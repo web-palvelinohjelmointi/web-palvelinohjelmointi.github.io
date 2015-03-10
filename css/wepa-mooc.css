@@ -1,0 +1,78 @@
+/* --------------------- */
+.hidden-in-hy {
+  display: initial; }
+
+.hidden-in-mooc {
+  display: none; }
+
+/* --------------------- */
+body {
+  background-color: #fafafa !important;
+  /* #f9f9f9; */
+  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Verdana, Geneva, sans-serif !important; }
+  body > header {
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#333333), to(#020202));
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #333333, #020202);
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #333333, #020202);
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #333333, #020202);
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #333333, #020202); }
+    body > header > nav > ul li {
+      color: #eee; }
+
+section {
+  color: #666; }
+  section > header > h1 {
+    font-weight: normal;
+    text-transform: uppercase; }
+  section > h1 {
+    font-weight: normal;
+    text-transform: uppercase; }
+  section > h2 {
+    font-weight: normal;
+    text-transform: uppercase; }
+  section > h3 {
+    font-weight: normal;
+    text-transform: uppercase; }
+  section > h4 {
+    font-weight: normal;
+    text-transform: uppercase; }
+
+aside.pohdi {
+  border-color: #666; }
+  aside.pohdi h1:before {
+    border-color: #666; }
+aside h1 {
+  font-weight: normal;
+  text-transform: uppercase; }
+aside h1:before {
+  font-weight: normal;
+  text-transform: uppercase; }
+
+.tehtava {
+  border-color: black; }
+  .tehtava > header {
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#333333), to(#020202));
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #333333, #020202);
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #333333, #020202);
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #333333, #020202);
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #333333, #020202);
+    color: #fff; }
+    .tehtava > header > h1 {
+      font-weight: normal;
+      text-transform: uppercase; }
+  .tehtava > div h1 {
+    font-weight: normal;
+    text-transform: uppercase; }
+  .tehtava > div h2 {
+    font-weight: normal;
+    text-transform: uppercase; }
