@@ -902,7 +902,7 @@ public class HelloController {
 
                 <p>Käytännössä jos selain tekee pyynnön osoitteeseen <code>http://localhost:8080/sijainti</code>, palauttaa palvelin merkkijonon "Haetaan Kumpula".</p>
 
-                <p>Parametreja voi olla pyynnössä myös useampia. Seuraavassa esimerkissä metodi osaa käsitellä sekä <code>sijainti</code> että <code>vuosi</code>-nimiset parametrit. Huomaa, että oletusarvot asetetaan aina merkkijonona.</p>
+                <p>Parametreja voi olla pyynnössä myös useampia. Seuraavassa esimerkissä metodi osaa käsitellä sekä <code>sijainti</code> että <code>vuosi</code> -nimiset parametrit. Huomaa, että oletusarvot asetetaan aina merkkijonona.</p>
 
                 <pre class="sh_java">
     @RequestMapping("/sijainti")
@@ -1071,7 +1071,7 @@ public class HelloController {
   &lt;/body&gt;
 &lt;/html&gt;</pre>     
 
-                <p>Kontrollerimetodit voivat sekä vastaanottaa pyynnön parametreja, että lisätä dataa Model-olioon. Allaolevassa esimerkissä metodi odottaa kahta parametria, ja lisää niiden arvot model-oliolle näkymän luomista varten.</p>
+                <p>Kontrollerimetodit voivat sekä vastaanottaa pyynnön parametreja, että lisätä dataa Model-olioon. Allaolevassa esimerkissä metodi odottaa kahta parametria ja lisää niiden arvot model-oliolle näkymän luomista varten.</p>
 
                 <pre class="sh_java">
     @RequestMapping("/sijainti")
@@ -1138,9 +1138,9 @@ public class HelloController {
 
                 <p>POST-tyyppiset pyynnöt voivat olla ongelmallisia jos pyynnön vastauksena palautetaan näytettävä sivu. Tällöin käyttäjä voi sivun uudelleenlatauksen (esim. painamalla F5) yhteydessä lähettää aiemmin lähettämänsä datan vahingossa uudelleen. Esimerkiksi edellisessä tehtävässä, jos painat F5-näppäintä sen jälkeen kun olet lähettänyt lomakkeen, huomaat tämän ilmiön.</p>
 
-                <p>Onkin tyylikkäämpää toteuttaa lomakkeen dataa vastaanottavat kontrollerit siten, että ne vastaanottavat pyynnön ja pyytävät selainta hakemaan sivun uudestaan. Tämä tapahtuu palauttamalla kontrollerimetodista merkkijono <code>redict:</code>, johon on liitetty haluttava polku. Esimerkiksi merkkijonon <code>redirect:/persons</code> palauttaminen luo tilanteen, missä selaimelle lähetetään viesti, jossa sitä ohjeistetaan tekemään GET-tyyppinen haku osoitteeseen <code>/persons</code>. Tätä toteutustapaa kutsutaan <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank">Post/Redirect/Get</a>-suunnittelumalliksi, ja sillä mm. estetään lomakkeiden uudelleenlähetys.</p>
+                <p>Onkin tyylikkäämpää toteuttaa lomakkeen dataa vastaanottavat kontrollerit siten, että ne vastaanottavat pyynnön ja pyytävät selainta hakemaan sivun uudestaan. Tämä tapahtuu palauttamalla kontrollerimetodista merkkijono <code>redirect:</code>, johon on liitetty haluttava polku. Esimerkiksi merkkijonon <code>redirect:/persons</code> palauttaminen luo tilanteen, missä selaimelle lähetetään viesti, jossa sitä ohjeistetaan tekemään GET-tyyppinen haku osoitteeseen <code>/persons</code>. Tätä toteutustapaa kutsutaan <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank">Post/Redirect/Get</a>-suunnittelumalliksi, ja sillä mm. estetään lomakkeiden uudelleenlähetys.</p>
 
-                <p>Ylläolevan esimerkin voi toteuttaa uudestaan siten, että lomake vastaanotetaan yhdessä kontrollerimetodissa, ja näytetään toisessa. Lisätään annotaatioon <code>@RequestMapping</code> parametri <code>method</code>, jolla kerrotaan pyyntötyyppi, jota kontrollerimetodi kuuntelee.</p>
+                <p>Ylläolevan esimerkin voi toteuttaa uudestaan siten, että lomake vastaanotetaan yhdessä kontrollerimetodissa ja näytetään toisessa. Lisätään annotaatioon <code>@RequestMapping</code> parametri <code>method</code>, jolla kerrotaan pyyntötyyppi, jota kontrollerimetodi kuuntelee.</p>
 
                 <pre class="sh_java">
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
@@ -1514,7 +1514,7 @@ public class PersonController {
 
                         <h1>Tehtävän lisääminen</h1>
 
-                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön mukana tulee <code>name</code> ja <code>done</code>-parametrit, joiden pohjalta luodaan uusi tehtävä. Jos tehtävän nimi (<em>name</em>) ei ole tyhjä, tai se ei ole null, tulee tehtävä tallentaa tietokantaan. Tässä <code>taskRepository</code>-olion <code>save</code>-metodi on hyödyksi.</p>
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön mukana tulee <code>name</code> ja <code>done</code>-parametrit, joiden pohjalta luodaan uusi tehtävä. Jos tehtävän nimi (<em>name</em>) ei ole tyhjä ja se ei ole null, tulee tehtävä tallentaa tietokantaan. Tässä <code>taskRepository</code>-olion <code>save</code>-metodi on hyödyksi.</p>
 
                         <p>Kun uusi tehtävä on lisätty, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille.</p>
 
