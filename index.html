@@ -733,6 +733,225 @@ porkkana=1
 
 		<h1>Ensimmäinen palvelinohjelmisto</h1>
 
+
+                <p>Tutustutaan tässä osiossa yksinkertaisten web-palvelinohjelmistojen rakenteeseen, sekä niiden toteuttamiseen <a href="http://www.spring.io" target="_blank">Spring</a>-sovelluskehyksen <a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a>-projektilla. Spring on sovelluskehys, joka tarjoaa komponentteja sovellusten toteuttamiseen ja testaamiseen, ja Spring Boot -projekti tarjoaa näistä komponenteista koostuvia valmiita aloituspaketteja.</p>
+
+
+                <h2>Hello World!</h2>
+
+                <p>Tutustutaan "Hello World!"-tyyppisen web-sovelluksen toteuttamiseen Springin avulla. Oletetaan, että käytössämme on osoitteesta <a href="http://start.spring.io/" target="_blank">start.spring.io</a> ladattu Web-projektirunko (Web), jonka kansiorakenne on oletuksena seuraavankaltainen:</p>
+
+                <pre>
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── demo
+    │   │       └── DemoApplication.java
+    │   └── resources
+    │       ├── application.properties
+    │       ├── static
+    │       └── templates
+    └── test
+        └── java
+            └── demo
+                └── DemoApplicationTests.java</pre>
+
+
+                <h3>Kontrolleriluokka, pyynnön vastaanottaminen ja pyynnön käsittelevä metodi</h3>
+
+
+                <p>Luodaan kansio <code>src/main/java/wad</code> ja lisätään sinne luokka <code>HelloController</code>. Kontrollerit (<em>Controller</em>) ovat palvelinohjelmistoissa luokkia, joissa oleviin metodeihin palvelin ohjaa käyttäjän tekemiä pyyntöjä. Spring löytää kontrolleriluokkamme jos luokalle on lisätty <em>annotaatio</em> <code>@Controller</code>. Lisätään luokalle lisäksi annotaatio <code>@ResponseBody</code>, joka kertoo, että metodien palauttamat arvot lähetetään sellaisenaan takaisin pyynnön tehneelle selaimelle. Kontrolleriluokkamme runko on seuraavanlainen.</p>
+
+<pre class="sh_java">
+package wad;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@ResponseBody
+public class HelloController {
+
+}</pre>
+
+                <p>Pyynnöt käsitellään kontrolleriluokissa olevien metodien avulla. Jotta Spring osaa valita oikean metodin, tulee metodeille lisäksi kertoa <em>polku</em>, mitä ne kuuntelevat. Polku kerrotaan metodille määriteltävällä <code>@RequestMapping</code>-annotaatiolla. Metodi, jolla on annotaatio <code>@RequestMapping("*")</code> kuuntelisi kaikkia palvelinohjelmistoon liittyviä polkuja, kun taas annotaatiolla <code>@RequestMapping("/hello")</code> metodi kuuntelisi vain ohjelmiston polkuun <code>/hello</code> tulevia pyyntöjä. Luodaan kontrolleri, joka palauttaa selaimelle tekstin <code>"Hello!"</code> riippumatta siitä, mihin polkuun pyyntö tulee.</p>
+
+		<pre class="sh_java">
+package wad;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@ResponseBody
+public class HelloController {
+
+    @RequestMapping("*")
+    public String hello() {
+        return "Hello!";
+    }
+}</pre>
+
+
+                <h3>Sovelluksen käynnistäminen komentoriviltä</h3>
+
+                <p>Sovelluksen käynnistäminen onnistuu suorittamalla projektijuuressa (hakemisto, missä on tiedosto pom.xml) komento <code>mvn spring-boot:run</code>. Käytännössä komento käynnistää projektissa mukana olevan palvelimen, ja asentaa siihen kehittämämme sovelluksen.</p>
+
+                <p>Kun sovellus käynnistetään, siihen liittyvä palvelin käynnistyy oletuksena osoitteeseen <code>http://localhost:8080</code>. Voit tarkastella sovellusta toimintaa web-selaimella. </p>
+
+
+                <hr/>
+
+                <div class="tehtavat">
+
+                    <p>Tästä eteenpäin materiaalissa on myös ohjelmointitehtäviä. Tehtävien tekeminen ja palautus tapahtuu NetBeans-ympäristössä Test My Code-liitännäisen avulla. Test My Code lataa tehtäväpohjat sinulle valmiiksi, eli et tarvitse <code>start.spring.io</code>-osoitteen projektipohjia tehtävien tekemiseen. Muistathan palauttaa jokaisen tehtävän (<em>submit solution</em>). Tehtävät avataan tehtävän otsikkoa klikkaamalla.</p>
+		    
+                    <div class="tehtava" id="t-helloweb-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-helloweb">
+                                    Hello World!
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-helloweb" class="collapse">
+
+                            <p>Kuten huomattava osa ohjelmointikursseista, tämäkin kurssi alkaa tehtävällä, jossa toteutettava ohjelma kirjoittaa tekstin <code>Hello World!</code>.</p>
+
+                            <p>Toteuta pakkauksessa <code>wad.controller</code> olevaan luokkaan <code>HelloWorldController</code> kontrollerimetodi, joka kuuntelee kaikkia osoitteita. Kun palvelin vastaanottaa pyynnön, tulee palvelimen palauttaa merkkijono "Hello World!".</p>
+
+                            <p>Käynnistä palvelin painamalla NetBeansin play-nappia tai suorittamalla <code>Application</code>-luokan <code>main</code>-metodi. Avaa nettiselain, mene osoitteeseen <a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a>, ja näet selaimessasi tekstin "Hello World!".</p>
+
+                            <p><img class="browser-img" src="img/exercises/w1e01.png"/></p>
+
+                            <p>Palvelin sammutetaan NetBeansissa punaista nappia painamalla -- vain yksi sovellus voi olla kerrallaan päällä samassa osoitteessa. Palauta tehtävä lopuksi Test My Code:n submit-napilla.</p>
+                        </div>
+                    </div>
+
+                    <div class="tehtava" id="t-vieraslaskuri">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-vieraslaskuri">
+                                    Vieraslaskuri
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-vieraslaskuri" class="collapse">
+                            <p>Vieraslaskuri kertoo kävijälle kuinka monta kävijää sivulla on käynyt tähän mennessä. Ensimmäinen kävijä näkee luvun 1, toinen kävijä luvun 2, jne.</p>
+
+                            <p>Toteuta pakkauksessa <code>wad.controller</code> olevaan luokkaan <code>VisitCountController</code> polkua <code>/visits</code> kuunteleva metodi, joka toteuttaa toivotun toiminnallisuuden. Vinkki! Kontrolleriluokka luodaan vain kerran palvelimen käynnistyksen yhteydessä, joten voinet hyödyntää jotain sopivaa oliomuuttujaa.</p>
+
+                            <p>Testaa sovellustasi. Ensimmäisellä pyynnöllä osoitteeseen <code>http://localhost:8080/visits</code> sinun pitäisi nähdä numero 1, toisella pyynnöllä numero 2 jne. Kun käynnistät palvelimen uudelleen, laskuri alkaa taas yhdestä.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Pyynnön parametrit</h2>
+
+                <p>Kun käyttäjä avaa osoitteen web-selaimella, selain tekee GET-tyyppisen pyynnön palvelimelle. Pyynnön mukana voi kulkea parametreja, jotka lisätään haettavan osoitteen perään. Esimerkiksi, osoitteessa <code>http://localhost:8080/autot?numero=95&amp;nimi=salama</code> on kaksi parametria. Parametrin <code>numero</code> arvo on <code>95</code> ja parametrin <code>nimi</code> arvo on <code>salama</code>. Parametrit erotetaan toisistaan <code>&amp;</code>-merkillä.</p>
+
+                <p>Kontrollerimetodit voivat vastaanottaa näitä pyyntöjä määrittelemällä pyynnön vastaanottavalle metodille parametreja. Seuraava osoitetta <code>/tervehdi</code>-kuunteleva kontrollerimetodi olettaa, että pyynnön mukana tulee parametri <code>nimi</code>, ja palauttaa viestin "Hei ", jonka perään on liitetty parametrina saatu arvo.</p>
+
+                <pre class="sh_java">
+package wad;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@ResponseBody
+public class HelloController {
+
+    @RequestMapping("/tervehdi")
+    public String hello(@RequestParam String nimi) {
+        return "Hei " + nimi;
+    }
+}</pre>
+
+                <p>Jos ylläolevan sovelluksen käynnistää, ja hakee selaimella osoitetta <code>http://localhost:8080/tervehdi?nimi=Winnetou</code> -- olettaen että sovellus on käynnistetty omalla koneella -- käyttäjä näkee tekstin <code>Hei Winnetou</code>. Käytännössä osoitteessa oleva parametrin nimi kytketään automaattisesti metodissa käytettävään muuttujan nimeen.</p>
+
+                <p>Kuten <code>@RequestMapping</code>-annotaatiolle, myös <code>@RequestParam</code>-annotaatiolle voi antaa toimintaa tarkentavia parametreja. Parametrit <code>required</code> ja <code>defaultValue</code> ovat molemmat hyödyllisiä; ensimmäisellä määritellään että tuleeko parametrin olla pyynnössä, ja toisella määritellään parametrin oletusarvo jos parametria ei ole.</p>
+
+                <p>Seuraavassa esimerkissä todetaan, että pyynnön ei tarvitse sisältää parametria <code>sijainti</code>, ja että parametriin asetetaan oletuksena arvo "Kumpula".</p>
+
+                <pre class="sh_java">
+    @RequestMapping("/sijainti")
+    public String etsi(@RequestParam(required=false, defaultValue="Kumpula") String sijainti) {
+        return "Haetaan " + sijainti;
+    }</pre>
+
+                <p>Käytännössä jos selain tekee pyynnön osoitteeseen <code>http://localhost:8080/sijainti</code>, palauttaa palvelin merkkijonon "Haetaan Kumpula".</p>
+
+                <p>Parametreja voi olla pyynnössä myös useampia. Seuraavassa esimerkissä metodi osaa käsitellä sekä <code>sijainti</code> että <code>vuosi</code> -nimiset parametrit. Huomaa, että oletusarvot asetetaan aina merkkijonona.</p>
+
+                <pre class="sh_java">
+    @RequestMapping("/sijainti")
+    public String etsi(@RequestParam(required=false, defaultValue="Kumpula") String sijainti,
+                       @RequestParam(required=false, defaultValue="1970") Integer vuosi) {
+        return "Haetaan " + sijainti + " vuonna " + vuosi;
+    }</pre>
+
+
+
+                <p>Käytämme viittaustyyppisiä muuttujia (esim. <code>Integer</code>) myös tapauksissa, joissa alkeistyyppisen muuttujan (esim. <code>int</code>) käyttö olisi periaatteessa mahdollista. Tällä ohjelmointityylillä vältämme ongelmia, joita ilmenee kun sovelluskehys yrittää asettaa puuttuvaa parametrin arvoa (oletuksena <code>null</code>) alkeistyyppiseen muuttujaan (kokeile mitä tapahtuu jos koodissasi on komennot <code>Integer arvo = null; int a = arvo;</code>).</p>
+
+
+                <div class="tehtavat">
+
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-kaikupalvelu">
+                                    Papukaija Bob
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-kaikupalvelu" class="collapse">
+                            <p>Papukaija <a href="https://www.youtube.com/watch?v=6NG37huf2dU" target="_blank">Bob</a> on netti-ilmiö, joka on oppinut sanoja, joita se toistaa. Tässä tehdään Bobille vastine, joka osaa toistaa sille sanottavia asioita.</p>
+
+                            <p>Toteuta luokkaan <code>ParrotController</code> kontrollerimetodi, joka kuuntelee pyyntöjä <code>/bob</code>-osoitteessa. Jos pyynnön mukana ei ole <code>message</code>-nimistä parametria, on vastaus <code>"Krraaa"</code>. Muuten, vastaus on <code>"Krraaa"</code>, jota seuraa välilyönti ja <code>message</code>-parametrin arvo.</p>
+
+                            <p>Kun testaat sovellusta, pyyntö osoitteeseen <code>http://localhost:8080/bob</code> näyttää sivun, jossa on merkkijono <code>"Krraaa"</code>, kun taas esimerkiksi pyyntö <code>http://localhost:8080/bob?message=keksii</code> palauttaa merkkijonon <code>"Krraaa keksii"</code>.</p>
+                        </div>
+                    </div>
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-laskin">
+                                    Laskin
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-laskin" class="collapse">
+
+                            <p>Toteuta luokkaan <code>CalculatorController</code> kontrollerimetodi, joka kuuntelee pyyntöjä <code>/calculate</code>-osoitteessa. Pyynnön mukana voi olla kolme parametria. Parametri <code>"op"</code> kertoo laskuoperaation, <code>"first"</code> kertoo ensimmäisen laskettavan luvun, ja <code>"second"</code> kertoo toisen laskettavan luvun.</p>
+
+                            <p>Jos parametria <code>"op"</code> ei ole pyynnössä mukana, tulee sen saada oletusarvoksi <code>"plus"</code>. Jos parametri <code>"first"</code> puuttuu, saa se oletuksena arvon 0. Myös parametri <code>"second"</code> saa puuttuessaan arvon 0.</p>
+
+                            <p>Laskimen tulee toteuttaa seuraavat operaatiot:</p>
+
+                            <ul>
+                                <li>Kun operaatio (op) on <code>"plus"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> summan. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=plus&first=3&second=1</code> palauttaa arvon <code>4</code>.</li>
+                                <li>Kun operaatio (op) on <code>"minus"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> erotuksen. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=minus&first=7&second=2</code> palauttaa arvon <code>5</code>.</li>
+                                <li>Kun operaatio (op) on <code>"multiply"</code> laskin palauttaa lukujen <code>"first"</code> ja <code>"second"</code> tulon. Esim. pyyntö osoitteeseen <code>http://localhost:8080/calculate?op=multiply&first=11&second=3</code> palauttaa arvon <code>33</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Näkymät ja data</h2>
+
+                <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn osoitteeseen tulevan pyynnön ja palauttaneet käyttäjälle esimerkiksi merkkijonomuodossa olevaa dataa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää käyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden avulla näkymään lisätään palvelimen tuottamaa tietoa.</p>
+
+
+
 		<p>Päivitysraja.</p>
 
             </section>
