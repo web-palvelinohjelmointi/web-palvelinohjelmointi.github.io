@@ -973,7 +973,8 @@ public class HelloController {
 
                 <h2>Näkymät ja data</h2>
 
-                <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn osoitteeseen tulevan pyynnön ja palauttaneet käyttäjälle esimerkiksi merkkijonomuodossa olevaa dataa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää k äyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden avulla näkymään lisätään palvelimen tuottamaa tietoa.</p>
+                <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn osoitteeseen tulevan pyynnön ja palauttaneet käyttäjälle esimerkiksi merkkijonomuodossa olevaa dataa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää käyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden perusteella näkymään lisätään palvelimen tuottamaa tietoa.</p>
+
 
 
 		<p>Päivitysraja.</p>
@@ -986,6 +987,10 @@ public class HelloController {
 		<p>model vie muuttujan templatemoottorille</p>
 
 		<p>muuttujan lisääminen modeliin</p>
+
+
+		<p>miksi @{/submit}?</p>
+        <form th:action="@{/submit}">
 
 		<p></p>
 
@@ -1008,9 +1013,787 @@ public class HelloController {
 <!--
                 <form th:action="@{/guests/{id}/delete(id=${guest.id})}" method="POST"><input type="submit" value="poista"/></form>
 -->
-            </section>
 
+                <p>kaksi tapaa indeksisivulle:  "oletusohjaus" tai indeksisivu, indeksisivu kuitenkin snadisti ärtsy koska jää helposti cacheen</p>
+<!--
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+-->
+		<p>tehtävä</p>
+
+
+		<p>kanta</p>
+
+
+                <h3>Näkymän luominen: Thymeleaf</h3>
+
+                <p>Eräs apuväline näkymän luomiseen on <a href="http://www.thymeleaf.org/" target="_blank">Thymeleaf</a>-templatemoottori, joka tarjoaa välineitä datan lisäämiseen HTML-sivuille. Käytännössä luomme näkymät ensin HTML-sivuina, jonka jälkeen sivuihin lisätään komentoja Thymeleafin käsiteltäväksi.</p>
+
+                <p>Esimerkiksi, kun allaolevaa HTML-sivua käsitellään palvelimella, siinä olevan elementin <code>&lt;span th:text="${viesti}"&gt;hello world!&lt;/span&gt;</code> sisältö vaihdetaan palvelimella pyyntöön lisättyyn muuttujaan <code>viesti</code>.</p>
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Tekstiä tekstielementin sisällä, tekstielementti runkoelementin sisällä,
+       runkoelementti html-elementin sisällä. Elementin sisältö voidaan asettaa
+       useammalle riville.&lt;/p&gt;
+
+    &lt;p&gt;palvelimelta saatu teksti: &lt;span th:text="${viesti}"&gt;hello world!&lt;/span&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+                <p>Thymeleaf-sivut eroavat HTML-sivuista siinä, että niillä on <code>html</code>-määrittelyssä <code>xml</code>-nimiavaruuden <code>th</code>-määrittely, jonka avulla komennot kuten <code>th:text</code> tunnistetaan.</p>
+
+                <p>Thymeleaf-sivut ("templatet") sijaitsevat tällä kurssilla projektin kansiossa <code>src/main/resources/templates</code> tai sen alla olevissa kansioissa. NetBeansissa kansio löytyy kun klikataan "Other Sources"-kansiota.</p>
+
+		<aside class="info">
+		  <br/>
+		  <h1>Thymeleafin käyttöönotto</h1>
+
+                  <p>Thymeleafin käyttöönotto vaatii <code>pom.xml</code>-tiedostossa olevien riippuvuuksien muokkaamista. Spring-sovelluskehyksen perusweb-toiminnallisuus on tuotu käyttöömme riippuvuudella</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+		<p>Vaihtamalla ylläoleva riippuvuus allaolevaan muotoon, otamme Thymeleafin käyttöön.</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+		<p>Joudumme myös hakemaan projektin riippuuvuuksia. Tämä onnistuu joko kirjoittamalla komentorivillä projektin juuressa komento <code>mvn dependency:resolve</code> tai valitsemalle NetBeansissa projektiin liittyvä kansio <em>Dependencies</em> oikealla hiirennapilla, ja painamalla <em>Download Declared Dependencies</em>.</p>
+
+		<p>tämän lisäksi, HTML-sivujen <code>html</code>-elementin määrittelyssä tulee olla seuraavat määrittelyt.</p>  
+
+                <pre class="sh_xml">
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;</pre>        
+
+                <p>Thymeleaf etsii näkymiä oletuksena kansiosta <code>src/main/resources/templates</code>. Spring etsii kansiosta <code>src/main/resources</code> konfiguraatiotiedostoa <code>application.properties</code>, johon lisäämme seuraavat rivit.</p>
+
+                <pre>
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.cache=false</pre>
+
+                <p>Yllä olevalla konfiguraatiolla määrittelemme, että näkymätiedostojen pääte on <code>.html</code>; sitä ei tarvitse erikseen kertoa kontrollerissa. Tämän lisäksi, rivi <code>spring.thymeleaf.cache=false</code> sanoo sovellukselle, että näkymiä ei tule ladata välimuistiin; tämän avulla näemme näkymiin tehtävät muutokset myös palvelimen ollessa käynnissä.</p>
+
+                <p>Nyt jos palautamme kontrollerista esimerkiksi merkkijonon <code>messages</code>, Spring etsii sivun <code>src/main/resources/templates/messages.html</code>, pyytää Thymeleafia luomaan sen, ja palauttaa sen käyttäjälle.</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.GET)
+public String view() {
+    return "messages";
+}</pre>        
+
+		</aside>
+
+
+                <h3>Näkymän löytäminen ja näyttäminen</h3>
+
+                <p>Sovellukseen tulevat pyynnöt otetaan vastaan ensin Spring-sovelluskehyksen toimesta, jonka tehtävänä on ohjata pyynnöt sopiville kontrollerimetodeille. Nämä päätellään <code>@RequestMapping</code>-annotaatioista. Kontrollerimetodien vastuulla on sekä datan liittäminen pyyntöön että vastauksen ohjaaminen joko suoraan käyttäjälle tai komponentille, joka luo datan avulla näkymän (esim. Thymeleaf).</p>
+
+		<p>Aiemmin kontrolleriluokissa käyttämämme annotaatio <code>@ResponseBody</code> on käytännössä tarkoittanut sitä, että metodin palauttama data palautetaan sellaisenaan käyttäjälle. Kun otamme sen pois, käyttämämme sovelluskehys yrittää etsiä palauttamamme merkkijonon perusteella näkymää, jonka voisi näyttää käyttäjälle.</p>
+
+                <p>Palauttamalla kontrollerimetodista merkkijono, sovellus etsii merkkijonoon liittyvää näkymää. Esimerkiksi, jos metodi palauttaa arvon "index", hakee Spring --  Thymeleafia käytettäessä -- kansiosta <code>src/main/resources/templates/</code> tiedostoa <code>index.html</code> ja näyttää sen sisällön käyttäjälle.</p>  
+
+                <pre class="sh_java">
+package wad.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloController {
+
+    @RequestMapping("*")
+    public String view() {
+        return "index";
+    }
+}</pre>
+
+                <h3>Tiedon lisääminen pyyntöön</h3>
+
+                <p>Sivua ei lähetetä suoraan käyttäjälle, vaan se käsitellään ensin palvelinohjelmistossa. Sivulle voi lisätä tietoa ns. <em>Model</em>-olion avulla, jonka voimme määritellä kontrollerimetodeihin. Spring asettaa oliolle arvon automaattisesti pyynnön saapuessa. Seuraava koodi lisää pyynnössä olevalle Model-oliolle attribuutin <code>viesti</code>, jonka arvoksi asetetaan merkkijono "aikamoista.". Tämän jälkeen metori palauttaa merkkijonon, jonka perusteella etsitään näkymän määrittelevä tiedosto. Tämä tiedosto ja model-oliossa oleva data käsitellään Thymeleafin toimesta, ja lopulta valmis sivu palautetaan käyttäjälle.</p>
+
+                <pre class="sh_java">
+package wad.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloController {
+
+    @RequestMapping("*")
+    public String view(Model model) {
+        model.addAttribute("viesti", "aikamoista.");
+        return "index";
+    }
+}</pre>
+
+        
+		<p>Näkymän luonnin yhteydessä data asetetaan määriteltyihin kohtiin ja Thymeleaf-projektiin liittyvät viitteet poistetaan. Jos sivu "index.html" olisi aiemmin materiaalissa näkemämme HTML-sivu, saisi käyttäjä lopulta seuraavalta näyttävän sivun.</p>
+
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Tekstiä tekstielementin sisällä, tekstielementti runkoelementin sisällä,
+       runkoelementti html-elementin sisällä. Elementin sisältö voidaan asettaa
+       useammalle riville.&lt;/p&gt;
+
+    &lt;p&gt;palvelimelta saatu teksti: &lt;span&gt;aikamoista&lt;/span&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>     
+
+	
+
+                <p>Kontrollerimetodit voivat luonnollisesti sekä vastaanottaa pyynnön parametreja, että lisätä dataa Model-olioon. Allaolevassa esimerkissä metodi odottaa kahta parametria ja lisää niiden arvot model-oliolle näkymän luomista varten.</p>
+
+                <pre class="sh_java">
+    @RequestMapping("/sijainti")
+    public String etsi(Model model,
+                       @RequestParam(required=false, defaultValue="Kumpula") String sijainti,
+                       @RequestParam(required=false, defaultValue="1970") Integer vuosi) {
+        model.addAttribute("sijainti", sijainti);
+        model.addAttribute("vuosi", vuosi);
+        return "index";
+    }</pre>
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-nakyma-ja-lomake">
+                                Näkymä ja lomake
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-nakyma-ja-lomake" class="collapse">
+                        <p>Sovelluksessa oleva luokka <code>FormController</code> sisältää metodin, joka vastaanottaa minkä tahansa pyynnön, asettaa <code>model</code>-olion <code>data</code>-parametrin arvoksi <code>content</code>-muuttujan, sekä ohjaa pyynnön luomaan sivun kansiossa <code>src/main/resources/templates/</code> olevasta <code>index.html</code>-sivusta. Sivu sisältää valmiin lomakkeen, jonka avulla palvelimelle voi lähettää tietoa. Jos HTML-lomakkeet eivät ole tuttuja, tutustu esimerkiksi osoitteessa <a href="http://www.w3schools.com/html/html_forms.asp" target="_blank">http://www.w3schools.com/html/html_forms.asp</a> olevaan oppaaseen.</p>
+
+			<p>Kun tarkastelet valmista lomaketta tarkemmin, on <code>action</code>-attribuutti hieman erilainen kuin normaalisti. Thymeleafissa lomakkeen <code>action</code>-attribuutti määritellään muodossa <code>th:action="@{/submit}"</code>, minkä avulla osoite voidaan muuttaa automaattisesti sovelluksen sijainnin muuttuessa.</p>
+
+                        <p>Muokkaa sovellusta siten, että lomakkeella lähetetty data muuttaa palvelimella olevaa <code>content</code>-muuttujaa, ja että käyttäjälle näytetään aina <code>content</code>-muuttujan uusin arvo. Jos taas pyynnössä ei tule <code>data</code>-nimistä parametria, säilytetään <code>content</code>-muuttujan arvo sellaisenaan. Varmista lopuksi, että käyttäjä näkee sivun myös ilman lomakkeen lähetystä.</p>
+
+                        <p>Käytännössä sivun tulee toimia seuraavasti:</p>
+
+                        <ul>
+                            <li>Kun sivu avataan ensimmäisen kerran, käyttäjä näkee tekstin "i got nothing.."</li>
+                            <li>Kun lomakkeella lähetetään dataa, esimerkiksi "testi", käyttäjä näkee tekstin "i got testi"</li>
+                            <li>Kun sivu avataan tämän jälkeen uudestaan, käyttäjä näkee vieläkin tekstin "i got testi"</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <h3>Pyynnöistä ja poluista</h3>
+
+
+                <p>HTML-sivuilla olevien lomakkeiden avulla käyttäjä voi lähettää dataa sekä GET- että POST-tyyppisellä pyynnöllä. Pyynnön tyyppi määritellään lomakkeen <code>method</code>-osiossa, esimerkiksi seuraavalla lomakkella tehdään POST-tyyppinen pyyntö, jossa palvelimen polkuun <code>/persons</code> lähetetään parametri nimeltä <code>name</code> -- (palvelimen päälläollessa käytännössä <code>http://localhost:8080/persons</code>). Käytännössä GET-tyyppisiä pyyntöjä ei tule käyttää ohjelmiston sisäisen tilan muokkaamiseen (esimerkiksi henkilöiden poistamiseen), sillä esimerkiksi web-indeksoijat tekevät GET-tyyppisiä pyyntöjä ja seuraavat sivujen linkkejä.</p>
+
+                <pre class="sh_xml">
+        &lt;form th:action="@{/persons}" method="POST"&gt;
+            &lt;input type="text" name="name"/&gt;
+            &lt;input type="submit"/&gt;
+        &lt;/form&gt;</pre>
+
+                <p>Allaoleva kontrollerimetodi vastaanottaa sekä GET- että POST-tyyppisiä pyyntöjä.</p>
+
+                <pre class="sh_java">
+    @RequestMapping("/persons")
+    public String post(@RequestParam String name) {
+        // tee jotain parametrille name
+        return "index";
+    }</pre>
+
+
+                <p>Pyynnön tyypin voi kertoa eksplisiittisesti osana <code>@RequestMapping</code>-annotaatiota. Alla oleva metodi käsittelee vain POST-tyyppisiä pyyntöjä.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(value = "/persons", method = RequestMethod.POST)
+    public String post(@RequestParam String name) {
+        // tee jotain parametrille name
+        return "index";
+    }</pre>
+
+                <p>POST-tyyppiset pyynnöt ovat hieman ongelmallisia jos pyynnön vastauksena palautetaan näytettävä sivu. Tällöin käyttäjä voi sivun uudelleenlatauksen (esim. painamalla F5) yhteydessä lähettää aiemmin lähettämänsä datan vahingossa uudelleen. Esimerkiksi edellisessä tehtävässä, jos painat F5-näppäintä sen jälkeen kun olet lähettänyt lomakkeen, huomaat tämän ilmiön.</p>
+
+                <p>On tyylikkäämpää toteuttaa lomakkeen dataa vastaanottavat kontrollerit siten, että ne vastaanottavat pyynnön ja pyytävät selainta hakemaan sivun uudestaan. Tämä tapahtuu palauttamalla kontrollerimetodista merkkijono <code>redirect:</code>, johon on liitetty haluttava polku. Esimerkiksi merkkijonon <code>redirect:/persons</code> palauttaminen luo tilanteen, missä selaimelle lähetetään viesti, jossa sitä ohjeistetaan tekemään GET-tyyppinen haku osoitteeseen <code>/persons</code>. Tätä toteutustapaa kutsutaan <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank">Post/Redirect/Get</a>-suunnittelumalliksi, ja sillä mm. estetään lomakkeiden uudelleenlähetys, jonka lisäksi vähennetään toiminnallisuuden toisteisuutta.</p>
+
+                <p>Ylläolevan esimerkin voi toteuttaa uudestaan siten, että lomake vastaanotetaan yhdessä kontrollerimetodissa ja näkymä palautetaan toisessa. Lisätään annotaatioon <code>@RequestMapping</code> parametri <code>method</code>, jolla kerrotaan pyyntötyyppi, jota kontrollerimetodi kuuntelee.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(value = "/persons", method = RequestMethod.GET)
+    public String get() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/persons", method = RequestMethod.POST)
+    public String post(@RequestParam String name) {
+        // tee jotain parametrille name
+        return "redirect:/persons";
+    }</pre>
+
+                <p>Kontrollerimetodiin <code>get</code> voisi luonnollisesti lisätä myös Model-parametrin, johon voisi asettaa näkymään lisättävää tietoa.</p>
+
+                <p>Jatketaan esimerkkiä vielä hieman. Oletetaan, että käsittelemme henkilöitä, joilla jokaisella on jonkinlainen yksilöllinen tunnus, ja haluamme näyttää henkilöön liittyvän sivun. Eräs vaihtoehto olisi lisätä pyynnön parametriin näytettävän henkilön tunnus, minkä perusteella pyyntöä käsittelevä metodi hakisi tarvittavan henkilön.</p>
+
+                <p>Toinen vaihtoehto on ajatella pyyntöpolkua haettavan henkilön, tai resurssin tunnistajana, ja hakea henkilön tietoja esimerkiksi osoitteen <code>/persons/5</code> kautta, missä tunnus <code>5</code> on haettavan henkilön tunnus. Parametrien erottaminen pyyntöpolusta onnistuu <code>@PathVariable</code>-annotaation avulla. Yllä oleva esimerkki jatkuu siten, että muokkaamme <code>get</code>-metodin nimen muotoon <code>list</code>, ja lisäämme toisen metodin nimeltä <code>get</code>, jonka avulla voidaan hakea yksittäinen henkilö. Kokonaisuudessaan henkilöiden noutamiseen ja lisäämiseen tarvittava kontrolleriluokka on seuraavanlainen.</p>
+
+
+                <pre class="sh_java">
+package wad.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+public class PersonController {
+
+    // ..
+
+    @RequestMapping(value = "persons", method = RequestMethod.GET)
+    public String list(Model model) {
+        // hae kaikki henkilöt ja lisää ne modeliin
+        // palauta sopiva sivu
+        return "persons"; // erillinen persons.html
+    }
+
+    @RequestMapping(value = "persons/{id}", method = RequestMethod.GET)
+    public String get(Model model, @PathVariable String id) {
+        // etsi henkilö tunnuksella id, lisää se modeliin
+        // palauta sopiva sivu
+        return "person"; // erillinen person.html
+    }
+
+    @RequestMapping(value = "persons", method = RequestMethod.POST)
+    public String post(@RequestParam String name) {
+        // luo uusi henkilö nimen perusteella
+        return "redirect:/persons";
+    }
+}</pre>
+
+                <p>Huomaamme kuitenkin metodeissa hieman toistoa. Voimme siirtää osan <code>@RequestMapping</code>-määrittelystä luokkatasolle seuraavasti. Tällöin kaikki alla olevassa luokassa olevat metodit kuuntelevat polkua <code>persons</code> tai sen alipolkuja.</p>
+
+
+                <pre class="sh_java">
+// ..
+
+@Controller
+@RequestMapping(value = "persons")
+public class PersonController {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        // ..
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String get(Model model, @PathVariable String id) {
+        // ..
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String post(@RequestParam String name) {
+        // ..
+    }
+}</pre>
+
+                <h3>Olioiden luominen pyynnöstä</h3>
+
+                <p>Jatketaan edellistä esimerkkiä vielä hieman. Oletetaan, että haluamme käsitellä <code>Person</code>-luokan ilmentymiä. Jos luokan attribuuttien nimet ovat samat pyynnössä olevien parametrien kanssa, voidaan pyynnön parametreista luoda olio automaattisesti. Oletetaan, että käytössämme on seuraava <code>Person</code>-luokka.</p>
+
+                <pre class="sh_java">
+//..
+public class Person {
+
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}</pre>
+
+                <p>Luokalle tulee olla ns. getterit ja setterit, sillä Spring käyttää niitä arvojen asettamiseen. Näiden luominen on automaattista NetBeansissa: kun olet luonut oliomuuttujat, klikkaa lähdekoodi-ikkunaa oikealla hiirennapillä, ja valitse <code>Insert code</code>.</p>
+
+                <p>Kun käytössämme on luokka <code>Person</code>, voimme muokata aiempaa kontrolleriluokkaamme siten, että lomakkeen vastaanottava <code>post</code> metodi luo pyynnöstä automaattisesti <code>Person</code>-olion. Tämä tapahtuu <code>@ModelAttribute</code>-annotaatiolla.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.POST)
+    public String post(@ModelAttribute Person person) {
+        // tee luodulle oliolle jotain
+
+        return "redirect:/persons";
+    }</pre>
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-vieraslista">
+                                Vieraslista
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-vieraslista" class="collapse">
+                        <p>Tehtävässä kehitetään vieraslistausta. Tässä tehtävässä on kaksi osaa, joista kummastakin saa tehtäväpisteen.</p>
+
+                        <h1>Vieraiden lisääminen</h1>
+
+                        <p>Muokkaa <code>GuestController</code>-luokkaa siten, että kun osoitteeseen <code>/guests</code> tehdään POST-pyyntö, jonka mukana lähetetään vierasta kuvaavat <code>name</code> ja <code>menu</code>-parametrit, vieraslistaan (lista nimeltä <code>guests</code>) lisätään uusi vieras. Lisää vieras jos ja vain jos name-parametri ei ole tyhjä.</p>
+
+                        <p>Huomioi, että luokka <code>GuestController</code> kuuntelee jo <code>/guests</code>-osoitetta!</p>
+
+                        <p>Kun uusi vieras on lisätty, pyyntö tulee <em>uudelleenohjata</em> vieraat listaavalle kontrollerimetodille.</p>
+
+
+                        <h1>Vieraiden poisto</h1>
+
+                        <p>Toteuta vieraiden poistotoiminnallisuus.</p>
+
+                        <p>Poistotoiminnallisuuden tulee tapahtua POST-tyyppisen pyynnön avulla vieraskohtaisiin osoitteisiin. Esimerkiksi, vieraan, jonka tunnus (id) on "x9z41f", poisto tapahtuu tekemällä pyyntö osoitteeseen <code>/guests/x9z41f/delete</code>. Annotaatiosta <code>@PathVariable</code> on tässä hyötyä. Huom! Älä hyväksy GET-tyyppisiä pyyntöjä, jotka yrittävät poistaa vierasta listalta!</p>
+
+                        <p>Kun vieras on poistettu, uudelleenohjaa pyyntö vieraat listaavalle kontrollerimetodille.</p>
+                    </div>
+                </div>
+
+
+                <h3>Olioiden ja kokoelmien käyttäminen näkymässä</h3>
+
+                <p>Edellisessä tehtävässä käytetyssä HTML-sivussa oli muutamia mystisiä kommentteja. Selvennetään niistä muutamia.</p>
+
+                <p>Jos model-olioon on lisätty olio, pääsemme olion muuttujiin käsiksi piste-operaattorin <code>.</code> avulla. Esimerkiksi lause <code>${person.name}</code> hakee <code>person</code>-nimiseen olioon liittyvän <code>name</code>-muuttujan arvoa. Muuttujien arvojen hakemisessa käytetään gettereitä ja settereitä, joten ne kannattaa olla luokkamäärittelyssä.</p>
+
+                <p>Käytännössä siis jos Person-luokan ilmentymä lisätään pyynnön model-olioon, pääsee Thymeleaf sen <code>getName</code>-metodiin käsiksi.</p>
+
+                <pre class="sh_java">
+    ...
+    Person p = new Person();
+    p.setName("James Gosling");
+    model.addAttribute("person", p);
+    ...
+                </pre>
+
+                <p>Kun olio on lisätty pyynnön attribuutiksi nimellä <code>person</code>, voidaan siihen liittyviin get-metodeihin viitata muodossa <code>${person.<em>ominaisuus</em>}</code>. Tämä tekisi metodikutsun <code>getOminaisuus()</code>. Metodia <code>getName()</code> voi taas kutsua seuraavasti:</p>
+
+                <pre class="sh_xml">
+    ...
+    &lt;body&gt;
+        &lt;p&gt;Ja seuraavana vuorossa on: &lt;span th:text="${person.name}"&gt;jack bauer?&lt;/span&gt;&lt;/p&gt;
+    &lt;/body&gt;
+    ...
+                </pre>
+
+                <p>Yllä oleva esimerkki luo seuraavanlaisen tulostuksen.</p>
+
+                <pre class="naytto">
+Ja seuraavana vuorossa on: James Gosling
+                </pre>
+
+                <p>Thymeleaf sisältää toiminnallisuudet mm. perusohjelmoinnissa käytettävien kontrollirakenteiden käyttöön sekä erilaisten tietotyyppien kuten päivämäärän formatointiin. Tällä kurssilla hyödynnämme lähinnä kontrollirakenteita, joista toistolauseke lienee tärkein.</p>
+
+                <p>Komentoa <code>th:each</code> käytetään Collection-rajapinnan toteuttavien kokoelmien läpikäyntiin. Sen määrittely saa muuttujan nimen, johon kokoelmasta otettava alkio kullakin iteraatiolla tallennetaan, sekä läpikäytävän kokoelman. Perussyntaksiltaan <code>th:each</code> on seuraavanlainen.</p>
+
+                <pre class="sh_xml">
+    ...
+    &lt;pre&gt;
+        &lt;p th:each="alkio : ${joukko}"&gt;
+            &lt;span th:text="${alkio}"&gt;hello world!&lt;/span&gt;
+        &lt;/p&gt;
+    &lt;/pre&gt;
+    ...
+                </pre>
+
+                <p>Yllä käytämme attribuuttia nimeltä <code>joukko</code>, ja tulostamme yksitellen sen sisältämät alkiot.</p>
+
+                <p><em>Huom! Eräs klassinen virhe on määritellä iteroitava joukko merkkijonona <code>th:each="alkio : joukko"</code>. Tämä ei luonnollisesti toimi.</em></p>
+
+                <p>Iteroitavan joukon alkioiden ominaisuuksiin pääsee käsiksi aivan samalla tavalla kuin muiden model-olioon lisättävien attribuuttien. Tutkitaan seuraavaa esimerkkiä, jossa listaan lisätään kaksi henkilöä, lista lisätään pyyntöön, ja lopulta luodaan Thymeleafin avulla.</p>
+
+
+                <pre class="sh_java">
+    ...
+    Person p = new Person();
+    p.setName("James Gosling");
+
+    Person p2 = new Person();
+    p2.setName("Martin Odersky");
+
+    List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+    list.add(p);
+    list.add(p2);
+
+    model.addAttribute("persons", list);
+    ...
+                </pre>
+
+                <pre class="sh_xml">
+    ...
+    &lt;p&gt;And the talks are given by:&lt;/p&gt;
+    &lt;ol&gt;
+        &lt;li th:each="person : ${persons}"&gt;
+            &lt;span th:text="${person.name}"&gt;has no name&lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ol&gt;
+    ...
+                </pre>
+
+                <p>Käyttäjälle lähetettävä sivu näyttää palvelimella tapahtuneen prosessoinnin jälkeen seuraavalta.</p>
+
+
+                <pre class="sh_xml">
+    ...
+    &lt;p&gt;And the talks are given by:&lt;/p&gt;
+    &lt;ol&gt;
+            &lt;li&gt;&lt;span&gt;James Gosling&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;span&gt;Martin Odersky&lt;/span&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+    ...
+                </pre>
+
+
+                <h2>Tietokannan käyttäminen</h2>
+
+                <p>Vaikka sovelluksemme ovat melko huikeita, on samalla hieman tylsää, että sovelluksiin liittyvä tieto katoaa aina kun palvelin käynnistetään uudelleen. Tietokannat ovat palvelinohjelmistosta erillisiä sovelluksia, joiden ensisijainen tehtävä on varmistaa, että käytettävä tieto ei katoa. Otetaan ensiaskeleet tietokannan käyttöön web-palvelinohjelmistoissa -- tutustumme tietokantoihin tarkemmin myöhemmin kurssilla. Käytämme tietokantatoiminnallisuuden toteuttamisessa <a href="http://projects.spring.io/spring-data-jpa/" target="_blank">Spring Data JPA</a>-komponenttia, johon löytyy myös aloituspaketti käyttämästämme Spring Bootista.</p>
+
+		<aside class="info">
+
+		  <br/>
+
+		  <h1>Spring Data JPA:n käyttöönotto</h1>
+
+		  <p>Saadaksemme Spring Data JPA:n käyttöömme, tulee meidän lisätä se <code>pom.xml</code>-tiedostoon. Spring Bootin kautta löytyy näppärä paketti <code>spring-boot-starter-data-jpa</code>, joka vähentää yksittäisten riippuvuuksien lisäämistä. Tämän lisäksi tarvitsemme testikäyttöön sopivan tietokannan -- valitaan <a href="http://hsqldb.org/" target="_blank">HSQLDB</a>, jonka voi ladata muistiin sovelluksen käynnistyessä.</p>
+
+		  <p>Lisätään projektiin seuraavat riippuvuudet:</p>
+
+		  <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.hsqldb&lt;/groupId&gt;
+    &lt;artifactId&gt;hsqldb&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+		  <p>Kun projektin riippuvuudet noudetaan Mavenin avulla, on tietokanta valmis testikäyttöön.</p>
+
+		</aside>
+
+                <p>Jotta voimme tallentaa luokan ilmentymiä tietokantaan, meidän tulee asettaa luokalle <code>@Entity</code>-annotaatio, sekä tehdä sille tunnuskenttä, jonka avulla se voidaan yksilöidä. Voimme käyttää tunnuskentän luomiseen Spring Data JPA:n valmiiksi tarjoamaa <code>AbstractPersistable</code>-yliluokkaa, jota perittäessä kerromme uniikin tunnuksen tyypin. Esimerkiksi <code>Person</code>-luokasta voidaan tehdä tietokantaan tallennettava seuraavilla muutoksilla.</p>
+
+                <pre class="sh_java">
+package wad.domain;
+
+import javax.persistence.Entity;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class Person extends AbstractPersistable&lt;Long&gt; {
+
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}</pre>
+
+                <p>Kun käytössämme on tietokantaan tallennettava luokka, voimme luoda tietokannan käsittelyyn käytettävän <em>rajapinnan</em>. Kutsutaan tätä rajapintaoliota nimellä <code>PersonRepository</code>.</p>
+
+                <pre class="sh_java">
+// pakkaus
+
+import wad.domain.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PersonRepository extends JpaRepository&lt;Person, Long&gt; {
+
+}</pre>
+
+                <p>Rajapinta perii Spring Data-projektin <code>JpaRepository</code>-rajapinnan; samalla kerromme, että tallennettava olio on tyyppiä <code>Person</code> ja että tallennettavan olion tunnus on <code>Long</code>-tyyppiä. Tämä tyyppi on sama kuin aiemmin <code>AbstractPersistable</code>-luokan perinnässä parametriksi asetettu tyyppi. Spring osaa käynnistyessään myös etsiä mm. JpaRepository-rajapintaluokan periviä luokkia. Jos niitä löytyy, se luo niiden pohjalta tietokannan käsittelyyn sopivan olion sekä asettaa olion ohjelmoijan haluamiin muuttujiin. Nämä muuttujat määritellään annotaatiolla <code>@Autowired</code> -- jokaiselle muuttujalle tulee oma annotaatio -- palaamme myöhemmin kurssilla tarkemmin tähän ns. olioiden automaattiseen asettamiseen.</p>
+
+                <p>Kun olemme luoneet rajapinnan <code>PersonRepository</code>, voimme lisätä sen käyttöömme esimerkiksi kontrolleriluokkaan. Tämä tapahtuu seuraavasti.</p>
+
+                <pre class="sh_java">
+// ...
+
+@Controller
+@RequestMapping(value = "persons")
+public class PersonController {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    // ...
+}</pre>
+
+                <p>Nyt tietokantaan pääsee käsiksi <code>personRepository</code>-olion kautta. Osoitteessa <a href="http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html" target="_blank">http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html</a> on JpaRepository-rajapinnan API-kuvaus, mistä löytyy rajapinnan tarjoamien metodien kuvauksia. Voimme esimerkiksi toteuttaa tietokannassa olevien olioiden listauksen sekä yksittäisen olion haun seuraavasti:</p>
+
+                <pre class="sh_java">
+// ...
+
+@Controller
+@RequestMapping(value = "persons")
+public class PersonController {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("list", personRepository.findAll());
+        return "persons"; // erillinen persons.html
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String get(Model model, @PathVariable Long id) {
+        model.addAttribute("person", personRepository.findOne(id));
+        return "person"; // erillinen person.html
+    }
+}</pre>
+
+
+                <h3>Tietokantatransaktiot ja tietokantaolioiden muuttaminen</h3>
+
+                <p>Kun tietokannasta lataa olion, sen muuttaminen ei automaattisesti vie muutoksia takaisin tietokantaan. Esimerkiksi, seuraavassa kontrollerimetodissa <code>person</code>-oliolle tehdyt muutokset eivät tallennu tietokantaan.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(value = "{id}/example", method = RequestMethod.POST)
+    public String post(@PathVariable Long id) {
+        Person p = personRepository.findOne(id);
+        p.setName("example");
+        // ..
+        return "redirect:/person/" + id;
+    }</pre>
+
+                <p>Jos muutokset halutaan tallentaa tietokantaan, tulee olio joko tallentaa erikseen <code>personRepository</code>-olion <code>save</code>-metodilla, tai kontrollerimetodille asettaa annotaatio <code>@Transactional</code>. Annotaatio <code>@Transactional</code> määrittelee metodin toiminnallisuuden sellaiseksi, että kaikki metodin sisällä tapahtuvat asiat tapahtuvat tietokantatransaktion sisällä, jonka aikana tehdyt muutokset viedään tietokantaan metodin suorituksen lopuksi. Seuraavassa esimerkissä haetun henkilön nimi päivittyy tietokantaan.</p>
+
+                <pre class="sh_java">
+    @Transactional
+    @RequestMapping(value = "{id}/example")
+    public String post(@PathVariable Long id) {
+        Person p = personRepository.findOne(id);
+        p.setName("example");
+        // ..
+        return "redirect:/person/" + id;
+    }</pre>
+
+
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-tehtavalista">
+                                Tehtävälista
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-tehtavalista" class="collapse">
+
+                      <p>Tässä tehtävässä toteutetaan tehtävälistatoiminnallisuutta. Tehtäväpohjassa on valmis tietokantakonfiguraatio, missä käytetään muistiin ladattavaa tietokantaa -- tietokanta tyhjenee palvelimen sammuessa.</p>
+
+                        <h1>Tehtävien listaaminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia GET-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön tulee lisätä <code>model</code>-parametriin <code>tasks</code> kaikki tietokannasta löytyvät tehtävät. Tässä <code>taskRepository</code>-olion <code>findAll</code>-metodi on hyödyksi. Palauta käyttäjälle kansiossa <code>src/main/resources/templates</code> olevasta <code>index.html</code>-tiedostosta luotu näkymä.</p>
+
+                        <h1>Tehtävän lisääminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks</code>-osoitteeseen tulevia POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Pyynnön mukana tulee <code>name</code> ja <code>done</code>-parametrit, joiden pohjalta luodaan uusi tehtävä. Jos tehtävän nimi (<em>name</em>) ei ole tyhjä ja se ei ole null, tulee tehtävä tallentaa tietokantaan. Tässä <code>taskRepository</code>-olion <code>save</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun uusi tehtävä on lisätty, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille.</p>
+
+                        <h1>Tehtävän poistaminen</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks/{id}/delete</code>-osoitteeseen POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Poistettavan tehtävän <code>id</code> on osana osoitetta. Tässä <code>taskRepository</code>-olion <code>delete</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun tehtävä on poistettu, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille.</p>
+
+                        <h1>Tehtävän muuttaminen tehdyksi</h1>
+
+                        <p>Toteuta <code>TaskController</code>-luokkaan <code>/tasks/{id}/done</code>-osoitteeseen POST-tyyppisiä pyyntöjä kuunteleva kontrollerimetodi. Tehtävän, joka tulee asettaa tehdyksi, <code>id</code> on osana osoitetta. Tässä <code>taskRepository</code>-olion <code>findOne</code>-metodi on hyödyksi.</p>
+
+                        <p>Kun tehtävä on on asetettu tehdyksi, uudelleenohjaa pyyntö aiemmin toteuttamallesi tehtävät listaavalle kontrollerimetodille. Huom! Jotta tietokannasta hakemaasi olioon tehdyt muutokset päivittyvät, sinun tulee joko käyttää <code>@Transactional</code>-annotaatiota, tai tallentaa olio muutosten jälkeen.</p>
+                    </div>
+                </div>
+
+                <h3>Tietokannassa olevat oliot ja toisiin olioihin viittaaminen</h3>
+
+                <p>Kuten olio-ohjelmoinnissa yleensäottaen, tietokantaan tallennettavat oliot voivat viitata toisiinsa. Oletetaan, että käytössämme on <code>Person</code>-luokan lisäksi <code>VipList</code>-luokka, joka sisältää listan henkilöitä. Yhtä Vip-listaa kohden on monta henkilöä, joten merkitään yhteys <code>@OneToMany</code>-annotaatiolla. Palaamme myös yhteystyyppeihin myöhemmin kurssilla.</p>
+
+                <pre class="sh_java">
+package wad.domain;
+
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class VipList extends AbstractPersistable&lt;Long&gt; {
+
+    @OneToMany
+    private List&lt;Person&gt; persons;
+
+    public List&lt;Person&gt; getPersons() {
+        return this.persons;
+    }
+
+    public void setPersons(List&lt;Person&gt; persons) {
+        this.persons = persons;
+    }
+}</pre>
+
+                <p>Täysin uuden henkilön luominen ja lisääminen vip-listalle tapahtuu seuraavasti. Oletetaan, että käytössämme on <code>personRepository</code>-olio henkilöiden hallintaan ja <code>vipListRepository</code>-vip-listojen hallintaan.</p>
+
+                <pre class="sh_java">
+    @Transactional
+    @RequestMapping(value = "viplists/{id}/persons", method = RequestMethod.POST)
+    public String post(@PathVariable Long id, @ModelAttribute Person person) {
+        // tallennetaan henkilö ja otetaan viite tallennettuun olioon haltuun
+        person = personRepository.save(person);
+        // haetaan vip-lista ja lisätään henkilö listalle
+        vipListRepository.findOne(id).add(person);
+
+        // ohjataan pyyntö sopivaan näkymään
+        return "redirect:/viplists";
+    }</pre>
+
+                <p>Henkilön poistaminen vip-listalta tapahtuu vastaavasti.</p>
+
+                <pre class="sh_java">
+    @Transactional
+    @RequestMapping(value = "viplists/{id}/persons/{personId}/delete", method = RequestMethod.POST)
+    public String removePerson(@PathVariable Long id, @PathVariable Long personId) {
+        person = personRepository.findOne(personId);
+        vipListRepository.findOne(id).getPersons().remove(person);
+
+        // ohjataan pyyntö sopivaan näkymään
+        return "redirect:/viplists";
+    }</pre>
+
+                <p>Huom! Vaikka käytämme ensimmäisellä viikolla POST-pyyntöjä resurssien (esimerkiksi henkilöiden) poistamiseen, on käytäntö melko huono. Opimme myöhemmin parempia tapoja.</p>
+
+                <p>Jos henkilö halutaan poistaa kokonaisuudessaan, tulee hänet ensin poistaa listoilta, joihin hän on lisätty. Palaamme taustasyihin myöhemmin...</p>
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-albumilista">
+                                Albumilista
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-albumilista" class="collapse">
+
+                        <p>Muokattavaan albumilistasovellukseen on toteutettu jo albumien lisääminen ja listaaminen. Tässä tehtävässä lisätään albumeihin kappaleita. Älä huoli <code>wad.profiles</code>-pakkauksen alla olevista tiedostoista tai muista projektiin lisätyistä uusista riippuvuuksista :).</p>
+
+                        <h1>Kappaleen lisääminen</h1>
+
+                        <p>Lisää <code>AlbumController</code>-luokkaan kontrollerimetodi, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/albums/{albumId}/tracks</code>, missä <code>albumId</code> on olemassaolevan albumin tunnus. Pyynnöissä tulee mukana <code>name</code>-niminen parametri, jonka arvona on lisättävän kappaleen nimi.</p>
+
+                        <p>Tallenna lisättävä kappale tietokantaan ja lisää se albumille, jonka tunnus (<em>id</em>) on sama kuin polussa oleva {albumId}.</p>
+
+                        <p>Kun kappale on lisätty albumille, ohjaa pyyntö edelleen albumit listaavalle kontrollerimetodille.</p>
+
+
+                        <h1>Kappaleen poistaminen</h1>
+
+
+                        <p>Lisää <code>AlbumController</code>-luokkaan kontrollerimetodi, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/albums/{albumId}/tracks/{trackId}/delete</code>, missä <code>albumId</code> on olemassaolevan albumin tunnus, ja <code>trackId</code> on poistettavan kappaleen tunnus.</p>
+
+                        <p>Kun kontrollerimetodia kutsutaan, tulee sen poistaa annettu kappale annetulta albumilta. Huomaa, että kappale tulee sekä poistaa albumilta, että poistaa kappaletietokannasta.</p>
+
+                        <p>Kun kappale on poistettu, ohjaa pyyntö edelleen albumit listaavalle kontrollerimetodille.</p>
+                    </div>
+                </div>
+
+                <h2>Sovelluksen siirtäminen verkkoon</h2>
+
+                <p>Albumilistamme, kuten muutkin sovelluksemme, on melko jepa, mutta olisi kiva näyttää sitä myös jollekin muulle. Tutustutaan tämän viikon lopuksi sovelluksen verkkoon siirtämiseen. Tarvitset tässä tunnukset <a href="https://www.heroku.com/" target="_blank">Heroku</a>-palveluun, joka tarjoaa ilmaisen sijoituspaikan vähän resursseja kuluttaville sovelluksille.</p>
+
+                <p>Kun olet luonut tunnuksen Herokuun, asenna osoitteesta <a href="https://toolbelt.heroku.com/" target="_blank">https://toolbelt.heroku.com/</a> työvälineet sovelluksen Herokuun siirtämiseen. Seuraa myös sivun "Getting started"-ohjetta, ja suorita sen <code>heroku login</code>-osio.</p>
+
+                <p>Mene tämän jälkeen Albumilista-tehtävän kansioon, missä on myös tiedosto <code>pom.xml</code>. Kirjoita kansiossa komento <code>git init</code>, mikä lisää kansioon versionhallintakansion <code>.git</code>.</p>
+
+                <pre>        
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git init
+Initialized empty Git repository in <em>polku</em>/W1E08.Albumilista/.git/</pre>
+
+                <p>Kirjoita tämän jälkeen komento <code>heroku create</code>, mikä luo paikan minne sovelluksen voi lähettää.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ heroku create
+Creating aqueous-lowlands-6350... done, stack is cedar
+http://aqueous-lowlands-6350.herokuapp.com/ | git@heroku.com:aqueous-lowlands-6350.git</pre>
+
+                <p>Komennolla <code>git remote add heroku git@heroku.com:aqueous-lowlands-6350.git</code> lisätään juuri luotu heroku-sijainti projekti käyttöömme. Huomaa, että <code>git@heroku.com:aqueous-lowlands-6350.git</code> on sama kuin komennon <code>heroku create</code> tulostama sijainti.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git remote add heroku git@heroku.com:aqueous-lowlands-6350.git
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$</pre>        
+
+                <p>Nyt voimme lisätä sovelluksen verkkoon. Jos tehtäväkansiossa on target-kansio, poista se tässä välissä. Kirjoita seuraavaksi komento <code>git add .</code>, jonka jälkeen komento <code>git commit -m "initial commit"</code>. Näillä komennoilla lisäät sovelluksen nykyisen version versionhallintaan. Kirjoita tämän jälkeen <code>git push heroku master</code>, mikä lähettää sovelluksen verkkoon.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git add .
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git commit -m "initial commit"
+[master (root-commit) 2cbc76b] initial commit
+ tulostusta...
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git push heroku master
+ tulostusta...
+-----> Discovering process types
+       Procfile declares types -> web
+
+-----> Compressing... done, 135.6MB
+-----> Launching... done, v6
+       http://aqueous-lowlands-6350.herokuapp.com/ deployed to Heroku
+ hieman tulostusta</pre>
+
+                <p>Nyt, voimme käydä tarkistamassa sovelluksen herokun palvelussa. Yllä olevassa esimerkissä sovellus on lisätty osoitteeseen <a href="http://aqueous-lowlands-6350.herokuapp.com/" target="_blank">http://aqueous-lowlands-6350.herokuapp.com/</a>.</p>
+            </section>
             <!-- END WEEK1 -->
+
+
+	    <p><em>päivitysraja</em></p>
+
+
+            <!-- BEGIN WEEK2 -->
+<!--
+            <section class="weeklimit" data-week-id="2">
+                <header>
+                    <h1 id="viikko2">Viikko 2</h1>
+                </header>
+
+
+            </section>
+-->
+            <!-- END WEEK2 -->
 
         </article>
 
