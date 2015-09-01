@@ -739,7 +739,7 @@ porkkana=1
 
                 <h2>Hello World!</h2>
 
-                <p>Tutustutaan "Hello World!"-tyyppisen web-sovelluksen toteuttamiseen Springin avulla. Oletetaan, että käytössämme on osoitteesta <a href="http://start.spring.io/" target="_blank">start.spring.io</a> ladattu Web-projektirunko (Web), jonka kansiorakenne on oletuksena seuraavankaltainen:</p>
+                <p>Tutustutaan "Hello World!"-tyyppisen web-sovelluksen toteuttamiseen Springin avulla. Oletetaan, että käytössämme on osoitteesta <a href="http://start.spring.io/" target="_blank">start.spring.io</a> ladattu Web-projektirunko (ruksaa Web-listan komponentti Web), jonka kansiorakenne on oletuksena seuraavankaltainen:</p>
 
                 <pre>
 ├── pom.xml
@@ -761,10 +761,10 @@ porkkana=1
                 <h3>Kontrolleriluokka, pyynnön vastaanottaminen ja pyynnön käsittelevä metodi</h3>
 
 
-                <p>Luodaan kansio <code>src/main/java/wad</code> ja lisätään sinne luokka <code>HelloController</code>. Kontrollerit (<em>Controller</em>) ovat palvelinohjelmistoissa luokkia, joissa oleviin metodeihin palvelin ohjaa käyttäjän tekemiä pyyntöjä. Spring löytää kontrolleriluokkamme jos luokalle on lisätty <em>annotaatio</em> <code>@Controller</code>. Lisätään luokalle lisäksi annotaatio <code>@ResponseBody</code>, joka kertoo, että metodien palauttamat arvot lähetetään sellaisenaan takaisin pyynnön tehneelle selaimelle. Kontrolleriluokkamme runko on seuraavanlainen.</p>
+                <p>Lisää kansioon <code>src/main/java/demo</code> luokka <code>HelloController</code>. Kontrollerit (<em>Controller</em>) ovat palvelinohjelmistoissa luokkia, joissa oleviin metodeihin palvelin ohjaa käyttäjän tekemiä pyyntöjä. Spring löytää kontrolleriluokkamme jos luokalle on lisätty <em>annotaatio</em> <code>@Controller</code>. Lisätään luokalle lisäksi annotaatio <code>@ResponseBody</code>, joka kertoo, että metodien palauttamat arvot lähetetään sellaisenaan takaisin pyynnön tehneelle selaimelle. Kontrolleriluokkamme runko on seuraavanlainen.</p>
 
 <pre class="sh_java">
-package wad;
+package demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -778,7 +778,7 @@ public class HelloController {
                 <p>Pyynnöt käsitellään kontrolleriluokissa olevien metodien avulla. Jotta Spring osaa valita oikean metodin, tulee metodeille lisäksi kertoa <em>polku</em>, mitä ne kuuntelevat. Polku kerrotaan metodille määriteltävällä <code>@RequestMapping</code>-annotaatiolla. Metodi, jolla on annotaatio <code>@RequestMapping("*")</code> kuuntelisi kaikkia palvelinohjelmistoon liittyviä polkuja, kun taas annotaatiolla <code>@RequestMapping("/hello")</code> metodi kuuntelisi vain ohjelmiston polkuun <code>/hello</code> tulevia pyyntöjä. Luodaan kontrolleri, joka palauttaa selaimelle tekstin <code>"Hello!"</code> riippumatta siitä, mihin polkuun pyyntö tulee.</p>
 
 		<pre class="sh_java">
-package wad;
+package demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -794,13 +794,36 @@ public class HelloController {
     }
 }</pre>
 
+	
 
                 <h3>Sovelluksen käynnistäminen komentoriviltä</h3>
 
                 <p>Sovelluksen käynnistäminen onnistuu suorittamalla projektijuuressa (hakemisto, missä on tiedosto pom.xml) komento <code>mvn spring-boot:run</code>. Käytännössä komento käynnistää projektissa mukana olevan palvelimen, ja asentaa siihen kehittämämme sovelluksen.</p>
 
-                <p>Kun sovellus käynnistetään, siihen liittyvä palvelin käynnistyy oletuksena osoitteeseen <code>http://localhost:8080</code>. Voit tarkastella sovellusta toimintaa web-selaimella. </p>
+                <p>Kun sovellus käynnistetään, siihen liittyvä palvelin käynnistyy oletuksena osoitteeseen <code>http://localhost:8080</code>. Voit tarkastella sovelluksen toimintaa web-selaimella. </p>
 
+
+		<h3>Sovelluksen käynnistämisestä ja pakkauksista</h3>
+		
+		<p>Esimerkkipohjan mukana tuleva Spring-sovellus käynnistyy luokan <code>DemoApplication</code> kautta.</p>
+		
+		<pre class="sh_java">package demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}</pre>
+		
+		<p>Luokassa oleva annotaatio <code>@SpringBootApplication</code> pyytää sovellusta muunmuassa etsimään oleellisia luokkia projektista. Oletuksena luokkien tulee olla pakkauksen <code>demo</code> sisällä, tai sen alipakkauksissa kuten <code>demo.controller</code>. Käytämme kurssilla tehtävissä usein juuripakkauksen nimenä termiä <code>wad</code>, joka on kurssia varten keksitty lyhenne sanoista Web Application Development.</p>
+
+		<p>Materiaalin esimerkeissä käytetty pakkausnimentä vaihtelee ajoittain.</p>
+		
 
                 <hr/>
 
@@ -851,6 +874,8 @@ public class HelloController {
                     </div>
                 </div>
 
+
+
                 <h2>Pyynnön parametrit</h2>
 
                 <p>Kun käyttäjä avaa osoitteen web-selaimella, selain tekee GET-tyyppisen pyynnön palvelimelle. Pyynnön mukana voi kulkea parametreja, jotka lisätään haettavan osoitteen perään. Esimerkiksi, osoitteessa <code>http://localhost:8080/autot?numero=95&amp;nimi=salama</code> on kaksi parametria. Parametrin <code>numero</code> arvo on <code>95</code> ja parametrin <code>nimi</code> arvo on <code>salama</code>. Parametrit erotetaan toisistaan <code>&amp;</code>-merkillä.</p>
@@ -858,7 +883,7 @@ public class HelloController {
                 <p>Kontrollerimetodit voivat vastaanottaa näitä pyyntöjä määrittelemällä pyynnön vastaanottavalle metodille parametreja. Seuraava osoitetta <code>/tervehdi</code>-kuunteleva kontrollerimetodi olettaa, että pyynnön mukana tulee parametri <code>nimi</code>, ja palauttaa viestin "Hei ", jonka perään on liitetty parametrina saatu arvo.</p>
 
                 <pre class="sh_java">
-package wad;
+package demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -948,12 +973,41 @@ public class HelloController {
 
                 <h2>Näkymät ja data</h2>
 
-                <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn osoitteeseen tulevan pyynnön ja palauttaneet käyttäjälle esimerkiksi merkkijonomuodossa olevaa dataa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää käyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden avulla näkymään lisätään palvelimen tuottamaa tietoa.</p>
-
+                <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn osoitteeseen tulevan pyynnön ja palauttaneet käyttäjälle esimerkiksi merkkijonomuodossa olevaa dataa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää k äyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden avulla näkymään lisätään palvelimen tuottamaa tietoa.</p>
 
 
 		<p>Päivitysraja.</p>
 
+<!--
+		<p>thymeleaf</p>
+
+		<p>th:text</p>
+
+		<p>model vie muuttujan templatemoottorille</p>
+
+		<p>muuttujan lisääminen modeliin</p>
+
+		<p></p>
+
+                <div class="tehtava">
+                    <header>
+                        <h1>
+                            <a data-toggle="collapse" class="collapsed" href="#t-nakyma-ja-lomake">
+                                Näkymä ja lomake
+                            </a>
+                        </h1>
+                    </header>
+                    <div id="t-nakyma-ja-lomake" class="collapse">
+                        <p>Sovelluksessa oleva luokka <code>FormController</code> sisältää metodin, joka vastaanottaa minkä tahansa pyynnön, asettaa <code>model</code>-olion parametriksi <code>data</code> <code>content</code>-muuttujan arvon, jonka jälkeen se palauttaa <code>index</code>-näkymän renderöitäväksi. Sivu sisältää lomakkeen, jonka avulla palvelimelle voi lähettää tietoa. Jos HTML-lomakkeet eivät ole tuttuja, tutustu esimerkiksi osoitteessa <a href="http://www.w3schools.com/html/html_forms.asp" target="_blank">http://www.w3schools.com/html/html_forms.asp</a> olevaan oppaaseen.</p>
+
+                        <p>Muokkaa sovellusta siten, että jos pyynnössä lähetetään <code>data</code>-niminen parametri, tulee sen arvo asettaa oliomuuttujan <code>content</code> arvoksi. Tämän muutoksen jälkeen sovellus toimii yhden asian muistuttajana, ja muistutettavaa asiaa voi vaihtaa lomakkeen avulla.</p>
+                    </div>
+                </div>
+
+		<p>parametrien lisääminen html:ään</p>
+<!--
+                <form th:action="@{/guests/{id}/delete(id=${guest.id})}" method="POST"><input type="submit" value="poista"/></form>
+-->
             </section>
 
             <!-- END WEEK1 -->
