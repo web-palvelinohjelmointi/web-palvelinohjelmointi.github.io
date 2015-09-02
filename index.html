@@ -715,7 +715,7 @@ porkkana=1
 &lt;!DOCTYPE html&gt;
 &lt;html lang="fi"&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+    &lt;meta charset="UTF-8" /&gt;
     &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
@@ -979,54 +979,6 @@ public class HelloController {
 
 
 
-		<p>Päivitysraja.</p>
-
-<!--
-		<p>thymeleaf</p>
-
-		<p>th:text</p>
-
-		<p>model vie muuttujan templatemoottorille</p>
-
-		<p>muuttujan lisääminen modeliin</p>
-
-
-		<p>miksi @{/submit}?</p>
-        <form th:action="@{/submit}">
-
-		<p></p>
-
-                <div class="tehtava">
-                    <header>
-                        <h1>
-                            <a data-toggle="collapse" class="collapsed" href="#t-nakyma-ja-lomake">
-                                Näkymä ja lomake
-                            </a>
-                        </h1>
-                    </header>
-                    <div id="t-nakyma-ja-lomake" class="collapse">
-                        <p>Sovelluksessa oleva luokka <code>FormController</code> sisältää metodin, joka vastaanottaa minkä tahansa pyynnön, asettaa <code>model</code>-olion parametriksi <code>data</code> <code>content</code>-muuttujan arvon, jonka jälkeen se palauttaa <code>index</code>-näkymän renderöitäväksi. Sivu sisältää lomakkeen, jonka avulla palvelimelle voi lähettää tietoa. Jos HTML-lomakkeet eivät ole tuttuja, tutustu esimerkiksi osoitteessa <a href="http://www.w3schools.com/html/html_forms.asp" target="_blank">http://www.w3schools.com/html/html_forms.asp</a> olevaan oppaaseen.</p>
-
-                        <p>Muokkaa sovellusta siten, että jos pyynnössä lähetetään <code>data</code>-niminen parametri, tulee sen arvo asettaa oliomuuttujan <code>content</code> arvoksi. Tämän muutoksen jälkeen sovellus toimii yhden asian muistuttajana, ja muistutettavaa asiaa voi vaihtaa lomakkeen avulla.</p>
-                    </div>
-                </div>
-
-		<p>parametrien lisääminen html:ään</p>
-<!--
-                <form th:action="@{/guests/{id}/delete(id=${guest.id})}" method="POST"><input type="submit" value="poista"/></form>
--->
-
-                <p>kaksi tapaa indeksisivulle:  "oletusohjaus" tai indeksisivu, indeksisivu kuitenkin snadisti ärtsy koska jää helposti cacheen</p>
-<!--
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="-1">
--->
-		<p>tehtävä</p>
-
-
-		<p>kanta</p>
-
-
                 <h3>Näkymän luominen: Thymeleaf</h3>
 
                 <p>Eräs apuväline näkymän luomiseen on <a href="http://www.thymeleaf.org/" target="_blank">Thymeleaf</a>-templatemoottori, joka tarjoaa välineitä datan lisäämiseen HTML-sivuille. Käytännössä luomme näkymät ensin HTML-sivuina, jonka jälkeen sivuihin lisätään komentoja Thymeleafin käsiteltäväksi.</p>
@@ -1037,7 +989,7 @@ public class HelloController {
 &lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+    &lt;meta charset="UTF-8" /&gt;
     &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
@@ -1151,7 +1103,7 @@ public class HelloController {
 &lt;!DOCTYPE html&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+    &lt;meta charset="UTF-8" /&gt;
     &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
