@@ -1638,7 +1638,7 @@ public class VipList extends AbstractPersistable&lt;Long&gt; {
         // tallennetaan henkilö ja otetaan viite tallennettuun olioon haltuun
         person = personRepository.save(person);
         // haetaan vip-lista ja lisätään henkilö listalle
-        vipListRepository.findOne(id).add(person);
+        vipListRepository.findOne(id).getPersons().add(person);
 
         // ohjataan pyyntö sopivaan näkymään
         return "redirect:/viplists";
