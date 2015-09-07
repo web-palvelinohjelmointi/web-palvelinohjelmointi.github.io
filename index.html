@@ -2317,7 +2317,7 @@ public class EventController {
 
                             <p>Sovelluksen rakenne on seuraava. Luokka <code>MessageController</code> ottaa vastaan pyyntöjä käyttöliittymältä, ja ohjaa niitä <code>MessageService</code>-palvelulle. MessageService tarjoaa metodit viestien listaamiseen ja uuden viestin tallentamiseen: tallentaminen tapahtuu <code>MessageRepository</code>-rajapintaa käyttämällä.</p>
 
-                            <p>Muokkaa <code>MessageService</code>-luokan tarjoamaa viestin tallennusmetodia siten, että kun käyttäjän kirjoittama viesti on tallennettu, viesti annetaan <code>ChatService</code>-oliolle, jonka palauttama viesti myös tallennetaan. Injektoi <code>ChatService</code>-palvelu <code>MessageService</code>-palveluun.</p>
+                            <p>Muokkaa <code>MessageService</code>-luokan tarjoamaa viestin tallennusmetodia siten, että kun käyttäjän kirjoittama viesti on tallennettu, viesti annetaan <code>ChatService</code>-oliolle, jonka palauttama viesti myös tallennetaan. Injektoi <code>ChatService</code>-palvelu <code>MessageService</code>-palveluun. Huom! Aseta injektoidun ChatService-olion nimeksi <code>chatService</code>.</p>
 
                             <p>Kun sovellus toimii, keskustelun pitäisi näyttää esimerkiksi seuraavanlaiselta:</p>
 
