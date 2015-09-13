@@ -71,7 +71,34 @@
         <!-- // END NAV -->
         <article>
 
+
+          <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form class="form-inline"  id="TmcLoginForm" role="form">
+		<div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
+                    <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
+                      <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua</button>
+                    <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
+                  </div>
+		</div><!-- /.modal-content -->
+              </form>
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+	  
+
             <section id="intro" class="no-toc weeklimit" data-week-id="-1">Huom! Jos etsit syksyllä 2014 julkaistua web-palvelinohjelmoinnin oppimateriaalia, löytyy se <a href="s2014-wepa.html">täältä</a>.</section>
+
 
 
             <!-- BEGIN INDEX -->
@@ -3569,30 +3596,6 @@ public class ShoppingCart implements Serializable {
         <script src="js/pheromones.js"></script>
         <script src="js/wepa.js"></script>
 
-
-        <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <form class="form-inline"  id="TmcLoginForm" role="form">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
-                  <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
-                  <div class="form-group">
-                    <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
-                    <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua</button>
-                  <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
-                </div>
-              </div><!-- /.modal-content -->
-            </form>
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
 
     </body>
 </html>
