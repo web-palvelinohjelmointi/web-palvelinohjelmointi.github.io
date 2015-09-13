@@ -19,7 +19,7 @@ var VERTICALFLOAT = {
     maxPoints: [],
 
     init: function(username) {
-        VERTICALFLOAT.username = "avihavai";
+        VERTICALFLOAT.username = username;
 	
 	if(!VERTICALFLOAT.username) {
 	    console.log("Analytics: not initiating.");
