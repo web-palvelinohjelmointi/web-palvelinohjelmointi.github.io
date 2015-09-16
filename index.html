@@ -2675,7 +2675,7 @@ public class Person extends AbstractPersistable&lt;Long&gt; {
 
                             <p>Lisää sovellukselle toiminnallisuus lentokentän lisäämiseen lentokoneelle. Käyttöliittymä sisältää jo tarvittavan toiminnallisuuden, joten käytännössä sinun tulee toteuttaa luokalle <code>AircraftController</code> metodi <code>String assignAirport</code>. Kun käyttäjä lisää lentokoneelle lentokenttää, käyttöliittymä lähettää POST-tyyppisen kyselyn osoitteeseen <code>/aircrafts/{aircraftId}/airports</code>, missä <code>aircraftId</code> on lentokoneen tietokantatunnus. Pyynnön mukana tulee lisäksi parametri <code>airportId</code>, joka sisältää lentokentän tietokantatunnuksen.</p>
 
-                            <p>Toteuta metodi siten, että haet aluksi tietokantatunnuksia käyttäen lentokoneen ja lentokentän, tämän jälkeen asetat lentokoneelle lentokentän ja lentokentälle lentokoneen, ja tallennat haetut oliot.</p>
+                            <p>Toteuta metodi siten, että haet aluksi pyynnössä saatuja tunnuksia käyttäen lentokoneen ja lentokentän, tämän jälkeen asetat lentokoneelle lentokentän ja lentokentälle lentokoneen, ja lopuksi tallennat haetut oliot.</p>
 
                             <p>Ohjaa lopuksi pyyntö osoitteeseen <code>/aircrafts</code></p>
 
