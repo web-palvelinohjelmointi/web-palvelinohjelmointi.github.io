@@ -184,7 +184,15 @@ $(function() {
     console.log("Init headers");
     SITE.init();
     console.log("Init syntax highlighting");
-    sh_highlightDocument('js/libs/syntaxhighlight/lang/', '.min.js');
+
+
+    try {
+	if(window.location.search.indexOf("muotoilu") == -1) {
+	    sh_highlightDocument('js/libs/syntaxhighlight/lang/', '.min.js');
+	}
+    } catch (t) {
+	sh_highlightDocument('js/libs/syntaxhighlight/lang/', '.min.js');
+    }
 
     tmcAuth(function() {
 	if(!auth.username) {
