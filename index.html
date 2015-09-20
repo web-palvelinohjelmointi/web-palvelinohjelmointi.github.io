@@ -46,10 +46,10 @@
                     <li>
                         <a href="#viikko3">Viikko 3</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko4">Viikko 4</a>
                     </li>
+<!--
                     <li>
                         <a href="#viikko5">Viikko 5</a>
                     </li>
@@ -3551,6 +3551,709 @@ public class ShoppingCart implements Serializable {
 
             </section>
             <!-- END WEEK3 -->
+
+
+            <!-- BEGIN WEEK4 -->
+            <section class="weeklimit" data-week-id="4">
+                <header>
+                    <h1 id="viikko4">Viikko 4</h1>
+                </header>
+
+                <h1>Palvelukeskeiset arkkitehtuurit</h1>
+
+                <aside class="extra">
+                    <p><em>...Koska ohjelmistoista halutaan mahdollisimman nopeasti konkreettista palautetta, arkkitehti aloittaa ohjelmiston suunnittelun perustarpeista: muutamasta huoneesta, joihin palautetta antavat ihmiset muuttavat. Kun alkuperäinen suunnitelma on lähes valmis, rakennukseen muuttaa lisää ihmisiä, jotka tarvitsevat rakennukselta uusia toiminnallisuuksia. Ensisijaisina vaatimuksina ovat uudet huoneet, pesula, disko ja luonnollisesti oleskelutila, jossa on tilaa biljardipöydälle. Tällöin arkkitehti soveltaa alkuperäistä suunnitelmaansa mukauttamaan uudet ihmiset ja kehitystyö jatkuu. Kehitystyön jatkuessa alkuperäiset asukkaat alkavat valittamaan rakennusmelusta ja uhkaavat poismuutolla, jos asioihin ei saada muutosta, aiheuttaen hiusten harvenemista arkkitehdille. Toisaalta, sana uudesta biljardipöydästä kiertää, ja yhä enemmän ihmisiä muuttaa rakennukseen, ja rakennukselta vaaditaan taas uusia huoneita, mukaanlukien cartingrata ja curlinghalli.</em></p>
+                </aside>
+
+                <p>Kurssin alkupuolella ollut ohjelmistokehittäjän elämää parodioiva kuvaus kuvaa yksittäisen sovelluksen kehitystä. Sovellukseen lisättävät huoneet ovat uusia metodeja, luokkia ja kontrollereita sovelluksessa, aivan kuten pesula, disko ja muut oleelliset elintilat. Sovelluksen kasvaessa sen ylläpidettävyys ja testaus muuttuu haastavammaksi, sillä kaikki osa-alueet ovat leivottu samaan sovellukseen. Tutustutaan tässä kappaleessa toisenlaiseen ajattelutapaan; sovellusten koostamiseen palveluista.</p>
+
+
+                <p>Monoliittiset "minä sisällän kaiken mahdollisen"-sovellukset ovat usein vaikeita ylläpitää, sillä uuden toiminnallisuuden lisääminen vaatii olemassaolevan sovelluksen muokkaamista sekä testaamista. Olemassaoleva sovellus voi olla kirjoitettu hyvin vähäisesssä käytössä olevalla kielellä (vrt. pankkijärjestelmät ja COBOL) ja esimerkiksi kehitystä tukevat automaattiset testit voivat puuttua siitä täysin.</p>
+
+                <p>Yrityksen toiminta-alueiden laajentuessa sekä uusien sovellustarpeiden ilmentyessä aiemmin toteutettuihin toiminnallisuuksiin olisi hyvä päästä käsiksi, mutta siten, että toiminnallisuuden käyttäminen ei vaadi juurikaan olemassaolevan muokkausta. Kun pohdimme aiempaa rakennusesimerkkiä, lienee selvää, että esimerkiksi diskoon voisi päästää muitakin kuin rakennuksen asukkaita, kun taas yksittäiset huoneet kannattanee pitää vain muutaman henkilön käytössä.</p>
+
+                <p>Koostamalla sovellus erillisistä palveluista saadaan luotua tilanne, missä palvelut ovat tarvittaessa myös uusien sovellusten käytössä. Palvelut tarjoavat rajapinnan (esim. REST) minkä kautta niitä voi käyttää. Samalla rajapinta kapseloi palvelun toiminnan, jolloin muiden palvelua käyttävien sovellusten ei tarvitse tietää sen toteutukseen liittyvistä yksityiskohdista. Oleellista on, että yksikään palvelu ei yritä tehdä kaikkea. Tämä johtaa myös siihen, että yksittäisen palvelun toteutuskieli ei vaikuta muiden komponenttien toimintaan -- oleellista on vain se, että palvelu tarjoaa rajapinnan jota voi käyttää ja joka löydetään.</p>
+
+                <p>Yrityksen kasvaessa sen sisäiset toiminnat ja rakennettavat ohjelmistot sisältävät helposti päällekkäisyyksiä. Tällöin tilanne on käytännössä se, että aikaa käytetään samankaltaisten toimintojen ylläpitoon useammassa sovelluksessa -- pyörä keksitään yhä uudestaan ja uudestaan uudestaan uusia sovelluksia kehitettäessä.</p>
+
+
+                <aside class="extra">
+
+                    <h1>Amazon ja Palveluorientoituneet arkkitehtuurit</h1>
+
+                    <p>Amazon on hyvä esimerkki yrityksestä, joka on menestynyt osittain sen takia, että se on toteuttanut tarjoamansa toiminnallisuudet palveluina. Siirtymä ei kuitenkaan ollut yksinkertainen, allaoleva viesti on katkelma Amazonin toimitusjohtajan, Jeff Bezosin, noin vuonna 2002 kirjoittamasta viestistä yritykselle (<a href="https://plus.google.com/+RipRowan/posts/eVeouesvaVX" target="_blank">lähde</a>).</p>
+
+                    <pre>
+1) All teams will henceforth expose their data and functionality 
+   through service interfaces.
+
+2) Teams must communicate with each other through these interfaces.
+
+3) There will be no other form of interprocess communication allowed: 
+   no direct linking, no direct reads of another team's data store, 
+   no shared-memory model, no back-doors whatsoever. The only communication 
+   allowed is via service interface calls over the network.
+
+4) It doesn't matter what technology they use. HTTP, Corba, Pubsub, 
+   custom protocols — doesn't matter.
+
+5) All service interfaces, without exception, must be designed from the 
+   ground up to be externalizable. That is to say, the team must plan 
+   and design to be able to expose the interface to developers in the 
+   outside world. No exceptions.
+
+6) Anyone who doesn't do this will be fired.</pre>
+
+                    <p>Oikeastaan, hyvin suuri syy sille, että Amazon tarjoaa nykyään erilaisia pilvipalveluita (kts. <a href="http://aws.amazon.com/" target="_blank">Amazon Web Services</a>) liittyy siihen kokemukseen, mitä yrityksen työntekijät sekä yritys on kerännyt kun yrityksen sisäistä toimintaa kehitettiin kohti palveluja tarjoavia ohjelmistotiimejä.</p>
+                </aside>
+
+                <p>SOA (<em><a href="http://en.wikipedia.org/wiki/Service-oriented_architecture" target="_blank">Service Oriented Architecture</a></em>), eli palvelukeskeinen arkkitehtuuri, on suunnittelutapa, jossa eri sovelluksen komponentit on suunniteltu toimimaan itsenäisinä avoimen rajapinnan tarjoavina palveluina. Pilkkomalla sovellukset erillisiin palveluihin pyritään luomaan tilanne, jossa palveluita voidaan käyttää myös tulevaisuudessa kehitettävien sovellusten toimesta.</p>
+
+                <p>SOA-palveluita käyttävät esimerkiksi toiset palvelut tai selainohjelmistot. Selainohjelmistot voivat hakea palvelusta JSON-muotoista dataa Javascriptin avulla ilman tarvetta omalle palvelinkomponentille. SOA-arkkitehtuurin avulla voidaan helpottaa myös ikääntyvien sovellusten jatkokäyttöä: ikääntyvät sovellukset voidaan kapseloida rajapinnan taakse, jonka kautta sovelluksen käyttö onnistuu myös jatkossa.</p>
+
+
+                <p><em>Huom! Kuten aiemminkin olemme todenneet, terveen järjen käyttäminen on tässäkin tärkeää. Huikean arkkitehtuurin ei tule olla yrityksen päätavoite, mutta se voi olla tapa päästä tavoitteeseen.</em></p>
+
+                <aside class="extra">
+
+                    <h1>Palveluiden löytäminen</h1>
+
+                    <p>Palveluorientoituneiden arkkitehtuurien yleistyessä markkinoille on myös ilmestynyt ESB (<a href="http://en.wikipedia.org/wiki/Enterprise_service_bus" target="_blank">enterprise service bus</a>)-sovelluksia, joiden tehtävä on toimia viestinvälittäjänä palveluiden välillä. Viestinvälityspalveluiden käyttäminen johtaa siihen, että palvelut ovat paremmin eriytettynä toisistaan -- palvelua A käyttävä palvelu B tietää vain viestinvälittäjän sekä palvelun A tunnisteen. Palvelun A tunniste ja kuvaus voidaan saada viestinvälittäjältä, ja palvelu voi kuvata itsensä esimerkiksi RAML (<a href="http://raml.org/" target="_blank">RESTful API Modeling Language</a>)-kuvauksen tai <a href="https://helloreverb.com/developers/swagger" target="_blank">Swagger</a>in avulla.</p>
+
+                    <p>Kantamme tällä kurssilla ESB-sovelluksiin on kuitenkin melko sama kuin Martin Fowlerilla ja Jim Webberillä; liika ylimääräinen toiminnallisuus voi vaikeuttaa palveluiden käyttöä ja kankeuttaa organisaatiota. Katso esitys <a href="http://www.infoq.com/presentations/soa-without-esb" target="_blank">Does My Bus Look Big in This?</a>.</p>
+
+                </aside>
+
+                <p>Toteutimme oikeastaan viime viikolla jo muutamia palveluita. Jatketaan nyt samalla teemalla.</p>
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-huoneistot">
+                                    Huoneistot
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-huoneistot" class="collapse">
+
+                            <p>Toteuta Spring Data RESTin avulla REST-rajapinta huoneistojen hallintaan.</p>
+
+                            <p>Jokaisella huoneistolla tulee olla uniikki nimi (<code>name</code>), joka ei saa olla tyhjä. Huoneistojen lisäys tapahtuu tekemällä JSON-muotoinen POST-pyyntö osoitteeseen <code>/api/apartments</code> (esim. <code>{"name":"The Cupboard Under the Stairs"}</code>). Vastaavasti <code>GET</code>-pyyntö osoitteeseen <code>/api/apartments</code> palauttaa <code>HAL</code>-spesifikaatiota seuraavan JSON-vastauksen, missä huoneet on listattu.</p>
+
+                            <p>yksittäisen huoneiston haku ja poisto tapahtuu osoitteessa <code>/api/apartments/{id}</code>, missä <code>id</code> on huoneiston uniikki tunnus.</p>
+
+                            <p>Käytä huoneiston tunnuksena (<code>id</code>) <code>Long</code>-tyyppistä muuttujaa.</p>
+
+                        </div>
+                    </div>
+
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-henkilot">
+                                    Henkilöt
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-henkilot" class="collapse">
+
+                            <p>Toteutetaan sovellus henkilöiden luomiseen.</p>
+
+                            <h1>Rajapinta</h1>
+
+                            <p>Toteuta Spring Data RESTin avulla REST-rajapinta henkilöiden hallintaan.</p>
+
+                            <p>Jokaisella henkilöllä tulee olla uniikki nimi (<code>name</code>), uniikki käyttäjätunnus (<code>username</code>) sekä uniikki salasana (<code>password</code>), joista yksikään ei saa olla tyhjä.</p>
+
+                            <p>Henkilöiden lisäys tapahtuu tekemällä JSON-muotoinen POST-pyyntö osoitteeseen <code>/api/persons</code> (esim. <code>{"name":"Harry Potter", "username":"hedwig", "password":"nimbus2000"}</code>).</p>
+
+                            <p>Vastaavasti <code>GET</code>-pyyntö osoitteeseen <code>/api/persons</code> palauttaa <code>HAL</code>-spesifikaatiota seuraavan JSON-vastauksen, missä henkilöt on listattu.</p>
+
+                            <p>Yksittäinen henkilö voidaan hakea tunnuksen perusteella osoitteesta <code>/api/persons/{id}</code>, missä <code>id</code> on henkilön uniikki tunnus. Poistamisen ei kuitenkaan tule onnistua.</p>
+
+                            <p>Käytä henkilön tunnuksena (<code>id</code>) <code>Long</code>-tyyppistä muuttujaa.</p>
+
+                            <p><strong>Huom!</strong> Toteuta toiminnallisuus siten, että GET-pyynnön yhteydessä henkilön salasanaa ei palauteta. Vastauksen tulee siis sisältää aina vain nimi ja käyttäjätunnus. Etsi apua Googlesta, avainsanoja ovat ainakin <code>@JsonProperty</code>, <code>@JsonIgnore</code> sekä esimerkiksi haku "json ignore property on deserialization but allow on serialization".</p> 
+
+
+                            <h1>Tunnistautuminen</h1>
+
+                            <p>Lisää sovellukseen rajapinta <code>/authenticate</code>, jonka avulla voidaan tarkistaa löytyykö käyttäjärekisteristä sopiva käyttäjätunnus-salasana -pari. Rajapinnalle voidaan tehdä <code>POST</code>-tyyppinen pyyntö JSON-muodossa. JSON-data sisältää käyttäjätunnus-salasana -parin (<code>{"username":"tunnus","password":"jackbauer"}</code>). Jos tietokannasta löytyy käyttäjä annetulla käyttäjätunnuksella ja salasanalla, metodin tulee palauttaa statuskoodi <code>200</code> eli "OK", sekä käyttäjän nimi vastauksen rungossa. Jos käyttäjää ei löydy, palautettavan arvon tulee olla <code>401</code> eli "Unauthorized".</p>
+
+                            <p>Toteuta vastaus siten että autentikointiin käytettävä kontrollerimetodi palauttaa <code><a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html" target="_blank">ResponseEntity</a></code>-olion. ResponseEntitylle voi määritellä vastauksen statuskoodin sekä rungon. Alla oleva ResponseEntity-olion runko sisältää merkkijonon <code>"jack bauer"</code> ja palauttaa statuskoodin <code>200</code> eli "OK".</p>
+
+                            <pre class="sh_java">
+ResponseEntity&lt;String&gt; vastaus = new ResponseEntity&lt;&gt;("jack bauer", HttpStatus.OK);</pre>
+
+                        </div>
+                    </div>
+
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-varauspalvelu">
+                                    Varauspalvelu
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-varauspalvelu" class="collapse">
+
+                            <p>Jatkokehitetään sovellusta huoneistojen varaamiseen ja varaustilanteen tarkasteluun. Käytössäsi on huoneistojen käsittelyyn tarvittava rajapinta, jonka palveluntarjoaja on toteuttanut sinua varten. Rajapintaa käytetään <code>ApartmentService</code>-luokan avulla, joka löytyy pakkauksesta <code>wad.ext.apartments</code>.</p>
+
+                            <p>Voit käyttää Huoneistot tehtävän vastausta osana tätä tehtävää:</p>
+
+                            <ol>
+                                <li>Paketoi tehtävä Huoneistot komennolla <code>mvn clean package</code></li>
+                                <li>Käynnistä huoneistot-sovellus komennolla <code>java -Dserver.port=12345 -jar target/Huoneistot-1.0-SNAPSHOT.jar</code></li>
+                                <li>Tämä käynnistää Huoneistot sovelluksen paikallisen koneesi porttiin 12345 -- sovellus siis osoitteessa <code>http://localhost:12345</code> ja sen tarjoamaa rajapintaa voi hyödyntää osoitteesta <code>http://localhost:12345/api</code>.</li>
+                            </ol>
+
+                            <h1>Rajapinnan rajoittaminen</h1>
+
+                            <p>Tällä hetkellä sovelluksen tarjoama polussa <code>/api/reservations</code> oleva rajapinta mahdollistaa uusien varausten tekemisen sekä varausten poistamisen. Muokkaa rajapintaa siten, että sen kautta voi vain hakea tämänhetkisen varaustilanteen, mutta ei voi tehdä muutoksia siihen.</p>
+
+                            <h1>Varaustilanteen näyttäminen</h1>
+
+                            <p>Lisää sovellukseen kontrolleri, joka kuuntelee osoitteeseen <code>/reservations</code>-tehtäviä pyyntöjä. Kun osoitteeseen tehdään GET-tyyppinen pyyntö, tulee pyynnön modeliin lisätä sekä kaikki olemassaolevat varaukset että kaikki asunnot.</p>
+
+                            <p>Lisää asunnot modeliin parametrin nimellä "apartments" -- huoneistoihin pääset käsiksi <code>ApartmentService</code>-toteutuksen avulla. Varausten tulee olla modelissa parametrilla "reservations". Näytä käyttäjälle polussa <code>/src/main/resources/templates/reservations.html</code> olevasta näkymästä luotu sivu.</p>
+
+                            <p>Tämän lisäksi, kun osoitteeseen <code>/reservations</code> tehdään POST-pyyntö, missä on varauksen tiedot, varaus tulee tallentaa tietokantaan. POST-pyynnön mukana tulee muuttujat <code>reservationStart</code>, <code>reservationEnd</code> sekä <code>apartmentId</code> -- voit todennäköisesti hyödyntää luokkaa <code>Reservation</code> tässä. Kun otat pyynnön vastaan, lisää varaukseen varattavan huoneiston nimi -- voit hakea yksittäisen huoneiston tiedot huoneiston tunnuksen perusteella <code>ApartmentService</code>-palvelusta. Muistathan että POST-pyynnön jälkeen pyyntö tulee aina uudelleenohjata.</p>
+
+                            <p>Huom! Lisää kontrollerille lisäksi <code>@PostConstruct</code>-annotaatiolla merkitty metodi, joka suoritetaan kun kontrolleri on ladattu. Aseta siinä <code>ApartmentService</code>-palvelulle osoite -- käytä aiempaa huoneistotehtävän vastausta testaukseen.</p>
+
+                            <h1>Päällekkäisten varausten esto</h1>
+
+                            <p>Muokkaa varaustoiminnallisuutta siten, että päällekkäisten varausten tekeminen ei onnistu. Samaa huoneistoa ei siis tule voida varata kahdesti samalle aikajaksolle tai osittain päällekkäiselle aikajaksolle.</p>
+
+
+                            <h1>Maksutoiminnallisuus</h1>
+
+                            <p>Jokaiseen varaukseen liittyy muuttuja <code>paymentStatus</code>, joka asetetaan varauksen luonnin yhteydessä <code>"UNPAID"</code>-tilaan, eli maksamattomaksi. Lisää sovellukseen toiminto, joka muuttaa varauksen maksutilaksi <code>"PAID"</code>. Tilan tulee muuttua jos osoitteeseen <code>/reservations/{id}/payment</code> tehdään POST-tyyppinen pyyntö -- tässä <code>id</code> on varauksen uniikki tunnus (<code>id</code>).</p>
+
+                            <p>Nyt varausten maksu voitaisiin periaatteessa hoitaa erillisessä palvelussa, joka päivittäisi varauksen tilan maksun yhteydessä.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <aside class="extra">
+
+                    <h1>Lisää aiheesta</h1>
+
+                    <p>Tutustu Microsoftin <a href="http://msdn.microsoft.com/en-us/library/bb833022.aspx" target="_blank">SOA-johdatukseen</a>.</p>
+
+                </aside>
+
+
+                <h1>Sovellusten testaaminen ja tuotantoon siirtäminen</h1>
+
+
+                <p>Kun sovellus julkaistaan, seuraaviin asioihin kannattaa kiinnittää huomiota. </p>
+
+
+                <ol>
+
+                    <li>Palvelun (esimerkiksi käyttöliittymä, REST-API) tulee olla käyttäjien löydettävissä.</li>
+
+                    <li>Palvelun rajapinnan (esimerkiksi käyttöliittymä, REST-API) käyttämiseen tulee olla tarjolla tukea tarvittaessa.</li>
+
+                    <li>Palvelun tilaa tulee pystyä seuraamaan. Jos palvelu on päällä mutta siihen ei pääse käsiksi, se on turha. Palvelu on myös turha jos se on päällä, mutta joku sen sisältämä osakomponentti on rikki ja pyynnöt eivät suoritu toivotusti.</li>
+
+                    <li>Kaikkien rajapintojen tulee olla testattu ja niiden kehityksen tulee tapahtua erillisenä tuotantopalvelusta, jolloin uusia toiminnallisuuksia voidaan testata erillään.</li>
+
+                    <li>Palvelun tulee pystyä kestämään suuria määriä liikennettä sekä suojautumaan vihamielisiltä ohjelmistoilta ja käyttäjiltä.</li>
+
+                </ol>
+
+                <p>Tutustutaan tässä kappaleessa lähinnä neljänteen kohtaan.</p>
+
+
+                <h2>Sovelluksen testaaminen</h2>
+
+
+                <p>Kuten ohjelmistotuotannossa yleensä, myös palvelinohjelmistoja rakennettaessa testaaminen hyödyntää sekä ohjelmiston kehitystä että sen ylläpitoa. Testaaminen voidaan karkeasti jakaa kolmeen osaan: yksikkötestaukseen, integraatiotestaukseen ja järjestelmätestaukseen. Yksikkötestauksessa testataan sovellukseen kuuluvia pienimpiä yksittäisiä komponentteja ja varmistetaan että niiden tarjoamat rajapinnat toimivat tarkoitetulla tavalla. Integraatiotestauksessa testataan että komponentit toimivat yhdessä kuten niiden pitäisi, ja järjestelmätestauksessa varmistetaan, että järjestelmä toimii vaatimusten mukaan järjestelmän käyttäjille tarjotun rajapinnan (esim. selain tai REST-api) kautta.</p>
+
+
+                <h3>Yksikkötestaus</h3>
+
+
+                <p>Yksikkötestauksella tarkoitetaan lähdekoodiin kuuluvien yksittäisten osien testausta. Termi yksikkö viittaa ohjelman pienimpiin mahdollisiin testattaviin toiminnallisuuksiin, kuten olion tarjoamiin metodeihin. Seuratessamme <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">single responsibility principle</a>ä, jokaisella oliolla ja metodilla on yksi selkeä vastuu, jota voi myös testata. Testaus tapahtuu yleensä testausohjelmistokehyksen avulla, jolloin luodut testit voidaan suorittaa automaattisesti. Yleisin Javalla käytettävä testauskehys on JUnit, jonka saa käyttöön lisäämällä siihen liittyvän riippuvuuden <code>pom.xml</code>-tiedostoon.</p>
+
+                <pre class="sh_xml">
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
+
+                <p>Yksittäisen riippuvuuden määre <code>scope</code> kertoo milloin riippuvuutta tarvitaan. Määrittelemällä <code>scope</code>-elementin arvoksi <code>test</code> on riippuvuudet käytössä vain testejä ajettaessa. Uusia testiluokkia voi luoda NetBeansissa valitsemalla New -> Other -> JUnit -> JUnit Test. Tämän jälkeen NetBeans kysyy testiluokalle nimeä ja pakkausta. Huomaa että lähdekoodit ja testikoodit päätyvät erillisiin kansioihin -- juurin näin sen pitääkin olla. Kun testiluokka on luotu, on projektin rakenne kutakuinkin seuraavanlainen.</p>
+
+                <pre>
+.
+|-- pom.xml
+`-- src
+    |-- main
+    |   |-- java
+    |   |   `-- wad
+    |   |       `-- ... oman projektin koodit
+    |   |-- resources
+    |   |       `-- ... resurssit, mm. konfiguraatio ja thymeleafin templatet
+    |   `-- webapp
+    |           
+    `-- test
+        `-- java
+            `-- wad
+                `-- ... testikoodit!
+                </pre>
+
+                <p>Tehtäväpohjissa JUnit-testikirjasto on valmiina mukana. Yksikkötestauksesta JUnit-kirjaston avulla löytyy pieni opas kurssin <a href="https://github.com/mluukkai/OTM2013/wiki/Ohje-JUnit:in-k%C3%A4ytt%C3%B6%C3%B6n" target="_blank">Ohjelmistotekniikan menetelmät</a> sivuilta.</p>
+
+
+                <h3>Integraatiotestaus</h3>
+
+                <p>Spring tarjoaa <code>spring-test</code>-komponentin, jonka avulla JUnit-kirjasto saa @Autowired-annotaatiot toimimaan. Tämän kautta pääsemme tilanteeseen, missä voimme injektoida testimetodille esimerkiksi kokonaisen palvelun, sekä testata sen tarjoamien metodien toimintaa. Testattava palvelu voi hyödyntää muita komponentteja, jolloin testauksen kohteena on kokonaisuuden toiminta yhdessä.</p>
+
+                <p>Spring test-komponentista on myös Spring Boot -projekti, jonka voimme ottaa käyttöömme lisäämällä seuraavan riippuvuuden pom.xml-tiedostoon. Käytetyn riippuvuuden versio liittyy Spring Boot -projektin versioon, eikä sitä tarvitse määritellä tarkemmin.</p>
+
+                <pre class="sh_xml">
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
+
+
+                <p>Yksittäisten palvelujen testaamisessa tarvitsemme testiluokkien alkuun kaksi annotaatiota. Annotaatio <code>@RunWith(SpringJUnit4ClassRunner.class)</code> kertoo että käytämme Springiä yksikkötestien ajamiseen ja annotaatiolle <code>@SpringApplicationConfiguration</code> annetaan konfiguraation sijainti -- tässä <code>Application.class</code>, mikä tehtäväpohjissa on tyypillisestä pakkauksessa <code>wad</code>. Testiluokka, johon injektoidaan automaattisesti <code>MyService</code>-palvelu, näyttää seuraavalta.</p>
+
+
+                <pre class="sh_java">
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+public class ApplicationTest {
+
+    @Autowired
+    private MyService myService;
+
+    // ... testit jne
+}</pre>
+
+                <p>Käynnistämällä Springin osana testejä, saamme käyttöömme oliokontekstin, jonka avulla voimme asettaa testattavat oliot testiluokkiin testaamista varten. Testattavien olioiden riippuvuudet asetetaan myös automaattisesti, eli jos <code>MyService</code> sisältää muita komponentteja, on ne myös automaattisesti asetettu.</p>
+
+                <p>Voimme ylläolevalla lähestymistavalla testata myös sitä, että sovelluksemme eri osat toimivat yhteen toivotusti. Oletetaan, että käytössämme on luokka <code>PersonService</code>, joka tarjoaa metodin <code>save</code>, jonka pitäisi tallentaa parametrina annettava <code>Person</code>-olio tietokantaan. Tämän lisäksi käytössämme on <code>PersonRepository</code>, jolla on metodi <code>findByName</code>, minkä avulla voimme hakea tietokannasta henkilön sen nimen perusteella. Kummatkin toteutukset voidaan injektoida suoraan testiluokkaan, testi itsessään ensin tallentaa henkilön <code>PersonService</code>-olion avulla, ja tarkistaa sen jälkeen <code>PersonRepository</code>-oliolta että kyseinen henkilö on olemassa.</p>
+
+
+                <pre class="sh_java">
+// importit
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+public class ApplicationTest {
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Test
+    public void testSavePerson() {
+        Person person = new Person();
+        person.setName("Jack Bauer");
+        person.setAge(42);
+
+        personService.save(person);
+
+        Person retrieved = personService.findByName("Jack Bauer");
+        assertNotNull(retrieved);
+        assertEquals(42, retrieved.getAge());
+    }
+
+    // ja muita testejä
+}</pre>
+
+                <p>Ylläolevassa testissä olevat metodit <code>assertNotNull</code> ja <code>assertEquals</code> ovat JUnit-kirjaston tarjoamia toiminnallisuuksia.</p>
+
+
+                <h3>Järjestelmätestaus</h3>
+
+                <p>Järjestelmätestauksessa on tarkoitus varmistaa, että järjestelmä toimii toivotulla tavalla. Järjestelmää testataan saman rajapinnan kautta, kuin mitä sen loppukäyttäjät käyttävät. Järjestelmätestaukseen on monenlaisia työkaluja, joista käsittelemme tässä kahta. Tutustumme ensin integraatiotestauksessa käytetyn <code>spring-test</code>-komponenttiin järjestelmätason testaustoiminnallisuuteen, jonka jälkeen tutustumme harjoitustehtävän kautta <code>Selenium</code> ja <code>FluentLenium</code> -kirjastoihin.</p>
+
+                <p>Springin tarjoama <code>spring-test</code> tarjoaa tuen järjestelmätestaamiseen. Lisäämällä testiluokkiin annotaatio <code>@WebAppConfiguration</code> testeillä on käytössä myös web-sovelluksen konteksti, jonka avulla voidaan luoda <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html" target="_blank">MockMvc</a>-olio. MockMvc-oliolla pystymme tekemään pyyntöjä sovelluksen tarjoamiin osoitteisiin, tarkistelemaan pyyntöjen onnistumista, sekä tarkastelemaan vastauksena saatua dataa.</p>
+
+                <p>Alla oleva esimerkki käynnistää sovelluksen ja tekee kolme GET-pyyntöä osoitteeseen <code>/messages</code>. Ensimmäinen pyyntö liittyy testiin, missä varmistetaan että vastaus on sisältää statuskoodin <code>200</code> eli "OK", toinen pyyntö liittyy testiin joka varmistaa että vastauksen tyyppi on JSON-muotoista dataa, ja kolmas pyyntö tarkistaa että vastauksessa on merkkijono "Awesome". Alun <code>setUp</code>-metodi luo <code>MockMvc</code>-olion injektoidun palveinkontekstin perusteella.</p>
+
+                 <pre class="sh_java">
+// muut importit
+
+// mm. mockMvc:n get- ja post-metodit
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
+public class MessagesTest {
+
+    private final String API_URI = "/messages";
+
+    @Autowired
+    private WebApplicationContext webAppContext;
+
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
+    }
+
+    @Test
+    public void statusOk() throws Exception {
+        mockMvc.perform(get(API_URI))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void responseTypeApplicationJson() throws Exception {
+        mockMvc.perform(get(API_URI))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void responseContainsTextAwesome() throws Exception {
+        MvcResult res = mockMvc.perform(get(API_URI))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String content = res.getResponse().getContentAsString();
+        Assert.assertTrue(content.contains("Awesome"));
+    }
+}</pre>
+
+                <p>Voit myös testata modeliin asetettujen attribuuttien olemassaoloa ja oikeellisuutta. Olemassaolon voi tarkistaa <code>model()</code>-metodin kautta, ja <code>MvcResult</code>-olion kautta pääsee käsiksi modelin sisältöön.</p>
+
+                <pre class="sh_java">
+    @Test
+    public void modelHasAttribute() throws Exception {
+        mockMvc.perform(get(API_URI))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("messages"));
+    }
+
+    @Test
+    public void modelHasAttribute() throws Exception {
+        MvcResult res = mockMvc.perform(get(API_URI))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("messages"))
+                .andReturn();
+
+        // oletetaan, että kontrolleri asettaa listan Message-tyyppisiä olioita
+        // modeliin
+
+        List&lt;Message&gt; messages = (List) res.getModelAndView().getModel().get("messages");
+
+        // tarkista lista
+    }
+                </pre>        
+
+
+                <p>MockMvc:n avulla voi testata käytännössä suurinta osaa palvelinsovellusten toiminnallisuudesta, mutta samalla se tarjoaa pääsyn samaan rajapintaan kuin mitä selain käsitteelee.</p>
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-lentokentatredux">
+                                    Lentokentät Redux
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-lentokentatredux" class="collapse">
+
+                            <p>Muistamme viikolta 2 tehtävän, missä tehtiin sovellus lentokoneiden ja lentokenttien hallintaan. Tässä tehtävässä harjoitellaan hieman sekä integraatio- että järjestelmätestausta.</p>
+
+			    <p>Huom! Tässä tehtävässä ei ole automaattisia testejä, joilla testattaisiin kirjoittamiasi testejä. Palauttaessasi tehtävän olet tarkistanut, että kirjoittamasi testit toimivat kuten tehtävänannossa on kuvattu.</p>
+
+                            <h1>AirportServiceTest</h1>
+
+                            <p>Sovellusessa on luokka <code>AirportService</code>, mikä sijaitsee pakkauksessa <code>wad.service</code>. Sille ei kuitenkaan ole yhtäkään testiä :(</p>
+
+                            <p>Lisää testikansioon (<code>Test Packages</code>) pakkaus <code>wad.service</code>, ja luo sinne luokka <code>AirportServiceTest</code>.</p>
+
+                            <p>Lisää luokalle tarvittavat annotaatiot sekä oliomuuttujat, ja toteuta luokalle testimetodit, joiden avulla testataan että haluttu lentokone todellakin lisätään lentokentälle. Haluat ainakin tietää että:</p>
+
+                            <ul>
+                                <li>Kun lentokone on lisätty lentokentälle, tietokannasta samalla tunnuksella haettavalla lentokoneella on asetettu lentokenttä, ja se on juuri se lentokenttä mihin kone on lisätty.</li>
+                                <li>Kun lentokone on lisätty lentokentälle, lentokentältä löytyy myös kyseinen kone.</li>
+                                <li>Kun lentokone on lisätty yhdelle lentokentälle, se ei ole muilla lentokentillä.</li>
+                                <li>Lentokoneen lisääminen samalle lentokentälle useasti ei johda siihen, että lentokenttä sisältää saman koneen monta kertaa.</li>
+                            </ul>
+
+                            <p>Aina kun lisäät yksittäisen testin, voit ajaa testit klikkaamalla projektia oikealla hiirennapilla ja valitsemalla "Test".</p>                        
+
+
+                            <h1>AircraftControllerTest</h1>
+
+                            <p>Luo testikansioon pakkaus <code>wad.controller</code> ja lisää sinne luokka <code>AircraftControllerTest</code>. Lisää luokkaan tarvittavat määrittelyt, jotta voit käyttää <code>MockMvc</code>-komponenttia testeissä.</p>
+
+                            <p>Tee seuraavat testit:</p>
+
+                            <ul>
+                                <li>Kun osoitteeseen <code>/aircrafts</code> tehdään GET-pyyntö, vastauksen status on 200 (ok) ja vastauksen model-oliossa on parametrit <code>aircrafts</code> ja <code>airports</code>.</li>
+                                <li>Kun osoitteeseen <code>/aircrafts</code> tehdään POST-pyyntö, jonka parametriksi annetaan <code>name</code>-kenttä, jonka arvona on "HA-LOL", pyynnön vastaukseksi tulee uudelleenohjaus. Tee tämän jälkeen erillinen kysely tietokantaan esim. <code>AircraftRepository</code>:n avulla, ja varmista, että tietokannasta löytyy lentokone, jonka nimi on <code>HA-LOL</code>.</li>
+                                <li>Kun osoitteeseen <code>/aircrafts</code> tehdään POST-pyyntö, jonka parametriksi annetaan <code>name</code>-kenttä, jonka arvona on "XP-55", pyynnön vastaukseksi tulee uudelleenohjaus. Tee tämän jälkeen GET-pyyntö osoitteeseen <code>/aircrafts</code>, ja tarkista että pyynnön vastauksena saatavan <code>model</code>-olion sisältämässä <code>"aircrafts"</code>-listassa on juuri luotu lentokone.</li>
+                            </ul>
+
+                            <p>Tässäkin tehtävässä, aina kun lisäät yksittäisen testin, voit ajaa testit klikkaamalla projektia oikealla hiirennapilla ja valitsemalla "Test".</p>                        
+                        </div>
+                    </div>
+                </div>
+
+
+                <p>Riippuen käytetystä käyttöliittymäkirjastosta, käyttöliittymä saatetaan luoda Spring-sovelluskehyksen ulkopuolella. Esimerkiksi <a href="https://en.wikipedia.org/wiki/JavaServer_Pages" target="_blank">JSP</a>-sivut luodaan käytetyllä palvelimella (esim Tomcat tai Jetty), eli ne ovat erillinen osa Spring-sovelluksesta.</p>
+
+
+                <p>MockMvc:n lisäksi järjestelmätestaukseen käytetään melko paljon <a href="http://www.seleniumhq.org/" target="_blank">Selenium</a>ia ja siihen liittyviä lisäosia kuten <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">FluentLenium</a>, jotka tarjoavat välineitä selaintoiminnallisuuden automatisointiin. Käytännössä edellämainitut ovat on web-selaimen toimintojen automatisointiin tarkoitettuja välineitä, jotka antavat sovelluskehittäjälle mahdollisuuden käydä läpi sovelluksen käyttöliittymää ohjelmallisesti.</p>
+
+		<p>Lisätään FluentLenium-kirjaston vaatimat riippuvuudet, oletetaan että testit kirjoitetaan JUnit-testikirjaston avulla (FluentLenium tarjoaa myös muita vaihtoehtoja).</p>
+
+                <pre class="sh_xml">
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.fluentlenium&lt;/groupId&gt;
+            &lt;artifactId&gt;fluentlenium-core&lt;/artifactId&gt;
+            &lt;version&gt;0.10.3&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;xml-apis&lt;/groupId&gt;
+            &lt;artifactId&gt;xml-apis&lt;/artifactId&gt;
+            &lt;version&gt;1.4.01&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;</pre>
+
+
+		<p><strong><em>FluentLenium testien kirjoittaminen</em></strong></p>
+
+
+                <p>Ajatellaan loppukäyttäjän haluamaa toiminnallisuutta "Käyttäjä voi ilmoittautua oppitunnille". Järjestelmä tarjoaa sivun, jonka ensimmäinen linkki vie ilmoittautumissivulle. Ilmoittautumissivulla tulee olla tietty otsikko -- varmistamme, että olemme oikealla sivulla. Tämän lisäksi ilmoiuttautumissivulla on lomakekenttä, jonka <em>id</em> on "name" -- jos kentällä on <em>id</code>, voidaan se valita kirjoittamalla "#kentannimi". Täytetään kenttään arvo "Bob" ja lähetetään lomake. Tämän jälkeen sivulla tulee olla teksti "Ilmoittautuminen onnistui!".</p>
+
+
+                <pre class="sh_java">
+// importit
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
+@IntegrationTest("server.port:0")
+public class ElokuvatietokantaTest extends FluentTest {
+
+    @Value("${local.server.port}")
+    private int serverPort;
+    private WebDriver webDriver = new HtmlUnitDriver();
+
+    private String getUrl() {
+        return "http://localhost:" + serverPort;
+    }
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return webDriver;
+    }
+
+    @Test
+    public void canSignUp() {
+        goTo(getUrl());
+
+        click(find("a").first());
+        assertEquals("Ilmoittautuminen", title());
+
+        fill(find("#name")).with("Bob");
+        submit(find("form").first());
+
+        assertTrue(pageSource().contains("Ilmoittautuminen onnistui!"));
+    }
+// ...
+                </pre>
+
+
+                <p>Yllä annotaatio <code>@IntegrationTest("server.port:0")</code> käynnistää palvelimen integraatiotestausta satunnaisessa portissa, joka saadaan muuttujaan <code>serverPort</code> annotaation <code>@Value("${local.server.port}")</code> avulla. Luomma tämän lisäksi ajurin näkymien läpikäyntiin (rivi <code>private WebDriver webDriver = new HtmlUnitDriver();</code>, joka tarjotaan oman testiluokkamme peritylle toiminnallisuudelle (<code>FluentTest</code>) metodin <code>getDefaultDriver()</code> kautta.</p>
+
+		<p>Yllä menemme ensin paikalliseen osoitteeseen <code>http://localhost:<em>portti</em></code>, missä portin numero on satunnaisesti valittu -- surffaamme siis haluttuun osoitteeseen. Haemme tämän jälkeen ensimmäisen linkin, eli <code>a</code>-elementin sivulta, ja klikkaamme sitä. Tämän jälkeen tarkistamme, että sivun otsake on <code>Ilmoittautuminen</code>. Tätä seuraa kentän, jonka id on "name" täyttäminen "Bob"-merkkijonolla, jonka jälkeen lomake lähetetään. Kun lomake on lähetetty, haetaan sivun lähdekoodista tekstiä "Ilmoittautuminen onnistui!". Jos tekstiä ei löydy, testi epäonnistuu.</p>
+
+		<p>FluentLenium-kirjastoon liittyvää dokumentaatiota löytyy osoitteesta <a href="http://www.fluentlenium.org/" target="_blank">http://www.fluentlenium.org/</a>, jonka lisäksi googlesta löytyy apua seuraavaan tehtävään.</p>
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-elokuvatredux">
+                                    Elokuvat Redux
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-elokuvatredux" class="collapse">
+
+                            <p>Muistamme viikolta 2 myös tehtävän, missä tehtiin sovellus elokuvien ja näyttelijöiden hallintaan. Tässä tehtävässä harjoitellaan hieman järjestelmätestausta FluentLeniumin avulla. Tehtävässä ei ole automaattisia testejä, sillä sinun tehtävänä on toteuttaa ne.</p>
+
+                            <h1>Näyttelijän lisääminen ja poistaminen</h1>
+
+                            <p>Luo testikansioon <code>wad.selenium</code> testiluokka <code>ActorTest</code>, johon asetat Selenium-testaamiseen tarvittavat komponentit.</p>
+
+                            <p>Toteuta testi, jolla varmistetaan että käyttäjän lisääminen ja poistaminen onnistuu. Testin tulee toimia seuraavasti:</p>
+
+                            <ol>
+                                <li>Menee näyttelijäsivulle</li>
+                                <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                                <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Van Damme", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                                <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                                <li>Klikkaa "Van Damme"en liittyvää poista-nappia </li>
+                                <li>Tarkistaa että sivulla ei ole tekstiä "Van Damme"</li>
+                            </ol>
+
+                            <p>Toteuta seuraavaksi testi, joka tekee seuraavat askeleet:</p>
+
+                            <ol>
+                                <li>Menee näyttelijäsivulle</li>
+                                <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                                <li>Tarkistaa ettei sivulla ole tekstiä "Chuck Norris"</li>
+                                <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Chuck Norris", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                                <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                                <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                                <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Van Damme", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                                <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                                <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                                <li>Klikkaa "Van Damme"en liittyvää poista-nappia</li>
+                                <li>Klikkaa henkilön "Chuck Norris" poista-nappia</li>
+                                <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                                <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                            </ol>
+
+
+                            <h1>Elokuvan lisääminen ja näyttelijän lisääminen elokuvaan</h1>
+
+                            <p>Luo testikansioon <code>wad.selenium</code> testiluokka <code>MovieTest</code>, johon asetat Selenium-testaamiseen tarvittavat komponentit.</p>
+
+                            <p>Toteuta seuraavat askeleet</p>
+
+                            <ol>
+                                <li>Mene elokuvasivulle</li>
+                                <li>Tarkista että sivulla ei ole tekstiä "Bloodsport"</li>
+                                <li>Tarkista että sivulla ei ole tekstiä "Van Damme"</li>
+                                <li>Etsi kenttä jonka id on "name" ja lisää siihen arvo "Bloodsport"</li>
+                                <li>Etsi kenttä jonka id on "lengthInMinutes" ja lisää siihen arvo "92"</li>
+                                <li>Lähetä kenttään liittyvä lomake</li>
+
+                                <li>Tarkista että sivulla on teksti "Bloodsport"</li>
+                                <li>Tarkista että sivulla ei ole tekstiä "Van Damme"</li>
+
+                                <li>Mene näyttelijäsivulle</li>
+                                <li>Tarkista ettei sivulla ole tekstiä "Van Damme"</li>
+                                <li>Etsi kenttä jonka id on "name", aseta kenttään teksti "Van Damme", ja lähetä lomake.</li>
+                                <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                                <li>Etsi linkki, jossa on teksti "Van Damme" ja klikkaa siitä.</li>
+                                <li>Etsi nappi, jonka id on "add-to-movie", ja klikkaa sitä.</li>
+
+                                <li>Mene elokuvasivulle</li>
+
+                                <li>Tarkista että sivulla on teksti "Bloodsport"</li>
+                                <li>Tarkista että sivulla on teksti "Van Damme"</li>
+                            </ol>
+
+                            <p>Suorita taas testit klikkaamalla projektia oikealla hiirennäppäimellä ja valitsemalla <code>Test</code>.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h2>Kehitys, Integraatio, QA, Tuotanto</h2>
+
+
+                <p>Kun sovelluksia kehitetään suuremmassa ryhmässä, sovellus sijaitsee useammassa paikassa.</p>
+
+                <ol>
+                    <li>Jokaisella ohjelmistokehittäjällä on oma <em>hiekkalaatikko</em>, jossa ohjelmistoon voi tehdä muutoksia vaikuttamatta muiden tekemään työhön. Jokaisella ohjelmistokehittäjällä on yleensä samat tai samankaltaiset työkalut (ohjelmointiympäristö, ...), mikä helpottaa muiden kehittäjien auttamista. Tyypillisesti ohjelmistokehittäjien päivittäiset tehtävät on jaettu pieniksi erillisiksi kokonaisuuksiksi ryhmän toimesta. Kun yksittäinen tehtävä on valmis, tehtävään liittyvä koodi sekä testit lisätään versionhallintapalvelimelle.</li>
+                    <li><em>Versionhallintapalvelin</em> sisältää mahdollisesti useampia versioita projektista. Esimerkiksi git-mahdollistaa ns. branchien käyttämisen, jolloin uusia ominaisuuksia voidaan toteuttaa erillään "päähaarasta". Kun uusi ominaisuus on valmis, voidaan se lisätä päähaaraan. Versionhallinnassa olevia koodeja voidaan myös tägätä julkaisuversioiksi.</li>
+                    <li>Versionhallintapalvelin on tyypillisesti kytketty <em>integraatiopalvelimeen</em>, jonka tehtävänä on yhdistää ohjelmistokehitystiimin lähdekoodit ja suorittaa niihin liittyvät testit jokaisen muutoksen yhteydessä. Integraatiopalvelin kuuntelee käytännössä versionhallintajärjestelmässä tapahtuvia muutoksia, ja hakee uusimman lähdekoodiversion muutoksen yhteydessä.</li>
+                    <li><em>Staging</em>-palvelin on lähes identtinen ympäristö tuotantoympäristöön verrattuna. Staging (usein myös QA)-ympäristöön kopioidaan ajoittain tuotantoympäristön data, ja se toimii viimeisenä testaus- ja validointipaikkana (Quality assurance) ennen tuotantoon siirtoa. QA-ympäristöä käytetään myös demo- ja harjoitteluympäristönä. Kun QA-ympäristössä oleva sovellus on päätetty toimivaksi, siirretään sovellus tuotantoympäristöön.</li>
+                    <li><em>Tuotantoympäristö</em> voi olla yksittäinen palvelin, tai se saattaa olla joukko palvelimia, joihin uusin muutos propagoidaan hiljalleen. Tuotantoympäristö on tyypillisesti erillään muista ympäristöistä mahdollisten virheiden minimoimiseksi.</li>
+                </ol>
+
+                <p>Riippuen ohjelmistotalosta ja käytetystä julkaisumallista, on mahdollista esimerkiksi että erillistä <code>Staging</code>-palvelinta ei ole käytössä.</p>
+
+
+                <h3>Integraatiopalvelin ja Continuous Integration</h3>
+
+
+
+                <p>Jatkuvassa integroinnissa (<em><a href="http://www.extremeprogramming.org/rules/integrateoften.html" target="_blank">Continuous integration</a></em>) jokainen ohjelmistoprojektin jäsen lisää päivittäiset muutoksensa olemassaolevaan kokonaisuuteen.</p>
+
+                <p>Jatkuvaa integrointia seuraten ohjelmistokehittäjä hakee kehityksen alla olevan version versionhallinnasta aloittaessaan työn. Hän toteuttaa uuden pienen ominaisuuden testeineen, testaten uutta toiminnallisuutta jatkuvasti. Kun ohjelmistokehittäjä on saanut muutoksen tehtyä, ja kaikki testit menevät läpi hänen paikallisella työasemalla, hän lähettää muutokset versionhallintaan. Kun versionhallintaan tulee muutos, jatkuvaa integrointia suorittava työkalu hakee uusimman version ja suorittaa sille sekä yksikkö- että integraatiotestit.</p>
+
+                <p>Testejä sekä paikallisella kehityskoneella että erillisellä integraatiokoneella ajettaessa ohjelmistotiimi mahdollisesti huomaa virheet, jotka ovat piilossa kehittäjän paikallisen konfiguraation johdosta. Kehittäjä ei aina ota koko ohjelmistoa omalle koneelleen -- ohjelmisto voi koostua useista komponenteista --  jolloin kaikkien vaikutusten testaaminen paikallisesti on mahdotonta. Jos testit eivät mene läpi integraatiokoneella, korjataan muutokset mahdollisimman nopeasti.</p>
+
+                <p>Työkaluja automaattiseen kääntämiseen ja jatkuvaan integrointiin ovat esimerkiksi <a href="https://travis-ci.org" target="_blank">Travis</a> ja <a href="https://coveralls.io" target="_blank">Coveralls</a>. Travis varmistaa että viimeisin lähdekoodiversio kääntyy ja että testit menevät läpi, ja Coveralls tarjoaa välineitä testikattavuuden ja projektin historian tarkasteluun -- tässä hyödyksi on esimerkiksi <a href="https://github.com/cobertura/cobertura" target="_blank">Cobertura</a>. Kummatkin ovat ilmaisia käyttää kun projektin lähdekoodi on avointa -- kumpikin tarjoaa myös suoran Github-tuen.</p>
+
+                <p>Travisin käyttöönottoon vaaditaan käytännössä se, että projekti on esimerkiksi Githubissa ja että sen juurikansiossa on travisin konfiguraatiotiedosto <code>travis.yml</code>. Yksinkertaisimmillaan konfiguraatiotiedosto sisältää vain käytetyn ohjelmointikielen -- travis osaa esimerkiksi päätellä projektin tyypin <code>pom.xml</code>-tiedoston pohjalta.</p>
+
+                <p>Näitä kumpaakin käytetään esimerkiksi <a href="https://github.com/kesapojat/tmc-snapshot-api" target="_blank">TMC Snapshot API</a>ssa, joka helpottaa ohjelmointiprosessin tutkimista.</p>
+
+
+                <h2>Konfiguraatioprofiilit</h2>
+
+
+
+                <p>Hyvin rakennetussa sovelluksessa ympäristön vaihtaminen ei vaadi muutoksia sovelluksen lähdekoodiin, vaan sovellusten ympäristöstä toiseen siirtäminen tapahtuu erilaisten profiilien avulla. Projekteissamme mukana olleet <code>wad.profiles</code>-pakkauksessa olleet luokat <code>DevProfile</code> ja <code>ProdProfile</code> sisältävät erilliset konfiguraatiot; ensimmäinen on kehityskäyttöön tarkoitettu ja hyödyntää vahvasti Spring Bootin oletusasetuksia, kun taas toinen ottaa käyttöön tietokannaksi PostgreSQL-kannan sovellukselle annettujen parametrien pohjalta. Esimerkiksi kun sovellus siirretään herokuun, se käyttää tuotantoprofiilia <code>"prod"</code>. Profiilin nimi määritellään profiilitiedoston alussa olevalla <code>@Profile</code>-annotaatiolla.</p>
+
+                <p>Profiilikohtaisten asetusten muuttaminen onnistuu sekä lähdekoodista profiilitiedostoa (esim. <code>ProdProfile</code>) muokkaamalla, että esimerkiksi <code>application.properties</code>-tiedostoa muokkaamalla. Jos sovelluskehittäjä haluaa, että testiprofiililla (esim "test") on erillinen konfiguraatiotiedosto, sellaisen voi luoda. Spring etsii automaattisesti oletuskonfiguraation <code>application.properties</code> lisäksi myös profiilikohtaisia konfiguraatiotiedostoja (esim. <code>application-test.properties</code>, missä <code>test</code> on profiilin nimi.</p>
+
+                <p>Konfiguraatiotiedostoihin voidaan asettaa myös ohjelmiston suorituksessa tarvittavaa tietoa. Esimerkiksi jos käyttäjä haluaa että sovelluksessa on erityistä tietoa, voidaan se määritellä muuttujaksi konfiguraatiotiedostoon. Alla olevassa esimerkissä konfiguraatiotiedostossa on muuttuja <code>wad.environment</code>, jolle on asetettu arvoksi <code>PRODUCTION</code>.</p>
+
+                <pre>
+wad.environment=PRODUCTION</pre>
+
+                <p>Nyt kun sovellus käynnistetään siten, että ylläoleva konfiguraatio ladataan, on sovelluksessa käytössä konfiguraatioparametri, jonka voi injektoida suoraan sovellukseen <code>@Value</code>-annotaation avulla.</p>
+
+                <pre class="sh_java">
+// ..
+@Controller
+public class DefaultController {
+
+    @Value("${wad.environment}")
+    private String location;
+// ...
+                </pre>
+
+                <p>Käytännössä profiilien hallinta kannattaa toteuttaa esimerkiksi niin, että eri ympäristöissä on käytössä erillinen ympäristömuuttuja, joka kertoo käytettävän profiilin. Springiä käytettäessä ympäristömuuttuja on <code>SPRING_PROFILES_ACTIVE</code> tai <code>spring.profiles.active</code>.</p>
+
+                <p>Ympäristömuuttujan asetus tapahtuu *nix-koneilla <code>export</code>-komennolla.</p>
+
+                <pre>
+export SPRING_PROFILES_ACTIVE=production
+                </pre>
+
+                <p>Kun Springille on asetettu profiili, voidaan testiluokille määritellä myös käytettävä profiili annotaation <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/context/ActiveProfiles.html" target="_blank">ActiveProfiles</a> avulla. Alla olevassa esimerkissä testiluokan testit suoritetaan siten, että käytössä on profiiliin "dev" liittyvä konfiguraatio, eli se konfiguraatio, joka on määritelty annotaatiolla <code>@Profile("dev")</code> (tai <code>@Profile(values = {"dev", "muita"})</code> jos halutaan että samaa konfiguraatiota käytetään useammassa profiilissa.</p>
+
+                <pre class="sh_java">
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
+@ActiveProfiles("dev")
+public class ApplicationTest {
+    // ...
+                </pre>
+
+
+
+            </section>
+            <!-- END WEEK4 -->
 
 
 
