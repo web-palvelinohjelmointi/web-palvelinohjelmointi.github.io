@@ -49,10 +49,10 @@
                     <li>
                         <a href="#viikko4">Viikko 4</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko5">Viikko 5</a>
                     </li>
+<!--
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
@@ -4256,6 +4256,833 @@ public class ApplicationTest {
             <!-- END WEEK4 -->
 
 
+
+            <!-- BEGIN WEEK5 -->
+            <section class="weeklimit" data-week-id="5">
+                <header>
+                    <h2 id="viikko5">Viikko 5</h2>
+                </header>
+
+                <h1>Luonnolliset näkymätemplatet</h1>
+
+                <p>Luonnollisten näkymätemplatejen tavoitteena on mahdollistaa tilanne, missä kehitettävät näkymät näyttävät halutuilta ilman erillistä palvelimella tapahtumaa renderöintiä. Tutustutaan tässä kappaleessa tarkemmin jo pidempään käyttämäämme <a href="http://www.thymeleaf.org/" target="_blank">Thymeleaf</a>-projektiin.</p>
+
+
+                <p>Thymeleaf on rakenteellisen tekstin renderöintiin tarkoitettu komponentti, minkä avulla näkymien todellisen muodon voi nähdä myös ilman palvelimen käynnistämistä. Henkilöiden listaus näyttäisi Thymeleafilla toteutettuna esimerkiksi seuraavalta:</p>
+
+                <pre class="sh_xml">
+&lt;p&gt;And the talks are given by:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li th:each="person : ${persons}" th:text="${person.name}"&gt;jack bauer&lt;/li&gt;
+&lt;/ol&gt;</pre>
+
+                <p>Selaimessa sivu näyttää esimerkiksi seuraavalta:</p>
+
+                <div class="naytto">
+                    <p>And the talks are given by:</p>
+                    <ol>
+                        <li th:each="person : ${persons}" th:text="${person.name}">jack bauer</li>
+                    </ol>
+                </div>
+
+                <p>Ylläoleva esimerkki hakee käytännössä modelista attribuutin <code>persons</code> ja käy siihen liittyvän listan läpi. Jokaisen listan elementin kohdalla luodaan uusi elementti, jonka tekstiksi asetetaan listaelementtiin liittyvän muuttujan <code>name</code>-arvo. Sivua voi muokata myös siten, että siellä on visualisointitarkoituksessa lisäsisältöä.</p>
+
+                <pre class="sh_xml">
+&lt;p&gt;And the talks are given by:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li th:each="person : ${persons}" th:text="${person.name}"&gt;jack bauer&lt;/li&gt;
+    &lt;!--/*--&gt;
+    &lt;li&gt;nauris&lt;/li&gt;
+    &lt;li&gt;elefantti&lt;/li&gt;
+    &lt;!--*/--&gt;
+&lt;/ol&gt;
+                </pre>
+
+                <p>Vaikka sivun kehitysvaiheessa lista näkyy kehittäjälle (ja esimerkiksi asiakkaalle jolle sivua demotaan), poistaa Thymeleaf elementtien <code>&lt;!--/*--&gt;</code> ja <code>&lt;!--*/--&gt;</code> välissä olevan sisällön kun sivu renderöidään palvelimella.</p>
+
+                <div class="naytto">
+                    <p>And the talks are given by:</p>
+                    <ol>
+                        <li th:each="person : ${persons}" th:text="${person.name}">jack bauer</li>
+                        <!--/*-->
+                        <li>nauris</li>
+                        <li>elefantti</li>
+                        <!--*/-->
+                    </ol>
+                </div>
+
+                <h2>Thymealeafin käyttöönotto</h2>
+
+                <p>Thymeleafin käyttöönotto vaatii riippuvuuden lisäämisen <code>pom.xml</code>-tiedostoon. Seuraava riippuvuus hakee Thymeleafin projektin käyttöön.</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+&lt;/dependency&gt;
+                </pre>
+
+                <p>Tämän lisäksi, HTML-sivuilla tulee määritellä <code>th</code>-nimiavaruus.</p>
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head lang="en"&gt;
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;title&gt;Messages&lt;/title&gt;
+    &lt;/head&gt;
+    ...
+                </pre>        
+
+
+                <p>Thymeleaf etsii näkymiä oletuksena kansiosta <code>src/main/resources/templates</code>. Näkymätiedostojen pääte on <code>.html</code>; sitä ei tarvitse erikseen kertoa kontrollerissa. Jos palautamme kontrollerista esimerkiksi merkkijonon <code>messages</code>, etsii Thymeleaf näkymätemplaten <code>/src/main/resources/templates/messages.html</code> ja renderöi sen sisällön.</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.GET)
+public String view() {
+    return "messages";
+}</pre>        
+
+
+                <h2>Sivujen rakentaminen osista</h2>
+
+
+                <p>Usein web-sivustot toimivat niin, että niissä on muuttumatonta sisältöä. Tämän muuttumattoman sisällön asettaminen jokaiselle näkymälle erikseen on huonoa ohjelmointityyliä, sillä se johtaa tilanteeseen, missä sama koodi on useammassa paikassa, ja sen ylläpidettävyys heikkenee. Thymeleaf tarjoaa muutaman tavan näkymien paloista koostamiseen.</p>
+
+                <p>Näkymäpalasten määrittely tapahtuu komennolla <code>th:fragment</code>. Erilliset näkymäpalaset, joista sivu koostetaan, pidetään tyypillisesti <code>templates</code>-kansion alla olevassa erillisessä <code>fragments</code>-kansiossa. Oletetaan, että allaolevan sivun nimi on <code>header.html</code>, ja että se sijaitsee <code>fragments</code>-kansiossa. Sivu sisältää käytettävät otsaketiedot <code>header</code>-alueen sisällä.</p>
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;header template&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div th:fragment="header"&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#" th:href="@{/index}"&gt;Etusivu&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#" th:href="@{/sports}"&gt;Urheilu&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+                <p>Ylläolevan sivun <code>&lt;div th:fragment="header"&gt;</code>-elementin sisältämän koodin saa käyttöön komennolla <code>th:replace</code>.</p>
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head lang="en"&gt;
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;title&gt;Uutisvuoto!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div th:replace="fragments/header :: header"&gt;
+            otsake.
+        &lt;/div&gt;
+        
+        &lt;p&gt;sivun sisältöä..&lt;/p&gt;
+        ...
+                </pre>
+
+
+                <p>Kun sivu renderöidään, aiheuttaa komento <code>th:replace="fragments/header :: header"</code> toiminnon, missä alueelle haetaan kansiosta <code>fragments</code> löytyvän tiedoston <code>header.html</code> sisältämä <code>header</code>-alue. Yksittäinen tiedosto voi luonnollisesti sisältää myös useampia palasia, joista sivun voi koostaa.</p>
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-puutarhasuunnittelu">
+                                    Puutarhasuunnittelu
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-puutarhasuunnittelu" class="collapse">
+                
+			  <p>Tutustutaan hieman Thymeleafin toiminnallisuuksiin luomalla pieni sovellus puutarhan istutusten suunnitteluun. Tehtäväpohjassa on valmiina tarvittavat entiteetit sekä repositoryluokat. Pohjassa on valmiina myös template-tiedosto kasvisten luomiselle (<code>/src/main/resources/templates/vegetables.html</code>) sekä valmis otsaketiedosto (<code>/src/main/resources/templates/fragments/header.html</code>).</p>
+
+                          <h1>Vihannesten listaus</h1>
+
+                          <p>Tässä tehtävässä luodaan kontrolleri vihannesten lisäämiselle. Tutustu tehtäväpohjassa olevaan tiedostoon <code>/src/main/resources/templates/vegetables.html</code>. Sivu lienee muuten tutuhko, mutta katsotaan hieman <code>form</code>-elementtiä.</p>
+
+                          <pre class="sh_xml">
+&lt;form method="POST" th:action="@{/vegetables}"&gt;
+    &lt;input type="text" name="name"/&gt;&lt;p th:if="${#fields.hasErrors('vegetable.name')}" th:errors="*{vegetable.name}"&gt;here be errors&lt;/p&gt;
+    &lt;input type="submit" value="Add"/&gt;
+&lt;/form&gt;</pre>
+
+                          <p>Thymeleaf asettaa osoitteen <code>/vegetables</code> lomakkeen lähetysosoitteeksi komennolla <code>th:action="@{/vegetables}"</code>. Tämän lisäksi, sivu etsii modelissa olevan olion <code>vegetable</code> kenttään <code>name</code> liittyviä virheitä ja näyttää ne jos niitä on: <code>&lt;p th:if="${#fields.hasErrors('vegetable.name')}" th:errors="*{vegetable.name}"&gt;here be errors&lt;/p&gt;</code> -- komento toimii melko samalla tavalla kuin aiemmin näkemämme Spring-form -elementin errors-toiminnallisuus.</p>
+
+
+                          <p>Toteuta vihannesten lisäämistä varten kontrolleri sekä metodi, joka kuuntelee GET-tyyppisiä pyyntöjä osoitteeseen <code>/vegetables</code>. Lisää pyynnön modeliin kolme attribuuttia: (1) attribuutin "message" arvoksi tulee merkkijono "Vegetables!", (2) attribuutin "vegetables" arvoksi tulee tietokannasta haettava lista Vegetable-olioita, (3) attribuutin "vegetable" arvoksi tulee uusi Vegetable-olio. Voit luoda attribuutin "vegetable" myös erillisellä metodilla, missä on <code>@ModelAttribute("vegetable")</code>-annotaatio.</p>
+
+
+                          <p>Osoitteeseen <code>/vegetables</code> tehtäviä GET-pyyntöjä kuuntelevan metodin tulee palautaa merkkijono <code>"vegetables"</code>, jonka perusteella Spring etsii sopivan näkymätemplaten kansiosta <code>/src/main/resources/templates</code>.</p>
+
+
+                          <h1>Vihannesten lisääminen</h1>
+
+
+                          <p>Toteuta edellisessä tehtävässä tekemääsi kontrolleriin metodi, joka kuuntelee <code>/vegetables</code>-osoitteeseen tehtäviä <code>POST</code>-tyyppisiä pyyntöjä. Pyynnössä on sivulla olevat lomakkeen tiedot; ota parametrit kiinni <code>@ModelAttribute</code>-annotaation avulla <code>Vegetable</code>-olioon. Validoi myös olio samalla, ja pyydä Springiä asettamaan mahdolliset validointivirheet erilliseen <code>BindingResult</code>-olioon.</p>
+
+                          <p>Jos <code>BindingResult</code>-olioon tulee validointivirheitä (<code>hasErrors</code>-metodi), palauta käyttäjälle vegetables-sivu -- tällöin myös validointivirheet näkyvät käyttäjälle suoraan.</p>
+
+                          <p>Jos validointivirheitä ei ole, tallenna uusi vihannes tietokantaan ja uudelleenohjaa pyyntö osoitteeseen <code>/vegetables</code>.</p>
+
+                          <p>Tässä vaiheessa <code>/vegetables</code>-osoitteessa olevan sivun pitäisi listata kaikki kasvikset ja sinne pitäisi voida lisätä uusia kasviksia.</p>
+
+
+                          <h1>Puutarhojen listaus ja lisääminen</h1>
+
+                          <p>Luo kansioon <code>/src/main/resources/templates</code> tiedosto <code>gardens.html</code> ja kopioi sinne tiedoston <code>vegetables.html</code> sisältö. Muokkaa sivun <code>gardens.html</code>-sisältöä siten, että vihanneksiin viittaavat tekstit muutetaan viittaamaan puutarhoihin. Poista gardens.html -sivulta <code>${message}</code>-attribuutin käyttö, ja muokkaa puutarhojen listausta siten, että puutarhat listataan seuraavalla tavalla avulla.</p>
+
+                            <pre class="sh_xml">
+&lt;h2&gt;Gardens&lt;/h2&gt;
+
+&lt;div th:each="garden : ${gardens}"&gt;
+    &lt;h3 th:text="${garden.name}"&gt;garden name&lt;/h3&gt;
+            
+&lt;/div&gt;
+                            </pre>
+
+                            <p>Sivun tulee toimia siten, että jos käyttäjä tekee GET-tyyppisen pyynnön <code>/gardens</code>-osoitteeseen, näytetään käyttäjälle lista olemassaolevista puutarhoista sekä annetaan käyttäjälle mahdollisuus uusien puutarhojen luomiseen.</p>
+
+
+                            <p>Puutarhojen luomiseen käytettävä lomake lähettää POST-tyyppisen pyynnön osoitteeseen <code>/gardens</code>; pyyntö tulee luonnollisesti validoida ja jos pyyntö on virheellinen, tulee virheviesti näyttää käyttäjälle. Jos validointivirheitä ei ole, luodaan uusi puutarha ja tallennetaan se tietokantaan; tämän jälkeen pyyntö uudelleenohjataan <code>/gardens</code>-osoitteeseen.</p>
+
+
+
+                            <h1>Puutarhan suunnittelu</h1>
+
+
+                            <p>Puutarhan suunnitteluun kuuluu mahdollisuus kasvisten lisäämiseen puutarhalle. Muuta <code>gardens.html</code>-tiedoston sisältöä siten, että se sisältää mahdollisuuden kasvisten lisäämiseen puutarhoille. Käytä allaolevaa koodia osana näkymää.</p>
+
+                            <pre class="sh_xml">
+...
+&lt;h2&gt;Gardens&lt;/h2&gt;
+
+&lt;div th:each="garden : ${gardens}"&gt;
+    &lt;h3 th:text="${garden.name}"&gt;garden name&lt;/h3&gt;
+
+    &lt;div th:if="${not #lists.isEmpty(garden.vegetables)}"&gt;
+        &lt;h4&gt;Current vegetables&lt;/h4&gt;
+        &lt;ol&gt;
+            &lt;li th:each="vegetable : ${garden.vegetables}" th:text="${vegetable.name}"&gt;veggie&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/div&gt;
+    
+    &lt;div th:if="${not #lists.isEmpty(vegetables)}"&gt;
+        &lt;h5&gt;plant a vegetable&lt;/h5&gt;
+        
+        &lt;form method="POST" th:action="@{/gardens/{id}/vegetables(id=${garden.id})}" action="/gardens/1/vegetables"&gt;
+        
+            &lt;select name="vegetableId"&gt;
+                &lt;option th:each="vegetable : ${vegetables}" 
+                    th:value="${vegetable.id}" 
+                    th:text="${vegetable.name}"&gt;veg name to add&lt;/option&gt;
+            &lt;/select&gt;
+            
+            &lt;input type="submit" value="Add"/&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;Add new garden&lt;/h2&gt;
+...</pre>                        
+
+                            <p>Yllä oleva koodi mahdollistaa puutarhaan liittyvien kasvisten listauksen sekä kasvisten lisäämisen puutarhaan. Muutamat komennot ovat mielenkiintoisia:</p>
+
+                            <ul>
+                                <li>Komento <code>&lt;div th:if="${not #lists.isEmpty(<em>listan nimi</em>)}"&gt;</code> tarkistaa onko annetulla listalla elementtejä. Jos lista ei ole tyhjä, elementin sisältö huomioidaan.</li>
+
+                                <li>Komento <code>th:action="@{/gardens/{id}/vegetables(id=${garden.id})}"</code> lisää osoitteeseen arvoja suluissa annetun määrittelyn perusteella. Tässä esimerkiksi puutarhan tunnus <code>{id}</code> haetaan muuttujasta <code>${garden.id}</code>.</li>
+
+                                <li>Näiden lisäksi <code>option</code>-elementissä käytetään toistokomentoa elementtien luomiseksi <code>select</code>-listalle; elementit luodaan annetusta listasta.</li>
+                            </ul>
+
+                            <p>Lisää osoitteeseen <code>/gardens</code> tehtävään GET-pyynnön vastaukseen attribuutti <code>vegetables</code>, mikä sisältää kaikki tietokannasta haetut kasvikset.</p>
+
+                            <p>Lisää tämän jälkeen sovellukseen kontrollerimetodi, joka kuuntelee osoitteeseen <code>/gardens/{id}/vegetables</code> tehtäviä POST-pyyntöjä. Pyynnön polussa on puutarhan tietokantatunnus ja pyynnön parametrina tulee kasviksen tunnus <code>vegetableId</code>. Kun osoitteeseen tehdään POST-pyyntö, tulee puutarhalle lisätä haluttu kasvis.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3>Käytetyn näkymän palauttaminen kontrollerimetodista</h3>
+
+                <p>Template-tiedostot voi suunnitella myös siten, että näkymäpohjana käytetään aina samaa tiedostoa, ja kontrollerimetodi palauttaa käytettävän palasen nimen. Sivurunko voi tällöin olla seuraavanlainen:</p>
+
+
+                <pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head lang="en"&gt;
+        &lt;meta charset="UTF-8" /&gt;
+        &lt;title&gt;Uutisvuoto!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div th:replace="fragments/header :: header"&gt;
+            otsake.
+        &lt;/div&gt;
+        
+        &lt;div th:replace="${view} :: content"&gt;
+            runko.
+        &lt;/div&gt;
+        ...
+                </pre>
+
+                <p>Nyt kun kontrollerissa modeliin lisätään attribuutti <code>view</code>, päätellään sen arvosta tiedosto, josta <code>content</code>-pala haetaan. Sama ajatus hieman toisella tavalla toteutettuna löytyy osoitteessa <a href="http://blog.codeleak.pl/2013/11/thymeleaf-template-layouts-in-spring.html" target="_blank">http://blog.codeleak.pl/2013/11/thymeleaf-template-layouts-in-spring.html</a> olevasta blogipostista.</p>
+
+
+
+                <h1>Mediatyypit ja tiedostojen käsittely</h1>
+
+
+                <p>Pyyntöjä lähetettäessä ja vastaanottaessa palvelin vastaanottaa ja kertoo pyynnön tyypin otsakkeella <code>Content-Type</code>. Tätä tietoa lähetettävän tai vastaanotettavan datan muodosta kutsutaan <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">mediatyypiksi</a>, millä dataa käsittelevä ohjelmisto voi päättää mitä datalla tehdään. Mediatyyppi sisältää yleensä kaksi osaa; mediatyypin sekä tarkenteen (esim <code>application/json</code>). Kattava lista eri mediatyypeistä löytyy IANA-organisaation ylläpitämästä <a href="http://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">mediatyyppilistasta</a>.</p>
+
+                <p>Tyypillisiä mediatyyppejä ovat erilaiset kuvat <code>image/*</code>, videot <code>video/*</code>, äänet <code>audio/*</code> sekä erilaiset tekstimuodot kuten JSON <code>application/json</code>.</p>
+
+                <p>Web-palvelut voivat tarjota käytännössä mitä tahansa näistä tiedostotyypeistä käyttäjälle; käyttäjän sovellusohjelmisto päättelee vastauksessa tulevan mediatyypin mukaan osaako se käsitellä tiedoston. Yksinkertaisimmillaan Springillä mediatiedoston lähetys palvelimelta toimii seuraavasti. Oletetaan, että käytössämme on levypalvelin polussa <code>/media/data/</code> oleva PNG-kuvatiedosto <code>architecture.png</code>.</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.GET, produces = "image/png")
+public void copyImage(OutputStream out) throws IOException {
+    Files.copy(Paths.get("/media/data/architecture.png"), out);
+}</pre>
+
+                <p>Yllä olevassa esimerkissä kerromme että metodi tuottaa <code>image/png</code>-tyyppistä. Spring asettaa kontrollerin metodin parametriksi automaattisesti <code>OutputStream</code>-olion, johon pyynnön vastaus voidaan kirjoittaa. <code>Files</code>-luokan tarjoama <code>copy</code>-metodi kopioi kuvan suoraan tiedostosta pyynnön vastaukseksi.</p>
+
+                <p>Ylläolevan kontrollerimetodin palauttaman kuvan voi näyttää osana sivua <code>img</code>-elementin avulla. Jos metodi kuuntelee osoitetta <code>/media/imageimage.png</code>, HTML-elementti <code>&lt;img src="/media/image.png" /&gt;</code> hakee kuvan automaattisesti osoitteesta sivun latautuessa.</p>
+
+                <p>Huom! Jos kuvat ovat staattisia eikä niitä esimerkiksi lisäillä tai poisteta, tulee niiden olla esimerkiksi projektin kansiossa <code>/src/main/webapp/img</code> -- niille <strong>ei</strong> tule määritellä kontrollerimetodia. Kansion <code>webapp</code>-alla oleviin tiedostoihin pääsee käsiksi web-selaimella ilman tarvetta kontrollerille (poikkeuksena WEB-INF -kansio, jonka palvelin piilottaa).</p>
+
+
+                <h2>Tiedostojen tallentaminen ja lataaminen</h2>
+
+
+                <p>Web-sivuilta voi lähettää tiedostoja palvelimelle. Alla oleva lomake HTML-koodi luo lomakkeen, joka voi sisältää myös binääridataa (kts. <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2" target="_blank">multipart/form-data</a>).</p>
+
+                <pre class="sh_xml">
+&lt;form method="POST" action="/files" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="file" /&gt;
+    &lt;input type="submit" value="Send!"/&gt;
+&lt;/form&gt;</pre>
+
+                <p>Lomake lähettää tiedot palvelimelle, jonka tulee käsitellä pyyntö. Pyynnön käsittely tapahtuu aivan kuten minkä tahansa muunkin pyynnön, mutta tässä tapauksessa pyynnön parametrin tyyppi on <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/multipart/MultipartFile.html" target="_blank">MultipartFile</a>, joka sisältää lähetettävän tiedoston tiedot.</p>
+
+                <p>Alla oleva kontrollerimetodi vastaanottaa pyynnön, ja tulostaa pyynnössä lähetetyn tiedoston koon ja tyypin. Se ei kuitenkaan tee vielä muuta.</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) {
+    System.out.println(file.getSize());
+    System.out.println(file.getContentType());
+
+    return "redirect:/files";
+}</pre>
+
+                <p>MultipartFile-olio sisältää myös tavutaulukon, missä pyynnössä lähetetty data sijaitsee.</p>
+
+                <p>Tavutaulukon -- eli tässä tapauksessa datan -- tallennus tietokantaan onnistuu. Seuraava entiteetti <code>FileObject</code> sisältää tavutaulukon siten, että sen voi tallentaa tietokantaan.</p>
+
+                <pre class="sh_java">
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    @Lob
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>        
+
+                <p>Annotaatiolla <a href="http://docs.oracle.com/javaee/6/api/javax/persistence/Lob.html" target="_blank">@Lob</a> kerrotaan että annotoitu muuttuja tulee tallentaa tietokantaan isona dataobjektina. Tietokantamoottorit tallentavat nämä tyypillisesti erilliseen isommille tiedostoille tarkoitettuun sijaintiin, jolloin kannan tehokkuus ei kärsi erikokoisten kenttien takia.</p>
+
+                <p>Kun entiteetille tekee repositoryn, voi sen ottaa käyttöön myös kontrollerissa. Tietokantaan tallentaminen tapahtuu tällöin seuraavasti:</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) throws IOException {
+    FileObject fo = new FileObject();
+    fo.setContent(file.getBytes());
+
+    fileObjectRepository.save(fo);
+
+    return "redirect:/files";
+}</pre>
+
+                <p>Tiedoston lähetys kontrollerista onnistuu vastaavasti. Tässä tapauksessa oletamme, että data on muotoa <code>image/png</code>; kontrolleri palauttaa tietokantaoliolta saatavan tavutaulukon pyynnön vastauksen rungossa.</p> 
+
+                <pre class="sh_java">
+@RequestMapping(value="{id}", method = RequestMethod.GET, produces = "image/png")
+@ResponseBody
+public byte[] get(@PathVariable Long id) {
+    return fileObjectRepository.findOne(id).getContent();
+}</pre>        
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-gifbin">
+                                    GifBin
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-gifbin" class="collapse">
+                            <p>Tässä tehtävässä toteutetaan sovellus gif-kuvien varastointiin ja selaamiseen. Tehtävästä saa kaksi tehtäväpistettä kun se palautetaan kokonaisena.</p>
+
+                            <p>Pääset toteuttamaan huomattavan osan sovelluksesta itse -- tarkista että suunnittelemasi domain-oliot sopivat yhteen annetun näkymän kanssa.</p>
+
+                            <h5>Kuvien listaaminen</h5>
+
+                            <p>Tehtäväpohjassa olevassa <code>gifs.html</code>-sivussa on toiminnallisuus, minkä avulla kuvia näytetään käyttäjälle.</p>
+
+                            <p>Toteuta toiminnallisuus, jonka avulla seuraavat toiminnot ovat käytössä.</p>
+
+                            <ul>
+                                <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs</code>, hänet ohjataan osoitteeseen <code>/gifs/1</code>.</li>
+                                <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs/{id}</code>, hänelle näytetään sivu <code>gifs</code>. Pyynnön modeliin tulee lisätä attribuutti <code>count</code>, joka sisältää tietokannassa olevien kuvien määrän. Tämän lisäksi, pyyntöön tulee lisätä attribuutti <code>next</code>, joka sisältää seuraavan kuvan tunnuksen -- jos sellainen on olemassa,  attribuutti <code>previous</code>, joka sisältää edeltävän kuvan tunnuksen -- jos sellainen on olemassa, ja <code>current</code>, joka sisältää nykyisen kuvan tunnuksen -- jos sellainen on olemassa.</li>
+                                <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs/{id}/content</code>, tulee hänelle palauttaa tunnukslla <code>{id}</code> tietokannassa oleva kuva -- vastauksen mediatyypiksi tulee asettaa myös <code>image/gif</code>.</li>
+                            </ul>
+
+
+                            <h5>Kuvien lisääminen</h5>
+
+                            <p>HTML-sivulla on myös lomake, jonka avulla palvelimelle voi lähettää uusia kuvia. Toteuta palvelimelle toiminnallisuus, jonka avulla osoitteeseen <code>/gifs</code> tehdystä POST-pyynnöstä otetaan sisältö talteen ja tallennetaan se tietokantaa. Huom! Tallenna sisältö vain jos sen mediatyyppi on <code>image/gif</code>. Pyyntö uudelleenohjataan aina lopuksi osoitteeseen <code>/gifs</code>.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <p>Kun isoja tiedostoja tallennetaan tietokantaan, kannattaa tietokanta suunnitella siten, että tiedostoja ei ladata tietokannasta sellaisten kutsujen yhteydessä, missä niitä ei tarvita. Voimme lisätä olioattribuuteille annotaatiolla <code>@Basic</code> lisämääreen <code>fetch</code>, minkä avulla hakeminen rajoitetaan eksplisiittisiin kutsuihin. Tarkasta tässä vaiheessa edellisen tehtävän mallivastaus -- huomaat että sielläkin -- vaikka annotaatio <code>@Basic</code> ei ollut käytössä -- konkreettinen kuva ladataan hyvin harvoin.</p>
+
+                <pre class="sh_java">
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>
+
+                <p>Ylläoleva <code>@Basic(fetch = FetchType.LAZY)</code> annotaatio pyytää JPA-toteutusta (tapauksessamme Hibernate) luomaan annotoidun olioattribuutin get-metodiin ns. proxymetodin -- data haetaan tietokannasta vasta kun metodia <code>getContent()</code> kutsutaan.</p>
+
+
+                <h2>Yleiskäyttöinen tiedoston tallennus ja lataaminen</h2>
+
+                <p>Edellisessä esimerkissä määrittelimme kontrollerimetodin palauttaman mediatyypin osaksi <code>@RequestMapping</code> annotaatiota. Usein tiedostopalvelimet voivat kuitenkin palauttaa lähes minkätyyppisiä tiedostojan tahansa. Tutustutaan tässä yleisempään tiedoston tallentamiseen ja lataukseen.</p>
+
+                <p>Käytämme edellisessä esimerkissä käytettyä <code>FileObject</code>-entiteettiä toteutuksen pohjana.</p>
+
+                <p>Jotta voimme kertoa tiedoston mediatyypin, haluamme tallentaa sen tietokantaan. Tallennetaan tietokantaan lisäksi myös tiedoston alkuperäinen nimi sekä tiedoston pituus.</p>
+
+                <pre class="sh_java">
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    private String name;
+    private String mediaType;
+    private Long size;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>
+
+
+                <p>Pääsemme kaikkiin kenttiin käsiksi <code>MultipartFile</code>-olion kautta; muokataan aiemmin näkemäämme kontrolleria siten, että otamme kaikki yllämääritellyt kentät tietokantaan tallennettavaan olioon.</p>
+
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) throws IOException {
+    FileObject fo = new FileObject();
+
+    fo.setName(file.getOriginalName());
+    fo.setMediaType(file.getContentType());
+    fo.setSize(file.getSize());
+    fo.setContent(file.getBytes());
+
+    fileObjectRepository.save(fo);
+
+    return "redirect:/files";
+}</pre>
+
+
+                <p>Nyt tietokantaan tallennettu olio tietää myös siihen liittyvän mediatyypin. Haluamme seuraavaksi pystyä myös kertomaan kyseisen mediatyypin tiedostoa hakevalle käyttäjälle.</p>
+
+                <p>Viime viikon materiaalissa vilahti käsite <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html" target="_blank">ResponseEntity</a>. ResponseEntityä käytetään vastauksen paketointiin; voimme palauttaa kontrollerista ResponseEntity-olion, jonka pohjalta Spring luo vastauksen käyttäjälle. ResponseEntity-oliolle voidaan myös asettaa otsaketietoja, joihin saamme asetettua mediatyypin.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity&lt;byte[]&gt; viewFile(@PathVariable Long id) {
+        FileObject fo = fileObjectRepository.findOne(id);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(fo.getContentType()));
+        headers.setContentLength(fo.getSize());
+
+        return new ResponseEntity&lt;&gt;(fo.getContent(), headers, HttpStatus.CREATED);
+    }</pre>                         
+
+                <p>Ylläolevassa esimerkissä vastaanotetaan pyyntö, minkä pohjalta tietokannasta haetaan FileObject-olio. Tämän jälkeen luodaan otsakeolio <code>HttpHeaders</code> ja asetetaan sille palautettavan datan mediatyyppi ja koko. Lopuksi palautetaan <code>ResponseEntity</code>-olio, mihin data, otsaketiedot ja pyyntöön liittyvä statusviesti (tässä tapauksessa CREATED) liitetään.</p>
+
+                <p>Edeltävä esimerkki ei ota kantaa tiedoston nimeen tai siihen, miten se ladataan. Voimme lisäksi vastaukseen <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html" target="_blank">Content-Disposition</a>-otsakkeen, minkä avulla voidaan ehdottaa tiedoston tallennusnimeä sekä kertoa että tiedosto on liitetiedosto, jolloin se tulee tallentaa.</p>
+
+                <pre class="sh_java">
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity&lt;byte[]&gt; viewFile(@PathVariable Long id) {
+        FileObject fo = fileObjectRepository.findOne(id);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(fo.getContentType()));
+        headers.setContentLength(fo.getSize());
+        headers.add("Content-Disposition", "attachment; filename=" + fo.getName());
+
+        return new ResponseEntity&lt;&gt;(fo.getContent(), headers, HttpStatus.CREATED);
+    }</pre>                         
+
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-filemanager">
+                                    FileManager
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-filemanager" class="collapse">
+
+                            <p>Tässä tehtävässä toteutetaan yleisempi tiedostojen varastointiin ja näyttämiseen käytettävä sovellus. Tehtävästä saa kaksi tehtäväpistettä kun se palautetaan kokonaisena.</p>
+
+                            <p>Kuten edellisessä tehtävässä, pääset toteuttamaan huomattavan osan sovelluksesta itse -- tarkista että suunnittelemasi domain-oliot sopivat yhteen annetun näkymän kanssa.</p>
+
+                            <p>Toteuta toiminnallisuus, jonka avulla seuraavat toiminnot ovat käytössä.</p>
+
+                            <ul>
+                                <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/files</code>, pyyntöön lisätään tietokannasta löytyvät tiedostot ja käyttäjä ohjataan sivulle <code>files.html</code>.</li>
+                                <li>Kun käyttäjä lähettää lomakkeella tiedoston osoitteeseen <code>/files</code>, pyynnöstä otetaan talteen kaikki tiedot mitä näkymässä halutaan näyttää, ja tallennetaan ne tietokantaan. Pyyntö ohjataan lopuksi uudelleen osoitteeseen <code>/files</code>.</li>
+                                <li>Kun käyttäjä klikkaa yksittäiseen tiedostoon liittyvää delete-nappia, tulee tiedosto poistaa tietokannasta. Lopuksi pyyntö uudelleenohjataan osoitteeseen <code>/files</code>.</li>
+                                <li>Kun käyttäjä klikkaa yksittäiseen tiedostoon liittyvää nimeä sen lataamista varten, tulee tiedosto lähettää käyttäjälle. Aseta pyyntöön datan lisäksi myös tiedoston mediatyyppi että ja ehdotus tiedoston tallennusnimestä.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Edellä nähdyt lähestymistavat toimivat isossa osassa tapauksia, mutta lataavat datan hetkellisesti tietokannasta kontrollerin käyttöön. Palaamme tähän seuraavalla viikolla.</p>
+
+
+
+                <h1>Tietoturva</h1>
+
+
+
+                <h2>Autentikointi ja autorisointi</h2>
+
+                <p>Autentikoinnilla tarkoitetaan sitä, että käyttäjän identiteetti varmistetaan. Autentikointi tapahtuu esimerkiksi käyttäjätunnuksen ja salasanan avulla. Autorisoinnilla taas tarkoitetaan sen varmistamista, että käyttäjä saa tehdä hänen yrittämiään asioita.</p>
+
+                <p>Käyttäjän identiteetti tarkistetaan yleisimmin käyttäjätunnus-salasana -parin avulla. Kiitettävä osa nykyaikaisista sovelluskehyksistä lähes kaikki tarjoavat jonkinlaisen autentikointimekanismin.</p>
+
+                <p>Springin tietoturvakomponentin, <a href="http://projects.spring.io/spring-security/" target="_blank">Spring Security</a>n saa käyttöön lisäämällä projektin <code>pom.xml</code>-tiedostoon seuraavan riippuvuuden.</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+                <p>Komponentti tuo käyttöön pyyntöjä tarkastelevan <em>filtterin</em>, joka toimii ennen kontrollerimetodeja. Oletuskonfiguraatiolla pääsy estetään käytännössä kaikkiin sovelluksen resursseihin, mutta sitä voi luonnollisesti muuttaa. Luodaan oma konfiguraatiotiedosto <code>SecurityConfiguration</code>, joka sisältää sovelluksemme tietoturvakonfiguraation. Huom! Kun konfiguraatiotiedostoja alkaa olla useampia, voit asettaa ne asettaa esimerkiksi erillisen pakkauksen <code>wad.config</code> sisään. </p>
+
+                <pre class="sh_java">
+// pakkaus 
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+
+@Configuration
+@EnableWebMvcSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // ei päästetä käyttäjää mihinkään sovelluksen resurssiin ilman
+        // kirjautumista
+        http.authorizeRequests().anyRequest().authenticated();
+
+        // tarjotaan mahdollisuus kirjautumiseen ja annetaan kaikille
+        // pääsy kirjautumissivulle
+        http.formLogin().permitAll();
+    }
+
+    @Configuration
+    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            // käyttäjällä jack, jonka salasana on bauer, on rooli USER
+            auth.inMemoryAuthentication()
+                    .withUser("jack").password("bauer").roles("USER");
+        }
+    }
+}</pre>
+
+                <p>Tietoturvakonfiguraatio koostuu kahdesta osasta. Ensimmäisessä osassa <code>configure(HttpSecurity http)</code> määritellään sovelluksen osoitteet joihin on pääsy kielletty tai pääsy sallittu. Toisessa osassa <code>init(AuthenticationManagerBuilder auth)</code> taas määritellään  -- tässä tapauksessa -- käytössä olevat käyttäjätunnukset ja salasanat.</p>
+
+                <p>Kun määritellään osoitteita, joihin käyttäjä pääsee käsiksi, on hyvä varmistaa, että viimeisenä sanotaan <code>anyRequest().authenticated()</code> -- tämä käytännössä johtaa tilanteeseen, missä kaikki osoitteet, joita ei ole erikseen määritelty, vaatii kirjautumista. Voimme määritellä osoitteita, jotka eivät vaadi kirjautumista seuraavasti:</p>
+
+                <pre class="sh_java">
+    // ..
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/free").permitAll()
+                .antMatchers("/access").permitAll()
+                .antMatchers("/to/*").permitAll()
+                .anyRequest().authenticated();
+
+        // tarjotaan mahdollisuus kirjautumiseen ja annetaan kaikille
+        // pääsy kirjautumissivulle
+        http.formLogin().permitAll();
+    }
+    // ..</pre>                            
+
+                <p>Ylläolevassa esimerkissä osoitteisiin <code>/free</code> ja <code>/access</code> ei tarvitse kirjautumista. Tämän lisäksi kaikki osoitteet polun <code>/to/</code> alla on kaikkien käytettävissä. Loput osoitteet on kaikilta kielletty. Tämän lisäksi, komento <code>http.formLogin().permitAll()</code> määrittelee sivun käyttöön kirjautumissivun, johon annetaan kaikille pääsy.</p>
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-secretmessages">
+                                    Secret Messages
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-secretmessages" class="collapse">
+
+                            <p>Tehtävässä on sovellus viestien näyttämiseen. Tehtävänäsi on lisätä siihen salaustoiminnallisuus -- kenenkään muun kuin käyttäjän "maxwell_smart" ei tule päästä viesteihin käsiksi. Aseta Maxwellin salasanaksi "kenkapuhelin".</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Näkymätason autorisointi</h3>
+
+
+                <p>Autorisointi pelkkien polkujen perusteella ei aina riitä, vaan käyttöliitymissä halutaan usein rajoittaa toiminta esimerkiksi käyttäjäroolien perusteella. Thymeleaf-projektiin löytyy liitännäinen, jonka avulla voimme lisätä tarkistuksia HTML-sivuille. Liitännäisen saa käyttöön lisäämällä seuraavan riippuvuuden <code>pom.xml</code>-tiedostoon.</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
+    &lt;artifactId&gt;thymeleaf-extras-springsecurity3&lt;/artifactId&gt;
+&lt;/dependency&gt;   
+                </pre>                            
+
+                <p>Nyt näkymiin voi määritellä elementtejä, joiden sisältö näytetään vain esimerkiksi tietyllä roolilla kirjautuneelle käyttäjälle. Seuraavassa esimerkissä teksti "salaisuus" näkyy vain käyttäjälle, jolla on rooli "ADMIN".</p>
+
+                <pre class="sh_xml">
+&lt;div sec:authorize="hasRole('ROLE_ADMIN')"&gt;
+    &lt;p&gt;salaisuus&lt;/p&gt;
+&lt;/div&gt;
+                </pre>                            
+
+                <p>Attribuutilla <code>sec:authorize</code> määritellään säännöt, joita tarkistuksessa käytetään. Attribuutille käy mm. arvot <code>isAuthenticated()</code>, <code>hasRole('...')</code> ja <code>hasAnyRole('...')</code>. Lisää sääntöjä löytyy Spring Securityn <a href="http://docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html" target="_blank">dokumentaatiosta</a>.</p>
+
+
+                <h3>Metoditason autorisointi</h3>
+
+                <p>Pelkän näkymätason autorisoinnin ongelmana on se, että usein toimintaa halutaan rajoittaa tarkemmin -- esimerkiksi siten, että tietyt operaatiot (esim. poisto tai lisäys) mahdollistetaan vain tietyille rooleille. Käyttöliittymän näkymää rajoittamalla ei voida rajoittaa kutsuja polkuihin, ja aiemmin luotu polkuihin tehtävien kutsujen rajoitus ei auta esimerkiksi REST-tyyppisissä osoitteissa, varsinkin jos GET-pyyntöihin halutaan oikeus kaikille.</p>
+
+                <p>Saamme sovellukseemme käyttöön myös metoditason autorisoinnin. Lisäämällä tietoturvakonfiguraatiotiedostoon luokkatason annotaation <code>@EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)</code>, Spring Security etsii metodeja, joissa käytetään sopivia annotaatioita ja suojaa ne. Suojaus tapahtuu käytännössä siten, että metodeihin luodaan proxy-metodit; aina kun metodia kutsutaan, kutsutaan ensin Spring securityn tietoturvakomponenttia, joka tarkistaa onko käyttäjä kirjautunut.</p>
+
+                <p>Kun konfiguraatiotiedostoon on lisätty annotaatio, on käytössämme muunmuassa annotaatio <a href="http://docs.spring.io/autorepo/docs/spring-security/3.1.7.RELEASE/apidocs/org/springframework/security/access/annotation/Secured.html" target="_blank">@Secured</a>. Alla olevassa esimerkissä <code>post</code>-metodin käyttöön vaaditaan "ADMIN"-rooli.</p>
+
+                <pre class="sh_java">
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(method = RequestMethod.POST)
+    public String post() {
+        // ..
+        return "redirect:/posts";
+    }
+                </pre>                            
+
+                <h3>Roolien määrittely</h3>
+
+
+                <p>Roolien määrittely tapahtuu osana konfiguraatiota. Alla olevassa konfiguraatiossa määritellään kolme eri käyttäjää, joilla jokaisella on oma rooli.</p>
+
+                <pre class="sh_java">
+    @Configuration
+    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            auth.inMemoryAuthentication()
+                    .withUser("aku").password("313").roles("USER");
+            auth.inMemoryAuthentication()
+                    .withUser("roope").password("onnenraha").roles("POMO");
+            auth.inMemoryAuthentication()
+                    .withUser("ohjelmistokehittaja").password("om1st4j4").roles("ADMIN");
+        }
+    }
+    ...</pre>                            
+
+                <p>Käyttäjä "aku" on normaali käyttäjä, "roope" on pomo, ja ohjelmistokehittäjä käytännössä päättää kaikesta.</p>
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-hiddenfields">
+                                    Hidden fields
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-hiddenfields" class="collapse">
+
+                            <p>Tehtävässä on sama sovellus viestien näyttämiseen kuin edellisessä tehtävässä.</p>
+
+                            <h1>Kirjautuminen ja näkymän piilottaminen</h1>
+
+                            <p>Luo sovellukseen tietoturvakonfiguraatio, missä määritellään kaksi käyttäjää. Ensimmäisellä käyttäjällä "user", jonka salasana on "password" on rooli "USER". Toisella käyttäjällä "postman", jonka salasana on "pat", on rooli "POSTER".</p>
+
+                            <p>Muokkaa näkymää <code>messages.html</code> siten, että vain käyttäjät, joilla on rooli "POSTER" näkee lomakkeen, jolla voi lisätä uusia viestejä.</p>
+
+                            <p>Muokkaa lisäksi konfiguraatiota siten, että käyttäjä voi kirjautua ulos osoitteesta <code>/logout</code>. Voit käyttää seuraavaa koodia (joutunet lisäämään konfiguraatioon muutakin..). </p>
+                            <pre class="sh_java">
+http.formLogin()
+    .permitAll()
+    .and()
+    .logout()
+    .logoutUrl("/logout")
+    .logoutSuccessUrl("/login");</pre>                                            
+
+
+                            <h1>Metoditason suojaus</h1>
+
+
+                            <p>Lisää sovellukseen metoditason suojaus millä rajoitat POST-pyyntöjen tekemisen osoitteeseen <code>/message</code> vain käyttäjille, joilla on rooli "POSTER". Vaikka testit päästäisivät sinut läpi jo ennen tämän toteutusta, tee se silti :).</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <p>Käyttäjän identiteetin varmistaminen vaatii käyttäjälistan, joka taas yleensä ottaen tarkoittaa käyttäjän rekisteröintiä jonkinlaiseen palveluun. Käyttäjän rekisteröitymisen vaatiminen heti sovellusta käynnistettäessä voi rajoittaa käyttäjien määrää huomattavasti, joten rekisteröitymistä kannattaa pyytää vasta kun siihen on tarve.</p>
+
+                <p>Erillinen rekisteröityminen ja uuden salasanan keksiminen ei ole aina tarpeen. Web-sovelluksille on käytössä useita kolmannen osapuolen tarjoamia keskitettyjä identiteetinhallintapalveluita. Esimerkiksi <a href="http://oauth.net/2/" target="_blank">OAuth2</a>:n avulla sovelluskehittäjä voi antaa käyttäjilleen mahdollisuuden käyttää jo olemassaolevia tunnuksia. Myös erilaiset sosiaalisen median palveluihin perustuvat autentikointimekanismit ovat yleistyneet viime aikoina.</p>
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-extauth">
+                                    External auth
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-extauth" class="collapse">
+
+                            <p>Teimme sattumalta viime viikolla tehtävän, missä luotiin rajapinta tunnistautumista varten. Rajapinta on käytössä osoitteessa <a href="http://authebin.herokuapp.com/authenticate">http://authebin.herokuapp.com/</a>, mistä sitä voi käyttää.</p>
+
+                            <p>Tutustu tässä tehtävässä tehtäväpohjassa olevaan luokkaan <code>CustomAuthenticationProvider</code> sekä sen käyttöön <code>SecurityConfiguration</code>-luokassa. Toteuta toiminnallisuus, minkä avulla käyttäjä voi kirjautua osoitteessa http://authebin.herokuapp.com olevan palvelun avulla. Tässä tehtävässä on hyötyä RestTemplate-luokasta..</p>
+
+                            <p>Tehtävässä ei ole testejä. Palauttamalla tehtävän, olet testannut että se toimii toivotusti ja tunnistautuminen kolmannen osapuolen rajapinnan kautta onnistuu.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <h2>HTTPS</h2>
+
+                <p>Usein kommunikointi selaimen ja palvelimen välillä halutaan salata, erityisesti salasanojen lähetyksen yhteydessä.</p>
+
+                <p>HTTPS on HTTP-pyyntöjä SSL (nykyisin myös TLS)-rajapinnan yli. HTTPS mahdollistaa sekä käytetyn palvelun verifioinnin sertifikaattien avulla että lähetetyn ja vastaanotetun tiedon salauksen.</p>
+
+                <p>HTTPS-pyynnöissä asiakas ja palvelin sopivat käytettävästä salausmekanismista ennen varsinaista kommunikaatiota. Käytännössä selain ottaa ensiksi yhteyden palvelimen HTTPS-pyyntöjä kuuntelevaan porttiin (yleensä 443), lähettäen palvelimelle listan selaimella käytössä olevista salausmekanismeista. Palvelin valitsee näistä parhaiten sille sopivan (käytännössä vahvimman) salausmekanismin, ja lähettää takaisin salaustunnisteen (palvelimen nimi, sertifikaatti, julkinen salausavain). Selain ottaa mahdollisesti yhteyttä sertifikaatin tarjoajaan -- joka on kolmas osapuoli -- ja tarkistaa onko sertifikaatti kunnossa.</p>
+
+                <p>Selain lähettää palvelimelle salauksessa käytettävän satunnaisluvun palvelimen lähettämällä salausavaimella salattuna. Palvelin purkaa viestin ja saa haltuunsa selaimen haluaman satunnaisluvun. Viesti voidaan nyt lähettää salattuna satunnaislukua ja julkista salausavainta käyttäen.</p>
+
+                <p>Käytännössä kaikki web-palvelimet tarjoavat HTTPS-toiminnallisuuden valmiina, joskin se täytyy ottaa palvelimilla käyttöön. Esimerkiksi Herokussa HTTPS:n saa käyttöön komennolla <code>heroku addons:add piggyback_ssl</code>. Lisätietoa Herokun SSL-tuesta osoitteessa <a href="https://devcenter.heroku.com/articles/ssl-endpoint" target="_blank">https://devcenter.heroku.com/articles/ssl-endpoint</a>.</p>
+
+
+                <h2>OWASP</h2>
+
+
+                <p>OWASP (<em>Open Web Application Security Project</em>) on verkkosovellusten tietoturvaan keskittynyt kansainvälinen järjestö. Sen tavoitteena on tiedottaa tietoturvariskeistä ja sitä kautta edesauttaa turvallisten web-sovellusten kehitystä. OWASP-yhteisö pitää mm. yllä listaa merkittävimmistä web-tietoturvariskeistä. Vuoden 2013 lista on seuraava:</p>
+
+                <ol>
+                    <li>Injection</li><br/>
+                    <li>Broken Authentication and Session Management</li><br/>
+                    <li>Cross-Site Scripting (XSS)</li><br/>
+                    <li>Insecure Direct Object References</li><br/>
+                    <li>Security Misconfiguration</li><br/>
+                    <li>Sensitive Data Exposure</li><br/>
+                    <li>Missing Function Level Access Control</li><br/>
+                    <li>Cross-Site Request Forgery (CSRF)</li><br/>
+                    <li>Using Components with Known Vulnerabilities</li><br/>
+                    <li>Unvalidated Redirects and Forwards</li><br/>
+                </ol>
+
+                <p>Tutustu listaan tarkemmin osoitteessa <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project</a>. He tarjoavat dokumentaatiossaan kuvaukset riskeistä, sekä esimerkkejä hyökkäyksistä; <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet" target="_blank">Tässä</a> esimerkki XSS-filtterien kiertämisestä.</p>
+
+
+
+
+                <div class="tehtavat">
+                    <div class="tehtava">
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-twiitberg">
+                                    Twiitberg
+                                </a>
+                            </h1>
+                        </header>
+                        <div id="t-twiitberg" class="collapse">
+
+                            <p>Tehtäväpohjaan on hahmoteltu palvelua, minne käyttäjä voi lisätä lyhyitä viestejä ja kuvia. Kuten huomaat, sovellus on jäänyt kesken, eikä edes autentikointi toimi. Tehtävänäsi tässä on (1) tutustua palveluun, (2) korjata autentikaatio, ja (3) keksiä toiminnallisuus tai kaksi, mitä palvelussa ei vielä ole, ja mitä siellä pitäisi olla. Toteuta keksimäsi toiminnallisuudet, ja palauta tehtävä.</p>
+
+                            <p>Kirjoita tehtävän palautuksen yhteyteen toteuttamasi ominaisuudet -- tehtävä on kolmen kurssipisteen arvoinen.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- END WEEK5 -->
 
 
 
