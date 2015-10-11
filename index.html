@@ -55,11 +55,9 @@
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
-<!--
                     <li>
                         <a href="#viikko7">Viikko 7</a>
                     </li>
--->
                 </ul>
 
 		<div style="direction: rtl;">
@@ -162,6 +160,13 @@
 		  <li>1000 -> 4</li>
 		  <li>1100 -> 5</li>
 		</ul>
+
+		<h2>Koeasiaa</h2>
+
+		<p>Kurssin paperitentti järjestetään keskiviikkona 21.10. klo 9:00 salissa A111. Jos keskiviikkoaamu ei muiden kokeiden takia sovi, tentti on mahdollista myös suorittaa tiistaina 20.10. klo 16:00. Ota tällöin sähköpostitse yhteyttä kurssin vastuuhenkilöön <a href="mailto:avihavai@cs.helsinki.fi">avihavai@cs.helsinki.fi</a>. Kurssikokeessa tulee olemaan sekä kurssin käsitteistön selittämistä että web-sovelluksen suunnittelua.</p>
+
+		<p>Kurssin konetentin voi tehdä aikavälillä 16-23.10. Konetentti suoritetaan TMC:hen tulevan kurssin kautta. Kun palauttaa kurssin ensimmäisen tehtävän, kurssikoe alkaa, ja koetehtävät tulevat ladattavaksi TMC:stä. Konetentille on kolme tuntia aikaa -- konetentissä materiaalin ja netin käyttö on sallittua, mutta kaikki muu kommunikointi kurssin aikana -- esimerkiksi avun kysymyminen tai vastaanottaminen ei ole sallittua. Konetentin kysymyksiä tai vastauksia ei luonnollisesti myöskään saa jakaa muille.</p>
+		
 
                 <p><a class="jump" href="#viikoittaiset-teemat" role="button">Viikoittaiset teemat &raquo;</a></p>
 
@@ -5708,6 +5713,406 @@ public class MessageService {
 
             <!-- END WEEK6 -->
 
+
+            <!-- BEGIN WEEK7 -->
+
+
+
+
+
+            <section class="weeklimit" data-week-id="7">
+
+                <header>
+                    <h1 id="viikko7">Viikko 7</h1>
+                </header>
+
+                <h1>Kertaus</h1>
+
+                <p>Kurssin viimeisen viikon teemana on hieman isomman sovelluksen toteuttaminen alusta lähtien. Sovelluksen teemana on miniyhteisöpalvelu, missä käyttäjät näkevät kaveriensa viestejä; kavereiden viesteistä voidaan myös tykätä. Käytämme ulkoasupohjana netistä valmiiksi löytyvää ulkoasua. Tässä tapauksessa ulkoasumme on <a href="http://w3layouts.com/" target="_blank">w3layouts</a>-palvelun tarjoama <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported</a>-lisenssillä varustettu <a href="http://w3layouts.com/cyan-flat-ui-kit-responsive-mobile-web-template/" target="_blank">Cyan Flat UI KIT Responsive mobile web template</a>. Käytännössä pohja tarjoaa nipun komponentteja, joita voimme hyödyntää osana sivumme rakentamista. Pohja käyttää myös valmiita Javascript- ja CSS-komponentteja, kuten <a href="http://jquery.com/" target="_blank">jQuery</a> ja <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Termi "responsive" tarkoittaa sitä, että käyttöliittymä mukautuu sitä käyttävän laitteen näytön kokoon.</p>
+
+                <p>Ensimmäinen askel käyttöliittymän käyttöönotossa on valmiin paketin purkaminen siten, että sivun katsominen onnistuu kun palvelin käynnistetään. Ensimmäisessä tehtäväpohjassa tämä on tehty valmiiksi -- sivuun liittyvät erilaiset resurssit kuten Javascript-tiedostot ja kuvat on siirretty kansion <code>static</code>-alle, näkymän linkit on korjattu osoittamaan oikeisiin sijainteihin, ja näkymästä on luotu erillinen tiedosto <code>template.html</code>. Tämän lisäksi palvelinohjelmiston oletuskontrolleri ohjaa käyttäjän näkymään, missä tiedoston <code>template.html</code> sisältö näytetään.</p>
+
+                <p>Koko viikko tehdään tehtäväorientoituneesti; seuraavat tehtäväpohjat sisältävät aina edellisen tehtävän ratkaisun, jolloin voit hypätä joidenkin kohtien yli tarvittaessa. Tehtävissä ei ole testejä; palauta tehtävä aina kun saat sen onnistuneesti valmiiksi.</p>
+
+                <div class="tehtavat">
+                    <div class="tehtava" id="t-henkilot-ja-viestit-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-henkilot-ja-viestit">
+                                    Henkilöt ja viestit
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-henkilot-ja-viestit" class="collapse">
+
+                            <p>Lisätään tässä sivulle toiminnallisuus viestien listaamiseen ja lähettämiseen. Henkilöiden luomista tai kirjautumista ei vielä toteuteta. Tämä tehtävä on kahden tehtäväpisteen arvoinen. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
+
+                            <img src="img/exercises/w7e01-uml.png"/>
+
+                            <p>Luo tehtävään ylläolevassa UML-kaaviossa kuvatut entiteetit <code>Person</code> ja <code>Post</code>, sekä niille sopivat <code>Repository</code>-rajapinnat. Lisää tämän jälkeen profiiliin <code>DevProfile</code> koodi, jolla saat sovellukseen sovelluksen käynnistyessä muutaman käyttäjän sekä heille viestejä (<code>@PostConstruct</code>-annotaatiosta on tässä hyötyä!).</p>
+
+                            <p>Kun testidata on käytössä, luo <code>template.html</code>-tiedostosta kopio nimeltä <code>index.html</code>. Muokkaa luokkaa <code>DefaultController</code> siten, että pyyntö mihin tahansa osoitteeseen näyttää sivun <code>index.html</code>; lisää modeliin myös 10 uusinta viestiä, uusin ensimmäisenä.</p>
+
+                            <p>Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että viestit näkyvät siinä. Löytänet oikean alueen hakemalla tekstiä <em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus dui id libero auctor cursus."</em>. Kun saat toteutuksen toimimaan, sinun pitäisi nähdä templaten sijaan lisäämäsi tekstit; viestialue voi näyttää esimerkiksi seuraavalta:</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-post-anonymous-sorted.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Lisää tämän jälkeen erillinen kontrolleri, joka kuuntelee osoitteeseen <code>/posts</code> tulevia POST-tyyppisiä pyyntöjä. Kun kontrolleri vastaanottaa pyynnön, se tallentaa viestin ja ohjaa käyttäjän oletusnäkymään (missä haetaan kymmenen uusinta viestiä). Voit hakea esimerkiksi tietokannasta satunnaisen henkilön viestin lähettäjäksi.</p>
+
+                            <p>Kun POST-pyyntöjä osoitteeseen <code>/posts</code> kuunteleva kontrolleri toimii, muokkaa <code>index.html</code>-tiedostossa olevaa viestikenttää seuraavanlaisesta</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-post-message-pre.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>seuraavanlaiseksi</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-post-message-post.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Kun laatikkoon kirjoitetaan viesti ja "Let 'Em Know!"-nappia painetaan, tulee viesti lähettää POST-tyyppisellä pyynnöllä osoitteeseen <code>/posts</code>. Huomaa että tarvitset lomakkeen tietojen lähettämiseen -- jos palvelin valittaa jotain CORS-teemaista, varmista, että osa lomakkeesta tehdään Thymeleafin avulla (esim <code>th:action="@{/posts}</code>).</p>
+
+                        </div>
+                    </div>
+
+                    <div class="tehtava" id="t-profiilit-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-profiilit">
+                                    Profiilit
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-profiilit" class="collapse">
+
+                            <p>Lisätään tässä sivulle toiminnallisuus henkilöiden listaamiseen. Tämä tehtävä on yhden tehtäväpisteen arvoinen. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
+
+                            <img src="img/exercises/w7e02-uml.png"/>
+
+                            <p>Lisää luokalle <code>Person</code> kentät <code>lastUpdated</code> ja <code>slogan</code>. Lastupdated pitää kirjaa viimeisimmästä muutoksesta; slogan taas on -- noh -- henkilön slogan.</p>
+
+                            <p>Muokkaa tämän jälkeen oletuskontrolleria siten, että se lisää 10 viimeksi tietojaan päivittänyttä käyttäjää modeliin. Muokkaa sivua <code>index.html</code> siten, että sivulla oletuksena ollut henkilö "Zach Dunes" vaihtuu käyttäjälistaan.</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-profiilit-pre.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Kun tehtävä on valmis, sivulla näkyy viimeisimmät käyttäjät ja heidän sloganit.</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-profiilit-post.png"/>
+                            <p>&nbsp;</p>
+
+
+                        </div>
+                    </div>
+
+                    <div class="tehtava" id="t-uusia-henkiloita-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-uusia-henkiloita">
+                                    Uusia henkilöitä
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-uusia-henkiloita" class="collapse">
+
+                            <p>Tässä tehtävässä toteutetaan ensimmäinen versio uusien henkilöiden lisäämisestä. Tehtävä on yhden tehtäväpisteen arvoinen.</p>
+
+                            <p>Muokkaa tiedostoa <code>index.html</code> siten, että kopioit nykyisen kirjautumislomakkeen ja luot siitä erillisen "Sign up"-lomakkeen, minkä avulla voi luoda uuden käyttäjän. Lomake voi näyttää esimerkiksi seuraavanlaiselta</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-sign-up.png"/>
+                            <p>&nbsp;</p>
+
+
+                            <p>Lisää tämän jälkeen sovellukseen erillinen kontrolleri, joka kuuntelee <code>POST</code>-tyyppisiä pyyntöjä osoitteeseen <code>/persons</code>; pyynnön pohjalta luodaan uusi käyttäjä. Muokkaa kontrolleria ja juuri luomaasi lomaketta siten, että niiden avulla voidaan luoda uusia käyttäjiä. Uuden käyttäjän lisäämisen tulee onnistua kirjoittamalla käyttäjän nimi ja slogan; käyttäjien lisäämiseen erikoistunut kontrolleri tallentaa käyttäjän ja ohjaa pyynnön oletuskontrollerille.</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-signing-up.png"/>
+                            <p>&nbsp;</p>
+
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7-signed-up.png"/>
+                            <p>&nbsp;</p>
+
+                        </div>
+                    </div>
+
+
+                    <div class="tehtava" id="t-kirjautuminen-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-kirjautuminen">
+                                    Kirjautuminen
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-kirjautuminen" class="collapse">
+
+                            <p>Tässä tehtävässä sovellukseen lisätään autorisointi- ja autentikointitoiminnallisuus. Tämän lisäksi kirjautumissivu ja uuden käyttäjän luomiseen tarkoitettu sivu muokataan erillisiksi sivuiksi, sekä asetetaan viestien lähetys niin, että niillä on oikeat kirjoittajat. Tehtävä on neljän tehtäväpisteen arvoinen -- kun palautat tehtävän, sen tulee toimia kokonaisuudessaan.</p>
+
+                            <img src="img/exercises/w7e04-uml.png"/>
+
+                            <p>Ennen alkua, lisää <code>Person</code>-entiteetille kentät username, password ja salt. Käyttäjätunnuksen tulee olla uniikki.</p>
+
+                            <h1>Sivujen eriyttäminen</h1>
+
+                            <p>Kopioi <code>index.html</code>-tiedostosta kaksi uutta versiota, toisen nimeksi tulee <code>login.html</code> ja toisen nimeksi <code>signup.html</code>. Luo tämän jälkeen oletuskontrolleriin kaksi kontrollerimetodia. Pyyntö osoitteeseen <code>/login</code> näyttää sivun <code>login.html</code>. Pyyntö osoitteeseen <code>/signup</code> näyttää sivun <code>signup.html</code>.</p>
+
+                            <p>Muokkaa sivuja siten, että <code>login.html</code> näyttää seuraavalta:</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e04-signin.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Kun sivulla klikkaa linkkiä "Sign up now", pääsee osoitetta <code>/signup</code> kuuntelevan kontrollerin kautta sivulle <code>signup.html</code>, joka näyttää seuraavalta:</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e04-signup.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Kirjautumissivun tulee vieläkin lähettää lomakkeelle syötettävät tiedot palvelimelle.</p>
+
+                            <h1>Tietoturvakonffit</h1>
+
+                            <p>Lue tässä välissä seuraavat sivut <a href="http://www.javacodegeeks.com/2012/08/bcrypt-salt-its-bare-minimum.html" target="_blank">http://www.javacodegeeks.com/2012/08/bcrypt-salt-its-bare-minimum.html</a> ja <a href="http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCrypt.html" target="_blank">http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCrypt.html</a>.</p>
+
+                            <p>Muokkaa Person-luokan <code>setPassword</code>-metodi seuraavanlaiseksi:</p>
+                            <pre class="sh_java">
+    public void setPassword(String password) {
+        this.salt = BCrypt.gensalt();
+        this.password = BCrypt.hashpw(password, this.salt);
+    }</pre>
+
+                            <p>Jos et tiedä mikä ihmeen <code>salt</code> tai miksi ylläoleva tehdään, lue esimerksi Wikipedian artikkeli <a href="http://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">Salt (cryptography)</a>.</p>
+
+                            <p>Lisää tämän jälkeen projektiin Spring Security-riippuvuus, ja konfiguroi siihen liittyvä <code>SecurityConfiguration</code>-komponentti seuraavasti:</p>
+
+                            <ul>
+                                <li>Kuka tahansa saa tehdä pyynnön osoitteisiin <code>/login</code>, <code>/signup</code> ja <code>/static</code> (sekä kaikkiin sen alla oleviin resursseihin). Kuka tahansa saa myös lähettää POST-tyyppisen pyynnön osoitteeseen <code>/persons</code>.</li>
+                                <li>Sovelluksessa on kirjautumislomake, joka on osoitteessa <code>/login</code> -- kun kirjautuminen onnistuu, käyttäjä ohjataan oletuskontrollerin kuuntelemaan osoitteeseen.</p>
+                                <li>Sovelluksessa on logout-toiminnallisuus, joka on osoitteessa <code>/logout</code> -- kun kirjautuminen onnistuu, käyttäjä ohjataan <code>/login</code>-osoitteeseen.</p>
+                                <li>Kirjautumiseen käytetään alla annettua <code>JpaAuthenticationProvider</code>-luokkaa.</li>
+                            </ul>
+
+                            <pre class="sh_java">
+@Component
+public class JpaAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Override
+    public Authentication authenticate(Authentication a) throws AuthenticationException {
+        String username = a.getPrincipal().toString();
+        String password = a.getCredentials().toString();
+
+        Person person = personRepository.findByUsername(username);
+
+        if (person == null) {
+            throw new AuthenticationException("Unable to authenticate user " + username) {
+            };
+        }
+
+        if (!BCrypt.hashpw(password, person.getSalt()).equals(person.getPassword())) {
+            throw new AuthenticationException("Unable to authenticate user " + username) {
+            };
+        }
+
+        List&lt;GrantedAuthority&gt; grantedAuths = new ArrayList&lt;&gt;();
+        grantedAuths.add(new SimpleGrantedAuthority("USER"));
+
+        return new UsernamePasswordAuthenticationToken(person.getUsername(), password, grantedAuths);
+    }
+
+    @Override
+    public boolean supports(Class&lt;?&gt; type) {
+        return true;
+    }
+}</pre>                            
+
+                            <p>Nyt sekä kirjautuminen käyttäjänä että käyttäjän luomisen pitäisi toimia.</p>
+
+                            <h1>Uloskirjautuminen</h1>
+
+                            <p>Spring Security olettaa, että uloskirjautumispyynnön mukana annetaan edellisen pyynnön vastaukseen generoitu satunnainen tunnus. Pelkkä GET-pyyntö osoitteeseen <code>/logout</code> ei toimi, sillä haluamme estää mahdollisia <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" target="_blank">CSRF</a>-hyökkäyksiä.</p>
+
+                            <p>Haluamme kuitenkin että logout-nappi on linkki, joten teemme erillisen piilossa olevan lomakkeen, joka lähetetään linkkiä painamalla.</p>
+
+                            <p>Muokkaa sivun oikeassa ylälaidassa olevaa logout-nappia siten, että se lähettää piilossa generoidun lomakkeen palvelimelle. Allaolevasta koodista lienee sinulle hyötyä.</p>
+
+                            <pre class="sh_java">
+&lt;ul class="logout list-unstyled"&gt;
+    &lt;li&gt;&lt;a href="#" onclick="document.getElementById('logout-form').submit();"&gt;&lt;span&gt; &lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;form style="visibility: hidden" id ="logout-form" method="post" action="#" th:action="@{/logout}"&gt;&lt;input type="submit" value="Logout"/&gt;&lt;/form&gt;</pre>
+
+                            <p>Nyt myös uloskirjautumisen pitäisi toimia.</p>
+
+
+                            <h1>Viestien lähetys oikealla nimellä</h1>
+
+                            <p>Kun käyttäjä on sivulla, hän on kirjautunut. Käyttäjätunnukseen pääsee käsiksi <a href="http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/context/SecurityContextHolder.html" target="_blank">SecurityContextHolder</a>-luokan kautta, joka pitää kirjaa kirjautuneesta käyttäjästä. Luokkaa käytetään seuraavasti:</p>
+
+                            <pre class="sh_java">
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</pre>                            
+
+                            <p>Toteuta palvelu, jonka voi injektoida <code>@Autowired</code>-annotaation avulla mihin tahansa sovellukseen, ja jolta saa tällä hetkellä kirjautuneen käyttäjän tiedot <em>Person</em>-oliona.</p>
+
+                            <p>Lisää tämän jälkeen osoitteeseen <code>/posts</code>-tehtäviä pyyntöjä kuuntelevaan kontrolleriin toiminnallisuus, missä uutta viestiä lisättäessä sille lisätään myös oikea kirjoittaja.</p>
+
+                            <p>Nyt kun kirjaudut sovellukseen, voit kirjoittaa viestin siten, että viestin kirjoittajana näkyy käyttäjäsi nimi.</p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="tehtava" id="t-tykkaaminen-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-tykkaaminen">
+                                    Tykkääminen
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-tykkaaminen" class="collapse">
+                            <p>Tässä tehtävässä lisätään tykkäystoiminnallisuus viesteihin. Tehtävä on kahden tehtäväpisteen arvoinen. Palauta se taas kokonaisuutena.</p>
+
+                            <img src="img/exercises/w7e05-uml.png"/>
+
+                            <p>Muokkaa ensin <code>Post</code>-entiteettiä siten, että sille luodaan satunnaisesti generoitu merkkijonotunnus. Luo tämän jälkeen entiteetti <code>Like</code> (kannattanee nimetä se jotenkin ettei tietokanta hermostu :)), joka kuvaa resurssiin liittyvää tykkäystä. Pidä resurssina merkkijonoa, joka viittaa esimerkiksi postin tunnukseen; jokainen tykkäys liittyy myös käyttäjään.</p>
+
+                            <p>Tee tämän jälkeen kontrolleri, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/likes</code>. Pyynnön mukana tulee parametri <code>resourceId</code>, joka viittaa tykättävään resurssiin -- lisää myös jokaiseen tykkäykseen <em>nykyinen</em> käyttäjä, jonka saat edellisessä tehtävässä toteutetusta palvelusta. Uudelleenohjaa käyttäjä oletuskontrollerille tykkäyksen lisäämisen jälkeen.</p>
+
+                            <p>Muokkaa tämän jälkeen oletuskontrolleria siten, että tietokannasta haetaan sivulla näytettäviin viesteihin liittyvät tykkäykset. Lisää tykkäykset modelin attribuutiksi nimeltä <code>likes</code> -- tykkäysten tulee olla <code>Map</code>, missä avain on resurssin tunnus ja arvo tykkäysten lukumäärä.</p>
+
+                            <p>Toteuta tämän jälkeen käyttöliittymään <em>viestikohtainen</em> tykkäyslinkki -- alla olevasta koodista lienee hyötyä.</p>
+
+                            <pre class="sh_xml">
+&lt;form style="visibility: hidden" th:id="@{like-{id}(id=${post.id})}" method="post" action="#" th:action="@{/likes}"&gt;
+    &lt;input type="text" name="resourceId" th:value="${post.id}"&gt;&lt;/input&gt;
+    &lt;input type="submit" value="Like"/&gt;
+&lt;/form&gt;
+&lt;p&gt;
+    &lt;a href="#" th:onclick="@{document.getElementById('like-{id}').submit();(id=${post.id})}"&gt;+1 like&lt;/a&gt; 
+    &lt;span th:if="${likes[post.id] != null}"&gt;
+        &lt;span th:text="${likes[post.id]}"&gt;num&lt;/span&gt; like&lt;span th:if="${likes[post.id] &gt; 1}"&gt;s&lt;/span&gt;
+    &lt;/span&gt;
+&lt;/p&gt;</pre>
+
+                            <p>Kun tehtävä toimii, sivuilla näkyy tykkäysnapit sekä tehtyjen tykkäysten määrät.</p>
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e05-likes.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Huom! Jos teet tulevaisuudessa tykkäystoiminnallisuutta, joskus puhdas selainpuolen toteutus on tarpeeksi -- tutustu esimerkiksi <a href="http://socialitejs.com/" target="_blank">SocialiteJS</a>-kirjastoon.</p>
+
+                        </div>
+                    </div>
+
+
+                    <div class="tehtava" id="t-kaverit-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-kaverit">
+                                    Kaverit
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-kaverit" class="collapse">
+                            <p>Tässä tehtävässä lisätään mahdollisuus kaverien lisäämiseen. Tehtävä on kolmen tehtäväpisteen arvoinen. Palauta se taas kokonaisuutena.</p>
+
+                            <img src="img/exercises/w7e06-uml.png"/>
+
+                            <h1>Entiteetti ja kaveripyynnön lisäys</h1>
+
+                            <p>Luo entiteetti <code>FriendshipRequest</code>, jossa on <code>Person</code>-olio sekä lähteenä että kohteena (source & target). Tämän lisäksi entiteetillä on status, joka voi saada arvot <code>Requested</code>, <code>Accepted</code>, <code>Rejected</code>.</p>
+
+                            <p>Kun entiteetti on olemassa, luo uusi kontrolleri, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/friends</code>. POST-tyyppinen pyyntö saa parametrina kentän muuttujan <code>personId</code>, joka on sen käyttäjän tunnus, kenelle kaveripyyntö tehdään. Tallenna pyyntö tietokantaan jos tietokannassa ei ole jo samaa pyyntöä tai vastaavaa pyyntöä, siten, että lähde ja kohde ovat vaihtuneet päittäin.</p>
+
+                            <p>Muokkaa vielä käyttöliittymää siten, että käyttäjäprofiili näyttää seuraavalta -- listassa tulee näkyä vain ne käyttäjät, jotka eivät ole nykyisen käyttäjän kavereita.</p>
+
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e06-friendem.png"/>
+                            <p>&nbsp;</p>
+
+                            <p>Allaolevasta koodista lienee hyötyä.</p>
+
+                            <pre class="sh_xml">
+&lt;form method="POST" th:action="@{/friends}"&gt;
+    &lt;input type="hidden" name="personId" th:value="${user.id}"/&gt;
+    &lt;input type="submit" class="p-btn" value="Friend 'em!"/&gt;
+&lt;/form&gt;</pre>
+
+
+                            <h1>Kaveripyyntöjen näyttäminen</h1>
+
+                            <p>Muokkaa oletuskontrolleria siten, että vastaukseen lisätään niiden kaveripyyntöjen lukumäärä, joiden status on <code>Requested</code> ja kohde nykyinen käyttäjä. Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että sivun oikeassa ylälaidassa näytetään notifikaatio, vain jos käyttäjälle on kaveripyyntöjä.</p> 
+
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e06-notif.png"/>
+                            <p>&nbsp;</p>
+                            
+                            <p>Muokkaa notifikaatiota siten, että kun notifikaatiota klikataan, niin käyttäjä tekee GET-pyynnön osoitteeseen <code>/friends</code>.</p>
+
+                            
+                            <h1>Kaveripyyntöjen hyväksyminen</h1>
+
+                            <p>Muokkaa <code>/friends</code>-osoitetta kuuntelevaa kontrolleria siten, että se palauttaa käyttäjälle tehdyt kaveripyynnöt ja näyttää sivun <code>friends.html</code></p>
+
+                            <p>Tee tämän jälkeen sivusta <code>index.html</code> kopio <code>friends.html</code> ja muokkaa sitä siten, että se näyttää vain listan käyttäjiä. Muokkaa käyttäjälistaa siten, että jokaiselle käyttäjälle on nappi "Ok! I Like 'im!".</p>
+                            
+                            <p>&nbsp;</p>
+                            <img src="img/exercises/w7e06-notif.png"/>
+                            <p>&nbsp;</p>
+                            
+                            <p>Kun nappia painetaan, käyttäjän pitäisi olla toisen käyttäjän kaveri.</p>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="tehtava" id="t-omafeature-ex">
+
+                        <header>
+                            <h1>
+                                <a data-toggle="collapse" class="collapsed" href="#t-omafeature">
+                                    Oma feature
+                                </a>
+                            </h1>
+                        </header>
+
+                        <div id="t-omafeature" class="collapse">
+                            <p>Lisää tässä tehtävässä oma feature sovellukseen -- esimerkiksi kuvien lisääminen -- toinen vaihtoehto on myös käyttöliittymän pilkkominen järkevämpiin osiin (fragmenteiksi). Oman toiminnallisuuden tekemisestä saa 3 pistettä. </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Kuten huomaat, yhteisöpalvelumme on vielä kaukana valmiista -- ensiaskeleet on kuitenkin tehty. Ennenpitkää sovellus pilkottaisiin pienempiin palasiin, ja sovelluksen toiminta rakennettaisiin niin, että sivulle toteutettava JavaScript-komponentti hakisi sivun sisällön eri komponenteista. Palaamme tähän <em>myöhemmällä kurssilla..</em>.</p>
+
+            </section>
+
+            <!-- END WEEK7 -->
 
 
 
