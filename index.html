@@ -5751,7 +5751,7 @@ public class MessageService {
 
                             <p>Lisätään tässä sivulle toiminnallisuus viestien listaamiseen ja lähettämiseen. Henkilöiden luomista tai kirjautumista ei vielä toteuteta. Tämä tehtävä on kahden tehtäväpisteen arvoinen. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
 
-                            <img src="img/exercises/w7e01-uml.png"/>
+                            <img src="img/exercises/w7e01-uml.png" alt="[Person|name (String)]1-*[Post|date (Date);title (String);content (String)]"/>
 
                             <p>Luo tehtävään ylläolevassa UML-kaaviossa kuvatut entiteetit <code>Person</code> ja <code>Post</code>, sekä niille sopivat <code>Repository</code>-rajapinnat. Lisää tämän jälkeen profiiliin <code>DevProfile</code> koodi, jolla saat sovellukseen sovelluksen käynnistyessä muutaman käyttäjän sekä heille viestejä (<code>@PostConstruct</code>-annotaatiosta on tässä hyötyä!).</p>
 
@@ -5760,7 +5760,7 @@ public class MessageService {
                             <p>Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että viestit näkyvät siinä. Löytänet oikean alueen hakemalla tekstiä <em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus dui id libero auctor cursus."</em>. Kun saat toteutuksen toimimaan, sinun pitäisi nähdä templaten sijaan lisäämäsi tekstit; viestialue voi näyttää esimerkiksi seuraavalta:</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-post-anonymous-sorted.png"/>
+                            <img src="img/exercises/w7-post-anonymous-sorted.png" alt="Kolme viestiä listattuna. Ensimmäisessä Anonymous -henkilö sanoo 'asdsada', toisessa Anonymous -henkilö ei sano mitään, ja kolmannessa Jack Reacher sanoo 'I'm not a vagrant. I'm a hobo. Big difference'. Viesteissä näkyy myös kellonajat."/>
                             <p>&nbsp;</p>
 
                             <p>Lisää tämän jälkeen erillinen kontrolleri, joka kuuntelee osoitteeseen <code>/posts</code> tulevia POST-tyyppisiä pyyntöjä. Kun kontrolleri vastaanottaa pyynnön, se tallentaa viestin ja ohjaa käyttäjän oletusnäkymään (missä haetaan kymmenen uusinta viestiä). Voit hakea esimerkiksi tietokannasta satunnaisen henkilön viestin lähettäjäksi.</p>
@@ -5768,16 +5768,16 @@ public class MessageService {
                             <p>Kun POST-pyyntöjä osoitteeseen <code>/posts</code> kuunteleva kontrolleri toimii, muokkaa <code>index.html</code>-tiedostossa olevaa viestikenttää seuraavanlaisesta</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-post-message-pre.png"/>
+                            <img src="img/exercises/w7-post-message-pre.png" alt="Lomake, missä otsikkona 'GET IN TOUCH', ja kenttinä nimi (Name), sähköposti (Email), puhelinnumero (Phone) ja viesti (Message). Lomakkeen lähetysnapissa teksti 'Send Message'."/>
                             <p>&nbsp;</p>
 
                             <p>seuraavanlaiseksi</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-post-message-post.png"/>
+                            <img src="img/exercises/w7-post-message-post.png" alt="Lomake, missä otsikkona 'WHAT'S GOING ON?', jonka lisäksi näkyy iso tekstialue, johon voi kirjoittaa viestin. Lomakkeen lähetysnapissa teksti 'Let 'Em Know!'."/>
                             <p>&nbsp;</p>
 
-                            <p>Kun laatikkoon kirjoitetaan viesti ja "Let 'Em Know!"-nappia painetaan, tulee viesti lähettää POST-tyyppisellä pyynnöllä osoitteeseen <code>/posts</code>. Huomaa että tarvitset lomakkeen tietojen lähettämiseen -- jos palvelin valittaa jotain CORS-teemaista, varmista, että osa lomakkeesta tehdään Thymeleafin avulla (esim <code>th:action="@{/posts}</code>).</p>
+                            <p>Kun laatikkoon kirjoitetaan viesti ja "Let 'Em Know!"-nappia painetaan, tulee viesti lähettää POST-tyyppisellä pyynnöllä osoitteeseen <code>/posts</code>. Huomaa että tarvitset lomakkeen tietojen lähettämiseen -- jos palvelin valittaa jotain CORS-teemaista, varmista, että osa lomakkeesta tehdään Thymeleafin avulla (esim <code>th:action="@{/posts}"</code>).</p>
 
                         </div>
                     </div>
@@ -5796,20 +5796,20 @@ public class MessageService {
 
                             <p>Lisätään tässä sivulle toiminnallisuus henkilöiden listaamiseen. Tämä tehtävä on yhden tehtäväpisteen arvoinen. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
 
-                            <img src="img/exercises/w7e02-uml.png"/>
+                            <img src="img/exercises/w7e02-uml.png" alt="[Person|name (String);slogan (String); lastUpdated (Date)]1-*[Post|date (Date);title (String);content (String)]"/>
 
                             <p>Lisää luokalle <code>Person</code> kentät <code>lastUpdated</code> ja <code>slogan</code>. Lastupdated pitää kirjaa viimeisimmästä muutoksesta; slogan taas on -- noh -- henkilön slogan.</p>
 
                             <p>Muokkaa tämän jälkeen oletuskontrolleria siten, että se lisää 10 viimeksi tietojaan päivittänyttä käyttäjää modeliin. Muokkaa sivua <code>index.html</code> siten, että sivulla oletuksena ollut henkilö "Zach Dunes" vaihtuu käyttäjälistaan.</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-profiilit-pre.png"/>
+                            <img src="img/exercises/w7-profiilit-pre.png" alt="Kuva, missä näkyy yksittäinen Henkilö 'Zach Dunes', teksti 'Lorem ipsum dolor sit amet, (jne)' ja nappi 'Profile'" />
                             <p>&nbsp;</p>
 
                             <p>Kun tehtävä on valmis, sivulla näkyy viimeisimmät käyttäjät ja heidän sloganit.</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-profiilit-post.png"/>
+                            <img src="img/exercises/w7-profiilit-post.png" alt="Kuva, missä kaksi henkilöä listattuna. Ensimmäisenä 'Jack Reacher', sloganina 'I know I'm smarter than an armadillo'. Toisena 'Jack Bauer', sloganina 'I'm federal agent Jack Bauer. This is the longest day of my life' Kummallekin on myös nappi, jossa lukee 'Profile'."/>
                             <p>&nbsp;</p>
 
 
@@ -5833,19 +5833,19 @@ public class MessageService {
                             <p>Muokkaa tiedostoa <code>index.html</code> siten, että kopioit nykyisen kirjautumislomakkeen ja luot siitä erillisen "Sign up"-lomakkeen, minkä avulla voi luoda uuden käyttäjän. Lomake voi näyttää esimerkiksi seuraavanlaiselta</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-sign-up.png"/>
+                            <img src="img/exercises/w7-sign-up.png" alt="Kirjautumislomake. Otsikkona 'Not a member? Sign Up Now', jota seuraa kaksi tekstikenttää -- yksi nimelle ja yksi sloganille. Näitä seuraa nappi 'Sign up'."/>
                             <p>&nbsp;</p>
 
 
                             <p>Lisää tämän jälkeen sovellukseen erillinen kontrolleri, joka kuuntelee <code>POST</code>-tyyppisiä pyyntöjä osoitteeseen <code>/persons</code>; pyynnön pohjalta luodaan uusi käyttäjä. Muokkaa kontrolleria ja juuri luomaasi lomaketta siten, että niiden avulla voidaan luoda uusia käyttäjiä. Uuden käyttäjän lisäämisen tulee onnistua kirjoittamalla käyttäjän nimi ja slogan; käyttäjien lisäämiseen erikoistunut kontrolleri tallentaa käyttäjän ja ohjaa pyynnön oletuskontrollerille.</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-signing-up.png"/>
+                            <img src="img/exercises/w7-signing-up.png" alt="Kirjautumislomake. Otsikkona 'Not a member? Sign Up Now', jota seuraa kaksi tekstikenttää -- yksi nimelle ja yksi sloganille. Näitä seuraa nappi 'Sign up'. Tällä kertaa nimi-kenttään on täytetty esimerkin vuoksi nimi 'Horst von der Goltz' ja slogan 'Oldies but goodies!'"/>
                             <p>&nbsp;</p>
 
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7-signed-up.png"/>
+                            <img src="img/exercises/w7-signed-up.png" alt="Tässä kuvalla vinkataan, että Horst olisi luotu järjestelmään. Edellisestä tehtävästä tuttu listaus henkilöitä, mutta tässä yksi henkilöistä 'Horst von der Goltz'."/>
                             <p>&nbsp;</p>
 
                         </div>
@@ -5866,7 +5866,7 @@ public class MessageService {
 
                             <p>Tässä tehtävässä sovellukseen lisätään autorisointi- ja autentikointitoiminnallisuus. Tämän lisäksi kirjautumissivu ja uuden käyttäjän luomiseen tarkoitettu sivu muokataan erillisiksi sivuiksi, sekä asetetaan viestien lähetys niin, että niillä on oikeat kirjoittajat. Tehtävä on neljän tehtäväpisteen arvoinen -- kun palautat tehtävän, sen tulee toimia kokonaisuudessaan.</p>
 
-                            <img src="img/exercises/w7e04-uml.png"/>
+                            <img src="img/exercises/w7e04-uml.png" alt="[Person| name (String); slogan (String); lastUpdated (Date); username (String); password (String); salt (String)]1-*[Post|date (Date);title (String);content (String)]"/>
 
                             <p>Ennen alkua, lisää <code>Person</code>-entiteetille kentät username, password ja salt. Käyttäjätunnuksen tulee olla uniikki.</p>
 
@@ -5877,13 +5877,13 @@ public class MessageService {
                             <p>Muokkaa sivuja siten, että <code>login.html</code> näyttää seuraavalta:</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e04-signin.png"/>
+                            <img src="img/exercises/w7e04-signin.png" alt="Kirjautumislomake. Otsikkona 'Sign in', jonka lisäksi lomakkeessa kaksi kenttää: 'username' ja 'password'. Näiden lisäksi lomakkeeseen liittyvä nappi 'Sign in'. Lomakkeen alapuolella on teksti 'Sign Up Now -&gt;', joka on linkki."/>
                             <p>&nbsp;</p>
 
                             <p>Kun sivulla klikkaa linkkiä "Sign up now", pääsee osoitetta <code>/signup</code> kuuntelevan kontrollerin kautta sivulle <code>signup.html</code>, joka näyttää seuraavalta:</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e04-signup.png"/>
+                            <img src="img/exercises/w7e04-signup.png" alt="Rekisteröitymislomake. Otsikkona 'Sign Up Form', jonka lisäksi lomakkeessa neljä kenttää: 'name', 'slogan', 'username' ja 'password'. Näiden lisäksi lomakkeeseen liittyvä nappi 'Sign up'."/>
                             <p>&nbsp;</p>
 
                             <p>Kirjautumissivun tulee vieläkin lähettää lomakkeelle syötettävät tiedot palvelimelle.</p>
@@ -5996,7 +5996,9 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
                         <div id="t-tykkaaminen" class="collapse">
                             <p>Tässä tehtävässä lisätään tykkäystoiminnallisuus viesteihin. Tehtävä on kahden tehtäväpisteen arvoinen. Palauta se taas kokonaisuutena.</p>
 
-                            <img src="img/exercises/w7e05-uml.png"/>
+                            <img src="img/exercises/w7e05-uml.png" alt="[Person]-*[Post]
+[Person]-*[Like]
+[Like]*-[Post]"/>
 
                             <p>Muokkaa ensin <code>Post</code>-entiteettiä siten, että sille luodaan satunnaisesti generoitu merkkijonotunnus. Luo tämän jälkeen entiteetti <code>Like</code> (kannattanee nimetä se jotenkin ettei tietokanta hermostu :)), joka kuvaa resurssiin liittyvää tykkäystä. Pidä resurssina merkkijonoa, joka viittaa esimerkiksi postin tunnukseen; jokainen tykkäys liittyy myös käyttäjään.</p>
 
@@ -6021,8 +6023,10 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
                             <p>Kun tehtävä toimii, sivuilla näkyy tykkäysnapit sekä tehtyjen tykkäysten määrät.</p>
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e05-likes.png"/>
-                            <p>&nbsp;</p>
+                            
+			    <img src="img/exercises/w7e05-likes.png" alt="Kuva, missä kaksi viestiä listattuna. Kummankin viestin yhteydessä on nyt linkki '+1 like', jota klikkaamalla viestistä voi tykätä. Tämän lisäksi viestissä, jota on tykätty, lukee tykkäysten lukumäärä (tykkäyslinkin vieressä)."/>
+             
+			    <p>&nbsp;</p>
 
                             <p>Huom! Jos teet tulevaisuudessa tykkäystoiminnallisuutta, joskus puhdas selainpuolen toteutus on tarpeeksi -- tutustu esimerkiksi <a href="http://socialitejs.com/" target="_blank">SocialiteJS</a>-kirjastoon.</p>
 
@@ -6043,8 +6047,11 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
                         <div id="t-kaverit" class="collapse">
                             <p>Tässä tehtävässä lisätään mahdollisuus kaverien lisäämiseen. Tehtävä on kolmen tehtäväpisteen arvoinen. Palauta se taas kokonaisuutena.</p>
 
-                            <img src="img/exercises/w7e06-uml.png"/>
-
+                            <img src="img/exercises/w7e06-uml.png" alt="[Person]-*[Post]
+[Person]-*[Like]
+[Like]*-[Post]
+[FriendshipRequest|status (Status)]-2[Person]
+--pyyntöön kuuluu sekä pyynnön lähettäjä (source) ja pyynnön vastaanottaja (target)"/>
                             <h1>Entiteetti ja kaveripyynnön lisäys</h1>
 
                             <p>Luo entiteetti <code>FriendshipRequest</code>, jossa on <code>Person</code>-olio sekä lähteenä että kohteena (source & target). Tämän lisäksi entiteetillä on status, joka voi saada arvot <code>Requested</code>, <code>Accepted</code>, <code>Rejected</code>.</p>
@@ -6055,7 +6062,9 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
 
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e06-friendem.png"/>
+
+                            <img src="img/exercises/w7e06-friendem.png" alt="Käyttäjän listaus, sama kuin profiileissa. Nyt käyttäjän 'Profile' -napin sijaan näkyy teksti 'Friend 'Em!', mitä klikkaamalla kirjautunut käyttäjä lähettää kohteelle kaveripyynnön."/>
+   
                             <p>&nbsp;</p>
 
                             <p>Allaolevasta koodista lienee hyötyä.</p>
@@ -6072,7 +6081,7 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
                             <p>Muokkaa oletuskontrolleria siten, että vastaukseen lisätään niiden kaveripyyntöjen lukumäärä, joiden status on <code>Requested</code> ja kohde nykyinen käyttäjä. Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että sivun oikeassa ylälaidassa näytetään notifikaatio, vain jos käyttäjälle on kaveripyyntöjä.</p> 
 
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e06-notif.png"/>
+                            <img src="img/exercises/w7e06-notif.png" alt="Tässä näkyy (1) kuva pienellä -- nyt joku valmis kuva, ei siis tartte toteuttaa kuvatoiminnallisuutta, (2) notifikaatiokuva 'kello', ja (3) logout-nappi. Enpä oikein osaa selittää tätä paremmin.." />
                             <p>&nbsp;</p>
                             
                             <p>Muokkaa notifikaatiota siten, että kun notifikaatiota klikataan, niin käyttäjä tekee GET-pyynnön osoitteeseen <code>/friends</code>.</p>
@@ -6085,7 +6094,7 @@ System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</
                             <p>Tee tämän jälkeen sivusta <code>index.html</code> kopio <code>friends.html</code> ja muokkaa sitä siten, että se näyttää vain listan käyttäjiä. Muokkaa käyttäjälistaa siten, että jokaiselle käyttäjälle on nappi "Ok! I Like 'im!".</p>
                             
                             <p>&nbsp;</p>
-                            <img src="img/exercises/w7e06-notif.png"/>
+                            <img src="img/exercises/w7e06-notif.png" alt="Täsmälleen sama kuva kuin aiemmin."/>
                             <p>&nbsp;</p>
                             
                             <p>Kun nappia painetaan, käyttäjän pitäisi olla toisen käyttäjän kaveri.</p>
