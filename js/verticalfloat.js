@@ -10,7 +10,7 @@ String.prototype.hashCode = function() {
 };
 
 var VERTICALFLOAT = {
-    DATA_URI: "https://tmc.mooc.fi/org/hy/courses/59/points.json?api_version=7&t=" + new Date().getTime(),
+    DATA_URI: "https://tmc.mooc.fi/mooc/courses/34/points.json?api_version=7&t=" + new Date().getTime(),
     minOpacity: 0.4,
     maxOpacity: 1,
     analyticsChart: null,
