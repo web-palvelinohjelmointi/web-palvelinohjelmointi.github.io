@@ -31,12 +31,12 @@
             <nav class="collapse bs-navbar-collapse" role="navigation">
                 <ul>
                     <li>
-                        <a href="#start">Yleistä</a>
+                        <a href="index.html">Yleistä</a>
+                    </li>
+                    <li>
+                        <a href="osa1.html">Osa 1</a>
                     </li>
 <!--
-                    <li>
-                        <a href="#osa1">Osa 1</a>
-                    </li>
                     <li>
                         <a href="#osa2">Osa 2</a>
                     </li>
@@ -194,8 +194,8 @@
 		</tr>
 		<tr>
 		  <td>1</td>
-		  <td>Johdanto web-sovellusten toimintaan. Yhtä tietokantataulua käyttävä web-sovellus. Web-sovelluksen siirtäminen pilvipalveluun.</td>
-		  <td>Osaa toteuttaa yhtä tietokantataulua käyttävän web-sovelluksen sekä siirtää sen pilvipalveluun.</td>
+		  <td>Johdanto web-sovellusten toimintaan. Yhtä tietokantataulua käyttävä web-sovellus.</td>
+		  <td>Osaa toteuttaa yhtä tietokantataulua käyttävän web-sovelluksen.</td>
 		</tr>
 		<tr>
 		  <td>2</td>
@@ -280,7 +280,7 @@
 	    
 	    <h2>Ensimmäinen palvelinohjelmisto</h2>
 	    
-	    <p>Käytämme kurssin alkupuolella Javalla toteutettua <a href="http://sparkjava.com/" target="_blank">Spark</a> -kirjastoa web-sovellusten tekemiseen. Sparkin avulla web-sovellusten teko perustuu valmiiden kirjastometodien käyttöön. Niitä kutsumalla määritellään (1) mihin osoitteeseen tulevat pyynnöt käsitellään tässä metodissa ja (2) mitä pyynnölle tulee tehdä.</p>
+	    <p>Käytämme kurssilla <a href="https://spring.io/" target="_blank">Spring</a> -sovellusperheen <a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a> -projektia web-sovellusten tekemiseen. Merkittävä osa web-sovellusten rakentamisesta perustuu valmiiden kirjastometodien käyttöön. Niiden avulla määritellään (1) mihin osoitteeseen tulevat pyynnöt käsitellään ja (2) mitä pyynnölle tulee tehdä.</p>
 	    
 	    <aside class="info">
 	      
@@ -294,49 +294,114 @@
 	      
 	    </aside>
 	    
-	    <p>Spark-kirjaston saa käyttöön lisäämällä Maven-projektiin seuraavan riippuvuuden.</p>
+	    <p>Spring -sovelluskehystä käyttävien web-sovellusten kehityksessä käytettävät osat saa käyttöön lisäämällä projektiin riippuvuuden Spring Boot -projektiin (<code>spring-boot-starter-parent</code>) sekä web-projektiin (<code>spring-boot-starter-web</code>).</p>
 
 <pre class="sh_xml">
-&lt;dependency&gt;
-    &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
-    &lt;version&gt;2.3&lt;/version&gt;
-&lt;/dependency&gt;
+&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.4.0.RC1&lt;/version&gt;
+&lt;/parent&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
 </pre>
 
-	    <p>Kun riippuvuus on lisätty projektiin ja projektista pääsee käsiksi Spark-kirjaston metodeihin ja luokkiin, on palvelinohjelmiston toteutus melko suoraviivaista. Yksinkertaisimmillaan "Hei Maailma!" -tekstin käyttäjälle palauttava sovellus on seuraavanlainen:</p>
+            <aside class="info">
+
+	      <br/>
+	      
+	      <h1>Release Candidate</h1>
+
+	      <p>Käytämme toistaiseksi Spring Boot -projektin version 1.4. esiversiota. Tehtäväpohjiin on valmiiksi määritelty sijainti, mistä esiversio löytyy. Omia kokeiluja varten tulee projektin <code>pom.xml</code>-tiedostoon lisätä määrittely esiversion löytämiseksi:</p>
+
+<pre class="sh_xml">
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;spring-milestones&lt;/id&gt;
+        &lt;name&gt;spring-milestones&lt;/name&gt;
+        &lt;url&gt;http://repo.spring.io/milestone/&lt;/url&gt;
+        &lt;releases&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;/releases&gt;
+        &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;/snapshots&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+</pre>
+
+	    </aside>
+
+	    <p>Kun riippuvuudet on lisätty projektiin ja projektista pääsee käsiksi Spring-sovelluskehyksen metodeihin ja luokkiin, voimme luoda ensimmäisen palvelinohjelmistomme.</p>
 
 <pre class="sh_java">
-import static spark.Spark.*;
+package heimaailma;
 
-public class HeiMaailma {
-    public static void main(String[] args) {
-        get("*", (req, res) -&gt; "Hei Maailma!");
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@SpringBootApplication
+@Controller
+public class HeiMaailmaController {
+
+    @RequestMapping("*")
+    @ResponseBody
+    public String home() {
+        return "Hei Maailma!";
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(HeiMaailmaController.class, args);
     }
 }
 </pre>
 
-	    <p>Yllä olevassa esimerkissä käytetään <code>spark</code>-pakkauksessa olevan <code>Spark</code>-luokan staattista metodia <code>get</code>, jolle määritellään kuunneltava osoite -- tässä kaikki <code>"*"</code> -- sekä palvelinohjelmiston pyyntöön palauttama vastaus. Lauseke <code>(req, res) -&gt; "Hei Maailma!"</code> palauttaa palvelimelle tulevaan pyyntöön merkkijonon <code>"Hei Maailma!"</code>. Tässä hyödynnetään Java 8:n mukana tulleita uusia ominaisuuksia -- Java 7:llä edelläoleva toteutus olisi näyttänyt seuraavalta:</p>
+	    <p>Yllä olevassa esimerkissä luodaan pyyntöjä vastaanottava luokka. Pyyntöjä vastaanottavat luokat merkitään <code>@Controller</code>-annotaatiolla. Tämän perusteella Spring-sovelluskehys tietää, että luokan metodit saattavat käsitellä selaimesta tehtyjä pyyntöjä.</p>
+
+	    <p>Luokalle on määritelty lisäksi metodi <code>home</code>, jolla on kaksi annotaatiota: <code>@RequestMapping</code> ja <code>@ResponseBody</code>. Annotaation <code>@RequestMapping</code> avulla määritellään kuunneltava osoite -- tässä kaikki <code>"*"</code>. Annotaatio <code>@ResponseBody</code> kertoo sovelluskehykselle, että metodin vastaus tulee näyttää vastauksena sellaisenaan.</p>
+
+	    <p>Eriytämme pyyntöjä vastaanottavat luokat ja sovelluksen käynnistämiseen käytettävän luokan jatkossa toisistaan.</p>
 
 <pre class="sh_java">
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import static spark.Spark.*;
+package heimaailma;
 
-public class HeiMaailma {
-    public static void main(String[] args) {
-        get("*", new Route() {
-            @Override
-            public Object handle(Request req, Response res) throws Exception {
-                return "Hei Maailma!";
-            }
-        });
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class HeiMaailmaApplication {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(HeiMaailmaController.class, args);
     }
 }
 </pre>
 
-	    <p>Tällä kurssilla tulee käyttää Javan versiota 8.</p>
+<pre class="sh_java">
+package heimaailma;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HeiMaailmaController {
+
+    @RequestMapping("*")
+    @ResponseBody
+    public String home() {
+        return "Hei Maailma!";
+    }
+}
+</pre>
+
 
 	    <aside class="info">
 	      <br/>
@@ -344,7 +409,7 @@ public class HeiMaailma {
 	      
               <p>Tästä eteenpäin materiaalissa on myös ohjelmointitehtäviä. Tehtävien tekeminen ja palautus tapahtuu NetBeans-ympäristössä Test My Code-liitännäisen avulla. Test My Code lataa tehtäväpohjat sinulle valmiiksi.</p>
 	      
-	      <p>Oletamme, että olet seurannut kurssin työvälineiden hakemiseen liittyviä ohjeita osoitteessa <a href="http://mooc.fi/courses/general/ohjelmointi/" target="_blank">http://mooc.fi/courses/general/ohjelmointi/</a>.</p>
+	      <p>Oletamme, että olet seurannut kurssin työvälineiden hakemiseen liittyviä ohjeita osoitteessa <a href="http://mooc.fi/courses/general/ohjelmointi/" target="_blank">http://mooc.fi/courses/general/ohjelmointi/</a> ja valinnut kurssiksi <code>2016-wepa</code>.</p>
 	      
 	      <p>Saat tehtävän auki klikkaamalla sen nimeä.</p>
 	      
@@ -366,11 +431,11 @@ public class HeiMaailma {
 		  
                   <p>Kuten huomattava osa ohjelmointikursseista, tämäkin kurssi alkaa tehtävällä, jossa toteutettava ohjelma kirjoittaa tekstin <code>Hello World!</code>.</p>
 		  
-                  <p>Toteuta tehtäväpohjan pakkauksessa <code>wad.helloworld</code> olevan luokan <code>HelloWorld</code> <code>main</code>-metodiin palvelimen käynnistävä sovellus, joka kuuntelee kaikkia osoitteita. Kun palvelin vastaanottaa pyynnön, tulee palvelimen palauttaa merkkijono "Hello World!".</p>
+                  <p>Toteuta tehtäväpohjan pakkauksessa <code>wad.helloworld</code> olevaan <code>HelloWorldController</code> luokkaan toiminnallisuus, joka kuuntelee kaikkia pyyntöjä. Kun palvelin vastaanottaa pyynnön, tulee palvelimen palauttaa merkkijono "Hello World!".</p>
 		  
-                  <p><img class="browser-img" src="img/mooc/ex1.png"/></p>
+                  <p><img class="browser-img" src="img/2016-mooc/ex1.png"/></p>
 		  
-                  <p>Käynnistä palvelin painamalla NetBeansin play-nappia tai suorittamalla <code>HelloWorld</code>-luokan <code>main</code>-metodi. Avaa nettiselain, mene osoitteeseen <a href="http://localhost:4567" target="_blank">http://localhost:4567</a> ja näet selaimessasi tekstin "Hello World!".</p>
+                  <p>Käynnistä palvelin painamalla NetBeansin play-nappia tai suorittamalla <code>HelloWorldApplication</code>-luokan <code>main</code>-metodi. Avaa nettiselain, mene osoitteeseen <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> ja näet selaimessasi tekstin "Hello World!".</p>
 		  
                   <p>Palvelin sammutetaan NetBeansissa punaista nappia painamalla -- vain yksi sovellus voi olla kerrallaan päällä samassa osoitteessa. Palauta tehtävä lopuksi Test My Code:n submit-napilla.</p>
                 </div>
@@ -384,12 +449,12 @@ public class HeiMaailma {
 	      
 	      <p>Palvelimen sammuttaminen tapahtuu NetBeansissa punaista neliötä klikkaamalla, joka sammuttaa suoritettavan ohjelman. Joissakin käyttöjärjestelmissä tämä on kuitenkin bugista, jolloin palvelin tulee sammuttaa komentoriviltä.</p>
 	      
-	      <p>Saat portissa 4567 käynnissä olevan prosessin tunnuksen tietoon terminaalissa komennolla <code>lsof -i :4567</code>. Etsi komennon palauttamasta tulosteesta prosessin tunnus, jonka jälkeen voit sammuttaa prosessin komennolla <code>kill -9 prosessin-tunnus</code>.</p>
+	      <p>Saat portissa 8080 käynnissä olevan prosessin tunnuksen tietoon terminaalissa komennolla <code>lsof -i :8080</code>. Etsi komennon palauttamasta tulosteesta prosessin tunnus, jonka jälkeen voit sammuttaa prosessin komennolla <code>kill -9 prosessin-tunnus</code>.</p>
 	      
 	      <p>Esimerkiksi:</p>
 		  
 <pre>
-> lsof -i :4567
+> lsof -i :8080
 COMMAND  PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
 java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTEN)
 >
@@ -398,7 +463,7 @@ java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTE
 	      <p>Yllä prosessin tunnus (PID) on 9916. Tämän jälkeen prosessi sammutetaan komennolla <code>kill -9 9916</code>.</p>
 
 <pre>
-> lsof -i :4567
+> lsof -i :8080
 COMMAND  PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
 java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTEN)
 > kill -9 9916
@@ -409,24 +474,46 @@ java    9916 kayttaja   51u  IPv6 0x65802ef6be5c6f29      0t0  TCP *:tram (LISTE
 
 	    <h2>Palvelinohjelmiston polut</h2>
 
-	    <p>Opimme aiemmin, että <code>get</code>-metodin voi määritellä kuuntelemaan kaikkia palvelimelle tulevia pyyntöjä parametrilla <code>"*"</code>. Käytännössä parametrin avulla määritellään <em>polku</em>, johon palvelimelle tulevat pyynnöt voidaan ohjata. Tähdellä määritellään, että kaikki pyynnöt päätyvät samalle polulle. Muiden polkujen määrittely on luonnollisesti myös mahdollista.</p>
+	    <p>Opimme aiemmin, että voimme kuunnella kaikkia palvelinohjelmistoon tulevia pyyntöjä asettamalla <code>@RequestMapping</code>-annotaation parametriksi <code>"*"</code>. Käytännössä tämän parametrin avulla määritellään <em>polku</em>, johon palvelimelle tulevat pyynnöt voidaan ohjata. Tähdellä määritellään, että kaikki pyynnöt päätyvät samalle polulle. Muiden polkujen määrittely on luonnollisesti myös mahdollista.</p>
 	    
 	    <p>Antamalla poluksi merkkijonon <code>"/salaisuus"</code>, kaikki web-palvelimen osoitteeseen <code>/salaisuus</code> tehtävät pyynnöt ohjautuvat kyseiseen polkuun liitettyyn toiminnallisuuteen. Allaolevassa esimerkissä määritellään polku <code>/salaisuus</code> ja kerrotaan, että polkuun tehtävät pyynnöt palauttavat merkkijonon <code>"Kryptos"</code>.</p>
 	    
 <pre class="sh_java">
-get("/salaisuus", (req, res) -&gt; "Kryptos");
+    @RequestMapping("/salaisuus")
+    @ResponseBody
+    public String home() {
+        return "Kryptos";
+    }
 </pre>
 
-	    <p>Yhteen ohjelmaan voi myös määritellä useampia polkuja sekä niihin liittyviä toiminnallisuuksia. Alla olevassa esimerkissä on määritelty kolme erillistä polkua, joista jokainen palauttaa käyttäjälle merkkijonon.</p>
+	    <p>Yhteen ohjelmaan voi myös määritellä useampia polkuja sekä niihin liittyviä toiminnallisuuksia. Jokainen polku käsitellään omassa metodissaan. Alla olevassa esimerkissä pyyntöjä vastaanottavaan luokkaan on määritelty kolme erillistä polkua, joista jokainen palauttaa käyttäjälle merkkijonon.</p>
 
 <pre class="sh_java">
-import static spark.Spark.*;
+package polut;
 
-public class Polut {
-    public static void main(String[] args) {
-        get("/path", (req, res) -&gt; "Polku (path)");
-        get("/route", (req, res) -&gt; "Polku (route)");
-        get("/trail", (req, res) -&gt; "Polku (trail)");
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class PolkuController {
+
+    @RequestMapping("/path")
+    @ResponseBody
+    public String path() {
+        return "Polku (path)";
+    }
+
+    @RequestMapping("/route")
+    @ResponseBody
+    public String route() {
+        return "Polku (route)";
+    }
+
+    @RequestMapping("/trail")
+    @ResponseBody
+    public String trail() {
+        return "Polku (trail)";
     }
 }
 </pre>
@@ -434,27 +521,27 @@ public class Polut {
 
 	    <div class="tehtavat">
 	      
-	      <div class="tehtava" id="t-helloroutes">
+	      <div class="tehtava" id="t-hellopaths">
 		
 		<header>
 		  <h1>
-                    <a data-toggle="collapse" class="collapsed" href="#t-helloroutes">
-                      Hello Routes
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellopaths">
+                      Hello Paths
                     </a>
                   </h1>
                 </header>
-                <div id="t-helloroutes" class="collapse">
+                <div id="t-hellopaths" class="collapse">
 		  
-                  <p>Toteuta pakkauksessa <code>wad.helloroutes</code> olevaan luokkaan <code>HelloRoutes</code> seuraava toiminnallisuus:</p>
+                  <p>Toteuta pakkauksessa <code>wad.hellopaths</code> olevaan luokkaan <code>HelloPathsController</code> seuraava toiminnallisuus:</p>
 		  
 		  <ul>
 		    <li>Pyyntö polkuun <code>/hello</code> palauttaa käyttäjälle merkkijonon "Hello"</li>
-		    <li>Pyyntö polkuun <code>/routes</code> palauttaa käyttäjälle merkkijonon "Routes"</li>
+		    <li>Pyyntö polkuun <code>/paths</code> palauttaa käyttäjälle merkkijonon "Paths"</li>
 		  </ul>
 		  
 		  <p>Alla olevassa kuvassa on esimerkki tilanteesta, missä selaimella on tehty pyyntö polkuun <code>/hello</code></p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex2.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex2.png"/></p>
 		  
 		  <p>Palauta tehtävä TMC:lle kun olet valmis.</p>
 		  
@@ -465,76 +552,84 @@ public class Polut {
 	    
 	    <h2>Pyynnön parametrit</h2>
 	    
-	    <p>Pyynnöissä voi lähettää myös palvelimelle tietoa. Tutustutaan ensin yksinkertaisempaan tapaan, missä pyynnön parametrit lisätään osaksi haettavaa osoitetta. Esimerkiksi pyynnössä <code>http://localhost:4567/salaisuus?onko=nauris</code> on parametri nimeltä <code>onko</code>, jonka arvoksi on määritelty <code>nauris</code>.</p>
+	    <p>Pyynnöissä voi lähettää palvelimelle tietoa. Tutustutaan ensin tapaan, missä pyynnön parametrit lisätään osaksi haettavaa osoitetta. Esimerkiksi pyynnössä <code>http://localhost:8080/salaisuus?onko=nauris</code> on parametri nimeltä <code>onko</code>, jonka arvoksi on määritelty arvo <code>nauris</code>.</p>
 	    
-	    <p>Parametrien lisääminen pyyntöön tapahtuu lisäämällä osoitteen perään kysymysmerkki, jota seuraa parametrin nimi, yhtäsuuruusmerkki ja parametrille annettava arvo. Jos parametreja on useampia, erotellaan ne toisistaan &amp;-merkillä. Seuraavassa esimerkissä pyynnössä on kolme parametria, <code>eka</code>, <code>toka</code> ja <code>kolmas</code>, joiden arvot ovat <code>1</code>, <code>2</code> ja <code>3</code> vastaavasti.</p>
-	    
-<pre>
-http://localhost:4567/salaisuus?eka=1&amp;toka=2&amp;kolmas=3
-</pre>
-
-	    <p>Pyynnössä tuleviin parametreihin pääsee Sparkissa käsiksi <code><a href="http://sparkjava.com/documentation.html#request" target="_blank">req</a></code>-parametrin metodilla <code>queryParams("<em>parametrinNimi</em>")</code>. Vastaavasti, kaikkien parametrien nimet saa metodilla <code>queryParams()</code>.</p>
+	    <p>Parametrien lisääminen pyyntöön tapahtuu lisäämällä osoitteen perään kysymysmerkki, jota seuraa parametrin nimi, yhtäsuuruusmerkki ja parametrille annettava arvo. Pyynnössä tuleviin parametreihin pääsee käsiksi <code><a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html" target="_blank">@RequestParam</a></code>-annotaation avulla.</p>
 
 	    <p>Allaolevassa esimerkissä on luotu palvelinohjelma, jonka tehtävänä on tervehtiä kaikkia pyynnön tekijöitä. Ohjelma käsittelee polkuun <code>/hei</code> tulevia pyyntöjä ja palauttaa niihin vastauksena tervehdyksen. Tervehdykseen liitetään pyynnössä tulevan <code>nimi</code>-nimisen parametrin arvo.</p>
 
 <pre class="sh_java">
-import static spark.Spark.*;
+package parametrit;
 
-public class Parametrit {
-    public static void main(String[] args) {
-        get("/hei", (req, res) -&gt; "Hei " + req.queryParams("nimi") + ", mitä kuuluu?");
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class TervehtijaController {
+
+    @RequestMapping("/hei")
+    @ResponseBody
+    public String tervehdi(@RequestParam String nimi) {
+        return "Hei " + nimi + ", mitä kuuluu?";
     }
 }
 </pre>
 
-	    <p>Nyt esimerkiksi osoitteeseen <code>http://localhost:4567/hei?nimi=Ada</code> tehtävä pyyntö saa vastaukseksi merkkijonon <code>Hei Ada, mitä kuuluu?</code>.</p>
+	    <p>Nyt esimerkiksi osoitteeseen <code>http://localhost:8080/hei?nimi=Ada</code> tehtävä pyyntö saa vastaukseksi merkkijonon <code>Hei Ada, mitä kuuluu?</code>.</p>
 
+
+	    <p>Jos parametreja on useampia, erotellaan ne toisistaan &amp;-merkillä. Seuraavassa esimerkissä pyynnössä on kolme parametria, <code>eka</code>, <code>toka</code> ja <code>kolmas</code>, joiden arvot ovat <code>1</code>, <code>2</code> ja <code>3</code> vastaavasti.</p>
 	    
-	    <aside class="info">
-	      <br/>
-	      <h1>Useamman komennon suorittaminen pyynnön yhteydessä</h1>
-	      
-	      <p>Silloin tällöin ohjelmassa halutaan suorittaa useampi komento. Allaolevassa esimerkissä vastaanotetaan pyyntö polkuun <code>/hei</code> ja palautetaan merkkijono.</p>
-
-<pre class="sh_java">
-get("/hei", (req, res) -&gt; "Hei " + req.queryParams("nimi") + ", mitä kuuluu?");
+<pre>
+http://localhost:8080/salaisuus?eka=1&amp;toka=2&amp;kolmas=3
 </pre>
 
-	      <p>Yllä metodilla on implisiittinen palautus ja <code>return</code>-komentoa ei käyttäjälle näytetä. Suoritettavan koodin voi myös pilkkoa useampaan riviin, jolloin <code>(req, res) -&gt</code> -osaa seuraa avaava aaltosulku, suoritettava koodi, <code>return</code>-komennolla merkitty palautettava koodi, sekä sulkeva aaltosulku.</p>
+	    <p>Kaikki pyynnössä olevat parametrit saa pyyntöä käsittelevät metodin käyttöön samalla <code>@RequestParam</code>-annotaatiolla. Allaolevassa esimerkissä kaikki pyynnön parametrit asetetaan <code>Map</code>-tietorakenteeseen, jonka jälkeen kaikki pyynnön arvojen avaimet palautetaan kysyjälle.</p>
 
 <pre class="sh_java">
-get("/hei", (req, res) -&gt; {
-    String palautettava = "Hei ";
-    palautettava += req.queryParams("nimi");
-    palautettava += ", mitä kuuluu?";
+package parametrit;
 
-    return palautettava;
-});
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class PyyntoParametrienNimetController {
+
+    @RequestMapping("/nimet")
+    @ResponseBody
+    public String nimet(@RequestParam Map&lt;String, String&gt; parametrit) {
+        return parametrit.keySet().toString();
+    }
+}
 </pre>
-	    </aside>
+
 
 	    <div class="tehtavat">
-	      <div class="tehtava" id="t-helloqueryparams">
+	      <div class="tehtava" id="t-hellorequestparams">
 		
 		<header>
 		  <h1>
-                    <a data-toggle="collapse" class="collapsed" href="#t-helloqueryparams">
-                      Hello Query Params
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellorequestparams">
+                      Hello Request Params
                     </a>
                   </h1>
                 </header>
-                <div id="t-helloqueryparams" class="collapse">
+                <div id="t-hellorequestparams" class="collapse">
 		  
-                  <p>Toteuta pakkauksessa <code>wad.helloqueryparams</code> olevaan luokkaan <code>HelloQueryParams</code> seuraava toiminnallisuus:</p>
+                  <p>Toteuta pakkauksessa <code>wad.hellorequestparams</code> olevaan luokkaan <code>HelloRequestParamsController</code> seuraava toiminnallisuus:</p>
 		  
 		  <ul>
 		    <li>Pyyntö polkuun <code>/hello</code> palauttaa käyttäjälle merkkijonon "Hello ", johon on liitetty <code>param</code>-nimisen parametrin sisältämä arvo.</li>
-		    <li>Pyyntö polkuun <code>/params</code> palauttaa käyttäjälle kaikkien pyynnön mukana tulevien parametrien nimet.</li>
+		    <li>Pyyntö polkuun <code>/params</code> palauttaa käyttäjälle kaikkien pyynnön mukana tulevien parametrien nimet ja arvot.</li>
 		  </ul>
 		  
 		  <p>Alla olevassa kuvassa on esimerkki tilanteesta, missä selaimella on tehty pyyntö polkuun <code>/params?hello=world&amp;it=works</code></p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex3.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex3.png"/></p>
 		  
 		  <p>Palauta tehtävä TMC:lle kun olet valmis.</p>
 		  
@@ -556,7 +651,7 @@ get("/hei", (req, res) -&gt; {
                 </header>
                 <div id="t-calculator" class="collapse">
 		  
-		  <p>Toteuta tässä tehtävässä pakkauksessa <code>wad.calculator</code> sijaitsevaan <code>Calculator</code>-luokkaan seuraava toiminnallisuus:</p>
+		  <p>Toteuta tässä tehtävässä pakkauksessa <code>wad.calculator</code> sijaitsevaan <code>CalculatorController</code>-luokkaan seuraava toiminnallisuus:</p>
 		  
 		  <ul>
 		    <li>Pyyntö polkuun <code>/add</code> laskee parametrien <code>first</code> ja <code>second</code> arvot yhteen ja palauttaa vastauksen käyttäjälle. Huomaa että arvot ovat numeroita, ja ne tulee myös käsitellä numeroina.</li>
@@ -568,7 +663,7 @@ get("/hei", (req, res) -&gt; {
 		  
 		  <p>Alla on esimerkki ohjelman toiminnasta, kun pyyntö tehdään <code>/sum</code>-polkuun.</p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex4.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex4.png"/></p>
 		  
 		  <p>Palauta tehtävä TMC:lle kun olet valmis.</p>
 		  
@@ -579,7 +674,8 @@ get("/hei", (req, res) -&gt; {
 	    
             <h2>Näkymät ja data</h2>
 	    
-            <p>Aiemmat sovelluksemme ovat vastaanottaneet tiettyyn polkuun tulevan pyynnön ja palauttaneet käyttäjälle merkkinomuodossa olevaa tietoa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää käyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden perusteella näkymään lisätään palvelimen tuottamaa tietoa.</p>
+
+            <p>Tähän asti luomamme sovellukset ovat vastaanottaneet tiettyyn polkuun tulevan pyynnön ja palauttaneet käyttäjälle merkkijonomuodossa olevaa tietoa. Tämä ei kuitenkaan ole ainoa palvelinohjelmistojen toimintatyyppi, vaan palvelin voi myös luoda käyttäjälle näkymän, jonka selain lopulta näyttää käyttäjälle. Näkymät luodaan tyypillisesti HTML-kielellä siten, että HTML-kielen sekaan on upotettu komentoja, joiden perusteella näkymään lisätään palvelimen tuottamaa tietoa.</p>
 	    
             <p>Tällä kurssilla käyttämämme apuväline näkymän luomiseen on <a href="http://www.thymeleaf.org/" target="_blank">Thymeleaf</a>, joka tarjoaa välineitä datan lisäämiseen HTML-sivuille. Käytännössä näkymiä luodessa luodaan ensin HTML-sivut, jonka jälkeen sivuille lisätään komentoja Thymeleafin käsiteltäväksi.</p>
 	    
@@ -590,14 +686,16 @@ get("/hei", (req, res) -&gt; {
 	      
 	      <h1>Thymeleafin käyttöönotto</h1>
 	      
-              <p>Thymeleafin käyttöönotto vaatii <code>pom.xml</code>-tiedostossa olevien riippuvuuksien muokkaamista. Spark Javan perustoiminnallisuus saatiin käyttöön lisäämällä <code>com.sparkjava</code>-ryhmän komponentti <code>spark-core</code> pom.xml-tiedoston dependencies-osioon. Sparkille saa Thymeleaf-tuen lisäämällä pom.xml-tiedostoon riippuvuuden </p>
+              <p>Thymeleafin käyttöönotto vaatii <code>pom.xml</code>-tiedostossa olevien riippuvuuksien muokkaamista. Web-sovellusten perustoiminnallisuus saatiin käyttöön lisäämällä <code>org.springframework.boot</code>-ryhmän komponentti <code>spring-boot-starter-web</code> pom.xml-tiedoston dependencies-osioon. Kun vaihdamme riippuvuuden muotoon <code>spring-boot-starter-thymeleaf</code>, pääsemme käyttämään Thymeleafia.</p>
 	      
               <pre class="sh_xml">
-&lt;dependency&gt;
-    &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
-    &lt;artifactId&gt;spark-template-thymeleaf&lt;/artifactId&gt;
-    &lt;version&gt;2.3&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</pre>
 
 	      <p>Jos edellämainittu riippuvuus ei ole aiemmin ladattuna koneelle, tulee se myös hakea. Tämä onnistuu joko kirjoittamalla komentorivillä projektin juuressa komento <code>mvn dependency:resolve</code> tai valitsemalle NetBeansissa projektiin liittyvä kansio <em>Dependencies</em> oikealla hiirennapilla ja painamalla <em>Download Declared Dependencies</em>.</p>
 	      
@@ -608,27 +706,26 @@ get("/hei", (req, res) -&gt; {
 	    </aside>
 
 	    
-	    <p>Allaolevassa esimerkissä luodaan juuripolkua <code>/</code> kuunteleva sovellus. Kun sovellukseen tehdään pyyntö, palautetaan HTML-sivu, jonka Thymeleaf käsittelee. Thymeleaf päättelee palautettavan sivun annettavan merkkijonon perusteella -- alla annetaan merkkijono <code>"sivu"</code>, jolloin Thymeleaf etsii kansiosta <code>src/main/resources/templates/</code> sivua <code>sivu.html</code>. Kun sivu löytyy, Thymeleaf käsittelee sen ja palauttaa sen käyttäjälle. Palaamme hieman myöhemmin tarkemmin käsittelyyn.</p>
+	    <p>Allaolevassa esimerkissä luodaan juuripolkua <code>/</code> kuunteleva sovellus. Kun sovellukseen tehdään pyyntö, palautetaan HTML-sivu, jonka Thymeleaf käsittelee. Thymeleaf päättelee palautettavan sivun metodin palauttaman merkkijonon perusteella. Alla metodi palauttaa merkkijonon <code>"index"</code>, jolloin Thymeleaf etsii kansiosta <code>src/main/resources/templates/</code> sivua <code>index.html</code>. Kun sivu löytyy, Thymeleaf käsittelee sen ja palauttaa sen käyttäjälle. Palaamme tarkemmin tähän käsittelyyn myöhemmin.</p>
 
 
 <pre class="sh_java">
-import java.util.HashMap;
-import spark.ModelAndView;
-import static spark.Spark.*;
-import spark.template.thymeleaf.ThymeleafTemplateEngine;
+package thymeleaf;
 
-public class ThymeleafSivu {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-    public static void main(String[] args) throws Exception {
-        get("/", (req, res) -> {
-            HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
+@Controller
+public class ThymeleafController {
 
-            return new ModelAndView(data, "sivu");
-        }, new ThymeleafTemplateEngine());
+    @RequestMapping("/")
+    public String home() {
+        return "index";
     }
 }
 </pre>
 
+	    <p>Huomaa, että pyyntöjä käsittelevällä metodilla ei enää ole annotaatiota <code>@ResponseBody</code>. Emme siis enää halua, että metodin palauttama arvo näytetään suoraan käyttäjälle, vaan haluamme, että käyttäjälle näytetään merkkijonon ilmaisema näkymä. Näkymä luodaan Thymeleafin avulla.</p>
 
 
 	    <p></p>
@@ -646,7 +743,7 @@ public class ThymeleafSivu {
 		
                 <div id="t-hellothymeleaf" class="collapse">
 		  
-		  <p>Toteuta tässä tehtävässä pakkauksessa <code>wad.hellothymeleaf</code> sijaitsevaan <code>HelloThymeleaf</code>-luokkaan seuraava toiminnallisuus:</p>
+		  <p>Toteuta tässä tehtävässä pakkauksessa <code>wad.hellothymeleaf</code> sijaitsevaan <code>HelloThymeleafController</code>-luokkaan seuraava toiminnallisuus:</p>
 		  
 		  <ul>
 		    <li>Pyyntö juuripolkuun <code>/</code> palauttaa käyttäjälle Thymeleafin avulla kansiossa <code>src/main/resources/templates/</code> olevan <code>index.html</code>-tiedoston.</li>
@@ -655,17 +752,26 @@ public class ThymeleafSivu {
 		    
 		  </ul>
 		  
-		  <p>Alla on esimerkki ohjelman toiminnasta, kun pyyntö on tehty juuripolkuun.</p>
+		  <p>Alla on esimerkki ohjelman toiminnasta, kun selaimella on tehty pyyntö sovelluksen juuripolkuun.</p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex5.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex5.png"/></p>
 		  
 		  <p>Palauta tehtävä TMC:lle kun olet valmis.</p>
 		  
                 </div>
               </div>
             </div>
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>HTML</h1>
+
+	      <p>Jos mietit mistä ihmeestä tuossa HTML-lyhenteessä on kyse tai haluat verestää HTML-muistiasi, nyt on hyvä hetki käydä lukemassa osoitteessa <a href="http://www.w3schools.com/html/default.asp" target="_blank">http://www.w3schools.com/html/default.asp</a> oleva HTML-opas.</p>
+
+	    </aside>
 	    
-	    
+<!--	    
 	    <p>Tarkastellaan edellä toteutettua sivun palauttamista vielä tarkemmin.</p>
 
 <pre class="sh_java">
@@ -677,21 +783,55 @@ get("/", (req, res) -> {
 </pre>
 
             <p>Ensimmäisellä rivillä kerromme, että juuripolkuun tulevat pyynnöt tulee käsitellä seuraavasti. Tätä seuraa pyynnön käsittelyyn liittyvä lohko, josta palautetaan olio, joka sisältää <code>HashMap</code>-olion sekä tiedon näytettävästä html-sivusta. Tämän jälkeen pyynnön käsittelyyn lisätään vielä erillinen olio, <code>ThymeleafTemplateEngine</code>, joka käsittelee html-sivun ennen sen palautusta.</p>
+-->
 
-	    <p>Tässä oikeastaan tulee kaksi uutta ja mielenkiintoista asiaa.</p>
-		
-	    <p>HashMap on ohjelmoinnissa käytettävä lokerikko, missä jokaisella lokerolla on nimi, mihin arvon voi asettaa. Alla olevassa esimerkissä luomme ensin HashMap-olion, jonka jälkeen asetamme lokeroon nimeltä <code>teksti</code> arvon <code>"Hei mualima!"</code>.</p>
+            <h3>Datan lisääminen näkymään</h3>
+
+	    <p>Palvelinohjelmistossa luodun tai haetun datan lisääminen näkymään tapahtuu <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/ui/Model.html" target="_blank">Model</a>-tyyppisen olion avulla. Kun lisäämme Model-olion pyyntöjä käsittelevän metodin parametriksi, lisää Spring-sovelluskehys sen automaattisesti käyttöömme. </p>
+
 
 <pre class="sh_java">
-HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;();
-map.put("teksti", "Hei mualima!");
+package thymeleafdata;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class ThymeleafJaDataController {
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        return "index";
+    }
+}
+</pre>
+      
+	    <p>Model on Spring-sovelluskehyksen käyttämä Map-rajapinnan toimintaa muistuttava lokerikko, missä jokaisella lokerolla on nimi, mihin arvon voi asettaa. Alla olevassa esimerkissä määrittelemme pyyntöjä käsittelevälle metodille Model-olion, jonka jälkeen lisäämme lokeroon nimeltä <code>teksti</code> arvon <code>"Hei mualima!"</code>.</p>
+
+
+<pre class="sh_java">
+package thymeleafdata;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ThymeleafJaDataController {
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("teksti", "Hei mualima!");
+        return "index";
+    }
+}
 </pre>
 
-	    <p>Kun HashMap-olio <em>palautetaan</em> pyynnön käsittelyn jälkeen -- <code>return new ModelAndView(map, "sivu");</code> -- annetaan lokerikko Thymeleafin käyttöön.</p>
+	    <p>Kun käyttäjä tekee pyynnön, joka ohjautuu ylläolevaan metodiin, ohjautuu pyyntö <code>return</code>-komennon jälkeen Thymeleafille, joka saa käyttöönsä myös Model-olion ja siihen lisätyt arvot.</p>
 
 	    <h3>Sivun käsittely Thymeleafissa</h3>
 	    
-	    <p>Oletetaan, että käytössämme oleva <code>sivu.html</code> näyttää seuraavalta:</p>
+	    <p>Oletetaan, että käytössämme olevan <code>index.html</code>-sivun lähdekoodi on seuraavanlainen:</p>
 	    
 <pre class="sh_xml">
 &lt;!DOCTYPE html&gt;
@@ -708,9 +848,9 @@ map.put("teksti", "Hei mualima!");
 &lt;/html&gt;
 </pre>
 
-	    <p>Kun Thymeleaf käsittelee HTML-sivun, se etsii sieltä elementtejä, joilla on <code>th:</code>-alkuisia attribuutteja. Ylläolevasta sivusta Thymeleaf löytää <code>h2</code>-elementin, jolla on attribuutti <code>th:text</code> -- <code>&lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;</code>. Attribuutti <code>th:text</code> kertoo Thymeleafille, että elementin tekstiarvo (testi) tulee korvata attribuutin arvon ilmaisemalla muuttujalla. Attribuutin <code>th:text</code> arvona on <code>${teksti}</code>, jolloin Thymeleaf etsii HashMap-oliosta avaimella <code>"teksti"</code> arvoa.</p>
+	    <p>Kun Thymeleaf käsittelee HTML-sivun, se etsii sieltä elementtejä, joilla on <code>th:</code>-alkuisia attribuutteja. Ylläolevasta sivusta Thymeleaf löytää <code>h2</code>-elementin, jolla on attribuutti <code>th:text</code> -- <code>&lt;h2 th:text="${teksti}"&gt;testi&lt;/h2&gt;</code>. Attribuutti <code>th:text</code> kertoo Thymeleafille, että elementin tekstiarvo (testi) tulee korvata attribuutin arvon ilmaisemalla muuttujalla. Attribuutin <code>th:text</code> arvona on <code>${teksti}</code>, jolloin Thymeleaf etsii <code>model</code>-oliosta avaimella <code>"teksti"</code> arvoa.</p>
 	    
-	    <p>Käytännössä Thymeleaf etsii siis HashMap-oliosta lokeron nimeltä <code>teksti</code> ja asettaa siinä olevan arvon <code>h2</code>-elementin tekstiarvoksi. Tässä tapauksessa teksti <code>testi</code> korvataan HashMap-olion lokerosta teksti löytyvällä arvolla, eli tekstillä <code>Hei mualima!</code>.</p>
+	    <p>Käytännössä Thymeleaf etsii siis Model-oliosta lokeron nimeltä <code>teksti</code> ja asettaa siinä olevan arvon <code>h2</code>-elementin tekstiarvoksi. Tässä tapauksessa teksti <code>testi</code> korvataan Model-olion lokerosta teksti löytyvällä arvolla, eli tekstillä <code>Hei mualima!</code>.</p>
 	    
 	    <p></p>
 	    
@@ -728,13 +868,13 @@ map.put("teksti", "Hei mualima!");
 		
                 <div id="t-hellomodel" class="collapse">
 		  
-		  <p>Tehtäväpohjan mukana tulevaan HTML-tiedostoon on toteutettu tarina, joka tarvitsee otsikon ja päähenkilön. Toteuta pakkauksessa <code>wad.hellomodel</code> sijaitsevaan <code>HelloModel</code>-luokkaan ohjelma, joka käsittelee juuripolkuun tulevia pyyntöjä ja käyttää pyynnössä tulevia parametreja tarinan täydentämiseen. Voit olettaa, että pyynnön mukana tulevien parametrien nimet ovat <code>title</code> ja <code>person</code>.</p>
+		  <p>Tehtäväpohjan mukana tulevaan HTML-tiedostoon on toteutettu tarina, joka tarvitsee otsikon ja päähenkilön. Toteuta pakkauksessa <code>wad.hellomodel</code> sijaitsevaan <code>HelloModelController</code>-luokkaan toiminnallisuus, joka käsittelee juuripolkuun tulevia pyyntöjä ja käyttää pyynnössä tulevia parametreja tarinan täydentämiseen. Voit olettaa, että pyynnön mukana tulevien parametrien nimet ovat <code>title</code> ja <code>person</code>.</p>
 		  
 		  <p>Lisää pyynnön mukana tulevien parametrien arvot Thymeleafille annettavaan HashMappiin. Otsikon avaimen tulee olla <code>"title"</code> ja henkilön avaimen tulee olla <code>"person"</code>. Palautettava sivu on <code>index.html</code>.</p>
 		  
-		  <p>Alla on esimerkki ohjelman toiminnasta, kun juuripolkuun tehdyssä pyynnössä on annettuna otsikko ja henkilö.</p>
+		  <p>Alla on esimerkki ohjelman toiminnasta, kun juuripolkuun tehdyssä pyynnössä on annettuna otsikoksi <code>Mökkielämää</code> ja henkilöksi <code>Leena</code>.</p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex6.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex6.png"/></p>
 		  
 		  <p>Palauta tehtävä TMC:lle kun olet valmis.</p>
 		  
@@ -746,18 +886,26 @@ map.put("teksti", "Hei mualima!");
 	    <h2>Tiedon lähettäminen palvelimelle</h2>
 	    
 	    
-            <p>HTML-sivuille voi määritellä lomakkeita (form), joiden avulla käyttäjä voi lähettää tietoa palvelimelle. Lomakkeen määrittely tapahtuu <code>form</code>-elementin avulla, jolle kerrotaan polku, mihin lomake lähetetään (action), sekä pyynnön tyyppi (method). Pidämme pyynnön tyypin toistaiseksi GET-tyyppisenä.</p>
+            <p>HTML-sivuille voi määritellä lomakkeita (<a href="http://www.w3schools.com/html/html_forms.asp" target="_blank">form</a>), joiden avulla käyttäjä voi lähettää tietoa palvelimelle. Lomakkeen määrittely tapahtuu <code>form</code>-elementin avulla, jolle kerrotaan polku, mihin lomake lähetetään (action), sekä pyynnön tyyppi (method). Pidämme pyynnön tyypin toistaiseksi GET-tyyppisenä.</p>
 	    
 	    <p>Lomakkeeseen voidaan määritellä mm. tekstikenttiä (<code>&lt;input type="text"...</code>) sekä painike, jolla lomake lähetetään (<code>&lt;input type="submit"...</code>). Alla tekstikentän <code>name</code>-attribuutin arvoksi on asetettu nimi. Tämä tarkoittaa sitä, että kun lomakkeen tiedot lähetetään palvelimelle, tulee pyynnössä <code>nimi</code>-niminen parametri, jonka arvona on tekstikenttään kirjoitettu teksti.</p>
 
 <pre class="sh_xml">
-&lt;form action="/" method="GET"&gt;
+&lt;form th:action="@{/}" method="GET"&gt;
     &lt;input type="text" name="nimi"/&gt;
     &lt;input type="submit"/&gt;
 &lt;/form&gt;</pre>
 
+	    <aside class="info">
+	      <br/>
+	      <h1>Wut, th:action?</h1>
+
+	      <p>Jos HTML-lomakkeet ovat sinulle tuttuja, saatoit huomata, että ylläolevassa lomakkeessa polku on määritelty attribuutin <code>th:action</code> avulla. Polku on lisäksi <code>@{<em>polku</em>}</code> <code>@</code>-merkin sekä aaltosulkujen sisällä -- <code>@{<em>polku</em>}</code>.</p>
+
+	      <p>Tämän avulla varaudumme tilanteeseen, missä palvelimella voi olla useampia sovelluksia samaan aikaan. Tällöin ohjelmoimamme sovellus voi sijaita esimerkiksi polussa <code>http://osoite.com/sovellus1/</code> ja sovelluskehyksemme päättelee polun automaattisesti.</p>
+	    </aside>
+
 	    <p></p>
-	    
 	    
 	    <div class="tehtavat">
 	      <div class="tehtava" id="t-helloform">
@@ -781,29 +929,51 @@ map.put("teksti", "Hei mualima!");
                 </div>
               </div>
             </div>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Pyynnön parametrit</h1>
+
+	      <p>Annotaatiolle <code>RequestParam</code> voi asettaa myös attribuutteja, joiden perusteella voidaan määritellä pyynnön parametrien pakollisuutta tai oletusarvoja. Katso edellisen tehtävän kontrolleriluokasta esimerkkiä.</p>
+	    </aside>
 	    
 
 	    <h2>Listojen käsittely</h2>
 
 
-	    <p>Thymeleafille annettavalle HashMapille (ns. Model) voi asettaa tekstin lisäksi myös arvokokoelmia. Alla luomme "pääohjelmassa" listan, joka asetetaan Thymeleafin käsiteltäväksi menevään HashMap-olioon jokaisen juuripolkuun tehtävän pyynnön yhteydessä. Jos juuripolkuun lähetetään parametri nimeltä <code>"content"</code>, lisätään se myös listaan.</p>
+	    <p>Thymeleafille annettavalle Model-oliolle voi asettaa tekstin lisäksi myös arvokokoelmia. Alla luomme "pääohjelmassa" listan, joka asetetaan Thymeleafin käsiteltäväksi menevään HashMap-olioon jokaisen juuripolkuun tehtävän pyynnön yhteydessä. Jos juuripolkuun lähetetään parametri nimeltä <code>"content"</code>, lisätään se myös listaan -- alla parametri on määritelty ei-pakolliseksi annotaation <code>@RequestMapping</code> attribuutilla <code>required = false</code>.</p>
 
 <pre class="sh_java">
-List&lt;String&gt; lista = new ArrayList<>();
-lista.add("Hello world!");
+package thymeleafdata;
 
-get("/", (req, res) -> {
-    HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-    if (req.queryParams().contains("content")) {
-        list.add(req.queryParams("content"));
+@Controller
+public class ListaController {
+    private List&lt;String&gt; lista;
+
+    public ListaController() {
+        this.lista = new ArrayList&lt;&gt;();
+        this.lista.add("Hello world!");
     }
 
-    data.put("lista", list);
-    return new ModelAndView(data, "index");
-}, new ThymeleafTemplateEngine());
-</pre>
+    @RequestMapping(value = "/")
+    public String home(Model model, 
+            @RequestParam(required = false) String content) {
+        if(content != null && !content.trim().isEmpty()) {
+            this.lista.add(content);
+        }
 
+        model.addAttribute("list", lista);
+        return "index";
+    }
+}
+</pre>
 
 	    <p>Listan läpikäynti Thymeleafissa tapahtuu attribuutin <code>th:each</code> avulla. Sen määrittely saa muuttujan nimen, johon kokoelmasta otettava alkio kullakin iteraatiolla tallennetaan, sekä läpikäytävän kokoelman. Perussyntaksiltaan <code>th:each</code> on seuraavanlainen.</p>
 
@@ -814,7 +984,7 @@ get("/", (req, res) -> {
     &lt;/p&gt;
 &lt;/pre&gt;</pre>
 
-            <p>Yllä käytämme attribuuttia nimeltä <code>joukko</code> ja tulostamme yksitellen sen sisältämät alkiot. Attribuutin <code>th:each</code> voi asettaa käytännössä mille tahansa toistettavalle elementille. Esimerkiksi listan voisi tehdä seuraavalla tavalla.</p>
+            <p>Yllä käytämme attribuuttia nimeltä <code>lista</code> ja tulostamme yksitellen sen sisältämät alkiot. Attribuutin <code>th:each</code> voi asettaa käytännössä mille tahansa toistettavalle elementille. Esimerkiksi listan voisi tehdä seuraavalla tavalla.</p>
 
             <pre class="sh_xml">
 &lt;ul&gt;
@@ -824,7 +994,7 @@ get("/", (req, res) -> {
 &lt;/ul&gt;</pre>
 
 
-            <p><em>Huom! Eräs klassinen virhe on määritellä iteroitava joukko merkkijonona <code>th:each="alkio : joukko"</code>. Tämä ei luonnollisesti toimi.</em></p>
+            <p><em>Huom! Eräs klassinen virhe on määritellä iteroitava joukko merkkijonona <code>th:each="alkio : lista"</code>. Tämä ei luonnollisesti toimi.</em></p>
 
 	    
 	    <div class="tehtavat">
@@ -846,7 +1016,7 @@ get("/", (req, res) -> {
 		  
 		  <p>Alla on esimerkki ohjelman toiminnasta, kun sivulle on lisätty muutama rivi lomakkeen avulla. Viimeisimpänä on juuri lisätty teksti "Hello?".</p>
 		  
-		  <p><img class="browser-img" src="img/mooc/ex8.png"/></p>
+		  <p><img class="browser-img" src="img/2016-mooc/ex8.png"/></p>
 		  
 		  
                 </div>
@@ -867,7 +1037,7 @@ get("/", (req, res) -> {
 		
                 <div id="t-notebook" class="collapse">
 		  
-		  <p>Toteuta tehtäväpohjan pakkauksessa <code>wad.notebook</code> olevaan <code>Notebook</code>-luokkaan muistio-ohjelma, jolle voi lisätä muistiinpanoja. Tee ohjelmastasi sellainen, että jos muistiinpanoja on yli 10, se muistaa ja näyttää niistä vain viimeisimmät 10.</p>
+		  <p>Toteuta tehtäväpohjan pakkauksessa <code>wad.notebook</code> olevaan <code>NotebookController</code>-luokkaan muistio-ohjelma, jolle voi lisätä muistiinpanoja. Tee ohjelmastasi sellainen, että jos muistiinpanoja on yli 10, se muistaa ja näyttää niistä vain viimeisimmät 10.</p>
 		  
 		  <p>Alla on esimerkki muistiosta, kun siihen on lisätty 3 viestiä.</p>
 		  
@@ -882,19 +1052,50 @@ get("/", (req, res) -> {
 	    
 	    <h2>Pyynnön uudelleenohjaus ja POST</h2>
 	    
-	    <p>Olemme tähän mennessä toteuttaneet palvelinohjelmistoihimme vain kyvyn käsitellä GET-tyyppisiä pyyntöjä. GET-tyyppisiä pyyntöjä käytetään ensisijaisesti tiedon hakemiseen, eikä niitä oikeastaan pitäisi käyttää lainkaan tiedon muuttamiseen. Toinen tapa lähettää tietoa palvelimelle on <code>POST</code>-tyyppiset pyynnöt, joita käytettäessä pyynnön parametrit kulkevat pyynnön <em>rungossa</em> -- palaamme tähän myöhemmin kurssilla.</p>
+	    <p>Olemme tähän mennessä toteuttaneet palvelinohjelmistoihimme vain kyvyn käsitellä GET-tyyppisiä pyyntöjä. GET-tyyppisiä pyyntöjä käytetään ensisijaisesti tiedon hakemiseen, eikä niitä oikeastaan pitäisi käyttää laisinkaan tiedon muuttamiseen. Toinen tapa lähettää tietoa palvelimelle on <code>POST</code>-tyyppiset pyynnöt, joita käytettäessä pyynnön parametrit kulkevat pyynnön <em>rungossa</em> -- palaamme pyynnön erilaisiin muotoihin myöhemmin kurssilla.</p>
 	    
             <p>Oikeastaan kaikki pyynnöt, joissa lähetetään tietoa palvelimelle, ovat ongelmallisia jos pyynnön vastauksena palautetaan näytettävä sivu. Tällöin käyttäjä voi sivun uudelleenlatauksen (esim. painamalla F5) yhteydessä lähettää aiemmin lähettämänsä datan vahingossa uudelleen. Kokeile tätä jossain aiemmassa tehtävässä kun olet lähettänyt lomakkeella tietoa!</p>
 	    
             <p>On tyylikkäämpää toteuttaa lomakkeen dataa vastaanottava toiminnallisuus siten, että lähetetyn tiedon käsittelyn jälkeen käyttäjälle palautetaan vastauksena uudelleenohjauspyyntö. Tämän jälkeen käyttäjän selain tekee uuden pyynnön uudelleenohjauspyynnön mukana annettuun osoitteeseen. Tätä toteutustapaa kutsutaan <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank">Post/Redirect/Get</a>-suunnittelumalliksi ja sillä mm. estetään lomakkeiden uudelleenlähetys, jonka lisäksi vähennetään toiminnallisuuden toisteisuutta.</p>
+
+	    <h3>POST-pyynnön kuuntelu ja uudelleenohjaus</h3>
 	    
-	    <p>Alla on toteutettu POST-tyyppistä pyyntöä kuunteleva polku sekä siihen liittyvä toiminnallisuus. Komennolla <code>res.redirect("/");</code> kerrotaan, että pyynnölle tulee lähettää vastauksena uudelleenohjauspyyntö polkuun <code>"/"</code>. Kun selain vastaanottaa uudelleenohjauspyynnön, tekee se GET-tyyppisen pyynnön uudelleenohjauspyynnössä annettuun osoitteeseen.</p>
+	    <p>Alla on toteutettu POST-tyyppistä pyyntöä kuunteleva polku sekä siihen liittyvä toiminnallisuus. Pyynnön tyyppi määritellään annotaation @RequestMapping attribuutiksi (method-attribuutti). Tällöin kuunneltava polku tulee määritellä myös tarkemmin (value-attribuutti). Palauttamalla pyyntöä käsittelevästä metodista merkkijono <code>redirect:/</code> kerrotaan, että pyynnölle tulee lähettää vastauksena uudelleenohjauspyyntö polkuun <code>"/"</code>. Kun selain vastaanottaa uudelleenohjauspyynnön, tekee se GET-tyyppisen pyynnön uudelleenohjauspyynnössä annettuun osoitteeseen.</p>
 
 <pre class="sh_java">
-post("/", (req, res) -> {
-    res.redirect("/");
-    return "";
-});
+package uudelleenohjaus;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class ListaController {
+    private List&lt;String&gt; lista;
+
+    public ListaController() {
+        this.lista = new ArrayList&lt;&gt;();
+        this.lista.add("Hello world!");
+    }
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("list", lista);
+        return "index";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String post(@RequestParam String content) {
+        if(!content.trim().isEmpty()) {
+            this.lista.add(content);
+        }
+
+        return "redirect:/";
+    }
+}
 </pre>
 	    <p></p>
 	    
@@ -917,9 +1118,10 @@ post("/", (req, res) -> {
               </div>
             </div>
 	    
+
 	    <h2>Olioita kaikkialla!</h2>
 	    
-	    <p>Thymeleafille annettavaan HashMap-olioon voi hyvin lisätä myös olioita. Oletetaan, että käytössämme on henkilöä kuvaava luokka.</p>
+	    <p>Thymeleafille annettavaan Modeliin voi hyvin lisätä myös olioita. Oletetaan, että käytössämme on henkilöä kuvaava luokka.</p>
 	    
 <pre class="sh_java">
 public class Henkilo {
@@ -939,18 +1141,17 @@ public class Henkilo {
 }
 </pre>
 
-	    <p>Henkilö-olion lisääminen HashMap-olioon on suoraviivaista:</p>
+	    <p>Henkilö-olion lisääminen on suoraviivaista:</p>
 
 <pre class="sh_java">
-get("/", (req, res) -&gt; {
-    HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
-
-    data.put("henkilo", new Henkilo("Le Pigeon"));
-    return new ModelAndView(data, "index");
-}, new ThymeleafTemplateEngine());
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("henkilo", new Henkilo("Le Pigeon"));
+        return "index";
+    }
 </pre>
 
-	    <p>Kun sivua luodaan, henkilöön päästään käsiksi HashMap-olioon asetetun avaimen perusteella. Edellä luotu "Le Pigeon"-henkilö on HashMapissa tallessa avaimella "henkilo". Kuten aiemminkin, avaimella pääsee olioon käsiksi.</p>
+	    <p>Kun sivua luodaan, henkilöön päästään käsiksi modeliin asetetun avaimen perusteella. Edellä luotu "Le Pigeon"-henkilö on tallessa avaimella "henkilo". Kuten aiemminkin, avaimella pääsee olioon käsiksi.</p>
 	    
 	    
 <pre class="sh_xml">
@@ -976,17 +1177,32 @@ get("/", (req, res) -&gt; {
 
             <p>Iteroitavan joukon alkioiden ominaisuuksiin pääsee käsiksi aivan samalla tavalla kuin muiden olioiden ominaisuuksiin. Tutkitaan seuraavaa esimerkkiä, jossa listaan lisätään kaksi henkilöä, lista lisätään pyyntöön ja lopulta luodaan näkymä Thymeleafin avulla.</p>
 
-                <pre class="sh_java">
-List&lt;Henkilo&gt; henkilot = new ArrayList&lt;&gt;();
-henkilot.add(new Person("James Gosling"));
-henkilot.add(new Person("Martin Odersky"));
+<pre class="sh_java">
+package henkilot;
 
-get("/", (req, res) -&gt; {
-    HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-    data.put("list", henkilot);
-    return new ModelAndView(data, "index");
-}, new ThymeleafTemplateEngine());</pre>
+@Controller
+public class HenkiloController {
+    private List&lt;Henkilo&gt; henkilot;
+
+    public ListaController() {
+        this.henkilot = new ArrayList&lt;&gt;();
+        this.henkilot.add(new Person("James Gosling"));
+        this.henkilot.add(new Person("Martin Odersky"));
+    }
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("list", henkilot);
+        return "index";
+    }
+}
+</pre>
 
                 <pre class="sh_xml">
 &lt;p&gt;Ja huomenna puheet pitävät:&lt;/p&gt;
@@ -999,170 +1215,427 @@ get("/", (req, res) -&gt; {
 
             <p>Käyttäjälle lähetettävä sivu näyttää palvelimella tapahtuneen prosessoinnin jälkeen seuraavalta.</p>
 
-            <pre class="sh_xml">
+<pre class="sh_xml">
 &lt;p&gt;Ja huomenna puheet pitävät:&lt;/p&gt;
 &lt;ol&gt;
     &lt;li&gt;&lt;span&gt;James Gosling&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Martin Odersky&lt;/span&gt;&lt;/li&gt;
 &lt;/ol&gt;</pre>
 
-		<p></p>
+	    <p></p>
 
-		<div class="tehtavat">
-		  <div class="tehtava" id="t-helloobjects">
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-helloobjects">
 
-		    <header>
-		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-helloobjects">
-                          Hello Objects
-                        </a>
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-helloobjects">
+                      Hello Objects
+                    </a>
                       </h1>
-                    </header>
+                </header>
 
-                    <div id="t-helloobjects" class="collapse">
+                <div id="t-helloobjects" class="collapse">
 
-		      <p>Tehtäväpohjassa on sovellus, jossa käsitellään <code>Item</code>-tyyppisiä olioita. Tehtävänäsi on lisätä sovellukseen lisätoiminnallisuutta:</p>
+		  <p>Tehtäväpohjassa on sovellus, jossa käsitellään <code>Item</code>-tyyppisiä olioita. Tehtävänäsi on lisätä sovellukseen lisätoiminnallisuutta:</p>
+		  
+		  <ul>
+		    <li>Kun käyttäjä avaa selaimella sovelluksen juuripolun, tulee hänen lomakkeen lisäksi nähdä lista esineistä. Jokaisesta esineestä tulee tulla ilmi sen nimi (name) ja tyyppi (type).</li>
+		    <li>Kun käyttäjä lähettää lomakkeella uuden esineen palvelimelle, tulee palvelimen säilöä esine listalle seuraavaa näyttämistä varten. Huomaa, että lomake lähettää tiedot POST-pyynnöllä sovelluksen juureen. Kun esine on säilötty, uudelleenohjaa käyttäjän pyyntö siten, että käyttäjän selain tekee GET-tyyppisen pyynnön sovelluksen juuripolkuun.</li>
+		  </ul>
+		  
+		  <p>Allaolevassa esimerkissä sovellukseen on lisätty olemassaolevan taikurin hatun lisäksi <a href="https://en.wikipedia.org/wiki/Party_hat" target="_blank">Party hat</a>, eli bilehattu.</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex11.png"/></p>
 
-		      <ul>
-			<li>Kun käyttäjä avaa sovelluksen, tulee hänen lomakkeen lisäksi nähdä lista esineistä. Jokaisesta esineestä tulee tulla ilmi sen nimi (name) ja tyyppi (type).</li>
-			<li>Kun käyttäjä lähettää lomakkeella uuden esineen palvelimelle, tulee palvelimen säilöä esine listalle seuraavaa näyttämistä varten. Huomaa, että lomake lähettää tiedot POST-pyynnöllä sovelluksen juureen. Kun esine on säilötty, uudelleenohjaa käyttäjän pyyntö siten, että käyttäjän selain tekee GET-tyyppisen pyynnön sovelluksen juuripolkuun.</li>
-		      </ul>
-
-		      <p>Allaolevassa esimerkissä sovellukseen on lisätty olemassaolevan taikurin hatun lisäksi <a href="https://en.wikipedia.org/wiki/Party_hat" target="_blank">Party hat</a>, eli bilehattu.</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex11.png"/></p>
-
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
 
 
-		<h2>Polkumuuttujat</h2>
+	    <h2>Polkumuuttujat</h2>
 
-		<p>Polkuja käytetään erilaisten resurssien tunnistamiseen ja yksilöintiin. Usein kuitenkin vastaan tulee tilanne, missä luodut resurssit ovat uniikkeja, emmekä niiden tietoja ennen sovelluksen käynnistymistä. Jos haluaisimme näyttää tietyn resurssin tiedot, voisimme lisätä pyyntöön parametrin, minkä arvo olisi haetun resurssin tunnus.</p>
+	    <p>Polkuja käytetään erilaisten resurssien tunnistamiseen ja yksilöintiin. Usein kuitenkin vastaan tulee tilanne, missä luodut resurssit ovat uniikkeja, emmekä niiden tietoja ennen sovelluksen käynnistymistä. Jos haluaisimme näyttää tietyn resurssin tiedot, voisimme lisätä pyyntöön parametrin -- esim <code>esineet?tunnus=3</code>, minkä arvo olisi haetun resurssin tunnus.</p>
 
-		<p>Toinen vaihtoehto on ajatella polkua haettavan resurssin tunnistajana. Sparkin avulla polun voi määritellä parametriksi kaksoispisteen avulla -- esimerkiksi polku <code>"/:arvo"</code> ottaisi vastaan minkä tahansa juuripolun alle tulevan kyselyn ja tallentaisi polun arvon myöhempää käyttöä varten. Tällöin jos käyttäjä tekee pyynnön osoitteeseen <code>http://localhost:4567/kirja</code>, löytyy arvo "kirja" muuttujasta <code>req.params(":arvo")</code>.</p>
+	    <p>Toinen vaihtoehto on ajatella polkua haettavan resurssin tunnistajana. Annotaatiolle <code>@RequestMapping</code> määriteltävään polkuun voidaan määritellä polkumuuttuja aaltosulkujen avulla. Esimerkiksi polku <code>"/{arvo}"</code> ottaisi vastaan minkä tahansa juuripolun alle tulevan kyselyn ja tallentaisi arvon myöhempää käyttöä varten. Tällöin jos käyttäjä tekee pyynnön esimerkiksi osoitteeseen <code>http://localhost:8080/kirja</code>, tallentuu arvo "kirja" myöhempää käyttöä varten. Polkumuuttujiin pääsee käsiksi pyyntöä käsittelevälle metodille määriteltävän annotaation <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html" target="_blank">@PathVariable</a> avulla.</p>
 
-		<p>Yksittäisen henkilön näyttäminen onnistuisi esimerkiksi seuravavasti:</p>
+	    <p>Yksittäisen henkilön näyttäminen onnistuisi esimerkiksi seuravavasti:</p>
+
+<pre class="sh_java">
+package henkilot;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HenkiloController {
+    private List&lt;Henkilo&gt; henkilot;
+
+    public ListaController() {
+        this.henkilot = new ArrayList&lt;&gt;();
+        this.henkilot.add(new Person("James Gosling"));
+        this.henkilot.add(new Person("Martin Odersky"));
+    }
+
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("list", henkilot);
+        return "index";
+    }
+
+    @RequestMapping("/{id}")
+    public String getOne(Model model, @PathVariable Integer id) {
+        if(id &lt; 0 || id &gt;= this.henkilot.size()) {
+            return home(model);
+        }
+
+        model.addAttribute("henkilo", henkilot.get(id));
+        return "henkilo";
+    }
+}
+</pre>
+
+	    <p></p>
+
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellopathvariables">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellopathvariables">
+                      Hello Path Variables
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellopathvariables" class="collapse">
+
+		  <p>Tehtäväpohjassa on sovellus, jossa käsitellään taas edellisestä tehtävästä tuttuja <code>Item</code>-tyyppisiä olioita. Tällä kertaa esineet kuitenkin kuvastavat hattuja. Kun sovelluksen juureen tehdään pyyntö, käyttäjälle näytetään oletushattu ("default"). Lisää sovellukseen toiminnallisuus, minkä avulla tiettyyn polkuun tehtävä kysely palauttaa sivun, jossa näkyy tietyn hatun tiedot -- huomaa, että voit asettaa polkumuuttujan tyypiksi myös Stringin.</p>
+		  
+		  <p>Sovelluksen juuripolkuun tehtävä pyyntö näyttää seuraavanlaisen sivun:</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex12-default.png"/></p>
+
+		  <p>Muihin osoitteisiin tehtävät pyynnöt taas palauttavat tehtäväpohjassa olevasta <code>items</code>-hajautustaulusta polkuun sopivan hatun. Esimerkiksi pyyntö polkuun <code>/ascot</code> näyttää seuraavanlaisen sivun:</p>
+
+		  <p><img class="browser-img" src="img/2016-mooc/ex12-ascot.png"/></p>
+
+                </div>
+              </div>
+            </div>
+
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-helloindividualpages">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-helloindividualpages">
+                      Hello Individual Pages
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-helloindividualpages" class="collapse">
+		  
+		  <p>Edellisessä tehtävässä käytössämme oli vain yksi sivu. Olisi kuitenkin hienoa, jos jokaiselle hatulle olisi oma sivu -- ainakin sovelluksen käyttäjän näkökulmasta.</p>
+		  
+		  <p>Tehtäväpohjassa on valmiina sovellus, joka listaa olemassaolevat hatut ja näyttää ne käyttäjälle. Jokaisen hatun yhteydessä on linkki, jota klikkaamalla pitäisi päästä hatun omalle sivulle.</p>
+		  
+		  <p>Toteuta sekä html-sivu (<code>single.html</code>), että sopiva metodi, joka ohjaa pyynnön sivulle.</p>
+		  
+
+		  <p>Pyyntö sovelluksen juureen luo seuraavanlaisen sivun.</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex13-list.png"/></p>
+		  
+		  <p>Jos sivulta klikkaa hattua, pääsee tietyn hatun tiedot sisältävälle sivulle. Alla olevassa esimerkissä on klikattu taikurin hattuun liittyvää linkkiä.</p>
+
+		  <p><img class="browser-img" src="img/2016-mooc/ex13-single.png"/></p>
+		  
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-todoapplication">
+
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-todoapplication">
+                      Todo Application
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-todoapplication" class="collapse">
+		  
+		  <p>Tässä tehtävässä tulee rakentaa tehtävien hallintaan tarkoitettu sovellus. Sovelluksen käyttämät sivut ovat valmiina näkyvissä, itse sovelluksen pääset toteuttamaan itse.</p>
+		  
+		  <p>Sovelluksen tulee sisältää seuraavat toiminnallisuudet:</p>
+		  
+		  <ul>
+		    <li>Kaikkien tehtävien listaaminen. Kun käyttäjä tekee pyynnön sovelluksen juuripolkuun, tulee hänelle näyttää sivu, missä tehtävät on listattuna. Sivulla on myös lomake tehtävien lisäämiseen. </li>
+		    <li>Yksittäisen tehtävän lisääminen. Kun käyttäjä täyttää lomakkeen sivulla ja lähettää tiedot palvelimelle, tulee sovelluksen lisätä tehtävä näytettävään listaan.</li>
+		    <li>Yksittäisen tehtävän poistaminen. Kun käyttäjä painaa tehtävään liittyvää <code>Done!</code>-nappia, tulee tehtävä poistaa listalta. Toteuta tämä niin, että metodin tyyppi on <code>DELETE</code>:
+<pre class="sh_java">
+@RequestMapping(value = "/{item}", method = RequestMethod.DELETE)</pre></li>
+		    <li>Yksittäisen tehtävän näyttäminen. Kun käyttäjä klikkaa tehtävään liittyvää linkkiä, tulee käyttäjälle näyttää tehtäväsivu. Huom! Tehtävään liittyvien tarkistusten määrä tulee kasvaa aina yhdellä kun sivulla vieraillaan.</li>
+		  </ul>
+		  
+		  <p>Alla kuva tehtävien listauksesta:</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex14-list.png"/></p>
+		  
+		  <p>Kun tehtävää klikkaa, näytetään erillinen tehtäväsivu:</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex14-item-1.png"/></p>
+		  
+		  <p>Kun sivu avataan toisen kerran, kasvaa tehtävien tarkistukseen liittyvä laskuri:</p>
+		  
+		  <p><img class="browser-img" src="img/2016-mooc/ex14-item-2.png"/></p>
+		  
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <h2>Tiedon tallentaminen</h2>
+
+	    <p>Sovelluksemme -- vaikka huikeita ovatkin -- ovat melko alkeellisia, sillä sovelluksissa käsiteltävää tietoa ei tallenneta mihinkään. Esimerkiksi lomakkeen avulla sovellukselle lähetettävä data katoaa kun sovellus käynnistetään uudestaan. Tämä ei ole kivaa.</p>
+
+	    <p>Tietokannat ovat palvelinohjelmistosta erillisiä sovelluksia, joiden ensisijainen tehtävä on varmistaa, että käytettävä tieto ei katoa. Otetaan ensiaskeleet tietokannan käyttöön web-palvelinohjelmistoissa -- tutustumme tietokantoihin tarkemmin myöhemmin kurssilla. Käytämme tietokantatoiminnallisuuden toteuttamisessa <a href="http://projects.spring.io/spring-data-jpa/" target="_blank">Spring Data JPA</a>-komponenttia, johon löytyy myös aloituspaketti käyttämästämme Spring Bootista.</p>
+
+	    <aside class="info">
+
+	      <br/>
+
+	      <h1>Spring Data JPA:n käyttöönotto</h1>
+		  
+	      <p>Saadaksemme Spring Data JPA:n käyttöömme, tulee meidän lisätä se <code>pom.xml</code>-tiedostoon. Spring Bootin kautta löytyy näppärä paketti <code>spring-boot-starter-data-jpa</code>, joka vähentää yksittäisten riippuvuuksien lisäämistä. Tämän lisäksi tarvitsemme testikäyttöön sopivan tietokannan -- valitaan <a href="http://www.h2database.com/" target="_blank">H2 Database</a>, jonka voi ladata muistiin sovelluksen käynnistyessä.</p>
+
+	      <p>Lisätään projektiin seuraavat riippuvuudet:</p>
+
+	      <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+    &lt;artifactId&gt;h2&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+	      <p>Kun projektin riippuvuudet noudetaan Mavenin avulla, on tietokanta valmis testikäyttöön.</p>
+
+	    </aside>
+
+
+	    <h3>Tietokantaan tallennettavat oliot eli entiteetit</h3>
+
+            <p>Käytämme ORM-kirjastoa (object relational mapping), jonka tehtävänä on muuntaa oliot tietokantaan tallennettavaan muotoon. Karkeasti ajatellen luokka vastaa tietokantataulua ja oliomuuttujat vastaavat tietokannan sarakkeita. Jokainen taulun rivi vastaa yhtä luokasta tehtyä oliota.</p>
+
+	    <p>Luokat, joista tehdyt oliot voidaan tallentaa tietokantaan, tulee annotoida <code>@Entity</code>-annotaatiolla. Tämän lisäksi luokille tulee määritellä tunnuskenttä, jonka avulla niihin liittyvät oliot voidaan yksilöidä. Voimme käyttää tunnuskentän luomiseen valmista <code>AbstractPersistable</code>-yliluokkaa, jota perittäessä kerromme uniikin tunnuksen tyypin. Esimerkiksi <code>Henkilo</code>-luokasta voidaan tehdä tietokantaan tallennettava seuraavilla muutoksilla.</p>
 
                 <pre class="sh_java">
-Map&lt;Integer, Henkilo&gt; henkilot = new HashMap&lt;&gt;();
-henkilot.put(1, new Person("James Gosling"));
-henkilot.add(2, new Person("Martin Odersky"));
+package wad.domain;
 
-get("/:id", (req, res) -&gt; {
-    HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
+import javax.persistence.Entity;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
-    data.put("henkilo", henkilot.get(Integer.parseInt(req.params(":id"))));
-    return new ModelAndView(data, "index");
-}, new ThymeleafTemplateEngine());</pre>
+@Entity
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+
+    public String getNimi() {
+        return this.nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+}</pre>
+
+            <p>Kun käytössämme on tietokantaan tallennettava luokka, voimme luoda tietokannan käsittelyyn käytettävän <em>rajapinnan</em>. Kutsutaan tätä rajapintaoliota nimellä <code>HenkiloRepository</code>.</p>
+
+                <pre class="sh_java">
+// pakkaus
+
+import wad.domain.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+
+}</pre>
+
+            <p>Rajapinta perii Spring Data-projektin <code>JpaRepository</code>-rajapinnan; samalla kerromme, että tallennettava olio on tyyppiä <code>Person</code> ja että tallennettavan olion tunnus on <code>Long</code>-tyyppiä. Tämä tyyppi on sama kuin aiemmin <code>AbstractPersistable</code>-luokan perinnässä parametriksi asetettu tyyppi. Spring osaa käynnistyessään etsiä mm. JpaRepository-rajapintaluokan periviä luokkia. Jos niitä löytyy, se luo niiden pohjalta tietokannan käsittelyyn sopivan olion sekä asettaa olion ohjelmoijan haluamiin muuttujiin.</p>
+
+	    <p>Nämä muuttujat tulee määritellä <code>@Autowired</code>-annotaatiolla -- jokaiselle muuttujalle tulee oma annotaatio -- palaamme myöhemmin kurssilla tarkemmin tähän ns. olioiden automaattiseen asettamiseen.</p>
+
+            <p>Kun olemme luoneet rajapinnan <code>HenkiloRepository</code>, voimme lisätä sen käyttöömme esimerkiksi kontrolleriluokkaan. Tämä tapahtuu seuraavasti.</p>
+
+                <pre class="sh_java">
+// ...
+
+@Controller
+public class HenkiloController {
+
+    @Autowired
+    private HenkiloRepository henkiloRepository;
+
+    // ...
+}</pre>
+
+            <p>Nyt tietokantaan pääsee käsiksi <code>HenkiloRepository</code>-olion kautta. Osoitteessa <a href="http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html" target="_blank">http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html</a> on JpaRepository-rajapinnan API-kuvaus, mistä löytyy rajapinnan tarjoamien metodien kuvauksia. Voimme esimerkiksi toteuttaa tietokannassa olevien olioiden listauksen sekä yksittäisen olion haun seuraavasti:</p>
+
+            <pre class="sh_java">
+// ...
+
+@Controller
+public class HenkiloController {
+
+    @Autowired
+    private HenkiloRepository henkiloRepository;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("list", henkiloRepository.findAll());
+        return "henkilot"; // erillinen henkilot.html
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String get(Model model, @PathVariable Long id) {
+        model.addAttribute("henkilo", henkiloRepository.findOne(id));
+        return "henkilo"; // erillinen henkilo.html
+    }
+}</pre>
+
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellodatabase">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellodatabase">
+                      Hello Database
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellodatabase" class="collapse">
+		  
+		  <p>Tässä tehtävässä on valmiiksi toteutettuna tietokantatoiminnallisuus sekä esineiden noutaminen tietokannasta. Lisää sovellukseen toiminnallisuus, jonka avulla esineiden tallentaminen tietokantaan onnistuu valmiiksi määritellyllä lomakkeella.</p>
+		  
+		  <p>Alla esimerkki sovelluksesta kun tietokantaan on lisätty muutama rivi:</p>
+
+		  <p><img class="browser-img" src="img/2016-mooc/ex15.png"/></p>
+		  
+                </div>
+              </div>
+            </div>		
+	    
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-tododatabase">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-tododatabase">
+                      Todo Database
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-tododatabase" class="collapse">
+		  
+		  <p>Luo tässä TodoApplication-tehtävässä nähty tehtävien hallintaan tarkoitettu toiminnallisuus mutta siten, että tehtävät tallennetaan tietokantaan. Tässä tehtävässä entiteettiluokan nimen tulee olla <code>Item</code> ja avaimen tyypin tulee olla <code>Long</code>: <pre class="sh_java">
+@Entity
+public class Item extends AbstractPersistable&lt;Long&gt; {
+...</pre></p>
+		  <p>Noudata lisäksi HTML-sivujen rakennetta ja toiminnallisuutta.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	  </section>
+	  
+	  <!-- END OSA1 -->
+
+          <!-- BEGIN WEEK2 -->
+          <section class="weeklimit" data-week-id="2">
+	    
+            <header>
+              <h1 id="osa2">Osa 2</h1>
+            </header>
+	    
+
+
+	    <p>Tutustutaan tässä pikaisesti erääseen verkossa toimivaan tietokantatoiminnallisuutta tarjoavaan palveluun, <a href="https://www.firebase.com/" target="_blank">Firebase</a>en. Firebase tarjoaa sovelluskehittäjille ilmaisen paikan tiedon tallentamiseen sovelluksen kehitysvaiheessa. Firebasen oleelliset kirjastot saa projektin käyttöön kun lisää <code>pom.xml</code> -tiedostoon seuraavan riippuvuuden.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.firebase&lt;/groupId&gt;
+    &lt;artifactId&gt;firebase-client-jvm&lt;/artifactId&gt;
+    &lt;version&gt;2.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+		<p>Firebaseen tallennettavat resurssit liittyvät aina tiettyyn osoitteeseen sekä osoitteen alla olevaan polkuun. Kurssin johdanto-osion viimeisessä tehtävässä on valmiiksi toteutettuna luokka, jonka avulla Firebaseen voi tehdä kyselyitä -- hauskaa tutustumista!</p>
 
 		<p></p>
 
 		<div class="tehtavat">
-		  <div class="tehtava" id="t-hellopathvariables">
+		  <div class="tehtava" id="t-hellofirebase">
 
 		    <header>
 		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-hellopathvariables">
-                          Hello Path Variables
+                        <a data-toggle="collapse" class="collapsed" href="#t-hellofirebase">
+                          Hello Firebase
                         </a>
                       </h1>
                     </header>
 
-                    <div id="t-hellopathvariables" class="collapse">
+                    <div id="t-hellofirebase" class="collapse">
 
-		      <p>Tehtäväpohjassa on sovellus, jossa käsitellään taas edellisestä tehtävästä tuttuja <code>Item</code>-tyyppisiä olioita. Tällä kertaa esineet kuitenkin kuvastavat hattuja. Kun sovelluksen juureen tehdään pyyntö, käyttäjälle näytetään oletushattu ("default"). Lisää sovellukseen toiminnallisuus, minkä avulla tiettyyn polkuun tehtävä kysely palauttaa sivun, jossa näkyy tietyn hatun tiedot.</p>
+		      <p>Tässä tehtävässä on valmiiksi toteutettuna esineiden tallentaminen ja noutaminen Firebase-palvelusta. Tutustu ensin sovelluksen toimintaan ja kokeile tiedon hakemista ja tallentamista. Huomaat myös, että tieto ei katoa, vaikka käynnistät palvelinohjelmiston uudestaan.</p>
 
-		      <p>Sovelluksen juuripolkuun tehtävä pyyntö näyttää seuraavanlaisen sivun:</p>
+		      <p>Toteuta tehtävässä toiminnallisuus esineiden poistamiseen ja muokkaamiseen. Poistamisen tulee poistaa esine Firebase-palvelusta (luokassa FirebaseService on valmis toiminnallisuus tähän) ja muokkaamisen tulee avata uusi sivu, jossa esineen nimeä voi muuttaa. Voit tehdä konkreettisen muokkaustoiminnallisuuden vaikkapa siten, että poistat vanhan esineen muokkauksen yhteydessä ja lisäät uuden esineen vanhaan esineeseen liittyvillä muokatuilla tiedoilla.</p>
 
-		      <p><img class="browser-img" src="img/mooc/ex12-default.png"/></p>
+		      <p>Tehtävässä ei ole testejä ja palauttaessasi tehtävän palvelimelle kerrot tehneesi sen valmiiksi. Testit on jätetty tästä pois, jotta voit luoda oman Firebase-palvelun ja käyttää myös sitä.</p>
 
-		      <p>Muihin osoitteisiin tehtävät pyynnöt taas palauttavat tehtäväpohjassa olevasta <code>items</code>-hajautustaulusta polkuun sopivan hatun. Esimerkiksi pyyntö polkuun <code>/ascot</code> näyttää seuraavanlaisen sivun:</p>
+		      <p>Huom! Jos Firebasea käytettäessä ohjelma heittää virheen "NullPointerException", muokkaa FirebaseService-luokan metodit <code>add</code> ja <code>list</code> seuraavanlaisiksi:</p>
 
-		      <p><img class="browser-img" src="img/mooc/ex12-ascot.png"/></p>
+<pre class="sh_java">
+public void add(FirebaseItem item) {
+    if (item == null || item.getName() == null || item.getIdentifier() == null) {
+        return;
+    }
 
-                    </div>
-                  </div>
-                </div>
-
-		<div class="tehtavat">
-		  <div class="tehtava" id="t-helloindividualpages">
-
-		    <header>
-		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-helloindividualpages">
-                          Hello Individual Pages
-                        </a>
-                      </h1>
-                    </header>
-
-                    <div id="t-helloindividualpages" class="collapse">
-
-		      <p>Edellisessä tehtävässä käytössämme oli vain yksi sivu. Olisi kuitenkin hienoa, jos jokaiselle hatulle olisi oma sivu -- ainakin sovelluksen käyttäjän näkökulmasta.</p>
-
-		      <p>Tehtäväpohjassa on valmiina sovellus, joka listaa olemassaolevat hatut ja näyttää ne käyttäjälle. Jokaisen hatun yhteydessä on linkki, jota klikkaamalla pitäisi päästä hatun omalle sivulle.</p>
-
-		      <p>Toteuta sekä html-sivu (<code>single.html</code>), että sopiva metodi, joka ohjaa pyynnön sivulle.</p>
+    new Firebase(this.url).child(item.getIdentifier()).setValue(item);
+    this.items.put(item.getIdentifier(), item);
+}
 
 
-		      <p>Pyyntö sovelluksen juureen luo seuraavanlaisen sivun.</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex13-list.png"/></p>
-
-		      <p>Jos sivulta klikkaa hattua, pääsee tietyn hatun tiedot sisältävälle sivulle. Alla olevassa esimerkissä on klikattu taikurin hattuun liittyvää linkkiä.</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex13-single.png"/></p>
-
+public List&lt;FirebaseItem&gt; list() {
+    return this.items.values().stream()
+            .filter(o -> o.getName() != null)
+            .sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
+            .collect(Collectors.toList());
+}
+</pre>
 
                     </div>
                   </div>
                 </div>
 
 
-		<div class="tehtavat">
-		  <div class="tehtava" id="t-todoapplication">
-
-		    <header>
-		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-todoapplication">
-                          Todo Application
-                        </a>
-                      </h1>
-                    </header>
-
-                    <div id="t-todoapplication" class="collapse">
-
-		      <p>Tässä tehtävässä tulee rakentaa tehtävien hallintaan tarkoitettu sovellus. Sovelluksen käyttämät sivut ovat valmiina näkyvissä, itse sovelluksen pääset toteuttamaan itse.</p>
-
-		      <p>Sovelluksen tulee sisältää seuraavat toiminnallisuudet:</p>
-
-		      <ul>
-			<li>Kaikkien tehtävien listaaminen. Kun käyttäjä tekee pyynnön sovelluksen juuripolkuun, tulee hänelle näyttää sivu, missä tehtävät on listattuna. Sivulla on myös lomake tehtävien lisäämiseen. </li>
-			<li>Yksittäisen tehtävän lisääminen. Kun käyttäjä täyttää lomakkeen sivulla ja lähettää tiedot palvelimelle, tulee sovelluksen lisätä tehtävä näytettävään listaan.</li>
-			<li>Yksittäisen tehtävän poistaminen. Kun käyttäjä painaa tehtävään liittyvää <code>Done!</code>-nappia, tulee tehtävä poistaa listalta.</li>
-			<li>Yksittäisen tehtävän näyttäminen. Kun käyttäjä klikkaa tehtävään liittyvää linkkiä, tulee käyttäjälle näyttää tehtäväsivu. Huom! Tehtävään liittyvien tarkistusten määrä tulee kasvaa aina yhdellä kun sivulla vieraillaan.</li>
-		      </ul>
-
-		      <p>Alla kuva tehtävien listauksesta:</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex14-list.png"/></p>
-
-		      <p>Kun tehtävää klikkaa, näytetään erillinen tehtäväsivu:</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex14-item-1.png"/></p>
-
-		      <p>Kun sivu avataan toisen kerran, kasvaa tehtävien tarkistukseen liittyvä laskuri:</p>
-
-		      <p><img class="browser-img" src="img/mooc/ex14-item-2.png"/></p>
-
-
-                    </div>
-                  </div>
-                </div>
-
-
-		<h2>Tyylitiedostot</h2>
+	    <h2>Tyylitiedostot</h2>
 
 		<p>Olet ehkäpä huomannut, että tähän mennessä tekemämme web-sovellukset eivät ole kovin kaunista katsottavaa. Kurssilla pääpaino on palvelinpään toiminnallisuuden toteuttamisessa, joten emme jatkossakaan keskity sivustojen ulkoasuun. Sivujen ulkoasun muokkaaminen on kuitenkin melko suoraviivaista. Verkosta löytyy iso kasa oppaita sivun ulkoasun määrittelyyn -- <a href="http://www.w3schools.com/css/" target="_blank">tässä yksi</a>.</p>
 
@@ -1239,77 +1712,6 @@ get("/:id", (req, res) -&gt; {
                   </div>
                 </div>
 
-
-		<h2>Tiedon tallentaminen</h2>
-
-		<p>Sovelluksemme -- vaikka huikeita ovatkin -- ovat melko alkeellisia, sillä sovelluksissa käsiteltävää tietoa ei tallenneta mihinkään. Esimerkiksi lomakkeen avulla sovellukselle lähetettävä data katoaa kun sovellus käynnistetään uudestaan. Tämä ei ole kivaa.</p>
-
-		<p>Web-sovelluksissa hyödynnetään tyypillisesti sovelluksesta erillisiä tietokantaohjelmistoja, joihin tehdään kyselyjä tarvittaessa. Tutustutaan tässä pikaisesti erääseen verkossa toimivaan tietokantatoiminnallisuutta tarjoavaan palveluun, <a href="https://www.firebase.com/" target="_blank">Firebase</a>en. Firebase tarjoaa sovelluskehittäjille ilmaisen paikan tiedon tallentamiseen sovelluksen kehitysvaiheessa. Firebasen oleelliset kirjastot saa projektin käyttöön kun lisää <code>pom.xml</code> -tiedostoon seuraavan riippuvuuden.</p>
-
-<pre class="sh_xml">
-&lt;dependency&gt;
-    &lt;groupId&gt;com.firebase&lt;/groupId&gt;
-    &lt;artifactId&gt;firebase-client-jvm&lt;/artifactId&gt;
-    &lt;version&gt;2.4.0&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
-
-		<p>Firebaseen tallennettavat resurssit liittyvät aina tiettyyn osoitteeseen sekä osoitteen alla olevaan polkuun. Kurssin johdanto-osion viimeisessä tehtävässä on valmiiksi toteutettuna luokka, jonka avulla Firebaseen voi tehdä kyselyitä -- hauskaa tutustumista!</p>
-
-		<p></p>
-
-		<div class="tehtavat">
-		  <div class="tehtava" id="t-hellofirebase">
-
-		    <header>
-		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-hellofirebase">
-                          Hello Firebase
-                        </a>
-                      </h1>
-                    </header>
-
-                    <div id="t-hellofirebase" class="collapse">
-
-		      <p>Tässä tehtävässä on valmiiksi toteutettuna esineiden tallentaminen ja noutaminen Firebase-palvelusta. Tutustu ensin sovelluksen toimintaan ja kokeile tiedon hakemista ja tallentamista. Huomaat myös, että tieto ei katoa, vaikka käynnistät palvelinohjelmiston uudestaan.</p>
-
-		      <p>Toteuta tehtävässä toiminnallisuus esineiden poistamiseen ja muokkaamiseen. Poistamisen tulee poistaa esine Firebase-palvelusta (luokassa FirebaseService on valmis toiminnallisuus tähän) ja muokkaamisen tulee avata uusi sivu, jossa esineen nimeä voi muuttaa. Voit tehdä konkreettisen muokkaustoiminnallisuuden vaikkapa siten, että poistat vanhan esineen muokkauksen yhteydessä ja lisäät uuden esineen vanhaan esineeseen liittyvillä muokatuilla tiedoilla.</p>
-
-		      <p>Tehtävässä ei ole testejä ja palauttaessasi tehtävän palvelimelle kerrot tehneesi sen valmiiksi. Testit on jätetty tästä pois, jotta voit luoda oman Firebase-palvelun ja käyttää myös sitä.</p>
-
-		      <p>Huom! Jos Firebasea käytettäessä ohjelma heittää virheen "NullPointerException", muokkaa FirebaseService-luokan metodit <code>add</code> ja <code>list</code> seuraavanlaisiksi:</p>
-
-<pre class="sh_java">
-public void add(FirebaseItem item) {
-    if (item == null || item.getName() == null || item.getIdentifier() == null) {
-        return;
-    }
-
-    new Firebase(this.url).child(item.getIdentifier()).setValue(item);
-    this.items.put(item.getIdentifier(), item);
-}
-
-
-public List&lt;FirebaseItem&gt; list() {
-    return this.items.values().stream()
-            .filter(o -> o.getName() != null)
-            .sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
-            .collect(Collectors.toList());
-}
-</pre>
-
-                    </div>
-                  </div>
-                </div>
-
-	    </section>
-
-            <!-- BEGIN WEEK2 -->
-            <section class="weeklimit" data-week-id="2">
-
-                <header>
-                    <h1 id="osa2">Osa 2</h1>
-                </header>
 
 
                 <div class="tehtavat">
@@ -2503,7 +2905,53 @@ CREATE TABLE Item (
                   </div>
                 </div>		
 
+<!--
+	    
+	    <h2>Sovelluksen siirtäminen verkkoon</h2>
 
+            <p>Tutustutaan lopuksi sovelluksen siirtämiseen <a href="https://www.heroku.com/" target="_blank">Heroku</a>-palveluun. Heroku on pilvipalvelu, joka tarjoaa rajoitetun (ja ilmaisen) sijoituspaikan vähän resursseja kuluttaville sovelluksille. Opas Herokun käyttöön löytyy osoitteesta <a href="https://devcenter.heroku.com/articles/getting-started-with-java#introduction" target="_blank">https://devcenter.heroku.com/articles/getting-started-with-java#introduction</a>.</p>
+
+	    <p>Tarvitset 
+            <p>Kun olet luonut tunnuksen Herokuun, asenna osoitteesta <a href="https://toolbelt.heroku.com/" target="_blank">https://toolbelt.heroku.com/</a> työvälineet sovelluksen Herokuun siirtämiseen. Seuraa myös sivun "Getting started"-ohjetta, ja suorita sen <code>heroku login</code>-osio.</p>
+
+            <p>Mene tämän jälkeen Albumilista-tehtävän kansioon, missä on myös tiedosto <code>pom.xml</code>. Kirjoita kansiossa komento <code>git init</code>, mikä lisää kansioon versionhallintakansion <code>.git</code>.</p>
+
+            <pre>        
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git init
+Initialized empty Git repository in <em>polku</em>/W1E08.Albumilista/.git/</pre>
+
+                <p>Kirjoita tämän jälkeen komento <code>heroku create</code>, mikä luo paikan minne sovelluksen voi lähettää.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ heroku create
+Creating aqueous-lowlands-6350... done, stack is cedar
+http://aqueous-lowlands-6350.herokuapp.com/ | git@heroku.com:aqueous-lowlands-6350.git</pre>
+
+                <p>Komennolla <code>git remote add heroku git@heroku.com:aqueous-lowlands-6350.git</code> lisätään juuri luotu heroku-sijainti projekti käyttöömme. Huomaa, että <code>git@heroku.com:aqueous-lowlands-6350.git</code> on sama kuin komennon <code>heroku create</code> tulostama sijainti.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git remote add heroku git@heroku.com:aqueous-lowlands-6350.git
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$</pre>        
+
+                <p>Nyt voimme lisätä sovelluksen verkkoon. Jos tehtäväkansiossa on target-kansio, poista se tässä välissä. Kirjoita seuraavaksi komento <code>git add .</code>, jonka jälkeen komento <code>git commit -m "initial commit"</code>. Näillä komennoilla lisäät sovelluksen nykyisen version versionhallintaan. Kirjoita tämän jälkeen <code>git push heroku master</code>, mikä lähettää sovelluksen verkkoon.</p>
+
+                <pre>       
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git add .
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git commit -m "initial commit"
+[master (root-commit) 2cbc76b] initial commit
+ tulostusta...
+avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git push heroku master
+ tulostusta...
+-----> Discovering process types
+       Procfile declares types -> web
+
+-----> Compressing... done, 135.6MB
+-----> Launching... done, v6
+       http://aqueous-lowlands-6350.herokuapp.com/ deployed to Heroku
+ hieman tulostusta</pre>
+
+                <p>Nyt, voimme käydä tarkistamassa sovelluksen herokun palvelussa. Yllä olevassa esimerkissä sovellus on lisätty osoitteeseen <a href="http://aqueous-lowlands-6350.herokuapp.com/" target="_blank">http://aqueous-lowlands-6350.herokuapp.com/</a>.</p>
+-->
 
 
             </section>
