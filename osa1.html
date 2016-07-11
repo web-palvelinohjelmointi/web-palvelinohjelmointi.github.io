@@ -990,7 +990,7 @@ public class Henkilo {
 }
 </pre>
 
-	    <p>Henkilö-olion lisääminen on suoraviivaista:</p>
+	    <p>Henkilo-olion lisääminen on suoraviivaista:</p>
 
 <pre class="sh_java">
     @RequestMapping("/")
@@ -1006,7 +1006,7 @@ public class Henkilo {
 <pre class="sh_xml">
 &lt;h2 th:text="${henkilo}"&gt;Henkilön nimi&lt;/h2&gt;</pre>
 
-	    <p>Ylläolevaa Henkilön tulostusta kokeillessamme saamme näkyville (esim.) merkkijonon <code>Henkilo@29453f44</code> -- ei ihan mitä toivoimme. Käytännössä Thymeleaf kutsuu edellisessä tapauksessa olioon liittyvää <code>toString</code>-metodia, jota emme ole määritelleet. Pääsemme oliomuuttujiin käsiksi olemassaolevien <code>get<em>Muuttuja</em></code>-metodien kautta. Jos haluamme tulostaa Henkilö-olioon liittyvän nimen, kutsumme metodia <code>getNimi</code>. Thymeleafin käyttämässä notaatiossa kutsu muuntuu muotoon <code>henkilo.nimi</code>. Saamme siis halutun tulostuksen seuraavalla tavalla:</p>
+	    <p>Ylläolevaa henkilön tulostusta kokeillessamme saamme näkyville (esim.) merkkijonon <code>Henkilo@29453f44</code> -- ei ihan mitä toivoimme. Käytännössä Thymeleaf kutsuu edellisessä tapauksessa olioon liittyvää <code>toString</code>-metodia, jota emme ole määritelleet. Pääsemme oliomuuttujiin käsiksi olemassaolevien <code>get<em>Muuttuja</em></code>-metodien kautta. Jos haluamme tulostaa Henkilo-olioon liittyvän nimen, kutsumme metodia <code>getNimi</code>. Thymeleafin käyttämässä notaatiossa kutsu muuntuu muotoon <code>henkilo.nimi</code>. Saamme siis halutun tulostuksen seuraavalla tavalla:</p>
 
 <pre class="sh_xml">
 &lt;h2 th:text="${henkilo.nimi}"&gt;Henkilön nimi&lt;/h2&gt;</pre>
@@ -1057,7 +1057,7 @@ public class HenkiloController {
 &lt;p&gt;Ja huomenna puheet pitävät:&lt;/p&gt;
 &lt;ol&gt;
     &lt;li th:each="henkilo : ${list}"&gt;
-        &lt;span th:text="${henkilo.nimi}"&gt;Esimerkkihenkilo&lt;/span&gt;
+        &lt;span th:text="${henkilo.nimi}"&gt;Esimerkkihenkilö&lt;/span&gt;
     &lt;/li&gt;
 &lt;/ol&gt;
 </pre>
