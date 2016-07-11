@@ -737,7 +737,7 @@ public class ThymeleafJaDataController {
 	    
             <p>HTML-sivuille voi määritellä lomakkeita (<a href="http://www.w3schools.com/html/html_forms.asp" target="_blank">form</a>), joiden avulla käyttäjä voi lähettää tietoa palvelimelle. Lomakkeen määrittely tapahtuu <code>form</code>-elementin avulla, jolle kerrotaan polku, mihin lomake lähetetään (action), sekä pyynnön tyyppi (method). Pidämme pyynnön tyypin toistaiseksi GET-tyyppisenä.</p>
 	    
-	    <p>Lomakkeeseen voidaan määritellä mm. tekstikenttiä (<code>&lt;input type="text"...</code>) sekä painike, jolla lomake lähetetään (<code>&lt;input type="submit"...</code>). Alla tekstikentän <code>name</code>-attribuutin arvoksi on asetettu nimi. Tämä tarkoittaa sitä, että kun lomakkeen tiedot lähetetään palvelimelle, tulee pyynnössä <code>nimi</code>-niminen parametri, jonka arvona on tekstikenttään kirjoitettu teksti.</p>
+	    <p>Lomakkeeseen voidaan määritellä mm. tekstikenttiä (<code>&lt;input type="text"...</code>) sekä painike, jolla lomake lähetetään (<code>&lt;input type="submit"...</code>). Alla tekstikentän <code>name</code>-attribuutin arvoksi on asetettu <code>nimi</code>. Tämä tarkoittaa sitä, että kun lomakkeen tiedot lähetetään palvelimelle, tulee pyynnössä <code>nimi</code>-niminen parametri, jonka arvona on tekstikenttään kirjoitettu teksti.</p>
 
 <pre class="sh_xml">
 &lt;form th:action="@{/}" method="GET"&gt;
