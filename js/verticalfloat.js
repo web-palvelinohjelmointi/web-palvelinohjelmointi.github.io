@@ -20,6 +20,16 @@ var VERTICALFLOAT = {
 
     init: function(username) {
         VERTICALFLOAT.username = username;
+
+	var courseId = 41;
+
+        if(window.location.href.indexOf("s2015-wepa-mooc") > -1) {
+	    courseId = 34;
+	} else if (window.location.href.indexOf("s2015-wepa") > -1) {
+	    VERTICALFLOAT.username = false;
+	}
+
+	VERTICALFLOAT.DATA_URI = "https://tmc.mooc.fi/mooc/courses/" + courseId + "/points.json?api_version=7&t=" + new Date().getTime();
 	
 	if(!VERTICALFLOAT.username) {
 	    console.log("Analytics: not initiating.");
@@ -156,8 +166,10 @@ var VERTICALFLOAT = {
 
 
 	if(group.valueOf() == "TREATMENT") {
+	    console.log("showing treatment");
 	    VERTICALFLOAT.showTreatmentVisu();
 	} else {
+	    console.log("showing control");
 	    VERTICALFLOAT.showControlVisu();
 	}
 
@@ -188,7 +200,15 @@ var VERTICALFLOAT = {
 	var sumSoFar = 0;
 
 	for (var i = 1; i <= 7; i++) {
-	    var weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    var weekdata;
+
+            if(window.location.href.indexOf("s2015-wepa-mooc") > -1) {
+		weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    } else if (window.location.href.indexOf("s2015-wepa") > -1) {
+		weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    } else {
+		weekdata = VERTICALFLOAT.userdata["W" + i];
+	    }
 
 	    if(!weekdata || !VERTICALFLOAT.maxPoints[i - 1] || weekdata == 0) {
 		realizedGrowth[i] = sumSoFar;
@@ -240,7 +260,16 @@ var VERTICALFLOAT = {
 	data.series[0] = [];
 
 	for (var i = 1; i <= 7; i++) {
-	    var weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    var weekdata;
+
+            if(window.location.href.indexOf("s2015-wepa-mooc") > -1) {
+		weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    } else if (window.location.href.indexOf("s2015-wepa") > -1) {
+		weekdata = VERTICALFLOAT.userdata["wk" + i];
+	    } else {
+		weekdata = VERTICALFLOAT.userdata["W" + i];
+	    }
+
 	    if(!weekdata || !VERTICALFLOAT.maxPoints[i - 1] || weekdata == 0) {
 		data.series[0][i - 1] = 0;
 		continue;
