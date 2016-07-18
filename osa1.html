@@ -37,11 +37,9 @@
                     <li>
                         <a href="osa1.html">Osa 1</a>
                     </li>
-<!--
                     <li>
-                        <a href="#osa2">Osa 2</a>
+                        <a href="osa2.html">Osa 2</a>
                     </li>
--->
 <!--
                     <li>
                         <a href="#viikko3">Viikko 3</a>
@@ -96,7 +94,6 @@
           </div><!-- /.modal -->
 
 	  <!-- BEGIN CONTENT -->
-
 	  <section class="no-toc weeklimit" data-week-id="0">
             <h1>Sisällysluettelo</h1>
 	    
@@ -105,9 +102,8 @@
             <h1>Tehtävät</h1>
 	    
             <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
-
+	    
 	  </section>
-          <!-- BEGIN OSA1 -->
           <!-- BEGIN OSA1 -->
           <section class="weeklimit" data-week-id="1">
 	    
@@ -1043,8 +1039,8 @@ public class HenkiloController {
 
     public ListaController() {
         this.henkilot = new ArrayList&lt;&gt;();
-        this.henkilot.add(new Person("James Gosling"));
-        this.henkilot.add(new Person("Martin Odersky"));
+        this.henkilot.add(new Henkilo("James Gosling"));
+        this.henkilot.add(new Henkilo("Martin Odersky"));
     }
 
     @RequestMapping("/")
@@ -1127,8 +1123,8 @@ public class HenkiloController {
 
     public ListaController() {
         this.henkilot = new ArrayList&lt;&gt;();
-        this.henkilot.add(new Person("James Gosling"));
-        this.henkilot.add(new Person("Martin Odersky"));
+        this.henkilot.add(new Henkilo("James Gosling"));
+        this.henkilot.add(new Henkilo("Martin Odersky"));
     }
 
     @RequestMapping("/")
@@ -1318,14 +1314,14 @@ public class Henkilo extends AbstractPersistable&lt;Long&gt; {
                 <pre class="sh_java">
 // pakkaus
 
-import wad.domain.Person;
+import wad.domain.Henkilo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
 
 }</pre>
 
-            <p>Rajapinta perii Spring Data-projektin <code>JpaRepository</code>-rajapinnan; samalla kerromme, että tallennettava olio on tyyppiä <code>Person</code> ja että tallennettavan olion tunnus on <code>Long</code>-tyyppiä. Tämä tyyppi on sama kuin aiemmin <code>AbstractPersistable</code>-luokan perinnässä parametriksi asetettu tyyppi. Spring osaa käynnistyessään etsiä mm. JpaRepository-rajapintaluokan periviä luokkia. Jos niitä löytyy, se luo niiden pohjalta tietokannan käsittelyyn sopivan olion sekä asettaa olion ohjelmoijan haluamiin muuttujiin.</p>
+            <p>Rajapinta perii Spring Data-projektin <code>JpaRepository</code>-rajapinnan; samalla kerromme, että tallennettava olio on tyyppiä <code>Henkilo</code> ja että tallennettavan olion tunnus on <code>Long</code>-tyyppiä. Tämä tyyppi on sama kuin aiemmin <code>AbstractPersistable</code>-luokan perinnässä parametriksi asetettu tyyppi. Spring osaa käynnistyessään etsiä mm. JpaRepository-rajapintaluokan periviä luokkia. Jos niitä löytyy, se luo niiden pohjalta tietokannan käsittelyyn sopivan olion sekä asettaa olion ohjelmoijan haluamiin muuttujiin.</p>
 
 	    <p>Nämä muuttujat tulee määritellä <code>@Autowired</code>-annotaatiolla -- jokaiselle muuttujalle tulee oma annotaatio -- palaamme myöhemmin kurssilla tarkemmin tähän ns. olioiden automaattiseen asettamiseen.</p>
 

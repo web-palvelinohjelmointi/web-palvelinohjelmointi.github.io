@@ -1,0 +1,1766 @@
+<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->
+<!-- BEGIN HEADER -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web-palvelinohjelmointi</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="js/libs/syntaxhighlight/css/sh_style.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/chartist.min.css"/>
+        <link rel="stylesheet" href="css/wepa.css"/>
+
+        <link rel="stylesheet" href="css/wepa-mooc.css"/>
+
+    </head>
+    <body>
+
+        <!-- BEGIN NAV -->
+        <header role="navigation">
+            <h1>
+                <button type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="http://www.mooc.fi" class="hidden-in-hy">&#171; mooc.fi</a>
+
+            </h1>
+            <nav class="collapse bs-navbar-collapse" role="navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">Yleistä</a>
+                    </li>
+                    <li>
+                        <a href="osa1.html">Osa 1</a>
+                    </li>
+                    <li>
+                        <a href="osa2.html">Osa 2</a>
+                    </li>
+<!--
+                    <li>
+                        <a href="#viikko3">Viikko 3</a>
+                    </li>
+                    <li>
+                        <a href="#viikko4">Viikko 4</a>
+                    </li>
+                    <li>
+                        <a href="#viikko5">Viikko 5</a>
+                    </li>
+                    <li>
+                        <a href="#viikko6">Viikko 6</a>
+                    </li>
+                    <li>
+                        <a href="#viikko7">Viikko 7</a>
+                    </li>
+-->
+                </ul>
+
+		<div style="direction: rtl;">
+		  <button id="logout" class="btn btn-warning">Kirjaudu ulos</button>
+		</div>
+            </nav>
+
+        </header>
+        <!-- // END NAV -->
+        <article>
+
+
+          <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form class="form-inline"  id="TmcLoginForm" role="form">
+		<div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
+                    <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
+                      <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua tai en tiedä TMC-tunnustani</button>
+                    <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
+                  </div>
+		</div><!-- /.modal-content -->
+              </form>
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+	  <!-- BEGIN CONTENT -->
+	  <section class="no-toc weeklimit" data-week-id="0">
+            <h1>Sisällysluettelo</h1>
+	    
+            <ul class="nav" id="material-toc"></ul>
+	    
+            <h1>Tehtävät</h1>
+	    
+            <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+	    
+	  </section>
+          <!-- BEGIN OSA2 -->
+          <section class="weeklimit" data-week-id="2">
+	    
+            <header>
+              <h1 id="osa2">Osa 2</h1>
+            </header>
+
+	    <p>Aloitamme toisen osan edellisen viikon kertauksella, jonka jälkeen syvennymme internetin perusosiin. Tätä seuraa tarkempi tutustuminen tietokantojen käyttöön sekä web-sovellusten rakenteeseen.</p>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Muutosten automaattinen päivittäminen sivulle</h1>
+
+	      <p>Muutamat ovat kysyneet miten ohjelmakoodissa tehdyt muutokset saa automaattisesti päivittymään selaimeen. Javalla toimivat ohjelmat käynnistetään tavukoodiksi, ja nämä tavukoodit suoritetaan ohjelmaa käynnistettäessä, joten automaattinen siirto ei ole täysin suoraviivaista.</p>
+
+	      <p>Tähän löytyy kuitenkin asian osittain ratkaiseva projekti, <code>spring-boot-devtools</code>, joka tarjoaa välineitä ohjelmistokehitysprosessin nopeuttamiseksi.</p>
+
+	      <p>Projektin lisääminen Maveniin tapahtuu seuraavan riippuvuuden avulla:</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</pre>
+
+	      <p>Kun ylläoleva riippuvuus on lisätty projektiin, käynnistetään ohjelman käynnistyksen yhteydessä myös <a href="http://livereload.com/" target="_blank">LiveReload</a>-palvelin. Kun selaimeen asentaa LiveReload-liitännäisen (Chromelle osoitteesta <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei" target="_blank">https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei</a>) ja kytkee liitännäisen päälle, LiveReload-liitännäinen ja palvelin keskustelevat toistensa kanssa ja päivittävät näkymää tarvittaessa.</p>
+
+	      <p>Devtools-projektin lisääminen sovellukseen johtaa myös siihen, että sovellus ladataan uudestaan aina kun sen lähdekoodi muuttuu. Tämän lisäksi osoitteessa <code>http://localhost:8080/h2-console</code> on tietokantakonsoli, jonka avulla voi käydä tarkastelemassa tietokannan tilaa. Huom! Tämä toimii vain, jos käytössä on H2-tietokantamoottori.</p>
+
+	    </aside>
+	    
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa1-kertaus-ex" data-count="17">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa1-kertaus">
+                      Osa 1, kertaus: Jobs
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa1-kertaus" class="collapse">
+		  
+		  <p>Jokainen uusi osio alkaa edellisen viikon teemoja sisältävällä kertaustehtävällä. Uusi osio tulee näkyville kun teet vähintään 50% edellisen osion tehtävistä. </p>
+		  
+		  <p>Ensimmäisessä kertaustehtävässä tehtävänäsi on toteuttaa sovellus työlistan hallintaan. Työlistalla näkyy ne työt, jotka eivät ole vielä tehtynä. Työn voi merkitä tehdyksi "Done!" -nappia painamalla.</p>
+		  
+		  <img src="img/2016-mooc/ex17-jobs.png" class="browser-img"/>
+		  
+		  <p>Kun työ merkitään tehdyksi, siirretään se erilliseen aiempia töitä listaavaan tauluun.</p>
+		  
+		  <img src="img/2016-mooc/ex17-jobs-done.png" class="browser-img"/>
+		  
+		  <p>Tehtäväpohjassa on annettu valmiina käyttöliittymän HTML-koodi, mistä voi tarkastella myös haluttua toiminnallisuutta.</p>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+	    
+            <h1 data-count="2">Internetin perusosat</h1>
+
+	    <p>Internetin peruskomponentit ovat (1) palveluiden, palvelinohjelmistojen ja resurssien yksilöintiin käytetyt merkkijonomuotoiset osoitteet (<em>URI, Uniform Resource Identifier</em>) sekä näiden merkkijonomuotoisten verkko-osoitteiksi käytettävä palvelu (<em>DNS, Domain Name Services</em>), (2) selainten ja palvelinten välisessä viestittelyssä käytettävä viestimuoto (protokolla) (<em>HTTP, HyperText Transfer Protocol</em>), sekä (3) yhteinen dokumenttien esityskieli (<em>HTML, HyperText Markup Language</em>).</p>
+		
+            <h2>URI ja DNS: Osoitteet ja niiden tulkinta</h2>
+
+            <p>Verkossa sijaitseva resurssi tunnistetaan osoitteen perusteella. Osoite (URI eli Uniform Resource Identifier, myös terminä käyttöön jäänyt URL <em>Uniform Resource Locator</em>) koostuu resurssin nimestä ja sijainnista, joiden perusteella haluttu resurssi ja palvelin (sijainti) voidaan löytää verkossa olevien koneiden massasta.</p>
+
+            <p>Käytännössä URI-osoitteet näyttävät seuraavilta:</p>
+	    
+<pre>
+protokolla://isäntäkone[:portti]/polku/../[kohdedokumentti[.paate]][?parametri=arvo&amp;toinen=arvo][#ankkuri]
+</pre>
+
+            <p>
+              <ul>
+                <li>protokolla: kyselyssä käytettävä protokolla, esimerkiksi HTTP, FTP tai SSH.</li>
+                <li>isäntäkone: kone tai palvelin johon luodaan yhteys. Voi olla joko IP-osoite tai tekstuaalinen kuvaus (esim www.cs.helsinki.fi).</li>
+                <li>portti: portti isäntäkoneella johon yhteys luodaan. Selaimet olettavat, että palvelinohjelmisto kuuntelee pyyntöjä portissa 80.  Web-sovellluksilla HTTP-palvelimien oletusportti on 80. Jos palvelin käyttää eri porttinumeroa kuin 80, tulee se merkitä osoitteeseen. Portti käytännössä määrittelee prosessin eli sovelluksen, johon yritetään ottaa yhteyttä.</li>
+                <li>polku: periaatteessa polku resurssiin palvelimella. Käytännössä (nykyään) myös palvelun osoite, johon palvelin osaa osoittaa. Usein palvelut toimivat erillisessä koneessa sisäverkossa, ja ulkoverkkoon näkyvä kone vain toimii ohjaajana eli proxynä oikeaan palveluun.</li>
+                <li>kohdedokumentti: haettava resurssi, jos kohdedokumenttia ei ole määritelty palvelin päättelee oletusdokumentin. Usein index.html</li>
+		<li>.paate: resurssiin liittyvä tiedostotyyppi, ei pakollinen. Esimerkiksi .html</li>
+                <li>kyselyparametrit: koostuu avain-arvo -pareista, joiden avulla palvelimelle pystyy toteuttamaan lisätoiminnallisuutta. Kuhunkin avaimeen liittyvä arvo esitetään = -merkillä, avain-arvo -parit erotetaan toisistaan &-merkillä.</li>
+                <li>ankkuri: kertoo mihin kohtaan dokumentissa tulee mennä.</li>
+              </ul>
+            </p>
+	    
+            <aside class="pohdi">
+              <h1>Osoitteen osat</h1>
+	      
+              <p>Tutki osoitetta <a href="https://fi.wikipedia.org/wiki/OSI-malli" target="_blank">https://fi.wikipedia.org/wiki/OSI-malli</a>. Mitkä tai mikä ovat/on osoitteen:</p>
+	      
+              <ul>
+                <li>protokolla</li>
+                <li>isäntäkone</li>
+                <li>portti</li>
+                <li>polku</li>
+                <li>kohdedokumentti</li>
+                <li>kyselyparametrit</li>
+                <li>ankkuri</li>
+              </ul>
+	      
+              <p>Mitkä näistä puuttuvat?</p>
+            </aside>
+
+
+            <p>Kun käyttäjä kirjoittaa web-selaimen osoitekenttään osoitteen ja painaa enteriä, web-selain tekee kyselyn annettuun osoitteeseen. Koska tekstimuotoiset osoitteet ovat käytännössä vain ihmisiä varten, kääntää selain ensiksi halutun osoitteen IP-osoitteeksi. Jos IP-osoite on jo tietokoneen tiedossa esimerkiksi aiemmin osoitteeseen tehdyn kyselyjen takia, selain voi ottaa yhteyden IP-osoitteeseen. Jos IP-osoite taas ei ole tiedossa, tekee selain ensin kyselyn <a href="http://fi.wikipedia.org/wiki/DNS" target="_blank">DNS</a>-palvelimelle (<em>Domain Name System</em>), jonka tehtävänä on muuntaa tekstuaaliset osoitteet IP-osoitteiksi (esim. Tietojenkäsittelytieteen laitoksen kotisivu <code>http://www.cs.helsinki.fi</code> on IP-osoitteessa <code>128.214.166.78</code>).</p>
+
+            <p>IP-osoitteet yksilöivät tietokoneet ja mahdollistavat koneiden löytämisen verkon yli. Käytännössä yhteys IP-osoitteen määrittelemään koneeseen avataan <a href="https://fi.wikipedia.org/wiki/OSI-malli" target="_blank">sovelluskerroksen</a> <a href="https://fi.wikipedia.org/wiki/HTTP" target="_blank">HTTP-protokollan</a> avulla kuljetuskerroksen <a href="https://fi.wikipedia.org/wiki/TCP" target="_blank">TCP-protokollan</a> yli. TCP-protokollan tehtävänä on varmistaa, että viestit pääsevät perille. Selain ei ota "suoraan" yhteyttä palvelinohjelmistoon, vaan välissä on tyypillisesti useita viestinvälityspalvelimia, jotka auttavat viestin perillepääsemisessä -- lisää tietoa konkreettisesta tietoliikenteestä löytyy kurssilla <a href="http://www.cs.helsinki.fi/courses/582202" target="_blank">Tietoliikenteen perusteet</a>.</p>
+
+
+            <h2>HTTP: Selainten ja palvelinten välinen kommunikaatioprotokolla</h2>
+	    
+            <p>HTTP (<em>HyperText Transfer Protocol</em>) on TCP/IP -protokollapinon sovellustason protokolla, jota web-palvelimet ja selaimet käyttävät kommunikointiin. HTTP-protokolla perustuu asiakas-palvelin malliin, jossa jokaista pyyntöä kohden on yksi vastaus (<em>request-response paradigm</em>). Tämä tarkoittaa sitä, että jokainen pyyntö käsitellään erillisenä kokonaisuutena, eikä saman käyttäjän kahta peräkkäistä pyyntöä yhdistetä automaattisesti toisiinsa.</p>
+
+	    <p>Käytännössä HTTP-asiakasohjelma (jatkossa selain) lähettää HTTP-viestin HTTP-palvelimelle (jatkossa palvelin), joka palauttaa HTTP-vastauksen. Tällä hetkellä eniten käytetty HTTP-protokollan versio on 1.1, joka on määritelty <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank">RFC 2616</a>-spesifikaatiossa.</p>
+
+            <h3>Asiakas-palvelin malli</h3>
+
+            <p>Asiakas-palvelin -mallissa <em>(Client-Server model)</em> asiakkaat käyttävät palvelimen tarjoamia palveluja. Kommunikointi asiakkaan ja palvelimen välillä tapahtuu usein verkon yli siten, että selain ja palvelin sijaitsevat erillisissä fyysisissä sijainneissa (eri tietokoneilla). Palvelin tarjoaa yhden tai useamman palvelun, joita käyttäjä käyttää selaimen kautta.</p>
+
+            <p>Käytännössä selain näyttää käyttöliittymän ohjelmiston käyttäjälle. Selaimen käyttäjän ei tarvitse tietää, että kaikki käytetty tieto ei ole hänen koneella. Käyttäjän tehdessä toiminnon selain pyytää tarpeen vaatiessa palvelimelta käyttäjän tarpeeseen liittyvää lisätietoa. Tyypillistä mallille on se, että palvelin tarjoaa vain asiakkaan pyytämät tiedot ja verkossa liikkuvan tiedon määrä pidetään vähäisenä.</p>
+	    
+            <p>Asiakas-palvelin -malli mahdollistaa hajautetut ohjelmistot: selainta käyttävät loppukäyttäjät voivat sijaita eri puolilla maapalloa palvelimen sijaitessa tietyssä paikassa.</p>
+
+		
+            <aside class="pohdi">
+              <h1>Client&#8211;server model</h1>
+		  
+              <p>Mene osoitteeseen <a href="https://en.wikipedia.org" target="_blank">https://en.wikipedia.org</a>. Kirjoita sivuston oikeassa ylälaidassa olevaan kenttään "client server model" ja paina Enter-näppäintä. Mitkä seuraavista askeleista tapahtuivat selaimessa, mitkä palvelimella, mitkä muualla?</p>
+		  
+              <ol>
+                <li>Näppäimistön avulla kirjoittamasi osoitetekstin näyttäminen.</li>
+                <li>Osoitetta https://en.wikipedia.org vastaavan IP-osoitteen etsiminen.</li>
+                <li>Sivun https://en.wikipedia.org näyttäminen.</li>
+                <li>https://en.wikipedia.org/wiki/Client&#8211;server_model -sivun näyttäminen</li>
+              </ol>
+		  
+	      <p>Tekstikentästä lähetetään viesti osoitteeseen <a href="https://en.wikipedia.org/w/index.php?search=client+server+model&title=Special%3ASearch&go=Go" target="_blank">https://en.wikipedia.org/w/index.php?search=client+server+model&title=Special%3ASearch&go=Go</a>, mutta päädyt sivulle <a href="https://en.wikipedia.org/wiki/Client&#8211;server_model" target="_blank">https://en.wikipedia.org/wiki/Client&#8211;server_model</a>. Miksi näin tapahtuu?</p>
+            </aside>
+		
+            <p>Haasteena perinteisessä asiakas-palvelin mallissa on se, että palvelin sijaitsee yleensä tietyssä keskitetyssä sijainnissa. Keskitetyillä palveluilla on mahdollisuus ylikuormittua asiakasmäärän kasvaessa. Kapasiteettia rajoittavat muun muassa palvelimen fyysinen kapasiteetti (muisti, prosessorin teho, ..), palvelimeen yhteydessä olevan verkon laatu ja nopeus, sekä tarjotun palvelun tyyppi. Esimerkiksi pyynnöt, jotka johtavat tiedon tallentamiseen, vievät tyypillisesti enemmän resursseja kuin pyynnöt, jotka tarvitsevat vain staattista sisältöä.</p>
+
+		
+	    
+            <div class="tehtavat">
+		  
+              <div class="tehtava" id="t-knockknock-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-knockknock">
+                      Knock Knock
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-knockknock" class="collapse">
+		  
+		  <p>Lähes kaikki sovellusten verkkoliikenne sovellustason protokollasta riippumatta käyttää TCP-yhteyksiä ja -portteja kommunikointiin. TCP-yhteyksiä käytetään Javassa <a href="https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html" target="_blank">Socket</a>- ja <a href="https://docs.oracle.com/javase/8/docs/api/java/net/ServerSocket.html" target="_blank">ServerSocket</a>-luokkien avulla. Lisää aiheesta löytyy <a href="https://docs.oracle.com/javase/tutorial/networking/sockets/" target="_blank">tästä oppaasta</a>.</p>
+		  
+		  <p>Eräs suosittu viestiprotokolla (eli säännöstö, joka kertoo kuinka kommunikoinnin tulee kulkea) alkaa sanoilla <code>Knock knock!</code>. Toinen osapuoli vastaa tähän <code>Who's there?</code>. Ensimmäinen osapuoli vastaa jotain, esim. <code>Moustache</code>, jonka jälkeen toisen osapuolen tulee vastata <code>Moustache who?</code>. Tähän ensimmäinen osapuoli vastaa viestillä joka päättyy "Bye.".</p>
+
+<pre>
+Server: Knock knock!
+Client: Who's there?
+Server: Moustache
+Client: Moustache who?
+Server: I Moustache you a question, but I'm shaving it for later! Bye.
+</pre>
+
+		  <p>Tehtäväpohjan mukana tulee projekti, on toteutettu valmiiksi palvelinpuolen toiminnallisuus luokassa KnockKnockServer. Palvelinohjelmisto kuuntelee pyyntöä portissa 12345.</p>
+		  
+		  <p>Tehtävänäsi on toteuttaa valmiiksi toteutettua palvelinkomponenttia varten asiakaspuolen toiminnallisuus, eli sovellus, joka tekee kyselyjä palvelimelle. Asiakaspuolen toiminnallisuutta varten on jo olemassa allaoleva runko, joka tulee tehtäväpohjan pakkauksessa <code>wad.knockknock.client</code> olevassa luokassa <code>KnockKnockClient</code>.</p>
+
+		  <p>Täydennä asiakasohjelmisto annettujen askelten mukaan siten, että sitä voi käyttää kommunikointiin viestiprotokollapalvelimen kanssa.</p>
+
+<pre class="sh_java">
+// Luodaan yhteys palvelimelle
+Socket socket = new Socket("localhost", port);
+
+Scanner serverMessageScanner = new Scanner(socket.getInputStream());
+PrintWriter clientMessageWriter = new PrintWriter(
+        socket.getOutputStream(), true);
+
+Scanner userInputScanner = new Scanner(System.in);
+
+// Luetaan viestejä palvelimelta
+while (serverMessageScanner.hasNextLine()) {
+    // 1. lue viesti palvelimelta
+    // 2. tulosta palvelimen viesti standarditulostusvirtaan näkyville
+
+    // 3. jos palvelimen viesti loppuu merkkijonon "Bye.", poistu toistolausekkeesta
+
+    // 4. pyydä käyttäjältä palvelimelle lähetettävää viestiä
+    // 5. kirjoita lähetettävä viesti palvelimelle. Huom! Käytä println-metodia.
+}
+</pre>
+
+
+		  <p>Kirjoita asiakasohjelmiston lähdekoodi KnockKnockClient-luokan start-metodiin. Kun olet saanut ohjelmiston valmiiksi, suorita ohjelma, jotta voit kokeilla sitä. Tehtäväpohjan mukana on ohjelman käynnistävä main-metodin sisältävä luokka valmiina. Tulostuksen pitäisi olla esimerkiksi seuraavanlainen (käyttäjän syöttämät tekstit on merkitty punaisella):</p>
+
+<pre>
+Server: Knock knock!
+Type a message to be sent to the server: <font color="red">Who's there?</font>
+Server: Lettuce
+Type a message to be sent to the server: <font color="red">Lettuce who?</font>
+Server: Lettuce in! it's cold out here! Bye.
+</pre>
+
+		  <p>Jos asiakasohjelmisto lähettää virheellisiä viestejä, reagoi palvelin siihen seuraavasti:</p>
+
+<pre>
+Server: Knock knock!
+Type a message to be sent to the server: <font color="red">What?</font>
+Server: You are supposed to ask: "Who's there?"
+Type a message to be sent to the server: <font color="red">Who's there?</font>
+Server: Lettuce
+Type a message to be sent to the server: <font color="red">huh</font>
+Server: You are supposed to ask: "Lettuce who?"
+Type a message to be sent to the server: <font color="red">Lettuce who?</font>
+Server: Lettuce in! it's cold out here! Bye.
+</pre>
+
+		  <p>Kun olet saanut asiakaspuolen toiminnallisuuden toimimaan, palauta tehtävä TMC:lle.</p>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+	    <p>Edellisessä tehtävässä toteutettu ohjelma voisi aivan yhtä hyvin tehdä kyselyitä web-palvelimelle, mutta tällöin käytettynä viestiprotokollana pitäisi olla HTTP-protokolla. Tutustutaan seuraavaksi tarkemmin HTTP-protokollaan, eli selainten ja palvelinten väliseen kommunikaatioon käytettyyn kommunikaatiotyyliin.</p>
+
+
+            <h3>HTTP-viestin rakenne: palvelimelle lähetettävä kysely</h3>
+
+            <p>HTTP-protokollan yli lähetettävät viestit ovat tekstimuotoisia. Viestit koostuvat riveistä jotka muodostavat otsakkeen, sekä riveistä jotka muodostavat viestin rungon. Viestin runkoa ei ole pakko olla olemassa -- joskus palautetaan esimerkiksi vain uudelleenohjauskomento. Viestin loppuminen ilmoitetaan kahdella peräkkäisellä rivinvaihdolla.</p>
+
+            <p>Palvelimelle lähetettävän viestin, eli kyselyn, ensimmäisellä rivillä on pyyntötapa, halutun resurssin polku ja HTTP-protokollan versionumero.</p>
+
+<pre>
+PYYNTÖTAPA /POLKU_HALUTTUUN_RESURSSIIN HTTP/versio
+otsake-1: arvo
+otsake-2: arvo
+
+valinnainen viestin runko</pre>
+
+            <p>Pyyntötapa ilmaisee HTTP-protokollassa käytettävän pyynnön tavan (esim. <code>GET</code> tai <code>POST</code>), polku haluttuun resurssiin kertoo haettavan resurssin sijainnin palvelimella (esim. <code>/index.html</code>), ja HTTP-versio kertoo käytettävän version (esim. <code>HTTP/1.0</code>). Alla esimerkki hyvin yksinkertaisesta -- joskin yleisestä -- pyynnöstä. Huomaa että yhteys palvelimeen on jo muodostettu, eli palvelimen osoitetta ei merkitä erikseen.</p>
+
+<pre>
+GET /index.html HTTP/1.0
+
+</pre>
+	    
+            <p>Yksittäisen tietokoneen käyttäminen yhteen web-palvelinohjelmistoon saapuviin pyyntöihin jättää helposti huomattavan osan tietokoneen kapasiteetista käyttämättä. Yleisesti käytössä oleva HTTP/1.1 -protokolla mahdollistaa useamman palvelimen pitämisen samassa IP-osoitteessa virtuaalipalvelintekniikan avulla. Tällöin yksittäiset palvelinkoneet voivat sisältää useita palvelimia. Käytännössä IP-osoitetta kuunteleva kone voi joko itsessään sisältää useita ohjelmistoilla emuloituja palvelimia, tai se voi toimia reitittimenä ja ohjata pyynnön tietylle esimerkiksi yrityksen sisäverkossa sijaitsevalle koneelle.</p>
+
+	    <p>Koska yksittäinen IP-osoite voi sisältää useampia palvelimia, pelkkä polku haluttuun resurssiin ei riitä oikean resurssin löytämiseen: resurssi voisi olla millä tahansa koneeseen liittyvällä virtuaalipalvelimella. HTTP/1.1 -protokollassa on pyynnöissä pakko olla mukana käytetyn palvelimen osoitteen kertova <code>Host</code>-otsake.</p>
+
+<pre>
+GET /index.html HTTP/1.1
+Host: www.munpalvelin.net
+
+</pre>
+
+
+	    <h3>Yhteyden muodostaminen palvelimelle Java-maailmassa</h3>
+		
+	    <p>Java-maailmassa yhteys toiselle koneelle muodostetaan <a href="https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html" target="_blank">Socket</a>-luokan avulla. Kun yhteys on muodostettu, toiselle koneelle lähetettävä viesti kirjoitetaan socketin tarjoamaan <a href="https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html" target="_blank">OutputStream</a>-rajapintaan. Tämän jälkeen luetaan vastaus socketin tarjoaman <a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" target="_blank">InputStream</a>-rajapinnan kautta.</p>
+
+<pre class="sh_java">
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // Connect to the Web server at an address
+        String address = "www.helsinki.fi";
+        // InetAddress.getByName retrieves an IP for the address
+        Socket socket = new Socket(InetAddress.getByName(address), 80);
+
+        // Send a HTTP-request to the server that we are connected to 
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+        writer.println("GET / HTTP/1.1");
+        writer.println("Host: " + address);
+        writer.println();
+        writer.flush();
+
+        // Read the response
+        Scanner reader = new Scanner(socket.getInputStream());
+        while (reader.hasNextLine()) {
+            System.out.println(reader.nextLine());
+        }
+    }
+}
+</pre>
+
+	    <p>Yllä oleva ohjelma ottaa yhteyden etsii www.helsinki.fi -osoitteeseen liittyvän palvelimen, ottaa yhteyden palvelimen porttiin 80, ja lähettää palvelimelle seuraavan viestin:</p>
+
+<pre>
+GET / HTTP/1.1
+Host: www.helsinki.fi
+
+</pre>
+
+	    <p>Tämän jälkeen ohjelma tulostaa palvelimelta saatavan vastauksen.</p>
+
+	    <div class="tehtavat">
+              <div class="tehtava" id="t-browser-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-browser">
+                      Hello Browser!
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-browser" class="collapse">
+		  
+		  <p>Vaikkei kyseessä olekaan selainohjelmointikurssi, on jokaisen hyvä toteuttaa selainohjelmiston ensimmäiset askeleet. Toteuta tehtäväpohjassa olevan <code>HelloBrowser</code>-luokan main-metodiin ohjelma, joka kysyy käyttäjältä sivun osoitetta, tekee syötetyn sivun juureen ("/") pyynnön, ja tulostaa käyttäjälle vastauksen.</p>
+		  
+		  <p>Alla on esimerkkituloste, missä käyttäjän syöte on annettu punaisella.</p>
+
+<pre>
+================
+ THE INTERNETS!
+================
+Where to? <font color="red">www.google.com</font>
+
+==========
+ RESPONSE
+==========
+HTTP/1.1 302 Found
+Cache-Control: private
+Content-Type: text/html; charset=UTF-8
+Location: http://www.google.fi/?gfe_rd=cr&ei=Q5dgVu7zDqOr8wer_4OoCA
+Content-Length: 256
+Server: GFE/2.0
+
+&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;TITLE&gt;302 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;302 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF="http://www.google.fi/?gfe_rd=cr&amp;ei=Q5dgVu7zDqOr8wer_4OoCA"&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</pre>
+
+		  <p>Kokeile myös tehdä pyyntö osoitteeseen, jota ei ole olemassa. Minkälaisen virheviestin ohjelmisto tarjoaa?</p>
+
+                </div>
+              </div>
+	    </div>
+	    
+
+            <h3>HTTP-viestin rakenne: palvelimelta saapuva vastaus</h3>
+
+            <p>Palvelimelle tehtyyn pyyntöön saadaan aina jonkinlainen vastaus. Jos tekstimuotoiseen osoitteeseen ei ole liitetty IP-osoitetta DNS-palvelimilla, selain ilmoittaa ettei palvelinta löydy. Jos palvelin löytyy, ja pyyntö saadaan tehtyä palvelimelle asti, tulee palvelimen myös vastata jollain tavalla.</p>
+
+            <p>Palvelimelta saatavan vastauksen sisältö on seuraavanlainen. Ensimmäisellä rivillä HTTP-protokollan versio, viestiin liittyvä statuskoodi, sekä statuskoodin selvennys. Tämän jälkeen on joukko otsakkeita, tyhjä rivi, ja mahdollinen vastausrunko. Vastausrunko ei ole pakollinen.</p>
+
+<pre>
+HTTP/versio statuskoodi selvennys
+otsake-1: arvo
+otsake-2: arvo
+
+valinnainen vastauksen runko
+</pre>
+
+            <p>Esimerkiksi:</p>
+
+<pre>
+HTTP/1.1 200 OK
+Date: Mon, 01 Sep 2014 03:12:45 GMT
+Server: Apache/2.2.14 (Ubuntu)
+Vary: Accept-Encoding
+Content-Length: 973
+Connection: close
+Content-Type: text/html;charset=UTF-8
+
+.. runko ..</pre>
+
+            <p>Kun palvelin vastaanottaa tiettyyn resurssiin liittyvän pyynnön, tekee se resurssiin liittyviä toimintoja ja palauttaa lopulta vastauksen. Kun selain saa vastauksen, tarkistaa se vastaukseen liittyvän <a href="https://http.cat/" target="_blank">statuskoodin</a> ja siihen liittyvät tiedot -- tyypillinen statuskoodi on <code>200</code> (OK). Tämän jälkeen selain päättelee, mitä vastauksella tehdään, ja esimerkiksi tuottaa vastaukseen liittyvän web-sivun käyttäjälle.</p>
+
+	    <aside class="info">
+	      <br/>
+	      
+	      <h1>HTTP-statuskoodit</h1>
+
+              <p>Statuskoodit (<em>status code</em>) kuvaavat palvelimella tapahtunutta toimintaa kolmella numerolla. Statuskoodien avulla palvelin kertoo mahdollisista ongelmista tai tarvittavista lisätoimenpiteistä. Yleisin statuskoodi on <code>200</code>, joka kertoo kaiken onnistuneen oikein. HTTP/1.1 sisältää viisi kategoriaa vastausviesteihin.</p>
+
+              <ul>
+		<li>1**: informaatioviestit (esim 100 "Continue")</li>
+		<li>2**: onnistuneet tapahtumat (esim 200 "OK")</li>
+		<li>3**: asiakasohjelmistolta tarvitaan lisätoimintoja (esim 301 "Moved Permanently" tai 304 "Not Modified" eli hae välimuistista)</li>
+		<li>4**: virhe pyynnössä tai erikoistilanne (esim 401 "Not Authorized" ja 404 "Not Found")</li>
+		<li>5**: virhe palvelimella (esim 500 "Internal Server Error")</li>
+              </ul>
+	    </aside>
+
+            <h3>Palvelimen toiminta Java-maailmassa</h3>
+		
+	    <p>Palvelimen toiminta muistuttaa huomattavasti aiemmin nähtyä yhteyden muodostamista. Toisin kuin yhteyttä toiseen koneeseen muodostaessa, palvelinta toteutettaessa luodaan <a href="https://docs.oracle.com/javase/8/docs/api/java/net/ServerSocket.html" target="_blank">ServerSocket</a>-olio, joka kuuntelee tiettyä koneessa olevaa porttia. Kun toinen kone ottaa yhteyden palvelimeen, saadaan käyttöön Socket-olio, joka tarjoaa mahdollisuuden lukemiseen ja kirjoittamiseen.</p>
+
+	    <p>Web-palvelin lukee tyypillisesti ensin pyynnön, jonka jälkeen pyyntöön kirjoitetaan vastaus. Alla on esimerkki yksinkertaisen palvelimen toiminnasta -- palvelin on toiminnassa vain yhden pyynnön ajan.</p>
+
+<pre class="sh_java">
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // Create a Server Socket that listens to requests on port 8080
+        ServerSocket server = new ServerSocket(8080);
+
+        // Wait for a request from a machine, once it apprears, accept it
+        Socket socket = server.accept();
+
+        // Read the request
+        Scanner requestReader = new Scanner(socket.getInputStream());
+
+        // Write the response
+        PrintWriter responseWriter = new PrintWriter(socket.getOutputStream());
+
+        // Close the streams and the socket
+        requestReader.close();
+        responseWriter.close();
+        socket.close();
+
+        // Close the server
+        server.close();
+    }
+}
+</pre>
+
+	    <p>Kokeile ylläolevaa ohjelmaa omalla koneellasi. Kuten aiemmissa web-sovelluksissa, voit tässäkin tehdä HTTP-pyynnön porttiin 8080 kirjoittamalla  selaimella osoitteeksi <code>http://localhost:8080</code>. Jos sovelluksen käynnistäminen ei onnistu, tarkista että portti ei ole varattu (et ole sammuttanut jotain aiemmin tekemääsi web-sovellusta).</p>
+
+
+	    
+	    <aside class="info">
+	      <br/>
+	      <h1>Web-palvelin odottaa pyyntöä selaimelta</h1>
+	      
+	      <p>ServerSocket-olion accept-metodi on <em>blokkaava</em>. Tämä tarkoittaa sitä, että accept-metodia kutsuttaessa ohjelman suoritus jää odottamaan kunnes palvelimeen otetaan yhteys. Kun yhteys on muodostettu, accept-metodi palauttaa Socket-olion, jota käytetään palvelimen ja yhteyden ottaneen koneen väliseen kommunikointiin.</p>
+
+	      <p>Ohjelmoijan näkökulmasta Socket-oliota -- ja porttia yleisemminkin -- voi ajatella tiedostona. Tiedostoon voi kirjoittaa ja siellä olevaa tietoa voi lukea. Kirjoitettava ja luettava tieto ei kuitenkaan tule tiedostosta, vaan yhteyden toisessa päässä toimivasta ohjelmasta.</p>
+
+	    </aside>
+	    
+	    <p>Tyypillisesti palvelin halutaan toteuttaa niin, että se kuuntelee ja käsittelee pyyntöjä jatkuvasti. Tämä onnistuu toistolauseen avulla.</p>
+
+<pre class="sh_java">
+// Create a Server Socket that listens to requests on port 8080
+ServerSocket server = new ServerSocket(8080);
+
+while (true) {
+    // Wait for a request from a machine, once it apprears, accept it
+    Socket socket = server.accept();
+
+    // Read the request
+    Scanner requestReader = new Scanner(socket.getInputStream());
+
+    // Write the response
+    PrintWriter responseWriter = new PrintWriter(socket.getOutputStream());
+
+    // Close the streams and the socket
+    requestReader.close();
+    responseWriter.close();
+    socket.close();
+}
+</pre>
+
+	    <p>Web-palvelimet käsittelevät useampia pyyntöjä lähes samanaikaisesti, sillä palvelinohjelmistot ovat säikeistettyjä. Käytännössä jokainen pyyntö käsitellään erillisessä säikeessä, joka luo pyyntöön vastauksen ja palauttaa sen käyttäjille. Javassa säikeille löytyy oma <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html" target="_blank">Thread</a>-luokka. Emme kuitenkaan tällä kurssilla perehdy säikeiden käyttöön sen tarkemmin -- tätä varten löytyy kurssi <a href="https://www.cs.helsinki.fi/courses/582219" target="_blank">Käyttöjärjestelmät</a>.</p>
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Tietokoneen portit</h1>
+
+	      <p>Jos kokeilet käynnistää palvelimen koneellasi portissa 80, saatat törmätä virheviestiin. Tähän on useita mahdollisia syitä: (1) koneellasi oleva palomuuri- tai tietoturvaohjelmisto ei salli portin avaamista, (2) portti on jo käytössä (koneellasi oleva ohjelma -- esimerkiksi palvelin -- käyttää porttia 80), tai käyttäjätunnuksellasi ei ole oikeuksia portin avaamiseen.</p>
+
+	      <p>Tietokoneella on käytössä portit 0-65535, joista "normaali" käyttäjä saa tyypillisesti avata vain suurempia kuin 1024 olevia. Lue lisää porteista <a href="https://fi.wikipedia.org/wiki/Portti_(tietoliikenne)" target="_blank">Wikipediasta</a>.</p>
+	    </aside>
+
+
+	    
+
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-server-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-server">
+                      Hello Server!
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-server" class="collapse">
+		  
+		  <p>Toteuta web-palvelin, joka kuuntelee pyyntöjä porttiin 8080.</p>
+		  
+		  <p>Jos pyydetty polku on <code>/quit</code>, tulee palvelin sammuttaa.</p>
+		  
+		  <p>Muulloin, minkä tahansa pyynnön vastaukseen kirjoitetaan resurssin siirtymisestä kertova (302-alkuinen) HTTP-statuskoodi sekä palvelimen osoite, eli <code>http://localhost:8080</code>.</p>
+
+		  <p>Ota samalla selvää kuinka monta pyyntöä selaimesi tekee palvelimelle, ennen kuin se ymmärtää että jotain on vialla.</p>
+
+		  <img src="img/mooc/ex20-redirectloop.png"/>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+
+            <aside class="extra">
+	      
+              <p><strong>Google Dev Tools</strong></p>
+		  
+              <p>Google Chromen DevTools-apuvälineet löytää Tools-valikosta tai painamalla F12 (Linux). Apuvälineillä voi esimerkiksi tarkastella verkkoliikennettä ja lähetettyjä ja vastaanotettuja paketteja. Valitsemalla työvälineistä Network-välilehden, ja lataamalla sivun uudestaan, näet kaikki sivua varten ladattavat osat sekä kunkin osan lataamiseen kuluneen ajan.</p>
+
+	      <p>Yksittäistä sivua avattaessa tehdään jokaista resurssia (kuva, tyylitiedosto, skripti) varten erillinen pyyntö. Esimerkiksi <a href="http://www.hs.fi" target="_blank">Helsingin sanomien</a> verkkosivua avattaessa tehdään yli 270 erillistä pyyntöä.</p>
+
+	      <img src="img/google-devtools-hs-fi.png"/>
+
+	      
+            </aside>
+	    
+	    
+            <h3>HTTP-liikenteen testaaminen telnet-työvälineellä</h3>
+	    
+            <p>Linux-ympäristöissä on käytössä telnet-työkalu, jota voi käyttää yksinkertaisena asiakasohjelmistona pyyntöjen simulointiin. Telnet-yhteyden tietyn koneen tiettyyn porttiin saa luotua komennolla <code>telnet isäntäkone portti</code>. Esimerkiksi Helsingin sanomien www-palvelimelle saa yhteyden seuraavasti:</p>
+
+<pre>
+$ telnet www.hs.fi 80
+</pre>
+
+            <p>Tätä seuraa telnetin infoa yhteyden muodostamisesta, jonka jälkeen pääsee kirjoittamaan pyynnön.</p>
+
+<pre>
+Trying 158.127.30.40...
+Connected to www.hs.fi.
+Escape character is '^]'.
+
+</pre>
+
+            <p>Yritetään pyytää HTTP/1.1 -protokollalla juuridokumenttia. Huom! HTTP/1.1 -protokollassa tulee pyyntöön lisätä aina Host-otsake. Jos yhteys katkaistaan ennen kuin olet saanut kirjoitettua viestisi loppuun, ota apuusi tekstieditori ja copy-paste. Muistathan myös että viesti lopetetaan aina kahdella rivinvaihdolla.</p>
+
+<pre>
+GET / HTTP/1.1
+Host: www.hs.fi
+
+</pre>
+
+            <p>Palvelin palauttaa vastauksen, jossa on statuskoodi ja otsakkeita sekä dokumentin runko.</p>
+
+<pre>
+HTTP/1.1 200 OK
+X-UA-Compatible: IE=Edge,chrome=1
+X-PageCache: true
+Content-Type: text/html;charset=UTF-8
+Content-Language: en
+Content-Length: 485452
+Set-Cookie: HSSESSIONID=0E325634FOOH806AC32F62E33F3CF624F3.fe04; Path=/; HttpOnly
+Vary: Accept-Encoding
+Connection: close
+
+&lt;!DOCTYPE html&gt;
+...
+</pre>
+
+            <p>Juuripolkua palvelimelta <code>www.hs.fi</code> haettaessa palvelin vastaa "OK" ja palauttaa dokumentin.</p>
+
+
+	    <p>Jos käytössäsi ei ole Linux-konetta, voit käyttää Telnetiä esimerkiksi <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank">PuTTY</a>-ohjelmiston avulla. Voit myös tehdä selailua käsin aiemmin toteutetun Java-ohjelman avulla.</p>
+
+	    
+            <aside class="pohdi">
+              <h1>Kuinka monta hyppyä?</h1>
+		  
+              <p>Käytä telnetiä tee pyyntö osoitteeseen <code>cs.helsinki.fi</code> (portti 80). Tavoitteenasi on päästä vastauksia seuraamalla tietojenkäsittelytieteen laitoksen osoitteessa <code>http://www.cs.helsinki.fi/home/</code> olevalle etusivulle. Kuinka monta uudelleenohjausta palvelin palauttaa ennenkuin palvelin lopulta kertoo oikean etusivun osoitteen?</p>
+	      
+              <p>Huom! Jos et ehdi kirjoittamaan komentoa telnet-ikkunaan, voit ensin kirjoittaa sen esimerkiksi tekstieditoriin, ja kopioida sen sieltä telnet-ikkunaan.</p>
+		  
+<pre>
+GET / HTTP/1.1
+Host: cs.helsinki.fi
+
+</pre>
+
+            </aside>
+
+
+            <h3>HTTP-protokollan pyyntötavat</h3>
+
+            <p>HTTP-protokolla määrittelee kahdeksan erillistä pyyntötapaa (Request method), joista eniten käytettyjä ovat <code>GET</code> ja <code>POST</code>. Pyyntötavat määrittelevät rajoitteita ja suosituksia viestin rakenteeseen ja niiden prosessointiin palvelinpäässä. Esimerkiksi <a href="http://jcp.org/aboutJava/communityprocess/mrel/jsr154/index2.html" target="_blank">Java Servlet API (versio 2.5)</a> sisältää seuraavan suosituksen GET-pyyntotapaan liittyen:</p>
+
+            <p><em>The GET method should be safe, that is, without any side effects for which users are held responsible. For example, most form queries have no side effects. If a client request is intended to change stored data, the request should use some other HTTP method.</em></p>
+
+            <p>Suomeksi yksinkertaistaen: GET-pyynnöt ovat tarkoitettu tiedon hakamiseen. Palvelinpuolen toiminnallisuutta suunniteltaessa tulee siis pyrkiä tilanteeseen, missä <code>GET</code>-tyyppisillä pyynnöillä ei muuteta palvelimella olevaa dataa.</p>
+
+            <h4>Tiedon hakeminen: GET</h4>
+
+            <p>GET-pyyntötapaa käytetään esimerkiksi dokumenttien hakemiseen: kun kirjoitat osoitteen selaimen osoitekenttään ja painat enter, selain tekee GET-pyynnön. GET-pyynnöt eivät tarvitse otsaketietoja HTTP/1.1:n vaatiman Host-otsakkeen lisäksi. Mahdolliset kyselyparametrit lähetetään palvelimelle osana haettavaa osoitetta.</p>
+
+<pre>
+GET /sivu.html?porkkana=1 HTTP/1.1
+Host: palvelimen-osoite.net
+
+</pre>
+
+	    <p>Spring-sovelluksissa kontrollerimetodi kuuntelee GET-tyyppistä pyyntöä jos <code>@RequestMapping</code>-annotaatiolle on määritelty metodiksi <code>GET</code>: <code>@RequestMapping(value = "polku", method = RequestMethod.GET)</code>.</p>
+
+            <h4>Tiedon lähettäminen: POST</h4>
+
+            <p>Käytännön ero POST- ja GET-kyselyn välillä on se, että POST-tyyppisillä pyynnoillä kyselyparametrit liitetään pyynnön runkoon. Rungon sisältö ja koko määritellään otsakeosiossa. POST-kyselyt mahdollistavat multimedian (kuvat, videot, musiikki, ...) lähettämisen palvelimelle.</p>
+
+<pre>
+POST /sivu.html HTTP/1.1
+Host: palvelimen-osoite.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+porkkana=1
+</pre>
+	    <p>Spring-sovelluksissa kontrollerimetodi kuuntelee POST-tyyppistä pyyntöä jos <code>@RequestMapping</code>-annotaatiolle on määritelty metodiksi <code>POST</code>: <code>@RequestMapping(value = "polku", method = RequestMethod.POST)</code>.</p>
+
+
+            <h4>Muita pyyntötyyppejä</h4>
+
+	    <p>Selaimen ja palvelimen välisessä kommunikoinnissa GET- ja POST-tyyppiset pyynnöt ovat eniten käytettyjä. Sivun tai siihen liittyvän osan kuten kuvan hakeminen tapahtuu käytännössä aina GET-tyyppisellä pyynnöllä, ja tiedon lähettäminen esimerkiksi lomakkeen kautta POST-tyyppisellä pyynnöllä. HTTP-protokolla määrittelee muitakin pyyntötyyppejä, joita käytetään palvelinohjelmistojen toteuttamisessa. Oleellisimpia ovat:</p>
+
+	    <ul>
+	      <li><em>OPTIONS</em> pyytää tietoja resurssiin liittyvistä vaihtoehdoista (esimerkiksi voidaanko resurssi poistaa, ...)</li>
+	      <li><em>DELETE</em> pyytää resurssin poistamista</li>
+	      <li><em>HEAD</em> haluaa resurssiin liittyvät otsaketiedot, mutta ei resurssia</li>
+	    </ul>
+
+
+	    <aside class="info">
+		  
+	      <br/>
+	      <h1>HTTP/2</h1>
+
+	      <p>Nykyaikaiset web-sivustot ja palvelinohjelmistot sisältävät tyypillisesti useita erilaisia asioita: kuvia, tyylitiedostoja, musiikkia, videokuvaa ja niin edelleen. Jokainen sivuun liittyvä resurssi tulee hakea erikseen.</p>
+
+	      <p>HTTP-protokollasta julkaistiin toukokuussa 2015 versio <a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a> (<a href="https://tools.ietf.org/html/rfc7540" target="_blank">RFC 7540</a>). Eräs uudistus protokollassa on palvelimelle jätetty mahdollisuus lähettää pyyntöön vastauksena useampia resursseja saman. Tällöin yhteyden avaamiseen ja sulkemiseen käytetty aika vähenee ja web-sivustojen lataaminen mahdollisesti nopeutuu. HTTP/2 -protokolla sisältää muitakin parannuksia nykytilanteeseen -- suurin osa toiminnallisuudesta toteutetaan kuitenkin palvelinohjelmistoa pyörittävässä palvelimessa, eikä itse palvelinohjelmistossa.</p>
+	    </aside>
+
+	    
+            <h2>HTML: Yhteinen dokumenttien esityskieli</h2>
+
+            <p>HTML on rakenteellinen kuvauskieli, jolla voidaan esittää linkkejä sisältävää tekstiä sekä tekstin rakennetta. HTML koostuu elementeistä, jotka voivat olla sisäkkäin ja peräkkäin. Elementtejä käytetään ohjeina dokumentin jäsentämiseen ja käyttäjälle näyttämiseen. HTML-dokumenteissa elementit avataan elementin nimen sisältävällä pienempi kuin -merkillä (&lt;) alkavalla ja suurempi kuin -merkkiin (&gt;) loppuvalla merkkijonolla (&lt;elementin_nimi&gt;), ja suljetaan merkkijonolla jossa elementin pienempi kuin -merkin jälkeen on vinoviiva (&lt;/elementin_nimi&gt;).</p>
+
+            <p>HTML-dokumentin rakennetta voi ajatella myös puuna. Juurisolmuna on elementti <code>&lt;html&gt;</code>, jonka lapsina ovat elementit <code>&lt;head&gt;</code> ja <code>&lt;body&gt;</code>.</p>
+
+            <p>Jos elementin sisällä ei ole muita elementtejä tai tekstisolmuja eli tekstiä, voi elementin yleensä avata ja sulkea samalla merkkijonolla: (&lt;elementin_nimi /&gt;).</p>
+
+            <p>HTML:stä on useita erilaisia standardeja, joista viimeisin julkaistu versio on <a href="http://www.w3.org/TR/html5/" target="_blank">HTML5</a>. Versiota <a href="http://www.w3.org/TR/html51/" target="_blank">5.1</a> työstetään tällä hetkellä (viimeisin päivitys 21.6.2016).</p>
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fi"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;selainikkunassa näkyvä otsikko&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Tekstiä tekstielementin sisällä, tekstielementti runkoelementin sisällä,
+       runkoelementti html-elementin sisällä. Elementin sisältö voidaan asettaa
+       useammalle riville.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+            <p>Ylläoleva HTML5-dokumentti sisältää dokumentin tyypin ilmaisevan aloitustägin (<code>&lt;!DOCTYPE html&gt;</code>), dokumentin aloittavan html-elementin (<code>&lt;html&gt;</code>), otsake-elementin ja sivun otsikon (<code>&lt;head&gt;</code>, jonka sisällä <code>&lt;title&gt;</code>), sekä runkoelementin (<code>&lt;body&gt;</code>).</p>
+
+            <p>Elementit voivat sisältää attribuutteja ja attribuuteille voi antaa arvoja. Esimerkiksi ylläolevassa esimerkissä html-elementille on määritelty erillinen attribuutti <em>lang</em>, joka kertoo dokumentissa käytetystä kielestä.  Ylläolevan esimerkin otsakkeessa on myös metaelementti, jota käytetään lisävinkin antamiseen selaimelle: "dokumentissa käytetään UTF-8 merkistöä". Tämä kannattaa olla dokumenteissa aina.</p>
+
+            <p>Nykyaikaiset web-sivut sisältävät paljon muutakin kuin sarjan HTML-elementtejä. Linkitetyt resurssit, kuten kuvat ja tyylitiedostot, ovat oleellisia sivun ulkoasun ja rakenteen luomisessa. Selainpuolella suoritettavat skriptitiedostot, erityisesti Javascript, ovat luoneet huomattavan määrän syvyyttä nykyaikaiseen web-kokemukseen. Tällä kurssilla emme juurikaan syvenny selainpuolen toiminnallisuuteen.</p>
+
+	    <aside class="info">
+
+	      <br/>
+	      
+	      <h1>Thymeleaf ja HTML</h1>
+		  
+	      <p>Käytämme kurssilla Thymeleaf-komponenttia dynaamisen sisällön lisäämiseen sivuille. Thymeleaf on erittäin tarkka HTML-dokumentin muodosta, ja pienikin poikkeama voi johtaa virhetilanteeseen. Kannattaakin aina edetä pienin askelein, ja aina muokata ja testata vain yhtä paikkaa kerrallaan. Tällöin virhetilanteessa tyypillisesti tietää mistä kohdasta kannattaa lähteä etsimään virhettä. </p>
+	      
+	    </aside>
+
+
+	    <h1>Sovelluksen rakenne ja pyynnön kulku sovelluksessa</h1>
+
+	    <p>Web-sovellusten suunnittelussa noudatetaan useita arkkitehtuurimalleja. Tyypillisimpiä näistä ovat MVC-arkkitehtuuri sekä kerrosarkkitehtuuri, joissa kummassakin perusperiaatteena on vastuiden jako selkeisiin osakokonaisuuksiin.</p>
+
+	    
+	    <h2>MVC-arkkitehtuuri</h2>
+
+
+	    <p>MVC-arkkitehtuurin tavoitteena on käyttöliittymän erottaminen sovelluksen toiminnasta siten, että käyttöliittymät eivät sisällä sovelluksen toiminnan kannalta tärkeää sovelluslogiikkaa. MVC-arkkitehtuurissa ohjelmisto jaetaan kolmeen osaan: malliin (<em>model</em>, tiedon tallennus- ja hakutoiminnallisuus), näkymään (<em>view</em>, käyttöliittymän ulkoasu ja tiedon esitystapa) ja käsittelijään (<em>controller</em>, käyttäjältä saatujen käskyjen käsittely sekä sovelluslogiikka).</p>
+
+	    <p>MVC-mallia on perinteisesti käytetty työpöytäsovelluksiin, missä käsittelijä on voinut olla jatkuvassa yhteydessä näkymään ja malliin. Tällöin käyttäjän yksittäinen toiminta käyttöliittymässä -- esimerkiksi tekstikentän tiedon päivitys -- liittyy tapahtumankäsittelijään, joka ohjaa tiedon malliin liittyvälle ohjelmakoodille, jonka tehtävänä on päivittää sovellukseen liittyvää tietoa tarvittaessa. Tapahtumankäsittelijä mahdollisesti sisältää myös ohjelmakoodia, joka pyytää muunnosta käyttöliittymässä.</p>
+
+	    <p>Web-maailmassa käsittelijän ohjelmakoodia suoritetaan vain kun selain lähettää palvelimelle pyynnön. Ohjelmakoodissa haetaan esimerkiksi tietokannasta tietoa, joka ohjataan näkymän luontiin tarkoitetulle sovelluksen osalle. Kun näkymä on luotu, palautetaan se pyynnön tehneelle selaimelle. Spring-sovelluksissa kontrollereissa näkyvä <code>Model</code> viittaa tietoon, jota käytetään näkymän luomisessa -- se ei kuitenkaan vastaa MVC-mallin model -termiä, joka liittyy kattavammin koko tietokantatoiminnallisuuteen.</p>
+
+	    <div class="image">
+              <img src="img/mvc.png"/>
+              <div>MVC-mallissa käyttäjän pyyntö ohjautuu kontrollerille, joka sisältää sovelluslogiikkaa. Kontrolleri kutsuu pyynnöstä riippuen mallin toiminnallisuuksia ja hakee sieltä esimerkiksi tietoa. Tämän jälkeen pyyntö ohjataan näkymän luomisesta vastuulle olevalle komponentilla ja näkymä luodaan. Lopulta näkymä palautetaan vastauksena käyttäjän tekemälle pyynnölle.</div>
+            </div>
+	    
+	    <p>MVC-mallista on useita hyötyjä. Käyttöliittymien (näkymien) suunnitelu ja toteutus voidaan eriyttää sovelluslogiikan toteuttamisesta, ja niitä voidaan työstää rinnakkain. Samalla ohjelmakoodi selkenee, sillä eri komponenttien vastuut ovat eriteltyjä -- näkymät eivät sisällä sovelluslogiikkaa, kontrollerin tehtävänä on käsitellä pyynnöt ja ohjata niitä eteenpäin, ja mallin vastuulla on tietoon liittyvät operaatiot. Tämän lisäksi sovellukseen voidaan luoda useampia käyttöliittymiä, joista jokainen käyttää samaa sovelluslogiikkaa, ja pyynnön kulku sovelluksessa selkiytyy.</p>
+
+
+	    <h2>Kerrosarkkitehtuuri</h2>
+
+
+	    <p>Kun sovellus jaetaan selkeisiin vastuualueisiin, selkeytyy myös pyynnön kulku sovelluksessa. Kerrosarkkitehtuuria noudattamalla pyritään tilanteeseen, missä sovellus on jaettu itsenäisiin kerroksiin, jotka toimivat vuorovaikutuksessa muiden kerrosten kanssa. Käyttöliittymäkerros sisältää näkymät (esim. Thymeleafin html-sivut) sekä mahdollisen logiikan tiedon näyttämiseen (esim tägit html-sivuilla). Käyttöliittymä näkyy käyttäjän selaimessa, ja käyttäjän selain tekee palvelimelle pyyntöjä käyttöliittymässä tehtyjen klikkausten ja muiden toimintojen pohjalta. Palvelimella toimivan sovelluksen kontrollerikerros ottaa vastaan nämä pyynnöt, ja ohjaa ne eteenpäin sovelluksen sisällä. Tällä kurssilla kerrosarkkitehtuurilla tarkoitetaan yleisesti ottaen seuraavaa jakoa:</p>
+
+            <ul>
+              <li>Käyttöliittymäkerros</li>
+              <li>Kontrollerikerros</li>
+              <li>Sovelluslogiikka ja palvelut</li>
+              <li>Tallennuslogiikka (tietokanta-abstraktio ja tietokantapalvelut)</li>
+            </ul>
+
+            <p>Kerrosarkkitehtuuria noudattaessa ylempi kerros hyödyntää alemman kerroksen tarjoamia toiminnallisuuksia, mutta alempi kerros ei hyödynnä ylempien kerrosten tarjoamia palveluita. Puhtaassa kerrosarkkitehtuurissa kaikki kerrokset ovat olemassa, ja kutsut eivät ohita kerroksia ylhäältä alaspäin kulkiessaan. Tällä kurssilla noudatamme avointa kerrosarkkitehtuuria, missä kerrosten ohittaminen on sallittua.</p>
+
+
+	    <div class="image">
+              <img src="img/layers.png"/>
+              <div>Kerrosarkkitehtuurissa sovelluksen vastuut jaetaan kerroksittain. Näkymäkerros sisältää käyttöliittymät, joista voidaan tehdä pyyntöjä kontrollerille. Kontrolleri käsittelee palveluita, jotka ovat yhteydessä tallennuslogiikkaan. Tiedon tallentamiseen käytettäviä entiteettejä sekä muita luokkia (esim "view objects") käytetään kaikilla kerroksilla.</div>
+            </div>
+
+
+            <h3>Kontrollerikerros</h3>
+
+            <p>Kontrollerien ensisijaisena vastuuna on pyyntöjen kuuntelu, pyyntöjen ohjaaminen sopiville palveluille, sekä tuotetun tiedon ohjaaminen oikealle näkymälle tai näkymän generoivalle komponentille.</p>
+
+            <p>Jotta palveluille ei ohjata epäoleellista dataa, esimerkiksi huonoja arvoja sisältäviä parametreja, on kontrolleritason vastuulla myös pyynnössä olevien parametrien validointi.</p>
+
+	    <p>Kontrollerikerroksen luokissa käytetään annotaatiota <code>@Controller</code>, ja luokkien metodit, jotka vastaanottavat pyyntöjä annotoidaan <code>@RequestMapping</code>-annotaatiolla.</p>
+
+
+            <h3>Palvelukerros</h3>
+
+            <p>Palvelukerros tarjoaa kontrollerikerrokselle palveluita, joita kontrollerikerros voi käyttää. Palvelut voivat esimerkiksi abstrahoida kolmannen osapuolen tarjoamia komponentteja tai rajapintoja, tai sisältää toiminnallisuutta, jonka toteuttaminen kontrollerissa ei ole järkevää esimerkiksi sovelluksen ylläpidettävyyden kannalta.</p>
+
+	    
+            <p>Vaikka palvelukerroksella sijaitsevan toiminnallisuuden voisi sisällyttää kontrollerikerrokseen, kontrollerikerros ennen mittaa muuttuisi yhä epäselkeämmäksi.</p>
+
+	    <p>Palvelukerroksen luokat merkitään annotaatiolla <code>@Service</code> tai <code>@Component</code>. Tämä annotaatio tarkoittaa käytännössä sitä, että sovelluksen käynnistyessä luokka ladataan muistiin ja sen ilmentymä asetetaan olioihin, jotka on merkitty <code>@Autowired</code>-annotaatiolla.</p>
+
+	    <p>Alla olevassa esimerkissä luokka <code>PankkiService</code> tarjoaa pankkipalveluita, ja se on otettu automaattisesti luokan <code>PankkiController</code>-käyttöön.</p>
+
+<pre class="sh_java">
+// pakkaus ja importit
+
+@Service
+public class PankkiService {
+
+    // käytetyt oliot
+
+    public void siirraRahaa(Long tililta, Long tilille, Double maara) {
+        // toteutus
+    }
+}</pre>
+
+<pre class="sh_java">
+// pakkaus ja importit
+
+@Controller
+public class PankkiController {
+
+    @Autowired
+    private PankkiService pankkiService;
+
+    @RequestMapping(value = "/siirto", method = RequestMethod.POST)
+    public String siirraRahaa(@RequestParam Long tililta, 
+            @RequestParam Long tilille, @RequestParam Double maara) {
+        this.pankkiService.siirraRahaa(tililta, tilille, maara);
+        return "redirect:/nakyma";
+    }
+
+    // muut toiminnot
+}</pre>
+
+	    <p>Yllä <code>PankkiController</code>-luokan vastuut on eritelty selkeästi. Kontrollerin vastuulla on vain pyynnön vastaanotto sekä näkymän luomiseen liittyvä ohjeistus.</p>
+	    
+            <h3>Tallennuslogiikka</h3>
+
+	    <p>Tallennuslogiikkakerros sisältää tietokannan käyttöön liittyvät oleelliset oliot. Pankki saattaisi tarvita esimerkiksi Tilitapahtumiin liittyvää tallennuslogiikkaa. Täällä olisi esimerkiksi <code>Repository</code>-rajapinnat, jotka perivät rajapinnan <code>JpaRepository</code>.</p>
+
+	    
+
+	    <h3>Tietoa sisältävät oliot</h3>
+
+	    <p>Tiedon esittämiseen liittyvät oliot elävät kerrosarkkitehtuurissa kerrosten sivulla. Esimerkiksi entiteettejä voidaan käsitellä tallennuslogiikkakerroksella (tiedon tallennus), palvelukerroksella (tiedon käsittely), kontrollerikerroksella (tiedon lisääminen Model-olioon) sekä näkymäkerroksella (Model-olion käyttäminen näkymän luomiseen.</p>
+
+	    <p>Sovellusten kehittämisessä näkee välillä myös jaon useampaan erilaiseen tietoa sisältävään oliotyyppiin. Entiteettejä käytetään tietokantatoiminnallisuudessa, mutta välillä näkymien käsittelyyn palautettavat oliot pidetään erillisinä entiteeteistä. Tähän ei ole oikeastaan yhtä oikeaa tapaa: lähestymistapa valitaan tyypillisesti ohjelmistokehitystiimin kesken.</p>
+
+
+
+            <aside class="extra">
+              <h1>Dependency Injection ja Inversion of Control</h1>
+	      
+              <p>Jokaisella luokalla on oma selkeä vastuualueensa, ja vastuiden sekoittamista tulee välttää. Inversion of Control ja Dependency Injection ovat suunnitelumalleja, joilla pyritään vähentämään olioiden turhia riippuvuuksia.</p>
+
+              <p>Perinteisissä ohjelmistoissa olioiden luominen on ohjelmoijan vastuulla, mutta ohjelmistokehykset tekevät osan tästä työstä puolestamme.</p>
+
+	      <p>Spring luo käyttöömme luokkia joita tarvitsemme: Kontrollin käännöllä tarkoitetaan ohjelman toiminnan hallinnan vastuun siirtämistä sovelluskehykselle ja ohjelmaa suorittavalle palvelimelle (<em>inversion of control</em>).</p>
+
+	      <p>Spring injektoi <code>@Autowired</code>-annotaatiolla merkittyihin oliomuuttujiin ilmentymät luokista, jotka se lataa käyttöönsä palvelinohjelmiston käynnistyessä (<em>dependency injection</em>). Luokat ladataan annotaatioiden perusteella: jos luokalla on @Controller, @Service, @Component tai @Repository -annotaatio, ladataan se ohjelman käyttöön alussa.</p>
+
+              <p>Lue lisää aiheesta <a href="http://martinfowler.com/articles/injection.html" target="_blank">Martin Fowlerin</a> artikkelista.</p>
+            </aside>
+
+
+	    
+
+            <h1>Tiedon tallentaminen ja hakeminen</h1>
+
+	    <p>Hyvin harva web-sovellus toimii ilman tarvetta tiedon tallentamis- tai hakutoiminnallisuudelle. Tietoa voidaan tallentaa levylle tiedostoihin, tai sitä voidaan tallentaa erilaisiin tietokantaohjelmistoihin. Nämä tietokantaohjelmistot voivat sijaita erillisellä koneella web-sovelluksesta, tai ne voivat itsekin olla web-sovelluksia. Toteutusperiaatteista riippumatta näiden sovellusten ensisijainen tehtävä on varmistaa, ettei käytettävä tieto katoa.</p>
+	    
+	    <aside class="info">
+	      
+	      <br/>
+	      
+	      <h1>Tietokannat, wut?</h1>
+	      
+	      <p>Jos tietokannat eivät käsitteenä ole tuttuja, ja/tai SQL-kyselyiden kirjoittaminen on ruosteessa, tutustu Helsingin yliopiston kurssin <a href="http://tietokantojen-perusteet.github.io/" target="_blank">tietokantojen perusteet</a> materiaaliin.</p>
+	      
+	    </aside>
+	    
+
+	    <h2>Tietokannan käyttäminen ohjelmallisesti</h2>
+	    
+	    <p>Käytämme tällä kurssilla <a href="http://www.h2database.com/html/main.html" target="_blank">H2-tietokantamoottoria</a>, joka tarjoaa rajapinan SQL-kyselyiden tekemiseen. H2-tietokantamoottorin saa käyttöön lisäämällä projektin <code>pom.xml</code>-tiedostoon seuraavan riippuvuuden.</p>
+	    
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+    &lt;artifactId&gt;h2&lt;/artifactId&gt;
+    &lt;version&gt;1.4.192&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+	    <p>Tietokantaa käyttävä ohjelma sisältää tyypillisesti tietokantayhteyden luomisen, tietokantakyselyn tekemisen tietokannalle, sekä tietokannan palauttamien vastausten läpikäynnin. Javalla edellämainittu näyttää esimerkiksi seuraavalta -- alla oletamme, että käytössä on tietokantataulu "Book", jossa on sarakkeet "id" ja "name".</p>
+
+<pre class="sh_java">
+// Open connection to database
+Connection connection = DriverManager.getConnection("jdbc:h2:./database", "sa", "");
+
+// Create query and retrieve result set
+ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM Book");
+
+// Iterate through results
+while (resultSet.next()) {
+    String id = resultSet.getString("id");
+    String name = resultSet.getString("name");
+
+    System.out.println(id + "t" + name);
+}
+
+// Close the resultset and the connection
+resultSet.close();
+connection.close();
+</pre>
+
+	    <p>Oleellisin tässä on luokka <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank">ResultSet</a>, joka tarjoaa pääsyn rivikohtaisiin tuloksiin. Kurssin <a href="http://tietokantojen-perusteet.github.io/" target="_blank">tietokantojen perusteet</a> oppimateriaali sisältää myös hieman tietoa ohjelmallisista tietokantakyselyistä.</p>
+
+	    <aside class="info">
+	      
+	      <br/>
+	      
+	      <h1>Tietokantayhteyden luomisesta</h1>
+		  
+	      <p>Komento <code>DriverManager.getConnection("jdbc:h2:./database", "sa", "");</code> luo JDBC-yhteyden tietokantaan nimeltä "database". Käyttäjätunnuksena käytetään tunnusta "sa", jonka salasana on "". </p>
+	      
+	      <p>Jos "database"-nimistä tietokantaa ei ole, luodaan se levyjärjestelmään projektin juureen. Tässä tapauksessa luodaan tiedosto <code>database.mv.db</code> sekä mahdollisesti <code>database.trace.db</code>. Tietokantayhteyden voi luoda myös muistiin ladattavaan tietokantaan, jolloin tietokantaa ei luoda levyjärjestelmään -- tällöin tietokannassa oleva tieto kuitenkin katoaa ohjelman sammutuksen yhteydessä.</p>
+
+	      <p>Tarkempi opas H2-tietokannan tarjoamiin toimintoihin löytyy osoitteesta <a href="http://www.h2database.com/html/tutorial.html" target="_blank">http://www.h2database.com/html/tutorial.html</a>.</p>
+
+	    </aside>
+	    
+            <p></p>
+
+	    <p>Tietokannalla on tyypillisesti skeema, joka määrittelee tietokantataulujen rakenteen. Rakenteen lisäksi tietokantatauluissa on dataa. Kun tietokantasovellus käynnistetään ensimmäistä kertaa, nämä tyypillisesti ladataan myös käyttöön. H2-tietokantamoottori tarjoaa tätä varten työvälineitä <a href="http://www.h2database.com/javadoc/org/h2/tools/RunScript.html" target="_blank">RunScript</a>-luokassa. Alla olevassa esimerkissä tietokantayhteyden avaamisen jälkeen yritetään lukea tekstitiedostoista <code>database-schema.sql</code> ja <code>database-import.sql</code> niiden sisältö tietokantaan.</p>
+	    
+	    <p>Tiedosto <code>database-schema.sql</code> sisältää tietokantataulujen määrittelyt, ja tiedosto <code>database-import.sql</code> tietokantaan lisättävää tietoa. Järjestys on oleellinen -- jos tietokantataulujen määrittelyiden lukemisessa tulee virhe, ovat tietokantataulut olemassa, eikä tällöin tietoakaan enää kannata ladata uudestaan.</p>
+
+
+<pre class="sh_java">
+// Open connection to database
+Connection connection = DriverManager.getConnection("jdbc:h2:./database", "sa", "");
+
+try {
+    // If database has not yet been created, create it
+    RunScript.execute(connection, new FileReader("database-schema.sql"));
+    RunScript.execute(connection, new FileReader("database-import.sql"));
+} catch (Throwable t) {
+    System.out.println(t.getMessage());
+}
+// ...
+</pre>
+
+
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellodatabase-ex">
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellodatabase">
+                      Hello Database
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellodatabase" class="collapse">
+		  
+		  <p>Käytössäsi on agenttien tietoja sisältävä tietokantataulu, joka on määritelty seuraavasti:</p>
+		  
+<pre class="sh_sql">
+CREATE TABLE Agent (
+    id varchar(9) PRIMARY KEY,
+    name varchar(200)
+);</pre>
+		  
+		  <p>Kirjoita ohjelma, joka tulostaa kaikki tietokannassa olevat agentit.</p>
+		  
+                </div>
+              </div>
+	      
+              <div class="tehtava" id="t-helloinsert-ex">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-helloinsert">
+                      Hello Insert
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-helloinsert" class="collapse">
+		  
+		  <p>Käytössäsi on edellisessä tehtävässä käytetty agenttien tietoja sisältävä tietokantataulu. Toteuta tässä tehtävässä tietokantaan lisäämistoiminnallisuus. Ohjelman tulee toimia seuraavasti:</p>
+
+<pre>
+Agents in database:
+Secret	Clank
+Gecko	Gex
+Robocod	James Pond
+Fox	Sasha Nein
+
+Add one:
+What id? <font color="red">Riddle</font>
+What name? <font color="red">Voldemort</font>
+
+Agents in database:
+Secret	Clank
+Gecko	Gex
+Robocod	James Pond
+Fox	Sasha Nein
+Riddle	Voldemort
+</pre>
+
+		  <p>Seuraavalla käynnistyskerralla agentti Voldemort on tietokannassa heti sovelluksen käynnistyessä.</p>
+
+<pre>
+Agents in database:
+Secret	Clank
+Gecko	Gex
+Robocod	James Pond
+Fox	Sasha Nein
+Riddle	Voldemort
+
+Add one:
+What id? <font color="red">Feather</font>
+What name? <font color="red">Major Tickle</font>
+
+Agents in database:
+Secret	Clank
+Gecko	Gex
+Robocod	James Pond
+Fox	Sasha Nein
+Riddle	Voldemort
+Feather	Major Tickle
+</pre>
+
+                </div>
+              </div>
+	      
+              <div class="tehtava" id="t-hellodao-ex">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellodao">
+                      Hello Dao
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellodao" class="collapse">
+		  
+		  <p>Edellisissä tietokantatehtävissä tietokantatoiminnallisuus toteutettiin suoraan main-metodiin. Tämä ei ohjelman koon kasvaessa ole toivottua -- toteutetaan tässä rajapinta tietokantatoiminnallisuuden abstrahointiin.</p>
+		  
+		  <p>Etsi tehtäväpohjasta luokka <code>AgentDao</code> ja toteuta siihen rajapinnan <code>Dao&lt;Agent, String&gt;</code> vaatimien metodien tietokantatoiminnallisuus. Kun ohjelma on toteutettu, luokan HelloDao main-metodi toimii kutakuinkin järkevästi.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    <aside class="info">
+	      <br/>
+
+	      <h1>Web-palvelinohjelmointikurssi?</h1>
+	      
+	      <p>Edelliset tehtävät antavat vain pienen pintaraapaisun siihen teknologiaan, minkä päälle nykyaikaiset web-sovellukset rakentuvat. Vaikka web-sovelluksia voi toteuttaa ilman suurempaa tietämystä niihin liittyvistä taustateknologioista ja ratkaisuista, omatoiminen syventyminen teemaan kannattaa.</p>
+	      
+	    </aside>
+
+
+	    <h2>Oliot ja relaatiotietokannat</h2>
+
+	    <p>Relaatiotietokantojen ja olio-ohjelmoinnin välimaastossa sijaitsee tarve olion muuntamiseen tietokantataulun riviksi ja takaisin. Tähän tehtävään käytetään ORM (<em><a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank">Object-relational mapping</a></em>) -ohjelmointitekniikkaa, jota varten löytyy merkittävä määrä valmiita työvälineitä sekä kirjastoja.</p>
+
+	    <p>ORM-työvälineet tarjoavat ohjelmistokehittäjälle mm. toiminnallisuutta tietokantataulujen luomiseen määritellyistä luokista, jonka lisäksi ne helpottavat kyselyjen muodostamista ja hallinnoivat luokkien välisiä viittauksia. Tällöin ohjelmoijan vastuulle jää sovellukselle tarpeellisten kyselyiden toteuttaminen vain niiltä osin kun niitä ei tarjota valmiiksi.</p>
+
+            <p>Relaatiotietokantojen käsittelyyn Javalla löytyy joukko ORM-sovelluksia. Oracle/Sun standardoi olioiden tallentamisen relaatiotietokantoihin <a href="http://en.wikipedia.org/wiki/Java_Persistence_API" target="_blank">JPA</a> (<em>Java Persistence API</em>) -standardilla. JPA:n toteuttavat kirjastot (esim. <a href="http://www.hibernate.org/" target="_blank">Hibernate</a>) abstrahoivat relaatiotietokannan ja helpottavat kyselyjen tekemistä suoraan ohjelmakoodista.</p>
+	    <p>Koska huomattava osa tietokantatoiminnallisuudesta on hyvin samankaltaista ("tallenna", "lataa", "poista", ...), voidaan perustoiminnallisuus piilottaa käytännössä kokonaan ohjelmoijalta. Tällöin ohjelmoijalle jää tehtäväksi usein vain sopivan rajapintaluokan määrittely. Esimerkiksi aiemmin nähdyn <code>Henkilo</code>-luokan tallentamistoiminnallisuuteen tarvitaan seuraavanlainen rajapinta.</p>
+
+<pre class="sh_java">
+// pakkaus ja importit
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+}</pre>
+
+            <p>Kun rajapintaa käytetään, Spring osaa tuoda sopivan toteutuksen ohjelman käyttöön. Käytössä tulee olla Maven-riippuvuus Spring-projektin Data JPA -kirjastoon.</p>
+
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+    &lt;artifactId&gt;h2&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+
+            <h2>Luokan määrittely tallennettavaksi</h2>
+	    
+            <p>JPA-standardin mukaan luokka tulee määritellä <em>entiteetiksi</em>, jotta siitä tehtyjä olioita voi tallentaa JPA:n avulla tietokantaan.</p>
+
+            <p>Jokaisella tietokantaan tallennettavalla luokalla tulee olla annotaatio <code>@Entity</code> sekä <code>@Id</code>-annotaatiolla merkattu attribuutti, joka toimii tietokantataulun ensisijaisena avaimena. JPA:ta käytettäessä <code>id</code>-attribuutti on usein numeerinen (<code>Long</code> tai <code>Integer</code>), mutta merkkijonojen käyttö on yleistymässä. Näiden lisäksi, luokan tulee toteuttaa <code>Serializable</code>-rajapinta.</p>
+
+            <p>Numeeriselle avainattribuutille voidaan lisäksi määritellä annotaatio <code>@GeneratedValue(strategy = GenerationType.AUTO)</code>, joka antaa id-kentän arvojen luomisen vastuun tietokannalle. Tietokantatauluun tallennettava luokka näyttää seuraavalta:</p>
+
+<pre class="sh_java">
+// pakkaus
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Henkilo implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String nimi;
+
+    // getterit ja setterit</pre>
+
+            <p>Tietokantaan luotavien sarakkeiden ja tietokantataulun nimiä voi muokata annotaatioiden <code>@Column</code> ja <code>@Table</code> avulla.</p>
+
+<pre class="sh_java">
+// pakkaus
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Henkilo")
+public class Henkilo implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "nimi")
+    private String nimi;
+    // getterit ja setterit</pre>
+
+            <p>Ylläoleva konfiguraatio määrittelee luokasta <code>Henkilo</code> tietokantataulun nimeltä "Henkilo", jolla on sarakkeet "id" ja "nimi". Sarakkeiden tyypit päätellään muuttujien tyyppien perusteella.</p>
+
+            <p>Spring Data JPA:n <a href="http://docs.spring.io/autorepo/docs/spring-data-jpa/current/api/org/springframework/data/jpa/domain/AbstractPersistable.html" target="_blank">AbstractPersistable</a>-luokkaa käytettäessä ylläolevan luokan määrittely kutistuu hieman. Yläluokka AbstractPersistable määrittelee pääavaimen, jonka lisäksi luokka toteuttaa myös rajapinnan Serializable. </p>
+
+<pre class="sh_java">
+// pakkaus ja importit
+
+@Entity
+@Table(name = "Henkilo")
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    @Column(name = "nimi")
+    private String nimi;
+    // getterit ja setterit</pre>
+
+            <p>Jos tietokantataulun ja sarakkeiden eksplisiittisen poistaa, niiden nimet päätellään luokan ja muuttujien nimistä.</p>
+
+<pre class="sh_java">
+// pakkaus ja importit
+
+@Entity
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+    // getterit ja setterit</pre>
+
+
+            <h2>Transaktioiden hallinta</h2>
+
+	    <p>Transaktioiden avulla varmistetaan, että joko kaikki halutut operaatiot suoritetaan, tai yhtäkään niistä ei suoriteta.</p>
+
+            <p>Tietokantatransaktiot määritellään metodi- tai luokkatasolla annotaation <code>@Transactional</code> avulla. Annotaatiolla <code>@Transactional</code> merkittyä metodia suoritettaessa metodin alussa aloitetaan tietokantatransaktio, jossa tehdyt muutokset viedään tietokantaan metodin lopussa. Jos annotaatio <code>@Transactional</code> määritellään luokkatasolla, se koskee jokaista luokan metodia.</p>
+
+	    <p>Alla on kuvattuna tilisiirto, joka on ehkäpä klassisin transaktiota vaativa tietokantaesimerkki. Jos ohjelmakoodin suoritus epäonnistuu (esim. päätyy poikkeukseen) sen jälkeen kun toiselta tililtä on otettu rahaa, mutta toiselle sitä ei vielä ole lisätty, peruuntuu myös rahan ottaminen tililtä. Jos metodille ei olisi määritelty <code>@Transactional</code>-annotaatiota, rahat katoaisivat.</p>
+
+<pre class="sh_java">
+@Transactional
+public void siirraRahaa(Long tililta, Long tilille, Double paljonko) {
+    Tili mista = tiliRepository.findOne(tililta);
+    Tili minne = tiliRepository.findOne(tilille);
+
+    mista.setSaldo(mista.getSaldo() - paljonko);
+    minne.setSaldo(minne.getSaldo() + paljonko);
+}</pre>
+
+
+            <p>Annotaatiolle <code>@Transactional</code> voidaan määritellä parametri <code>readOnly</code>, jonka avulla määritellään kirjoitetaanko muutokset tietokantaan. Jos parametrin <code>readOnly</code> arvo on <code>true</code>, metodiin liittyvä transaktio perutaan metodin lopussa (rollback). Tällöin metodi ei yksinkertaisesti voi muuttaa tietokannassa olevaa tietoa. </p>
+
+            <p>Rajapinnalla <code>JpaRepository</code> on määriteltynä transaktiot luokkatasolle. Tämä tarkoittaa sitä, että yksittäiset tallennusoperaatiot toimivat myös ilman <code>@Transactional</code>-annotaatiota.</p>
+
+	    <h3>Entiteettien hallinta</h3>
+
+	    <p>Jos metodille on määritelty annotaatio <code>@Transactional</code>, pitää JPA kirjaa tietokannasta ladatuista entiteeteistä ja tarkastelee niihin tapahtuvia muutoksia. Muutokset viedään tietokantaan metodin suorituksen lopussa. Aiempi esimerkkimme siis tekee suorittaa tilisiirrot vaikka tilejä ei erikseen tallennettaisi.</p>
+
+<pre class="sh_java">
+@Transactional
+public void siirraRahaa(Long tililta, Long tilille, Double paljonko) {
+    Tili mista = tiliRepository.findOne(tililta);
+    Tili minne = tiliRepository.findOne(tilille);
+
+    mista.setSaldo(mista.getSaldo() - paljonko);
+    minne.setSaldo(minne.getSaldo() + paljonko);
+}</pre>
+
+	    <p>Jos taas annotaatiota <code>@Transactional</code> ei olisi määritelty, tulisi tilit erikseen tallentaa, jotta niihin tapahtuneet muutokset vietäisiin tietokantaan.</p>
+
+
+<pre class="sh_java">
+public void siirraRahaa(Long tililta, Long tilille, Double paljonko) {
+    Tili mista = tiliRepository.findOne(tililta);
+    Tili minne = tiliRepository.findOne(tilille);
+
+    mista.setSaldo(mista.getSaldo() - paljonko);
+    minne.setSaldo(minne.getSaldo() + paljonko);
+
+    tiliRepository.save(mista);
+    tiliRepository.save(minne);
+}</pre>
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-banktransfer">
+                      Bank Transfer
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-banktransfer" class="collapse">
+		  
+                  <p>Sovelluksessa on valmiina yksinkertainen sovellus tilien hallintaan ja tilisiirtojen tekemiseen. Sovelluksen tilisiirtotoiminnallisuudessa on kuitenkin vielä jonkin verran viilattavaa.</p>
+
+		  <p>Pohdi minkälaisia korjauksia tilisiirtotoiminnallisuus tarvitsee ja toteuta ne. Kerro myös tehtävän palautuksen yhteydessä tekemäsi korjaukset.</p>
+
+                  <p>Kun olet valmis, lähetä sovellus TMC:lle.</p>
+                </div>
+              </div>
+	    </div>
+
+
+
+
+
+            <h2>Viitteet tietokantataulujen välillä</h2>
+
+            <p>Luokkien -- tai tietokantataulujen -- väliset viittaukset tapahtuvat kuten normaalistikin, mutta ohjelmoijan tulee lisäksi määritellä osallistumisrajoitteet. Osallistumisrajoitteet -- yksi moneen (<em>one to many</em>), moni yhteen (<em>many to one</em>), moni moneen (<em>many to many</em>) lisätään annotaatioiden avulla. Luodaan esimerkiksi luokka <code>Henkilo</code>, joka voi omistaa joukon esineitä. Kukin esine on vain yhden henkilön omistama -- suhde siis yksi moneen -- annotaatio <code>@OneToMany</code>.</p>
+
+<pre class="sh_java">
+@Entity
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+    @OneToMany
+    private List&lt;Esine&gt; esineet;
+
+
+    // ...
+    public List&lt;Esine&gt; getEsineet() {
+        if (this.esineet == null) {
+            this.esineet = new ArrayList&lt;&gt;();
+        }
+
+        return this.esineet;
+    }
+    // ...
+</pre>
+
+            <p>Yllä olevaa esimerkkiä käytettäessä luokalle <code>Esine</code> luodaan tietokantatauluun automaattisesti sarake, johon tallennetaan omistavan <code>Henkilo</code>-olion yksilöivä tunnus. Esinelista luodaan tarvittaessa jos sitä ei ole jo olemassa.</p>
+	    
+
+            <p>Moni-moneen yhteys tapahtuu tietokantatauluja suunniteltaessa liitostaulun avulla. JPA:ssa moni-moneen yhteydet määritellään annotaatiolla <code>@ManyToMany</code>. Tällöin yhteys tulee merkitä kummallekin puolelle. Jos henkilö voi omistaa useita esineitä, ja esineellä voi olla useita omistajia, toteutus on seuraavanlainen.</p>
+
+            <pre class="sh_java">
+@Entity
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+    @ManyToMany
+    private List&lt;Esine&gt; esineet;
+    ...</pre>
+
+                <pre class="sh_java">
+@Entity
+public class Esine extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+    private Double paino;
+    @ManyToMany(mappedBy = "esineet")
+    private List&lt;Henkilo&gt; omistajat;</pre>
+
+            <p>Yllä oleva määritelmä luo liitostaulun Esine- ja Henkilo-taulujen välille. Esine-luokassa olevassa @ManyToMany-annotaatiossa oleva parametri <code>mappedBy = "esineet"</code> kertoo että Esine-luokan <code>omistajat</code>-lista saadaan liitostaulusta, ja että se kytketään luokan Henkilo listaan <code>esineet</code>.</p>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>@OneToMany ja @ManyToMany -annotaatiot</h1>
+
+	      <p>Kun kirjoitat NetBeansissa viitteen entiteettiluokasta toiseen, NetBeans kysyy viittauksen tyyppiä. Tutustu tähän toiminnallisuuteen, sillä se helpottaa annotaatioiden määrittelyä.</p>
+
+	    </aside>
+
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-simplebanking">
+                      Simple Banking
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-simplebanking" class="collapse">
+		  
+                  <p>Sovelluksessa on toteutettuna entiteetit tilien ja asiakkaiden hallintaan, mutta niiden väliltä puuttuu kytkös. Muokkaa sovellusta siten, että asiakkaalla voi olla monta tiliä, mutta jokaiseen tiliin liittyy tasan yksi asiakas.</p>
+		  
+		  <p>Tilin lisäämisen tulee kytkeä tili myös asiakkaaseen. Alla olevassa esimerkissä tietokannassa on kaksi asiakasta ja kolme tiliä.</p>
+		  
+                  <p><img class="browser-img" src="img/2016-mooc/ex24.png"/></p>
+		  
+                  <p>Kun olet valmis, lähetä sovellus TMC:lle tarkistettavaksi.</p>
+                </div>
+              </div>
+	    </div>
+
+
+	    <h2>Transaktiot ja viitteiden automaattinen hallinta</h2>
+
+            <p>Haluamme usein tallentaa olion joka viittaa olioon, josta viitataan takaisin.</p>
+
+            <p>Pohditaan tätä kontekstissa, jossa tavoitteena on lisätä uusia Henkilo-olioita olemassaolevan esineen omistajiksi. Esineellä on lista sen omistajista. Yksi ratkaisu on seuraava. </p>
+
+<pre class="sh_java">
+@Transactional
+public void lisaaOmistaja(Long henkiloId, Long esineId) {
+    Esine esine = esineRepository.findOne(esineId);
+    Henkilo henkilo = henkiloRepository.findOne(henkiloId);
+
+    henkilo.getEsineet().add(esine);
+    esine.getOmistajat().add(henkilo);
+}</pre>
+
+            <p>Koska ylläolevassa esimerkissä koodi suoritetaan transaktion sisällä, ladattuihin olioihin tehdyt muutokset viedään tietokantaan transaktion lopussa.</p>
+
+            <h3>Olemassaolevan olion poistaminen</h3>
+
+
+            <p>Pohditaan seuraavaksi tilannetta, jossa haluaisimme poistaa tietyn henkilön. Ensimmäinen hahmotelma on kutakuinkin seuraavanlainen:</p>
+
+<pre class="sh_java">
+@Transactional
+public void remove(Long henkiloId) {
+    personRepository.delete(henkiloId);
+}</pre>
+
+            <p>Yllä ongelmana on kuitenkin se, että esineet eivät kadota viittausta henkilöön. Käytännössä henkilö jää "haamuksi" järjestelmään tai saamme virheen poistoa yrittäessä. Jos haluamme poistaa viittaukset henkilöön, joudumme tekemään sen käsin.</p>
+
+                <pre class="sh_java">
+@Transactional
+public void remove(Long henkiloId) {
+    Henkilo henkilo = personRepository.findOne(henkiloId);
+    
+    for (Esine esine: henkilo.getEsineet()) {
+        esine.getOmistajat().remove(henkilo);
+    }
+
+    personRepository.delete(person);
+}</pre>
+
+	    <p>Ei kovin nättiä. </p>
+
+
+            <h2>Omien kyselyiden toteuttaminen</h2>
+	    
+            <p>Spring Data JPA ei tarjoa kaikkia kyselyitä valmiiksi. Uudet kyselyt, erityisesti attribuuttien perusteella tapahtuvat kyselyt, tulee määritellä erikseen. Laajennetaan aiemmin määriteltyä rajapintaa <code>HenkiloRepository</code> siten, että sillä on metodi <code>List&lt;Henkilo&gt; findByNimi(String nimi)</code> -- eli hae henkilöt, joilla on tietty nimi.</p>
+
+
+<pre class="sh_java">
+// pakkaus
+
+import org.springframework.data.repository.JpaRepository;
+
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+    List&lt;Henkilo&gt; findByNimi(String nimi);
+}</pre>
+
+            <p>Ylläoleva esimerkki on esimerkki kyselystä, johon ei tarvitse erillistä toteutusta. Koska tietokantataululla on valmis sarake nimi, arvaa Spring Data JPA että kysely olisi muotoa <code>SELECT * FROM Henkilo WHERE nimi = :nimi</code> ja luo sen valmiiksi. Lisää Spring Data JPA:n kyselyistä löytyy sen <a href="http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation" target="_blank">dokumentaatiosta</a>.</p>
+
+            <aside class="extra">
+	      <br/>
+	      
+              <h1>Kyselyt Java Persistence Apin kautta</h1>
+	      
+              <p>Java Persistence APIn kautta tehdyt kyselyt eivät ole natiivia SQL:ää, vaan seuraavat JPQL-määritelmää (Java Persistence Query Language), joka kuitenkin muistuttaa SQL:ää. JPQL-kielestä löytyy lisää tietoa osoitteesta <a href="http://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html" target="_blank">http://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html</a>.</p>
+
+            </aside>
+
+
+            <p>Tehdään toinen esimerkki, jossa joudumme oikeasti luomaan oman kyselyn. Lisätään rajapinnalle <code>HenkiloRepository</code> metodi <code>findJackBauer</code>, joka suorittaa kyselyn <code>"SELECT h FROM Henkilo h WHERE h.nimi = 'Jack Bauer'"</code>.</p>
+
+
+<pre class="sh_java">
+// pakkaus
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.JpaRepository;
+
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+    List&lt;Henkilo&gt; findByNimi(String nimi);
+    @Query("SELECT h FROM Henkilo h WHERE h.nimi = 'Jack Bauer'")
+    Henkilo findJackBauer();
+}</pre>
+
+            <p>Käytössämme on nyt myös metodi <code>findJackBauer</code>, joka suorittaa <code>@Query</code>-annotaatiossa määritellyn kyselyn. Tarkempi kuvaus kyselyiden määrittelystä osana rajapintaa löytyy Spring Data JPAn <a href="http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query" target="_blank">dokumentaatiosta</a>.</p>
+
+
+
+
+
+            <h2>Viitattujen olioiden noutaminen tietokannasta</h2>
+
+            <p>Tietokanta-abstraktioita tarjoavat komponentit kuten Hibernate päättävät mitä tehdään haettavaan olioon liittyville viitteille. Yksi vaihtoehto on hakea viitatut oliot automaattisesti kyselyn yhteydessä ("Eager"), toinen vaihtoehto taas on hakea viitatut oliot vasta kun niitä pyydetään eksplisiittisesti esimerkiksi get-metodin kautta ("Lazy").</p>
+
+            <p>Tyypillisesti one-to-many ja many-to-many -viitteet haetaan vasta niitä tarvittaessa, ja one-to-one ja many-to-one viitteet heti. Oletuskäyttäytymistä voi muuttaa <a href="http://docs.oracle.com/javaee/6/api/javax/persistence/FetchType.html" target="_blank">FetchType</a>-parametrin avulla. Esimerkiksi alla ehdotamme, että <code>asunnot</code>-lista noudetaan heti.</p>
+
+<pre class="sh_java">
+// pakkaus
+
+@Entity
+public class Henkilo extends AbstractPersistable&lt;Long&gt; {
+
+    private String nimi;
+
+    // oletamme, että Asunto-entiteetti on olemassa
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn 
+    private List&lt;Asunto&gt; asunnot; 
+
+    // getterit ja setterit
+}
+</pre>
+
+            <p>Käytännössä tietokannasta tarvittaessa haku toteutetaan muokkaamalla get-metodia siten, että tietokantakysely tapahtuu metodia kutsuttaessa. Staattisesti tyypitetyissä ohjelmointikielissä tämä käytännössä vaatii sitä, että luokkien rakennetta muutetaan joko ajonaikaisesti tai lähdekooditiedostojen kääntövaiheessa -- käyttämämme komponentit tekevät tämän puolestamme.</p>
+
+
+
+
+            <aside class="info">
+	      
+	      <br/>
+	      
+              <h1>N+1 Kyselyn ongelma</h1>
+	      
+              <p>Viitattujen olioiden lataaminen vasta niitä tarvittaessa on yleisesti ottaen hyvä idea, mutta sillä on myös kääntöpuolensa. Pohditaan tilannetta, missä kirjalla voi olla monta kirjoittajaa, ja kirjoittajalla monta kirjaa -- <code>@ManyToMany</code>. Jos haemme tietokannasta listan kirjoja (1 kysely), ja haluamme tulostaa kirjoihin liittyvät kirjoittajat, tehdään jokaisen kirjan kohdalla erillinen kysely kyseisen kirjan kirjoittajille (n kyselyä). Tätä ongelmaa kutsutaan N+1 -kyselyn ongelmaksi.</p>
+		  
+              <p>Jos kirjoja tarvitaan sekä ilman kirjoittajaa että kirjoittajan kanssa, on FetchType-parametrin asettaminen <code>EAGER</code>-tyyppiseksi yksi vastaus. Tällöin kuitenkin osassa tapauksista haetaan ylimääräistä dataa tietokannasta. Toinen vaihtoehto on luoda erillinen kysely yhdelle vaihtoehdoista, ja lisätä kyselyyn vinkki (<a href="http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-hints" target="_blank">Spring Data JPA, applying query hints</a>) kyselyn toivotusta toiminnallisuudesta.</p>
+
+            </aside>
+		
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-lentokentat">
+                      Airports and aircrafts
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-lentokentat" class="collapse">
+		  
+                  <p>Jatkokehitetään tässä tehtävässä sovellusta lentokoneiden ja lentokenttien hallintaan. Projektissa on jo valmiina ohjelmisto, jossa voidaan lisätä ja poistaa lentokoneita. Tavoitteena on lisätä toiminnallisuus lentokoneiden kotikenttien asettamiseksi.</p>
+		  
+                  <h1>Tallennettavat: <code>Aircraft</code> ja <code>Airport</code>.</h1>
+		  
+                  <p>Lisää luokkaan <code>Aircraft</code> attribuutti <code>airport</code>, joka kuvaa lentokoneen kotikenttää, ja on tyyppiä <code>Airport</code>. Koska usealla lentokoneella voi olla sama kotikenttä, käytä attribuutille <code>airport</code> annotaatiota <code>@ManyToOne</code>. Lisää attribuutille myös <code>@JoinColumn</code>-annotaatio, jonka avulla kerrotaan että tämä attribuutti viittaa toiseen tauluun. Lisää luokalle myös oleelliset get- ja set-metodit.</p>
+		  
+                  <p>Lisää seuraavaksi <code>Airport</code>-luokkaan attribuutti <code>aircrafts</code>, joka kuvaa kaikkia koneita, keiden kotikenttä kyseinen kenttä on, ja joka on tyyppiä <code>List&lt;Aircraft&gt;</code>. Koska yhdellä lentokentällä voi olla useita koneita, lisää attribuutille annotaatio <code>@OneToMany</code>. Koska luokan <code>Aircraft</code> attribuutti <code>airport</code> viittaa tähän luokkaan, aseta annotaatioon <code>@OneToMany</code> parametri <code>mappedBy="airport"</code>. Nyt luokka <code>Airport</code> tietää että attribuuttiin <code>aircrafts</code> tulee ladata kaikki <code>Aircraft</code>-oliot, jotka viittaavat juuri tähän kenttään.</p>
+		  
+                  <p>Lisää lisäksi <code>Airport</code>-luokan <code>@OneToMany</code>-annotaatioon parametri <code>fetch = FetchType.EAGER</code>, jolloin lentokenttään liittyvät lentokoneet haetaan kyselyn yhteydessä.</p>
+		  
+                  <p>Lisää lopuksi luokalle <code>Airport</code> oleelliset get- ja set-metodit.</p>
+		  
+		  
+                  <h1>Lentokentän asetus lentokoneelle</h1>
+		  
+                  <p>Lisää sovellukselle toiminnallisuus lentokentän lisäämiseen lentokoneelle. Käyttöliittymä sisältää jo tarvittavan toiminnallisuuden, joten käytännössä sinun tulee toteuttaa luokalle <code>AircraftController</code> metodi <code>String assignAirport</code>. Kun käyttäjä lisää lentokoneelle lentokenttää, käyttöliittymä lähettää POST-tyyppisen kyselyn osoitteeseen <code>/aircrafts/{aircraftId}/airports</code>, missä <code>aircraftId</code> on lentokoneen tietokantatunnus. Pyynnön mukana tulee lisäksi parametri <code>airportId</code>, joka sisältää lentokentän tietokantatunnuksen.</p>
+		  
+                  <p>Toteuta metodi siten, että haet aluksi pyynnössä saatuja tunnuksia käyttäen lentokoneen ja lentokentän, tämän jälkeen asetat lentokoneelle lentokentän ja lentokentälle lentokoneen, ja lopuksi tallennat haetut oliot.</p>
+		  
+                  <p>Ohjaa lopuksi pyyntö osoitteeseen <code>/aircrafts</code></p>
+		  
+                  <p>Kun olet valmis, lähetä sovellus TMC:lle tarkistettavaksi.</p>
+                </div>
+              </div>
+	      
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-elokuvatietokanta">
+                      Elokuvatietokanta
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-elokuvatietokanta" class="collapse">
+		  
+                  <p>Tämä on avoin tehtävä jossa saat itse suunnitella huomattavan osan ohjelman sisäisestä rakenteesta. Ainoat määritellyt asiat ohjelmassa ovat käyttöliittymä ja domain-oliot, jotka tulevat tehtäväpohjan mukana. Tehtäväpohjassa on myös valmis konfiguraatio.</p>
+		  
+                  <p>Tehtävästä on mahdollista saada yhteensä 4 pistettä.</p>
+		  
+                  <p>Huom! Kannattanee aloittaa näyttelijän lisäämisestä ja poistamisesta. Suunnittele ensin sopiva tietokantaolio, sekä sille sopivat repository-oliot. Jatka tämän jälkeen kontrollerin toteutuksella -- sekä mahdollisesti palvelukerroksen lisäämisellä. Kannattanee hyödyntää valmiiksi tarjotuissa käyttöliittymätiedostoissa olevaa koodia osana tietokantaolioiden attribuuttien määrittelyä.</p>
+		  
+                  <h1>pisteytys</h1>
+		  
+                  <ol class="pisteytys">
+                    <li>+ 1p: Näyttelijän lisääminen ja poistaminen onnistuu. Käyttöliittymän olettamat osoitteet ja niiden parametrit:<br/>
+                      <ul>
+                        <li><code>GET /actors</code> - näyttelijöiden listaus, ei parametreja pyynnössä. Lisää pyyntöön attribuutin <code>actors</code>, joka sisältää kaikki näyttelijät ja luo sivun <code>/src/main/resources/templates/actors.html</code> pohjalta näkymän.</li>
+			
+                        <li><code>POST /actors</code> - parametri <code>name</code>, jossa on lisättävän näyttelijän nimi. Lisäyksen tulee lopulta ohjata pyyntö osoitteeseen <code>/actors</code>.</li>
+			
+                        <li><code>DELETE /actors/{actorId}</code> - polun parametri <code>actorId</code>, joka sisältää poistettavan näyttelijän tunnuksen. Poiston tulee lopulta ohjata pyyntö osoitteeseen <code>/actors</code>.</li>
+                      </ul>
+                    </li>
+		    
+                    <p></p>
+		    
+                    <li>+ 1p: Elokuvan lisääminen ja poistaminen onnistuu. Käyttöliittymän olettamat osoitteet ja niiden parametrit:<br/>
+                      <ul>
+                        <li><code>GET /movies</code> - elokuvien listaus, ei parametreja pyynnössä. Lisää pyyntöön attribuutin <code>movies</code>, joka sisältää kaikki elokuvat ja luo sivun <code>/src/main/resources/templates/movies.html</code> pohjalta näkymän.</li>
+			
+                        <li><code>POST /movies</code> - elokuvan lisäys, parametrit <code>name</code>, joka sisältää lisättävän elokuvan nimen, ja <code>lengthInMinutes</code>, joka sisältää elokuvan pituuden minuuteissa. Lisäyksen tulee lopulta ohjata pyyntö osoitteeseen <code>/movies</code>.</li>
+			
+                        <li><code>DELETE /movies/{movieId}</code> - polun parametri <code>movieId</code>, joka sisältää poistettavan elokuvan tietokantatunnuksen. Poiston tulee lopulta ohjata pyyntö osoitteeseen <code>/movies</code>.</li>
+                      </ul>
+                    </li>
+		    
+                    <p></p>
+		    
+                    <li>+ 2p: Näyttelijän voi lisätä elokuvaan (kun näyttelijä tai elokuva poistetaan, tulee myös poistaa viitteet näyttelijästä elokuvaan ja elokuvasta näyttelijään). Käyttöliittymän olettamat osoitteet ja niiden parametrit:<br/>
+                      <ul>
+			
+                        <li><code>GET /actors/{actorId}</code> - polun parametri <code>actorId</code>, joka sisältää näytettävän näyttelijän tietokantatunnuksen. Asettaa pyyntöön sekä attribuutin <code>actor</code> jossa näyttelijä-olio että attribuutin <code>movies</code>, jossa kaikki elokuvat, sekä luo sivun <code>/src/main/resources/templates/actor.html</code> pohjalta näkymän.</li>
+			
+                        <li><code>POST /actors/{actorId}/movies</code> - polun parametri <code>actorId</code>, joka sisältää kytkettävän näyttelijän tietokantatunnuksen, ja parametri <code>movieId</code>, joka sisältää kytkettävän elokuvan tietokantatunnuksen. Lisäämisen tulee lopulta ohjata pyyntö osoitteeseen <code>/actors</code>.</li>
+                      </ul>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+	    
+	    
+
+            <h2>Tietokantakyselyn tulosten järjestäminen ja rajoittaminen</h2>
+
+            <p>Tietokantakyselyn tulokset halutaan usein hakea tai järjestää tietyn kriteerin mukaan. Jos tietokantadatan läpikäynti toteutettaisiin osana palvelua, tekisimme oikeastaan juuri sen työn, missä tietokannat loistavat.</p>
+
+            <p>Esimerkiksi alla oleva lisäys tarjoaa metodin henkilöiden etsimiseen, joilla ei ole huonetta (oletamme että Henkilo-luokalla on attribuutti Asunto).</p>
+
+<pre class="sh_java">
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+    List&lt;Henkilo&gt; findByAsuntoIsNull();
+}</pre>
+
+            <p>Vastaavasti voisimme hakea esimerkiksi nimen osalla: <code>findByNimiContaining(String osa)</code>.</p>
+
+            <p>Spring Data JPAn rajapinta <a href="http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html" target="_blank">JpaRepository</a> mahdollistaa muutaman lisäparametrin käyttämisen osassa pyyntöjä. Voimme esimerkiksi käyttää parametria <a href="http://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/PageRequest.html" target="_blank">PageRequest</a>, joka tarjoaa apuvälineet sivuttamiseen sekä pyynnön hakutulosten rajoittamiseen. Alla olevalla PageRequest-oliolla haluasimme ensimmäiset 50 hakutulosta attribuutin nimi mukaan käänteisessä järjestyksessä.</p>
+
+<pre class="sh_java">
+    Pageable pageable = new PageRequest(0, 50, Sort.Direction.DESC, "nimi");</pre>
+
+            <p>Voimme muokata metodia <code>findByAsuntoIsNull</code> hyväksymään <code>Pageable</code>-rajapinnan toteuttavan olion parametriksi, jolloin metodi palauttaa <a href="http://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/api/org/springframework/data/domain/Page.html" target="_blank">Page</a>-luokan ilmentymän.</p>
+
+<pre class="sh_java">
+public interface HenkiloRepository extends JpaRepository&lt;Henkilo, Long&gt; {
+    Page&lt;Henkilo&gt; findByAsuntoIsNull(Pageable pageable);
+}</pre>
+
+            <p>Yhdistämällä kaksi edellistä, voisimme hakea kaikki huoneettomat henkilöt sopivasti järjestettynä:</p>
+
+<pre class="sh_java">
+//...
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+//...
+
+    // tämä palvelussa
+    Pageable pageable = new PageRequest(0, 50, Sort.Direction.DESC, "nimi");
+    Page&lt;Henkilo&gt; henkiloSivu = henkiloRepository.findByAsuntoIsNull(pageable);
+    List&lt;Henkilo&gt; henkilot = henkiloSivu.getContent();
+</pre>
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-viimeisetviestit">
+                      Last Messages
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-viimeisetviestit" class="collapse">
+		  
+                  <p>Tehtävässä on käytössä viestien lähetykseen käytettävä sovellus. Muokkaa sovellusta siten, että MessageServicen <code>list</code>-metodi palauttaa aina vain uusimmat 10 viestiä. Käytä tässä hyödyksi yllä nähtyä Pageable-oliota.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    
+	    <h2>Muita tietokantapalveluita</h2>
+
+	    <p>Web-sovelluksissa käytetään tiedon tallentamiseen erilaisia tietokantapalveluita, joista merkittävimpiä ovat relaatiomalliin perustuvat relaatiotietokannat. Tietokantoja on toki myös muunlaisia: muita vaihtoehtoja ovat esimerkiksi NewSQL-tietokannat, jotka yhdistelevät avain-arvo -tietokantojen ja relaatiotietokantojen hyviä puolia, verkkotietokannat, joissa paljon yhteyksiä sisältävän tiedon hakeminen ja tallentaminen on tehokkaampaa, sekä erilaiset verkossa toimivat palvelut kuten <a href="https://www.firebase.com/" target="_blank">Firebase</a>.</p>
+
+	    <p>Tutustutaan seuraavassa tehtävässä pikaisesti <a href="https://www.firebase.com/" target="_blank">Firebase</a>en. Firebase tarjoaa sovelluskehittäjille ilmaisen paikan tiedon tallentamiseen sovelluksen kehitysvaiheessa. Firebasen oleelliset kirjastot saa projektin käyttöön kun lisää <code>pom.xml</code> -tiedostoon seuraavan riippuvuuden.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.firebase&lt;/groupId&gt;
+    &lt;artifactId&gt;firebase-client-jvm&lt;/artifactId&gt;
+    &lt;version&gt;2.5.2&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+
+	    <p>Firebaseen tallennettavat resurssit liittyvät aina tiettyyn osoitteeseen sekä osoitteen alla olevaan polkuun. Tämän osion viimeisessä tehtävässä on valmiiksi toteutettuna luokka, jonka avulla Firebaseen voi tehdä kyselyitä -- hauskaa tutustumista!</p>
+
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellofirebase">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellofirebase">
+                      Hello Firebase
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellofirebase" class="collapse">
+		  
+		  <p>Tässä tehtävässä on valmiiksi toteutettuna esineiden tallentaminen ja noutaminen Firebase-palvelusta. Tutustu ensin sovelluksen toimintaan ja kokeile tiedon hakemista ja tallentamista. Huomaat myös, että tieto ei katoa, vaikka käynnistät palvelinohjelmiston uudestaan.</p>
+		  
+		  <p>Toteuta tehtävässä toiminnallisuus esineiden poistamiseen ja muokkaamiseen. Poistamisen tulee poistaa esine Firebase-palvelusta (luokassa FirebaseService on valmis toiminnallisuus tähän) ja muokkaamisen tulee avata uusi sivu, jossa esineen nimeä voi muuttaa. Voit tehdä konkreettisen muokkaustoiminnallisuuden vaikkapa siten, että poistat vanhan esineen muokkauksen yhteydessä ja lisäät uuden esineen vanhaan esineeseen liittyvillä muokatuilla tiedoilla.</p>
+		  
+		  <p>Kuten muutamassa aiemmassakin tehtävässä, tässä tehtävässä ei ole testejä. Palauttaessasi tehtävän palvelimelle kerrot tehneesi sen valmiiksi. Testit on jätetty tästä pois, jotta voit luoda oman Firebase-palvelun ja käyttää myös sitä.</p>
+
+		  <p>Kun olet saanut tehtävän valmiiksi, tarkastele vielä sovelluksen rakennetta. Huomaat toivottavasti, että vaikka tallennuslogiikka on muuttunut, niin sen perusosat eivät poikkea merkittävästi muista sovelluksistamme.</p>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+          </section>
+<!-- BEGIN FOOTER -->
+
+        <footer>
+            <p>
+                <a id="license" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; float:left; padding:15px" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+                <small>T&auml;m&auml; materiaali on lisensoitu Creative Commons BY-NC-SA-lisenssill&auml;, joten voit k&auml;ytt&auml;&auml; ja levitt&auml;&auml; sit&auml; vapaasti, kunhan alkuper&auml;isten tekij&ouml;iden nimi&auml; ei poisteta. Jos teet muutoksia materiaaliin ja haluat levitt&auml;&auml; muunneltua versiota, se t&auml;ytyy lisensoida samalla lisenssill&auml;. Materiaalien k&auml;ytt&ouml; kaupalliseen tarkoitukseen on ilman erillist&auml; lupaa kielletty. Tekij&auml;(t): <a href="http://www.cs.helsinki.fi/en/people/avihavai" target="_blank">Arto Hellas</a> sekä <a href="http://www.cs.helsinki.fi/en/rage" target="_blank">Agile Education Research</a> -tutkimusryhm&auml;.
+            </p>
+        </footer>
+
+        <div class="hidden">
+            <p>the end.</p>
+        </div>
+
+
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jqueryui/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
+
+        <script src="js/libs/chartist.min.js"></script>
+        <script src="js/libs/visibility.core.js"></script>
+        <script src="js/libs/visibility.timers.js"></script>
+        <script src="js/libs/visibility.fallback.js"></script>
+        <script src="js/js-logger.js"></script>
+        <script src="js/verticalfloat.js"></script>
+        <script src="js/pheromones.js"></script>
+        <script src="js/wepa.js"></script>
+
+
+    </body>
+</html>

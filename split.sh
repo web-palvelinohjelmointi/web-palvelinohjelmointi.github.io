@@ -2,10 +2,12 @@ if [ -f "index.html" ]
 then
     rm index.html
     rm osa1.html
+    rm osa2.html
 fi
 
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > index.html
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa1.html
+echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa2.html
 
 INDEX=0
 HEADER=0
@@ -13,6 +15,7 @@ NAV=0
 CONTENT=0
 FOOTER=0
 OSA1=0
+OSA2=0
 
 
 IFS=''
@@ -54,6 +57,12 @@ while read line; do
         *END*OSA1*)
             OSA1=0
             ;;
+        *BEGIN*OSA2*)
+            OSA2=1
+            ;;
+        *END*OSA2*)
+            OSA2=0
+            ;;
     esac
 
     if [ $HEADER -eq 1 ] || [ $FOOTER -eq 1 ] || [ $INDEX -eq 1 ]; then
@@ -61,6 +70,9 @@ while read line; do
     fi
     if [ $HEADER -eq 1 ] || [ $FOOTER -eq 1 ] || [ $OSA1 -eq 1 ] || [ $CONTENT -eq 1 ]; then
         echo $line >> osa1.html
+    fi
+    if [ $HEADER -eq 1 ] || [ $FOOTER -eq 1 ] || [ $OSA2 -eq 1 ] || [ $CONTENT -eq 1 ]; then
+        echo $line >> osa2.html
     fi
 
 done < 2016-mooc.html

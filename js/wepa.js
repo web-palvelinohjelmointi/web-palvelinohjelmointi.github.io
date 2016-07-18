@@ -1,10 +1,28 @@
 var SITE = {
+    conf: {
+	lastExerciseCount: -1,
+	lastChapterCount: -1
+    },
     init: function() {
         SITE.initToc();
     },
     initToc: function() {
         $(".tehtava").each(function(index, value) {
-            var exCount = (index + 1);
+	    var exCount = -1;
+
+	    if(SITE.conf.lastExerciseCount < 0) {
+		exCount = (index + 1);
+		SITE.conf.lastExerciseCount = exCount;
+	    } else {
+		SITE.conf.lastExerciseCount = SITE.conf.lastExerciseCount + 1;
+		exCount = SITE.conf.lastExerciseCount;
+	    }
+
+	    if($(value).data("count")) {
+		exCount = $(value).data("count");
+		SITE.conf.lastExerciseCount = exCount;
+	    }
+
             var exName = "Tehtävä " + exCount + ": " + $(value).find("h1 a").text();
 
             // add assignments to toc 
@@ -45,6 +63,18 @@ var SITE = {
 
             if ($(value).parent('section').length) {
 
+		if(SITE.conf.lastChapterCount < 0) {
+		    idx = 1;
+		    SITE.conf.lastChapterCount = idx;
+		} else {
+		    SITE.conf.lastChapterCount = SITE.conf.lastChapterCount + 1;
+		    idx = SITE.conf.lastChapterCount;
+		}
+		
+		if($(value).data("count")) {
+		    idx = $(value).data("count");
+		    SITE.conf.lastChapterCount = idx;
+		}
 
                 var chapterCount = idx;
 
