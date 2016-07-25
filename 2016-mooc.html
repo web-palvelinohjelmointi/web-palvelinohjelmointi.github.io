@@ -39,6 +39,9 @@
                     <li>
                         <a href="osa2.html">Osa 2</a>
                     </li>
+                    <li>
+                        <a href="osa3.html">Osa 3</a>
+                    </li>
 <!--
                     <li>
                         <a href="#viikko3">Viikko 3</a>
@@ -1591,7 +1594,7 @@ public class Item extends AbstractPersistable&lt;Long&gt; {
 
 	      <p>Kun ylläoleva riippuvuus on lisätty projektiin, käynnistetään ohjelman käynnistyksen yhteydessä myös <a href="http://livereload.com/" target="_blank">LiveReload</a>-palvelin. Kun selaimeen asentaa LiveReload-liitännäisen (Chromelle osoitteesta <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei" target="_blank">https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei</a>) ja kytkee liitännäisen päälle, LiveReload-liitännäinen ja palvelin keskustelevat toistensa kanssa ja päivittävät näkymää tarvittaessa.</p>
 
-	      <p>Devtools-projektin lisääminen sovellukseen johtaa myös siihen, että sovellus ladataan uudestaan aina kun sen lähdekoodi muuttuu. Tämän lisäksi osoitteessa <code>http://localhost:8080/h2-console</code> on tietokantakonsoli, jonka avulla voi käydä tarkastelemassa tietokannan tilaa. Huom! Tämä toimii vain, jos käytössä on H2-tietokantamoottori.</p>
+	      <p>Devtools-projektin lisääminen sovellukseen johtaa myös siihen, että sovellus ladataan uudestaan aina kun sen lähdekoodi muuttuu. Tämän lisäksi osoitteessa <code>http://localhost:8080/h2-console</code> on tietokantakonsoli, jonka avulla voi käydä tarkastelemassa tietokannan tilaa -- tietokannan JDBC URL on oletuksena <code>jdbc:h2:mem:testdb</code>. Huom! Tämä toimii vain, jos käytössä on H2-tietokantamoottori.</p>
 
 	    </aside>
 	    
@@ -3195,66 +3198,48 @@ import org.springframework.data.domain.Sort;
 	  <!-- END OSA2 -->
 
 	  <!-- BEGIN OSA3 -->
-
-
-
-
-<!--
+          <section class="weeklimit" data-week-id="3">
 	    
-	    <h2>Sovelluksen siirtäminen verkkoon</h2>
+            <header>
+              <h1 id="osa3">Osa 3</h1>
+            </header>
 
-            <p>Tutustutaan lopuksi sovelluksen siirtämiseen <a href="https://www.heroku.com/" target="_blank">Heroku</a>-palveluun. Heroku on pilvipalvelu, joka tarjoaa rajoitetun (ja ilmaisen) sijoituspaikan vähän resursseja kuluttaville sovelluksille. Opas Herokun käyttöön löytyy osoitteesta <a href="https://devcenter.heroku.com/articles/getting-started-with-java#introduction" target="_blank">https://devcenter.heroku.com/articles/getting-started-with-java#introduction</a>.</p>
-
-	    <p>Tarvitset 
-            <p>Kun olet luonut tunnuksen Herokuun, asenna osoitteesta <a href="https://toolbelt.heroku.com/" target="_blank">https://toolbelt.heroku.com/</a> työvälineet sovelluksen Herokuun siirtämiseen. Seuraa myös sivun "Getting started"-ohjetta, ja suorita sen <code>heroku login</code>-osio.</p>
-
-            <p>Mene tämän jälkeen Albumilista-tehtävän kansioon, missä on myös tiedosto <code>pom.xml</code>. Kirjoita kansiossa komento <code>git init</code>, mikä lisää kansioon versionhallintakansion <code>.git</code>.</p>
-
-            <pre>        
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git init
-Initialized empty Git repository in <em>polku</em>/W1E08.Albumilista/.git/</pre>
-
-                <p>Kirjoita tämän jälkeen komento <code>heroku create</code>, mikä luo paikan minne sovelluksen voi lähettää.</p>
-
-                <pre>       
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ heroku create
-Creating aqueous-lowlands-6350... done, stack is cedar
-http://aqueous-lowlands-6350.herokuapp.com/ | git@heroku.com:aqueous-lowlands-6350.git</pre>
-
-                <p>Komennolla <code>git remote add heroku git@heroku.com:aqueous-lowlands-6350.git</code> lisätään juuri luotu heroku-sijainti projekti käyttöömme. Huomaa, että <code>git@heroku.com:aqueous-lowlands-6350.git</code> on sama kuin komennon <code>heroku create</code> tulostama sijainti.</p>
-
-                <pre>       
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git remote add heroku git@heroku.com:aqueous-lowlands-6350.git
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$</pre>        
-
-                <p>Nyt voimme lisätä sovelluksen verkkoon. Jos tehtäväkansiossa on target-kansio, poista se tässä välissä. Kirjoita seuraavaksi komento <code>git add .</code>, jonka jälkeen komento <code>git commit -m "initial commit"</code>. Näillä komennoilla lisäät sovelluksen nykyisen version versionhallintaan. Kirjoita tämän jälkeen <code>git push heroku master</code>, mikä lähettää sovelluksen verkkoon.</p>
-
-                <pre>       
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git add .
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git commit -m "initial commit"
-[master (root-commit) 2cbc76b] initial commit
- tulostusta...
-avihavai@aavikkokettu:<em>polku</em>/W1E08.Albumilista$ git push heroku master
- tulostusta...
------> Discovering process types
-       Procfile declares types -> web
-
------> Compressing... done, 135.6MB
------> Launching... done, v6
-       http://aqueous-lowlands-6350.herokuapp.com/ deployed to Heroku
- hieman tulostusta</pre>
-
-                <p>Nyt, voimme käydä tarkistamassa sovelluksen herokun palvelussa. Yllä olevassa esimerkissä sovellus on lisätty osoitteeseen <a href="http://aqueous-lowlands-6350.herokuapp.com/" target="_blank">http://aqueous-lowlands-6350.herokuapp.com/</a>.</p>
--->
+	    <p>Aloitamme taas edellisen viikon kertauksella ja tutustumme samalla ajan tallentamiseen tietokantaan. Tämän jälkeen tarkastelemme HTTP-protokollan tilattomuuden hyötyjä ja haittoja sekä tutustumme evästeiden käyttöön. Evästeiden avulla voidaan kiertää tilattomuuteen liittyviä rajoitteita. Tämän jälkeen tutustumme konfiguraatioprofiileihin, joiden avulla testaus- ja kehityskäytössä oleva sovellus voi käyttää erilaisia asetuksia kuin tuotantokäytössä oleva sovellus. Osion lopuksi tutustutaan web-sovellusten automaatiseen testaamiseen.</p>
 
 
-                <h3>Ajan tallentaminen</h3>
 
-                <p>Aikaa kuvaavat attribuutit tulee annotoida <code><a href="http://docs.oracle.com/javaee/6/api/javax/persistence/Temporal.html" target="_blank">@Temporal</a></code>-annotaatiolla, joka määrittelee mikä osa ajasta tallennetaan. Annotaatiolle annetaan parametrina <code><a href="http://docs.oracle.com/javaee/6/api/javax/persistence/TemporalType.html" target="_blank">TemporalType</a></code>-tyyppinen arvo, joka kertoo tarkemman tallennusmuodon. Arvo <code>TemporalType.DATE</code> tallentaa päivämäärän (esim. 2012-09-15), <code>TemporalType.TIME</code> tallentaa kellonajan (esim. 18:00:00), ja arvo <code>TemporalType.TIMESTAMP</code> tallentaa päivän ja ajan (esim. 2012-09-15 18:00:00).</p>
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa2-kertaus-ex" data-count="30">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa2-kertaus">
+                      Osa 2, kertaus: Exams and Questions
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa2-kertaus" class="collapse">
+		  
+		  <p>Toisessa kertaustehtävässä tehtävänäsi on täydentää kokeiden ja koekysymysten hallintaan tarkoitettua sovellusta. Sovellukseen on toteutettu valmiiksi rungot kokeiden ja koekysymysten lisäämiseen tarvittaviin kontrollereihin, jonka lisäksi sovelluksessa on osittain valmiina tarvitut <code>Exam</code> ja <code>Question</code> -entiteetit.</p>
 
-                <p>Annotaatiolla <code>@Temporal</code> merkityn attribuutin tulee olla joko tyyppiä <code>java.util.Date</code> tai tyyppiä <code>java.util.Calendar</code>. Alla on määritelty entiteettiluokka <code>GroceryItem</code>, joka kuvaa elintarviketta. Elintarvikkeella on myös parasta ennen-päivämäärä (bestBefore).</p>
+		  <p>Lisää sovellukseen tarvittavat Repository-rajapinnat ja täydennä Exam- ja Question-entiteettejä niin, että yhteen kokeeseen monta kysymystä ja yksi kysymys voi liittyä useampaan kokeeseen. Toteuta myös kontrollereilopuksi </p>
 
-                <pre class="sh_java">
+		  <p>Voit tarkastella myös sovellukseen toteutettuja näkymiä toivotun toiminnallisuuden selvittämiseksi.</p>
+
+                </div>
+              </div>
+	    </div>
+
+
+	    <h2>Muutama sana ajan tallentamisesta tietokantaan</h2>
+	    
+            <p>Aikaa kuvaavat attribuutit tulee annotoida <code><a href="http://docs.oracle.com/javaee/6/api/javax/persistence/Temporal.html" target="_blank">@Temporal</a></code>-annotaatiolla, joka määrittelee mikä osa ajasta tallennetaan. Annotaatiolle annetaan parametrina <code><a href="http://docs.oracle.com/javaee/6/api/javax/persistence/TemporalType.html" target="_blank">TemporalType</a></code>-tyyppinen arvo, joka kertoo tarkemman tallennusmuodon. Arvo <code>TemporalType.DATE</code> tallentaa päivämäärän (esim. 2012-09-15), <code>TemporalType.TIME</code> tallentaa kellonajan (esim. 18:00:00), ja arvo <code>TemporalType.TIMESTAMP</code> tallentaa päivän ja ajan (esim. 2012-09-15 18:00:00).</p>
+
+            <p>Annotaatiolla <code>@Temporal</code> merkityn attribuutin tulee olla joko tyyppiä <code>java.util.Date</code> tai tyyppiä <code>java.util.Calendar</code>. Alla on määritelty entiteettiluokka <code>GroceryItem</code>, joka kuvaa elintarviketta. Elintarvikkeella on myös parasta ennen-päivämäärä (bestBefore).</p>
+
+<pre class="sh_java">
 // pakkaus ja importit
 
 @Entity
@@ -3267,8 +3252,1160 @@ public class GroceryItem extends AbstractPersistable&lt;Long&gt; {
     // getterit ja setterit
 }</pre>
 
+	    <p>Aikamääreitä voi lähettää myös sovelluksesta palvelimelle. Tällöin kontrollerissa tulee määritellä tapa aikaa kuvaavan merkkijonon muuntamiseen. Exams and Questions -sovelluksessa oli käytössä <code>@DateTimeFormat</code>-annotaatio, joka toimii juurikin merkkijonon muuntamiseen.</p>
+
+<pre class="sh_java">
+public String addExam(@RequestParam String subject,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date examDate) {
+...
+</pre>
+
+	    <p>Edellä oleva hahmo <code>yyyy-MM-dd</code> olettaa, että palvelimelle lähetetään aika merkkijonona, jossa on ensin vuosi (4 numeroa), sitten viiva, sitten kuukausi (2 numeroa), sitten viiva, ja lopulta päivä (2 numeroa). Tämä muoto liittyy <a href="https://tools.ietf.org/html/rfc3339#section-5.6" target="_blank">RFC3339-spesifikaatioon</a>, joka määrittelee muodon, mitä päivämäärissä <em>pitäisi</em> käyttää kun tietoa lähetetään palvelimelle. Spesifikaation takia voimme olettaa (tai toivoa), että esimerkiksi HTML:n <a href="https://www.w3.org/TR/html-markup/input.date.html" target="_blank">date</a>-elementtiin syötettävä päivämäärä lähetetään palvelimelle em. muodossa.</p>
 
 
+	    
+            <h1 data-count="5">HTTP-protokollan tilattomuus ja evästeet</h1>
+
+            <p>HTTP on tilaton protokolla. Tämä tarkoittaa sitä, että HTTP:n näkökulmasta jokainen pyyntö on erillinen kokonaisuus, joka ei liity aiempiin pyyntöihin. Suunnittelupäätöksen taustalla oli se, että internetissä sisältöä voidaan hakea useammasta sijainnista, jolloin tilan ylläpito olisi ollut turhan hidasta (<a href="https://www.w3.org/Protocols/HTTP/HTTP2.html" target="_blank">Basic HTTP as defined in 1992</a>). Päätös tilattomuudesta oli alunperin hyvä: suurin osa verkkoliikenteestä liittyy staattisen sisällön hakemiseen, palvelinten ei tarvitse varata resursseja käyttäjän tilan ylläpitämiseen, ja palvelinten ja selainohjelmistojen toteuttajien ei tarvinnut toteuttaa mekanismeja käyttäjien tilan ylläpitämiseen.</p>
+
+	    <p>Käyttäjän tunnistamiseen pyyntöjen välillä on kuitenkin tarvetta. Esimerkiksi verkkokaupat ja muut käyttäjän kirjautumista vaativat palvelut tarvitsevat tavan käyttäjän tunnistamiseen. Klassinen -- mutta huono -- tapa kiertää HTTP:n tilattomuus on ollut säilyttää GET-muotoisessa osoitteessa parametreja, joiden perusteella asiakas voidaan tunnistaa palvelinsovelluksessa. Tämä ei kuitenkaan ole suositeltavaa, sillä osoitteessa olevia parametreja voi muokata käsin, ja ne saattavat jättää sovellukseen ylimääräisiä tietoturva-aukkoja (palaamme tietoturvaan myöhemmin).</p>
+
+            <aside class="info">
+	      
+	      <br/>
+
+              <h1>Case: GET-parametri tunnistautumiseen</h1>
+	      
+              <p>Eräässä järjestelmässä verkkokaupan toiminnallisuus oli toteutettu siten, että GET-parametrina säilytettiin numeerista ostoskorin identifioivaa tunnusta. Käyttäjäkohtaisuus oli toteutettu palvelinpuolella siten, että tietyllä GET-parametrilla näytettiin aina tietyn käyttäjän ostoskori. Uusien tuotteiden lisääminen ostoskoriin onnistui helposti, sillä pyynnöissä oli aina mukana ostoskorin tunnistava GET-parametri. Ostoskorit oli valitettavasti identifioitu juoksevalla numerosarjalla. Henkilöllä 1 oli ostoskori 1, henkilöllä 2 ostoskori 2 jne..</p>
+	      <p>Koska käytännössä kuka tahansa pääsi katsomaan kenen tahansa ostoskoria vain osoitteessa olevaa numeroa vaihtamalla, olivat ostoskorien sisällöt välillä hyvin mielenkiintoisia.</p>
+
+            </aside>
+		
+            <p>HTTP-protokollan tilattomuus ei pakota palvelinohjelmistoja tilattomuuteen. Palvelimella tilaa pidetään yllä jollain tavalla tekniikalla, joka ei näy HTTP-protokollaan asti. Yleisin tekniikka tilattomuuden kiertämiseen on evästeiden käyttö.</p>
+
+
+            <h2>HTTP ja evästeet</h2>
+
+            <p>Merkittävä osa verkkosovelluksista sisältää käyttäjäkohtaista toiminnallisuutta, jonka toteuttamiseen sovelluksella täytyy olla jonkinlainen tieto käyttäjästä sekä mahdollisesti käyttäjän tilasta. HTTP/1.1 tarjoaa mahdollisuuden tilallisten verkkosovellusten toteuttamiseen evästeiden (<em>cookies</em>) avulla.</p>
+	    
+            <p>Asettamalla käyttäjän tekemän pyynnön vastaukseen eväste, tulee käyttäjän jatkossa pyyntöä tehdessä aina palauttaa kyseinen eväste pyynnön otsaketietoina. Tämä tapahtuu automaattisesti selaimen toimesta. Evästeitä käytetään istuntojen (<em>session</em>) ylläpitämiseen: istuntojen avulla pidetään kirjaa käyttäjästä useampien pyyntöjen yli.</p>
+
+            <p>Evästeet toteutetaan otsakkeiden avulla. Kun käyttäjä tekee pyynnön palvelimelle, ja palvelimella halutaan asettaa käyttäjälle eväste, palauttaa palvelun vastauksen mukana otsakkeen <code>Set-Cookie</code>, jossa määritellään käyttäjäkohtainen evästetunnus. Set-Cookie voi olla esimerkiksi seuraavan näköinen:</p>
+
+<pre>
+Set-Cookie: SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg; Max-Age=3600; Domain=".helsinki.fi"
+</pre>
+
+            <p>Ylläoleva palvelimelta lähetetty vastaus ilmoittaa pyytää selainta tallettamaan evästeen. Selaimen tulee jatkossa lisätä eväste <code>SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg</code> jokaiseen <code>helsinki.fi</code>-osoitteeseen. Eväste on voimassa tunnin, eli selain ja palvelin voi unohtaa sen tunnin kuluttua sen asettamisesta. Tarkempi syntaksi evästeen asettamiselle on seuraava:</p>
+
+<pre>
+Set-Cookie: nimi=arvo [; Comment=kommentti] [; Max-Age=elinaika sekunteina]
+                      [; Expires=parasta ennen paiva] [; Path=polku tai polunosa jossa eväste voimassa]
+                      [; Domain=palvelimen osoite (URL) tai osoitteen osa jossa eväste voimassa]
+                      [; Secure (jos määritelty, eväste lähetetään vain salatun yhteyden kanssa)]
+                      [; Version=evästeen versio]
+</pre>
+
+
+            <p>Evästeet tallennetaan selaimen sisäiseen evästerekisteriin, josta niitä haetaan aina kun käyttäjä tekee selaimella kyselyn. Evästeet lähetetään palvelimelle jokaisen viestin yhteydessä <code>Cookie</code>-otsakkeessa.</p>
+
+<pre>
+Cookie: SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg
+</pre>
+
+            <p>Evästeiden nimet ja arvot ovat yleensä monimutkaisia ja satunnaisesti luotuja niiden yksilöllisyyden takaamiseksi. Samaan palvelinosoitteeseen voi liittyä useampia evästeitä. Yleisesti ottaen evästeet ovat sekä hyödyllisiä että haitallisia: niiden avulla voidaan luoda yksiöityjä käyttökokemuksia tarjoavia sovelluksia, mutta niitä voidaan käyttää myös käyttäjien seurantaan ympäri verkkoa.</p>
+	    
+            <aside class="info">
+	      
+	      <br/>
+              
+	      <h1>Evästeet hs.fi -palvelussa</h1>
+	      
+              <p>Painamalla F12 tai valitsemalla Tools -> Developer tools, pääset tutkimaan sivun lataamiseen ja sisältöön liittyvää statistiikkaa. Lisäneuvoja löytyy <a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank">Google Developers</a> -sivustolta.</p>
+	      
+              <p>Avaa developer tools, ja mene osoitteeseen <a href="http://www.hs.fi" target="_blank">http://www.hs.fi</a>. Valitsemalla developer toolsien välilehden <code>Resources</code>, löydät valikon erilaisista sivuun liittyvistä resursseista. Avaa <code>Cookies</code> ja valitse vaihtoehto <code>www.hs.fi</code>. Kuinka moni palvelu pitää sinusta kirjaa kun menet Helsingin sanomien sivuille?</p>
+	      
+            </aside>
+
+
+	    <h2>Evästeet ja sessiot</h2>
+
+	    <p>Kun selain lähettää palvelimelle pyynnön yhteydessä evästeen, etsii palvelin evästeen perusteella käynnissä olevaa sessiota. Jos sessio löytyy, annetaan siihen liittyvät tiedot sovelluksen käyttöön. Jos sessiota taas ei löydy, voidaan selaimelle palauttaa uusi eväste ja aloittaa uusi sessio, jolloin session tiedot löytyvät jatkossa palvelimelta.</p>
+
+	    <p>Javassa sessioiden käsittelyyn löytyy <a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSession.html" target="_blank">HttpSession</a>-luokka, joka tarjoaa välineet sessio- ja käyttäjäkohtaisen tiedon tallentamiseen. Oleellisimmat luokan metodit ovat <code>public void setAttribute(String name, Object value)</code>, joka tallentaa sessioon arvon, sekä <code>public Object getAttribute(String name)</code>, jonka avulla kyseinen arvo löytyy.</p>
+
+	    <p>Session saa yksinkertaisimmillaan käyttöön lisäämällä sen kontrollerimetodin parametriksi. Tällöin Spring liittää metodiin parametrin automaattisesti. Alla on kuvattuna sovellus, joka pitää sessiokohtaista kirjaa käyttäjien tekemistä pyynnöistä.</p>
+
+<pre class="sh_java">
+import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class VisitCountController {
+    
+    @RequestMapping("*")
+    @ResponseBody
+    public String count(HttpSession session) {
+        int visits = 0;
+        if (session.getAttribute("count") != null) {
+            visits = (int) session.getAttribute("count");
+        }
+        
+        visits++;
+        session.setAttribute("count", visits);
+        
+        return "Visits: " + visits;
+    }
+}
+</pre>
+
+	   
+	    <p>Kun käyttäjä tekee ensimmäistä kertaa pyynnön sovellukseen, palauttaa sovellus merkkijonon "Visits: 1". Vastauksen yhteydessä palautetaan myös eväste. Kun käyttäjä tekee seuraavan kerran pyynnön sovellukseen, lähettää selain pyynnön yhteydessä myös evästeen palvelimelle, jolloin palvelin osaa tunnistaa käyttäjän ja hakee oikean istunnon tiedot -- vastaukseksi palautuu lopulta merkkijono "Visits: 2".</p>  
+
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-hellosession-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellosession">
+		      Hello Session
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellosession" class="collapse">
+
+		  <p>Toteuta sovellus, joka palauttaa käyttäjälle merkkijonon "Hello there!" jos käyttäjä ei ole ennen vieraillut sovelluksessa. Jos käyttäjä on vieraillut sovelluksessa aiemmin, tulee sovelluksen palauttaa käyttäjälle merkkijono "Hello again!".</p>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+	    
+	    <aside class="info">
+
+	      <br/>
+
+	      <h1>Evästeiden ja istuntojen testaaminen selaimella</h1>
+	      
+	      <p>Istuntojen toiminnallisuuden testaaminen selaimella onnistuu näppärästi selainten tarjoaman anonyymitoiminnallisuuden avulla. Esimerkiksi Chromessa voi valita "New incognito window", mikä avaa käyttöön selainikkunan, missä ei aluksi ole lainkaan vanhoja evästeitä muistissa. Kun palvelimelle tehdään pyyntö, tallentuu vastauksen yhteydessä palautettava eväste selaimen muistiin vain siksi aikaa kun anonyymi-ikkuna on auki.</p>
+
+	      <p>Session pituus riippuu esimerkiksi palvelimen asetuksista <code>session timeout</code> ja siitä, että salliiko käyttäjä evästeiden käytön.</p>
+
+	    </aside>
+	    
+            <p>HttpSession-olioon pääsee käsiksi myös muualla sovelluksessa, ja sen voi injektoida esimerkiksi palveluun <code>@Autowired</code>-annotaation avulla. Edellinen kontrolleriin toteutettu toiminnallisuus voitaisiin tehdä myös palvelussa.</p>
+	    
+<pre class="sh_java">
+// importit
+
+@Service
+public class CountService {
+
+    @Autowired
+    private HttpSession session;
+
+    public int incrementAndCount() {
+        int count = 0;
+        if (session.getAttribute("count") != null) {
+            count = (int) session.getAttribute("count");
+        }
+        
+        count++;
+        session.setAttribute("count", count);
+        return count;
+    }
+}</pre>
+
+	    <p>Nyt kontrollerin koodi olisi kevyempi:</p>
+
+<pre class="sh_java">
+// importit
+
+@Controller
+public class VisitCountController {
+
+    @Autowired
+    private CountService countService;   
+
+    @RequestMapping("*")
+    @ResponseBody
+    public String count() {
+        return "Visits: " + countService.incrementAndCount();
+    }
+}
+</pre>
+
+
+            <div class="tehtavat">
+  
+	      <div class="tehtava" id="t-reloadheroes-ex">
+    
+		<header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-reloadheroes">
+		      Reload Heroes
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-reloadheroes" class="collapse">
+		  
+		  <p>Reload Heroes -sovellus pitää kirjaa käyttäjän tekemistä sivun uudelleenlatauksista. Kun käyttäjä saapuu sovellukseen ensimmäistä kertaa, hänelle luodaan satunnainen käyttäjätunnus ja hänen vierailujen määrä asetetaan yhteen. Jokaisen uudelleenvierailun yhteydessä käyttäjän vierailujen määrä kasvaa yhdellä.</p>
+
+		  <p>Täydennä luokan <code>ReloadStatusService</code> metodit seuraavasti:</p>
+	
+		  <ul>
+		    <li>Metodi <code>public List&lt;ReloadStatus&gt; getTopList()</code> palauttaa viisi eniten uudelleenlatauksia tehnyttä käyttäjää suuruusjärjestyksessä. Listan ensimmäisellä sijalla on eniten uudelleenlatauksia tehnyt henkilö, toisella sijalla toiseksi eniten jne.</li>
+
+		    <li>Metodi <code>public ReloadStatus reload()</code> palauttaa pyynnön tehneeseen henkilöön liittyvän ReloadStatus-olion. Jos käyttäjä ei ole tehnyt yhtäkään pyyntöä aiemmin, tulee käyttäjälle luoda uusi tunnus sekä alustaa uudelleenlatausten määrä yhteen. Jos taas käyttäjä on tehnyt pyyntöjä aiemmin, tulee käyttäjän tekemien pyyntöjen määrää kasvattaa yhdellä. Tieto pyyntöjen määrästä tulee myös tallentaa tietokantaan. </li>
+		  </ul>
+
+		  <p>Kun sovellus on valmis, toimii se kuten osoitteessa <a href="https://still-beyond-90359.herokuapp.com" target="_blank">https://still-beyond-90359.herokuapp.com</a> oleva sovellus.</p>
+	  
+                </div>
+              </div>
+	    </div>
+
+	    <aside class="info">
+
+	      <br/>
+
+	      <h1>Milloin sessioita kannattaa käyttää?</h1>
+
+	      <p>Muutamia faktoja sessioista:</p>
+
+	      <ul>
+		<li>Sessio häviää kun käyttäjä poistaa selaimesta evästeet.</li>
+		<li>Sessio häviää kun evästeen elinikä kuluu loppuun.</li>
+		<li>Jokaisessa päätelaitteessa on tyypillisesti oma sessio: jos palvelua käytetään kännykällä ja padilla, kummallakin on omat evästeet.</li>
+		<li>Käyttäjä voi estää evästeiden käytön selaimen asetuksista.</li>
+	      </ul>
+
+	      <p>Sessioiden käyttö on näppärää sellaisen tiedon tallentamiseen mikä saakin kadota. Jos tiedon säilyvyys on oleellista sovelluksen toiminnan kannalta, kannattaa se tallentaa esimerkiksi tietokantaan.</p>
+
+	    </aside>
+
+	    <p>Springin annotaatio <code>@Autowired</code> luo oletuksena yhden ilmentymän luokasta, joka asetetaan <code>@Autowired</code>-annotaatiolla määriteltyyn luokkaan. Palveluiden ja komponenttien luomista voidaan kontrolloida erillisen <code>@Scope</code>-annotaation avulla, mikä mahdollistaa ilmentymien luonnin esimerkiksi sessiokohtaisesti. Seuraavassa on esimerkki ostoskorista, joka on sessiokohtainen ja jokaiselle käyttäjälle oma.</p>
+
+<pre class="sh_java">
+// importit 
+
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class ShoppingCart implements Serializable {
+
+    private Map&lt;Item, Integer&gt; items;
+
+    public ShoppingCart() {
+        this.items = new TreeMap&lt;&gt;();
+    }
+
+    public Map&lt;Item, Integer&gt; getItems() {
+        return items;
+    }
+
+    public void setItems(Map&lt;Item, Integer&gt; items) {
+        this.items = items;
+    }
+
+    public boolean isEmpty() {
+        return items == null || items.isEmpty();
+    }
+}</pre>
+
+            <p>Ylläolevasta komponentista luotavat ilmentymät ovat elossa vain käyttäjän session ajan, eli sen aikaa kun käyttäjän eväste on elossa. Ylläolevasta ostoskorista saa lisättyä ilmentymän sovellukseen aivan kuten muistakin komponenteista, eli <code>@Autowired</code>-annotaatiolla.</p>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Mikä ihmeen proxymode?</h1>
+
+	      <p>Tarkempaa tietoa em. annotaatiosta löytyy <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/beans.html#beans-factory-scopes-other-injection" target="_blank">Springin dokumentaatiosta</a>.</p>
+	    </aside>
+
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-euroshopper">
+                      EuroShopper
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-euroshopper" class="collapse">
+		  
+                  <p>Tässä tehtävässä toteutetaan verkkokauppaan ostoskoritoiminnallisuus.</p>
+		  
+                  <h1>Ostoskori</h1>
+		  
+                  <p>Luo pakkaukseen <code>wad.domain</code> luokka <code>ShoppingCart</code>, joka tarjoaa seuraavat toiminnallisuudet.</p>
+		  
+                  <ul>
+                    <li> Metodi <code>getItems()</code> palauttaa <code>Map&lt;Item, Long&gt;</code>-tyyppisen olion, joka sisältää ostoskorissa olevien tuotteiden tuotekohtaisen lukumäärän.</li>
+                    <li> Metodi <code>addToCart(Item item)</code> lisää ostoskoriin yhden kappaleen <code>Item</code>-tyyppistä esinettä.</li>
+                    <li> Metodi <code>removeFromCart(Item item)</code> poistaa ostoskorista yhden kappaleen <code>Item</code>-tyyppistä esinettä. Jos lukumäärä laskee nollaan, <code>getItems()</code>-metodin ei tule sisältää enää kyseistä tuotetta.</li>
+                  </ul>
+		  
+		  
+                  <h1>Kontrolleri ostoskorille</h1>
+		  
+                  <p>Tee ostoskorista sessiokohtainen, eli eri käyttäjien tulee saada eri ostoskori käyttöönsä. Annotaatiosta <code>Scope</code> on tässä hyötyä.</p>
+		  
+                  <p>Luo projektiin sopiva kontrolleri, joka tarjoaa seuraavat osoitteet ja toiminnallisuudet.</p>
+		  
+                  <ul>
+                    <li>GET /cart asettaa model-olion "items"-nimiseen attribuuttiin ostoskorin sisällön (aiempi <code>getItems()</code>). Pyynnön vastauksena käyttäjälle näytetään sivu, joka luodaan polussa <code>/src/main/resources/templates/cart.html</code> olevasta näkymästä.</li>
+                    <li>POST /cart/items/{id} lisää ostoskoriin yhden {id}-tunnuksella tietokannasta löytyvän Item-olion. Pyyntö ohjataan osoitteeseen <code>/cart</code>.</li>
+                    <li>DELETE /cart/items/{id} poistaa ostoskorista yhden {id}-tunnuksella tietokannasta löytyvän Item-olion. Pyyntö ohjataan osoitteeseen <code>/cart</code>.</li>
+                  </ul>
+		  
+                  <h1>Tilauksen tekeminen</h1>
+		  
+                  <p>Muokkaa luokkaa <code>wad.service.OrderService</code> siten, että tilaus tallennetaan tietokantaan. Tutustu luokkiin <code>Order</code>, <code>OrderItem</code> ja <code>UserDetails</code> ennen toteutusta. Varmista että esimerkiksi <code>OrderItem</code> viittaa oikeaan tietokantatauluun.</p>
+		  
+                  <p>Kun tilaus on tehty, tyhjennä ostoskori.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <h2>Käyttäjän tunnistaminen ja kirjautuminen</h2>
+
+	    <p>Käyttäjän tunnistautumis- ja kirjautumistoiminnallisuus rakennetaan tyypillisesti myös evästeiden avulla. Jos käyttäjällä ei ole evästettä, mikä liittyy kirjautuneen käyttäjän sessioon, hänet ohjataan kirjautumissivulle. Kirjautumisen yhteydessä käyttäjään liittyvään evästeeseen lisätään tieto siitä, että käyttäjä on kirjautunut -- tämän jälkeen sovellus tietää, että käyttäjä on kirjautunut.</p>
+
+	    <p>Kirjautumissivuja ja -palveluita on kirjoitettu useita, ja sellainen löytyy lähes jokaisesta web-sovelluskehyksestä. Myös Spring-sovelluskehyksessä löytyy oma projekti kirjautumistoiminnallisuuden toteuttamiseen. Käytämme seuraavaksi <a href="http://projects.spring.io/spring-security/" target="_blank">Spring Security</a> -projektia. Sen saa käyttöön lisäämällä Spring Boot -projektin <code>pom.xml</code>-tiedostoon seuraavan riippuvuuden.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+            <p>Komponentti tuo käyttöömme mm. filtterin, joka tarkastelee pyyntöjä ennen kuin ne ohjataan kontrollerimetodeille. Jos käyttäjän tulee olla kirjautunut päästäkseen haluamaansa osoitteeseen, ohjaa filtteri pyynnön tarvittaessa erilliselle kirjautumisivulle.</p>
+
+	    <p>Kirjautumista varten tulee luoda erillinen konfiguraatiotiedosto, jossa määritellään sovellukseen liittyvät salattavat sivut. Oletuskonfiguraatiolla pääsy estetään käytännössä kaikkiin sovelluksen resursseihin. Luodaan oma konfiguraatiotiedosto <code>SecurityConfiguration</code>, joka sisältää sovelluksemme tietoturvakonfiguraation. Huom! Kun konfiguraatiotiedostoja alkaa olla useampia, voit asettaa ne asettaa esimerkiksi erillisen pakkauksen <code>wad.config</code> sisään. </p>
+
+<pre class="sh_java">
+// pakkaus 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // Ei päästetä käyttäjää mihinkään sovelluksen resurssiin ilman
+        // kirjautumista. Tarjotaan kuitenkin lomake kirjautumiseen, mihin
+        // pääsee vapaasti. Tämän lisäksi uloskirjautumiseen tarjotaan
+        // mahdollisuus kaikille. 
+        http.authorizeRequests()
+                .anyRequest().authenticated().and()
+                .formLogin().permitAll().and()
+                .logout().permitAll();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // käyttäjällä jack, jonka salasana on bauer, on rooli USER
+        auth.inMemoryAuthentication()
+                .withUser("jack").password("bauer").roles("USER");
+    }
+}</pre>
+
+            <p>Tietoturvakonfiguraatio koostuu kahdesta osasta. Ensimmäisessä osassa <code>configure(HttpSecurity http)</code> määritellään sovelluksen osoitteet joihin on pääsy kielletty tai pääsy sallittu. Toisessa osassa <code>public void configureGlobal(AuthenticationManagerBuilder auth)</code> taas määritellään  -- tässä tapauksessa -- käytössä olevat käyttäjätunnukset ja salasanat.</p>
+
+            <p>Kun määritellään osoitteita, joihin käyttäjä pääsee käsiksi, on hyvä varmistaa, että määrittelyssä on mukana lause <code>anyRequest().authenticated()</code> -- tämä käytännössä johtaa tilanteeseen, missä kaikki osoitteet, joita ei ole erikseen määritelty, vaatii kirjautumista. Voimme määritellä osoitteita, jotka eivät vaadi kirjautumista seuraavasti:</p>
+
+<pre class="sh_java">
+    // ..
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/free").permitAll()
+                .antMatchers("/access").permitAll()
+                .antMatchers("/to/*").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin().permitAll().and()
+                .logout().permitAll();
+    }
+    // ..</pre>                            
+
+            <p>Ylläolevassa esimerkissä osoitteisiin <code>/free</code> ja <code>/access</code> ei tarvitse kirjautumista. Tämän lisäksi kaikki osoitteet polun <code>/to/</code> alla on kaikkien käytettävissä. Loput osoitteet on kaikilta kielletty. Komento <code>formLogin().permitAll()</code> määrittelee sivun käyttöön kirjautumissivun, johon annetaan kaikille pääsy, jonka lisäksi komento <code>logout().permitAll()</code> antaa kaikille pääsyn uloskirjautumistoiminnallisuuteen.</p>
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-helloauthentication">
+                      Hello Authentication
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-helloauthentication" class="collapse">
+		  
+                  <p>Tehtävässä on sovellus viestien näyttämiseen. Tehtävänäsi on lisätä siihen salaustoiminnallisuus -- kenenkään muun kuin käyttäjän "maxwell_smart" ei tule päästä viesteihin käsiksi. Aseta Maxwellin salasanaksi "kenkapuhelin".</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <p>Käyttäjätunnukset tallennetaan tyypillisesti tietokantaan, mistä ne voi tarvittaessa hakea. Salasanoja ei tule tallentaa sellaisenaan, sillä ne <a href="http://www.forbes.com/sites/thomasbrewster/2015/10/28/000webhost-database-leak/" target="_blank">voivat</a> <a href="https://techcrunch.com/2016/06/08/twitter-hack/" target="_blank">joskus</a> <a href="http://www.theregister.co.uk/2016/06/16/verticalscope_breach/" target="_blank">päätyä</a> <a href="https://en.wikipedia.org/wiki/2012_LinkedIn_hack" target="_blank">vääriin</a> <a href="http://www.independent.co.uk/life-style/gadgets-and-tech/news/gmail-hotmail-yahoo-email-passwords-stolen-hacked-hackers-russia-a7014711.html" target="_blank">käsiin</a>. Palaamme salasanojen tallentamismuotoon myöhemmin, nyt tutustumme vain siihen liittyvään tekniikkaan.</p>
+
+	    <aside class="info">
+	      <br/>
+
+	      <h1>Klassinen erhe: USER</h1>
+
+	      <p>Aloitteleva web-ohjelmoija tekee usein entiteetin, jossa on kenttä <code>USER</code>. Kyseinen sana on kuitenkin varattu SQL-spesifikaatiossa, joten sitä ei voi käyttää..</p>
+
+	    </aside>
+
+	    
+	    <p>Käyttäjätunnuksen ja salasanan noutamista varten tarvitsemme käyttäjälle entiteetin sekä sopivan repository-toteutuksen. Tarvitsemme lisäksi oman <a href="https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/userdetails/UserDetailsService.html" target="_blank">UserDetailsService</a>-rajapinnan toteutuksen, jota käytetään käyttäjän hakemiseen tietokannasta. Allaolevassa esimerkissä rajapinta on toteutettu siten, että tietokannasta haetaan käyttäjää. Jos käyttäjä löytyy, luomme siitä <a href="https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/userdetails/User.html" target="_blank">User</a>-olion, jonka palvelu palauttaa.</p>
+
+<pre class="sh_java">
+// importit
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByUsername(username);
+        if (account == null) {
+            throw new UsernameNotFoundException("No such user: " + username);
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                account.getUsername(),
+                account.getPassword(),
+                true,
+                true,
+                true,
+                true,
+                Arrays.asList(new SimpleGrantedAuthority("USER")));
+    }
+}</pre>
+
+	    <p>Kun oma UserDetailsService-luokka on toteutettu, voimme ottaa sen käyttöön SecurityConfiguration-luokassa.</p>
+
+<pre class="sh_java">
+// ..
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // mahdollistetaan h2-konsolin käyttö
+        http.csrf().disable();
+        http.headers().frameOptions().sameOrigin();
+        
+        http.authorizeRequests()
+                .antMatchers("/h2-console/*").permitAll()
+                .anyRequest().authenticated();
+        http.formLogin()
+                .permitAll();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+</pre>
+
+		<p>Edellisessä esimerkissä salasanojen tallentamisessa käytetään <a href="https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html" target="_blank">BCrypt</a>-algoritmia, joka rakentaa merkkijonomuotoisesta salasanasta hajautusarvon. Tällöin tietokantaan tallennettujen salasanojen vuoto ei ole täysi kriisi, vaikka ei siltikään toivottavaa.</p>  
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellodbauthentication">
+                      Hello Db Authentication
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-hellodbauthentication" class="collapse">
+		  
+                  <p>Tehtävän ohjelmakoodiin on toteutettu käyttäjät tunnistava sovellus, joka tallentaa käyttäjien salasanat tietokantaan. Tutustu sovelluksen ohjelmakoodiin ja lisää <code>DefaultController</code>-luokassa olevaa ohjelmakoodia mukaillen sovellukseen toinen käyttäjä, jonka salasana on myös "smart".</p>
+		  
+		  <p>Käy tämän jälkeen tarkastelemassa sovelluksen tietokantaa osoitteessa <code>http://localhost:8080/h2-console</code> (aseta JDBC URL -kentän arvoksi <code>jdbc:h2:mem:testdb</code>). Vaikka lisäämäsi käyttäjän salasana on myös "smart" pitäisi tietokannassa olevien hajautusarvojen olla erilaiset.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    <p>Kun käyttäjä on kirjautuneena, saa häneen liittyvän käyttäjätunnuksen ns. tietoturvakontekstista.</p>
+
+<pre class="sh_java">
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+String username = auth.getName();
+</pre>
+	    
+	    
+	    <aside class="info">
+	      
+	      <br/>
+
+	      <h1>Uloskirjautuminen</h1>
+	      
+	      <p>Käyttäjä voi uloskirjautua tekemällä POST-pyynnön sovelluksen osoitteeseen <code>/logout</code>. Miksi tavallinen GET-pyyntö ei riitä? Minkälaisia rajoitteita ja määreitä HTTP-protokollan GET-pyyntöihin liittyi?</p>
+	      
+	    </aside>
+	    
+	    
+	    
+	    <h2>Lakiteknisiä asioita evästeisiin liittyen</h2>
+	    
+	    
+	    <p>Euroopan komissio on säätänyt yksityisyydensuojaan liittyvän lain, joka määrää kertomaan käyttäjille evästeiden käytöstä. Käytännössä käyttäjältä tulee pyytää lupaa minkä tahansa sisällön tallentamiseen hänen koneelleen (<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002L0058:EN:HTML" target="_blank">ePrivacy directive, Article 5, kohta (3)</a>). Myöhemmin säädetty <a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002L0058:EN:HTML" target="_blank">tarkennus</a> tarkentaa määritelmää myös evästeiden käytön kohdalla.</p>
+
+	    <aside>
+	      <p>(25) However, such devices, for instance so-called "cookies", can be a legitimate and useful tool, for example, in analysing the effectiveness of website design and advertising, and in verifying the identity of users engaged in on-line transactions. Where such devices, for instance cookies, are intended for a legitimate purpose, such as to facilitate the provision of information society services, their use should be allowed on condition that users are provided with clear and precise information in accordance with Directive 95/46/EC about the purposes of cookies or similar devices so as to ensure that users are made aware of information being placed on the terminal equipment they are using. Users should have the opportunity to refuse to have a cookie or similar device stored on their terminal equipment. This is particularly important where users other than the original user have access to the terminal equipment and thereby to any data containing privacy-sensitive information stored on such equipment. Information and the right to refuse may be offered once for the use of various devices to be installed on the user's terminal equipment during the same connection and also covering any further use that may be made of those devices during subsequent connections. The methods for giving information, offering a right to refuse or requesting consent should be made as user-friendly as possible. Access to specific website content may still be made conditional on the well-informed acceptance of a cookie or similar device, if it is used for a legitimate purpose.</p>
+	    </aside>
+
+            <p>Lisätietoa mm. osoitteessa <a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2009:337:0011:0036:EN:PDF" target="_blank">http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2009:337:0011:0036:EN:PDF</a> sekä <a href="http://ec.europa.eu/justice/data-protection/article-29/documentation/opinion-recommendation/files/2012/wp194_en.pdf" target="_blank">http://ec.europa.eu/justice/data-protection/article-29/documentation/opinion-recommendation/files/2012/wp194_en.pdf</a>.</p>
+	    
+	    
+	    <h1>Konfiguraatioprofiilit</h1>
+	    
+	    <p>Ohjelmistotuotannossa on tyypillistä, että jokaisella ohjelmistokehittäjällä on oma ympäristö, missä sovellusta voi kehittää ja testata. Sovelluksen siirtäminen koneelta toiselle ei vaadi muutoksia ohjelman lähdekoodiin, vaan muutokset ovat heti myös muiden kokeiltavissa. Samanlaista joustavuutta odotetaan myös silloin kun sovelluksesta julkaistaan uusi versio käyttäjille.</p>
+	    
+	    <p>Sovelluksen julkaisun eli esimerkiksi tuotantopalvelimelle siirtämisen ei tule vaatia muutoksia sovelluksen lähdekoodiin. Kun sovellus on julkisessa käytössä, sillä on tyypillisesti ainakin usein eri tietokantaosoite kuin sovelluskehitysvaiheessa, mahdollisesti eri tietokannanhallintajärjestelmä, sekä todennäköisiä erilaisia salasanoihin ja ohjelman tuottamiin tulostuksiin (logeihin) liittyviä asetuksia.</p>
+
+	    <p>Tarvitsemme siis tavan olennaisten asetusten määrittelyyn ympäristökohtaisesti.</p>
+
+
+	    <h2>Konfiguraatioprofiilit Spring-sovelluskehyksessä</h2>
+
+
+	    <p>Spring-projekteissa konfiguraatiotiedostot sijaitsevat tyypillisesti kansiossa <code>src/main/resources/</code>. Spring etsii kansiosta tiedostoa nimeltä <code>application.properties</code>, johon ohjelmistokehittäjä voi määritellä sovelluksen käynnistyksen yhteydessä käytettäviä asetuksia. Asetustiedosto voi sisältää esimerkiksi tietokantaan liittyviä asetuksia:</p>
+
+<pre>
+spring.datasource.driverClassName=tietokanta-ajuri
+spring.datasource.url=jdbc-osoite
+</pre>
+
+	    <p>Lista tyypillisistä asetuksista löytyy osoitteesta <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html" target="_blank">http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html</a>.</p>
+
+	    <p>Käytettävän profiilin ja konfiguraatiotiedoston vaihtaminen toteutetaan tyypillisesti niin, että käytetyllä koneella on määriteltynä ympäristömuuttuja (<code>SPRING_PROFILES_ACTIVE</code>), joka kertoo käytettävän profiilin. Ympäristömuuttujan voi antaa myös sovellukselle parametrina sovellusta käynnistettäessä (<code>java ... -Dspring.profiles.active=arvo ...</code>).</p>
+
+	    <p>Jos käytössä on aktiivista profiilia kuvaava ympäristömuuttuja, etsii Spring oletuskonfiguraatiotiedoston (<code>application.properties</code>) lisäksi myös <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties" target="_blank">aktiiviseen profiiliin liittyvää konfiguraatiotiedostoa</a>. Jos aktiivisena profiilina on <code>production</code>, etsitään myös konfiguraatiotiedostoa <code>application-production.properties</code>. Konfiguraatioprofiili voisi esimerkiksi sisältää tietoa käytettävästä tietokanta-ajurista sekä tietokannan osoitteesta.</p>
+
+
+	    <h2>Ohjelmakoodissa määriteltävät profiilit</h2>
+
+	    <p>Osa Springin konfiguraatiosta tapahtuu ohjelmallisesti. Esimerkiksi tietoturvaan liittyvät asetukset, esimerkiksi aiemmin näkemämme <code>SecurityConfiguration</code>-luokka, määritellään usein ohjelmallisesti. Haluamme kuitenkin luoda tilanteen, missä tuotannossa on eri asetukset kuin kehityksessä.</p>
+
+	    <p>Tämä onnistuu <code>@Profile</code>-annotaation avulla, jonka kautta voimme asettaa tietyt luokat tai metodit käyttöön vain kun <code>@Profile</code>-annotaatiossa määritelty profiili on käytössä. Esimerkiksi aiemmin luomamme <code>SecurityConfiguration</code>-luokka voidaan määritellä tuotantokäyttöön seuraavasti:</p>
+
+<pre class="sh_java">
+// importit
+
+@Profile("production")
+@Configuration
+@EnableWebSecurity
+public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().authenticated();
+        http.formLogin()
+                .permitAll();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+</pre>
+
+	    <p>Voimme luoda erillisen tietoturvaprofiilin, jota käytetään oletuksena sovelluskehityksessä. Oletusprofiili määritellään merkkijonolla <code>default</code>.</p>
+
+<pre class="sh_java">
+// importit
+
+@Profile("default")
+@Configuration
+@EnableWebSecurity
+public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // sallitaan h2-konsolin käyttö
+        http.csrf().disable();
+        http.headers().frameOptions().sameOrigin();
+        
+        http.authorizeRequests()
+                .antMatchers("/h2-console/*").permitAll()
+                .anyRequest().authenticated();
+        http.formLogin()
+                .permitAll();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("jack").password("bauer").roles("USER");
+    }
+}
+</pre>
+
+	    <p>Nyt tuotantoympäristössä käyttäjät noudetaan tietokannasta, mutta kehitysympäristössä on erillinen testikäyttäjä. Jos profiilia ei ole erikseen määritelty, käytetään oletusprofiilia (default).</p>
+
+ 
+	    <h2>Sovelluksen siirtäminen pilvipalveluun</h2>
+
+            <p>Tutustutaan seuraavaksi sovelluksen siirtämiseen <a href="https://www.heroku.com/" target="_blank">Heroku</a>-pilvipalveluun. Heroku on palvelu, joka tarjoaa rajoitetun (ja ilmaisen) sijoituspaikan vähän resursseja kuluttaville sovelluksille. Toisin kuin aiemmin toteuttamiemme sovellusten tietokanta, Herokun käyttämä tietokannanhallintajärjestelmä on erillinen sovelluksesta, jolloin tietokantaan tallennetut tiedot pysyvät tietokannassa vaikka sovellus sammuisi välillä.</p>
+
+	    <p>Seuraa ensin osoitteessa <a href="https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku" target="_blank">https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku</a> olevaa opasta Spring Boot -sovelluksen käytöstä Herokussa ja luo ensimmäinen pilvessä sijaitseva Heroku-sovelluksesi.</p>
+
+	    <p>Jotta saisimme oman tietokantaa käyttävän sovelluksen Herokuun, tarvitsemme muutaman lisäaskeleen. Heroku käyttää PostgreSQL-tietokannanhallintajärjestelmää, joten tarvitsemme sen ajurin sekä erillisen tietokantayhteyksiä hallitsevan apukirjaston. Nämä saa käyttöön lisäämällä projektin pom.xml-tiedostoon seuraavat riippuvuudet.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+    &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-dbcp2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</pre>
+
+	    <p>Nyt käytössämme on tietokanta-ajuri. Lisätään pom.xml-tiedostoon vielä liitännäinen, joka luo projektista käynnistyvät jar-tiedoston. Koska liitännäisestä ei ole vielä uutta versiota, käytämme siitä hieman vanhempaa versiota.</p>
+
+<pre class="sh_xml">
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.3.6.RELEASE&lt;/version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;repackage&lt;/goal&gt;
+                    &lt;/goals&gt;
+                &lt;/execution&gt;
+            &lt;/executions&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</pre>
+
+	    <p>Luodaan seuraavaksi konfiguraatiotiedosto, jolla määrittelemme sovelluksen käyttöön PostgreSQL-kielen sekä pyydämme tietokantakyselyitä näkyville. Seuraava sisältö tulee tiedostoon <code>src/main/resources/application-production.properties</code>.</p>
+
+<pre>
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+</pre>
+
+	    <p>Luodaan tämän jälkeen profiili tuotantokäyttöä varten. Profiili noudattaa Herokun opasta osoitteessa <a href="https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java" target="_blank">https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java</a>, mutta on käytössä vain profiililla <code>production</code>. Tämän avulla sovellus muuntaa Herokun antaman tietokantaosoitteen sovelluksen käyttöön.</p>
+
+<pre class="sh_java">
+// pakkaus
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+@Configuration
+@Profile("production")
+public class ProductionProfile {
+
+    @Bean
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
+    }
+}</pre>
+
+
+	    <p>Luodaan lopulta vielä erillinen <code>Procfile</code>-tiedosto, jonka perusteella Heroku osaa käynnistää sovelluksen. Procfile-tiedoston sisältö on seuraava:</p>
+
+<pre>
+web: java $JAVA_OPTS -Dspring.profiles.active=production -Dserver.port=$PORT -jar target/*.jar
+</pre>
+
+	    <p>Tämän jälkeen sovelluksen siirtäminen tuotantoon onnistuu alkuperäisiä Herokun ohjeita noudattamalla.</p>
+
+
+	    <p>Käytännössä siis Heroku määrittelee sovellukselle käynnistysparametrit sekä portin, jonka lisäksi määrittelemme aktiiviseksi profiiliksi tuotantoprofiilin. Kun sovellus siirretään herokuun, se käyttää Herokun tietokantaa. Toisaalta, kun sovellusta kehitetään paikallisesti, käytössä on testitietokanta -- ihan näppärää.</p>
+
+
+	    <p>Voit kokeilla ReloadHeroes-sovellusta osoitteessa <a href="https://still-beyond-90359.herokuapp.com/" target="_blank">https://still-beyond-90359.herokuapp.com/</a>.</p>
+
+
+
+            <h1>Sovellusten testaaminen</h1>
+
+
+
+            <p>Kuten ohjelmistotuotannossa yleensä, myös palvelinohjelmistoja rakennettaessa sovellusten testaaminen hyödyntää sekä kehitystyötä että tulevaa ylläpitotyötä. Testaaminen voidaan karkeasti jakaa kolmeen osaan: yksikkötestaukseen, integraatiotestaukseen ja järjestelmätestaukseen. Tämän lisäksi on mm. myös käytettävyys- ja tietoturvatestaus, joita emme tässä käsittele tarkemmin.</p>
+
+	    <p>Yksikkötestauksessa testataan sovellukseen kuuluvia pienimpiä yksittäisiä komponentteja ja varmistetaan että niiden tarjoamat rajapinnat toimivat tarkoitetulla tavalla. Integraatiotestauksessa testataan että komponentit toimivat yhdessä kuten niiden pitäisi, ja järjestelmätestauksessa varmistetaan, että järjestelmä toimii vaatimusten mukaan järjestelmän käyttäjille tarjotun rajapinnan (esim. selain) kautta.</p>
+
+	    
+            <h2>Yksikkötestaus</h2>
+	
+            <p>Yksikkötestauksella tarkoitetaan lähdekoodiin kuuluvien yksittäisten osien testausta. Termi yksikkö viittaa ohjelman pienimpiin mahdollisiin testattaviin toiminnallisuuksiin, kuten olion tarjoamiin metodeihin. Seuratessamme <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">single responsibility principle</a>ä, jokaisella oliolla ja metodilla on yksi selkeä vastuu, jota voi myös testata. Testaus tapahtuu yleensä testausohjelmistokehyksen avulla, jolloin luodut testit voidaan suorittaa automaattisesti. Yleisin Javalla käytettävä testauskehys on JUnit, jonka saa käyttöön lisäämällä siihen liittyvän riippuvuuden <code>pom.xml</code>-tiedostoon.</p>
+
+<pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</pre>
+
+            <p>Yksittäisen riippuvuuden määre <code>scope</code> kertoo milloin riippuvuutta tarvitaan. Määrittelemällä <code>scope</code>-elementin arvoksi <code>test</code> on riippuvuudet käytössä vain testejä ajettaessa. Uusia testiluokkia voi luoda NetBeansissa valitsemalla New -> Other -> JUnit -> JUnit Test. Tämän jälkeen NetBeans kysyy testiluokalle nimeä ja pakkausta. Huomaa että lähdekoodit ja testikoodit päätyvät erillisiin kansioihin -- juurin näin sen pitääkin olla. Kun testiluokka on luotu, on projektin rakenne kutakuinkin seuraavanlainen.</p>
+
+            <pre>
+.
+|-- pom.xml
+`-- src
+    |-- main
+    |   |-- java
+    |   |   `-- wad
+    |   |       `-- ... oman projektin koodit
+    |   |-- resources
+    |           `-- ... resurssit, mm. konfiguraatio ja thymeleafin templatet
+    |           
+    `-- test
+        `-- java
+            `-- wad
+                `-- ... testikoodit!
+                </pre>
+
+
+            <p>Tehtäväpohjissa JUnit-testikirjasto on valmiina mukana. Yksikkötestauksesta JUnit-kirjaston avulla löytyy pieni opas kurssin <a href="https://github.com/mluukkai/OTM2015/wiki/JUnit-ohje" target="_blank">Ohjelmistotekniikan menetelmät</a> sivuilta.</p>
+
+
+            <h2>Integraatiotestaus</h2>
+
+            <p>Spring tarjoaa <code>spring-test</code>-komponentin, jonka avulla JUnit-kirjasto saa @Autowired-annotaatiot toimimaan. Tämän kautta pääsemme tilanteeseen, missä voimme injektoida testimetodille esimerkiksi kokonaisen palvelun, sekä testata sen tarjoamien metodien toimintaa. Testattava palvelu voi hyödyntää muita komponentteja, jolloin testauksen kohteena on kokonaisuuden toiminta yhdessä.</p>
+
+            <p>Spring test-komponentista on myös Spring Boot -projekti, jonka voimme ottaa käyttöömme lisäämällä seuraavan riippuvuuden pom.xml-tiedostoon. Käytetyn riippuvuuden versio liittyy Spring Boot -projektin versioon, eikä sitä tarvitse määritellä tarkemmin.</p>
+	    
+            <pre class="sh_xml">
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
+
+	    
+            <p>Yksittäisten palvelujen testaamisessa tarvitsemme testiluokkien alkuun kaksi annotaatiota. Annotaatio <code>@RunWith(SpringRunner.class)</code> kertoo että käytämme Springiä yksikkötestien ajamiseen ja annotaatio <code>@SpringBootTest</code> lataa sovelluksen osat käyttöön. Testiluokka, johon injektoidaan automaattisesti <code>MyService</code>-palvelu, näyttää seuraavalta.</p>
+
+<pre class="sh_java">
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ApplicationTest {
+
+    @Autowired
+    private MyService myService;
+
+    // ... testit jne
+}</pre>
+
+            <p>Käynnistämällä Springin osana testejä, saamme käyttöömme oliokontekstin, jonka avulla voimme asettaa testattavat oliot testiluokkiin testaamista varten. Testattavien olioiden riippuvuudet asetetaan myös automaattisesti, eli jos <code>MyService</code> sisältää muita komponentteja, on ne myös automaattisesti asetettu.</p>
+
+            <p>Voimme ylläolevalla lähestymistavalla testata myös sitä, että sovelluksemme eri osat toimivat yhteen toivotusti. Oletetaan, että käytössämme on luokka <code>PersonService</code>, joka tarjoaa metodin <code>save</code>, jonka pitäisi tallentaa parametrina annettava <code>Person</code>-olio tietokantaan. Tämän lisäksi käytössämme on <code>PersonRepository</code>, jolla on metodi <code>findByName</code>, minkä avulla voimme hakea tietokannasta henkilön sen nimen perusteella. Kummatkin toteutukset voidaan injektoida suoraan testiluokkaan, testi itsessään ensin tallentaa henkilön <code>PersonService</code>-olion avulla, ja tarkistaa sen jälkeen <code>PersonRepository</code>-oliolta että kyseinen henkilö on olemassa.</p>
+
+
+<pre class="sh_java">
+// importit
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ApplicationTest {
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Test
+    public void testSavePerson() {
+        Person person = new Person();
+        person.setName("Jack Bauer");
+        person.setAge(42);
+
+        personService.save(person);
+
+        Person retrieved = personService.findByName("Jack Bauer");
+        assertNotNull(retrieved);
+        assertEquals(42, retrieved.getAge());
+    }
+
+    // ja muita testejä
+}</pre>
+
+            <p>Ylläolevassa testissä olevat metodit <code>assertNotNull</code> ja <code>assertEquals</code> ovat JUnit-kirjaston tarjoamia toiminnallisuuksia.</p>
+
+	    
+            <h2>Järjestelmätestaus</h2>
+
+            <p>Järjestelmätestauksessa on tarkoitus varmistaa, että järjestelmä toimii toivotulla tavalla. Järjestelmää testataan saman rajapinnan kautta, kuin mitä sen loppukäyttäjät käyttävät. Järjestelmätestaukseen on monenlaisia työkaluja, joista käsittelemme tässä kahta. Tutustumme ensin integraatiotestauksessa käytetyn <code>spring-test</code>-komponenttiin järjestelmätason testaustoiminnallisuuteen, jonka jälkeen tutustumme harjoitustehtävän kautta <code>Selenium</code> ja <code>FluentLenium</code> -kirjastoihin.</p>
+
+            <p>Springin tarjoama <code>spring-test</code> tarjoaa tuen järjestelmätestaamiseen. Annotaatiolla <code>@SpringBootTest</code> testeillä on käytössä myös web-sovelluksen konteksti, jonka avulla voidaan luoda <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html" target="_blank">MockMvc</a>-olio. MockMvc-oliolla pystymme tekemään pyyntöjä sovelluksen tarjoamiin osoitteisiin, tarkistelemaan pyyntöjen onnistumista, sekä tarkastelemaan vastauksena saatua dataa.</p>
+
+            <p>Alla oleva esimerkki käynnistää sovelluksen ja tekee kolme GET-pyyntöä osoitteeseen <code>/messages</code>. Ensimmäinen pyyntö liittyy testiin, missä varmistetaan että vastaus on sisältää statuskoodin <code>200</code> eli "OK", toinen pyyntö liittyy testiin joka varmistaa että vastauksen tyyppi on JSON-muotoista dataa, ja kolmas pyyntö tarkistaa että vastauksessa on merkkijono "Awesome". Alun <code>setUp</code>-metodi luo <code>MockMvc</code>-olion injektoidun palveinkontekstin perusteella.</p>
+
+            <pre class="sh_java">
+// muut importit
+
+// mm. mockMvc:n get- ja post-metodit
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MessagesTest {
+
+    @Autowired
+    private WebApplicationContext webAppContext;
+
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
+    }
+
+    @Test
+    public void statusOk() throws Exception {
+        mockMvc.perform(get("/messages"))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void responseTypeApplicationJson() throws Exception {
+        mockMvc.perform(get("/messages"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void responseContainsTextAwesome() throws Exception {
+        MvcResult res = mockMvc.perform(get("/messages"))
+                .andReturn();
+
+        String content = res.getResponse().getContentAsString();
+        Assert.assertTrue(content.contains("Awesome"));
+    }
+}</pre>
+
+                <p>Voit myös testata modeliin asetettujen attribuuttien olemassaoloa ja oikeellisuutta. Olemassaolon voi tarkistaa <code>model()</code>-metodin kautta, ja <code>MvcResult</code>-olion kautta pääsee käsiksi modelin sisältöön.</p>
+
+                <pre class="sh_java">
+    @Test
+    public void modelHasAttributeMessages() throws Exception {
+        mockMvc.perform(get("/messages"))
+                .andExpect(model().attributeExists("messages"));
+    }
+
+    @Test
+    public void messagesCorrect() throws Exception {
+        MvcResult res = mockMvc.perform(get(API_URI))
+                .andReturn();
+
+        // oletetaan, että kontrolleri asettaa listan Message-tyyppisiä olioita
+        // modeliin
+
+        List&lt;Message&gt; messages = (List) res.getModelAndView().getModel().get("messages");
+
+        // tarkista lista
+    }
+</pre>        
+
+
+            <p>MockMvc:n avulla voi testata käytännössä suurinta osaa palvelinsovellusten toiminnallisuudesta, mutta samalla se tarjoaa pääsyn samaan rajapintaan kuin mitä selain käsitteelee.</p>
+	    
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-lentokentatredux">
+                      Airports and Airplanes Redux
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-lentokentatredux" class="collapse">
+		  
+                  <p>Muistamme edellisestä osiosta tehtävän, missä tehtiin sovellus lentokoneiden ja lentokenttien hallintaan. Tässä tehtävässä harjoitellaan hieman sekä integraatio- että järjestelmätestausta.</p>
+		  
+		  <p>Huom! Tässä tehtävässä ei ole automaattisia testejä, joilla testattaisiin kirjoittamiasi testejä. Palauttaessasi tehtävän olet tarkistanut, että kirjoittamasi testit toimivat kuten tehtävänannossa on kuvattu.</p>
+		  
+                  <h1>AirportServiceTest</h1>
+		  
+                  <p>Sovellusessa on luokka <code>AirportService</code>, mikä sijaitsee pakkauksessa <code>wad.service</code>. Sille ei kuitenkaan ole yhtäkään testiä :(</p>
+
+                  <p>Lisää testikansioon (<code>Test Packages</code>) pakkaus <code>wad.service</code>, ja luo sinne luokka <code>AirportServiceTest</code>.</p>
+		  
+                  <p>Lisää luokalle tarvittavat annotaatiot sekä oliomuuttujat, ja toteuta luokalle testimetodit, joiden avulla testataan että haluttu lentokone todellakin lisätään lentokentälle. Haluat ainakin tietää että:</p>
+		  
+                  <ul>
+                    <li>Kun lentokone on lisätty lentokentälle, tietokannasta samalla tunnuksella haettavalla lentokoneella on asetettu lentokenttä, ja se on juuri se lentokenttä mihin kone on lisätty.</li>
+                    <li>Kun lentokone on lisätty lentokentälle, lentokentältä löytyy myös kyseinen kone.</li>
+                    <li>Kun lentokone on lisätty yhdelle lentokentälle, se ei ole muilla lentokentillä.</li>
+                    <li>Lentokoneen lisääminen samalle lentokentälle useasti ei johda siihen, että lentokenttä sisältää saman koneen monta kertaa.</li>
+                  </ul>
+		  
+                  <p>Aina kun lisäät yksittäisen testin, voit ajaa testit klikkaamalla projektia oikealla hiirennapilla ja valitsemalla "Test".</p>                        
+		  
+                  <h1>AircraftControllerTest</h1>
+		  
+                  <p>Luo testikansioon pakkaus <code>wad.controller</code> ja lisää sinne luokka <code>AircraftControllerTest</code>. Lisää luokkaan tarvittavat määrittelyt, jotta voit käyttää <code>MockMvc</code>-komponenttia testeissä.</p>
+		  
+                  <p>Tee seuraavat testit:</p>
+		  
+                  <ul>
+                    <li>Kun osoitteeseen <code>/aircrafts</code> tehdään GET-pyyntö, vastauksen status on 200 (ok) ja vastauksen model-oliossa on parametrit <code>aircrafts</code> ja <code>airports</code>.</li>
+                    <li>Kun osoitteeseen <code>/aircrafts</code> tehdään POST-pyyntö, jonka parametriksi annetaan <code>name</code>-kenttä, jonka arvona on "HA-LOL", pyynnön vastaukseksi tulee uudelleenohjaus. Tee tämän jälkeen erillinen kysely tietokantaan esim. <code>AircraftRepository</code>:n avulla, ja varmista, että tietokannasta löytyy lentokone, jonka nimi on <code>HA-LOL</code>.</li>
+                    <li>Kun osoitteeseen <code>/aircrafts</code> tehdään POST-pyyntö, jonka parametriksi annetaan <code>name</code>-kenttä, jonka arvona on "XP-55", pyynnön vastaukseksi tulee uudelleenohjaus. Tee tämän jälkeen GET-pyyntö osoitteeseen <code>/aircrafts</code>, ja tarkista että pyynnön vastauksena saatavan <code>model</code>-olion sisältämässä <code>"aircrafts"</code>-listassa on juuri luotu lentokone.</li>
+                  </ul>
+		  
+                  <p>Tässäkin tehtävässä, aina kun lisäät yksittäisen testin, voit ajaa testit klikkaamalla projektia oikealla hiirennapilla ja valitsemalla "Test".</p>                        
+                </div>
+              </div>
+            </div>
+	    
+
+            <p>MockMvc:n lisäksi järjestelmätestaukseen käytetään melko paljon käyttöliittymän testaamiseen tarkoitettua <a href="http://www.seleniumhq.org/" target="_blank">Selenium</a>ia ja siihen liittyviä lisäosia kuten <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">FluentLenium</a>. Käytännössä edellämainitut ovat web-selaimen toimintojen automatisointiin tarkoitettuja välineitä, jotka antavat sovelluskehittäjälle mahdollisuuden käydä läpi sovelluksen käyttöliittymää ohjelmallisesti.</p>
+
+	    <p>Lisätään FluentLenium-kirjaston vaatimat riippuvuudet, oletetaan että testit kirjoitetaan JUnit-testikirjaston avulla (FluentLenium tarjoaa myös muita vaihtoehtoja).</p>
+
+            <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.fluentlenium&lt;/groupId&gt;
+    &lt;artifactId&gt;fluentlenium-core&lt;/artifactId&gt;
+    &lt;version&gt;0.13.1&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.fluentlenium&lt;/groupId&gt;
+    &lt;artifactId&gt;fluentlenium-assertj&lt;/artifactId&gt;
+    &lt;version&gt;0.13.1&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+    &lt;artifactId&gt;htmlunit-driver&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</pre>
+
+
+	    <h3>FluentLenium testien kirjoittaminen</h3>
+
+
+            <p>Ajatellaan loppukäyttäjän haluamaa toiminnallisuutta "Käyttäjä voi ilmoittautua oppitunnille". Järjestelmä tarjoaa sivun, jonka ensimmäinen linkki vie ilmoittautumissivulle. Ilmoittautumissivulla tulee olla tietty otsikko -- varmistamme, että olemme oikealla sivulla. Tämän lisäksi ilmoiuttautumissivulla on lomakekenttä, jonka attribuutin <em>id</em> arvo on "name". Jos kentällä on attribuutti <em>id</em>, voidaan se valita kirjoittamalla "#kentannimi". Täytetään kenttään arvo "Bob" ja lähetetään lomake. Tämän jälkeen sivulla tulee olla teksti "Ilmoittautuminen onnistui!".</p>
+
+
+            <pre class="sh_java">
+// importit
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ElokuvatietokantaTest extends FluentTest {
+
+    public WebDriver webDriver = new HtmlUnitDriver();
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return webDriver;
+    }
+
+    @LocalServerPort
+    private Integer port;
+
+    @Test
+    public void canSignUp() {
+        goTo("http://localhost:" + port);
+
+        click(find("a").first());
+        assertEquals("Ilmoittautuminen", title());
+
+        fill(find("#name")).with("Bob");
+        submit(find("form").first());
+
+        assertTrue(pageSource().contains("Ilmoittautuminen onnistui!"));
+    }
+// ...
+                </pre>
+
+
+            <p>Yllä annotaatio <code>@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</code> käynnistää palvelimen integraatiotestausta satunnaisessa portissa, joka saadaan muuttujaan <code>port</code> annotaation <code>@LocalServerPort</code> avulla. Luomme tämän lisäksi ajurin näkymien läpikäyntiin (rivi <code>private WebDriver webDriver = new HtmlUnitDriver();</code>, joka tarjotaan testiluokkamme peritylle toiminnallisuudelle (<code>FluentTest</code>) metodin <code>getDefaultDriver()</code> kautta.</p>
+
+	    <p>Yllä menemme ensin paikalliseen osoitteeseen <code>http://localhost:<em>portti</em></code>, missä portin numero on satunnaisesti valittu -- surffaamme siis haluttuun osoitteeseen. Haemme tämän jälkeen ensimmäisen linkin, eli <code>a</code>-elementin sivulta, ja klikkaamme sitä. Tämän jälkeen tarkistamme, että sivun otsake on <code>Ilmoittautuminen</code>. Tätä seuraa kentän, jonka id on "name" täyttäminen "Bob"-merkkijonolla, jonka jälkeen lomake lähetetään. Kun lomake on lähetetty, haetaan sivun lähdekoodista tekstiä "Ilmoittautuminen onnistui!". Jos tekstiä ei löydy, testi epäonnistuu.</p>
+
+	    <p>FluentLenium-kirjastoon liittyvää dokumentaatiota löytyy osoitteesta <a href="http://www.fluentlenium.org/" target="_blank">http://www.fluentlenium.org/</a>, jonka lisäksi googlesta löytyy apua seuraavaan tehtävään.</p>
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-elokuvatredux">
+                      Movie Database Redux
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-elokuvatredux" class="collapse">
+		  
+                  <p>Muistamme toisesta osiosta myös tehtävän, missä tehtiin sovellus elokuvien ja näyttelijöiden hallintaan. Tässä tehtävässä harjoitellaan hieman järjestelmätestausta FluentLeniumin avulla. Tehtävässä ei ole automaattisia testejä, sillä sinun tehtävänä on toteuttaa ne.</p>
+		  
+                  <h1>Näyttelijän lisääminen ja poistaminen</h1>
+		  
+                  <p>Luo testikansioon <code>wad.selenium</code> testiluokka <code>ActorTest</code>, johon asetat Selenium-testaamiseen tarvittavat komponentit.</p>
+		  
+                  <p>Toteuta testi, jolla varmistetaan että käyttäjän lisääminen ja poistaminen onnistuu. Testin tulee toimia seuraavasti:</p>
+		  
+                  <ol>
+                    <li>Menee näyttelijäsivulle</li>
+                    <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                    <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Van Damme", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                    <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                    <li>Klikkaa "Van Damme"en liittyvää poista-nappia </li>
+                    <li>Tarkistaa että sivulla ei ole tekstiä "Van Damme"</li>
+                  </ol>
+		  
+                  <p>Toteuta seuraavaksi testi, joka tekee seuraavat askeleet:</p>
+		  
+                  <ol>
+                    <li>Menee näyttelijäsivulle</li>
+                    <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                    <li>Tarkistaa ettei sivulla ole tekstiä "Chuck Norris"</li>
+                    <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Chuck Norris", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                    <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                    <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                    <li>Etsii kentän jonka id on "name", asettaa kenttään tekstin "Van Damme", ja lähettää lomakkeeseen liittyvän lomakkeen.</li>
+                    <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                    <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                    <li>Klikkaa "Van Damme"en liittyvää poista-nappia</li>
+                    <li>Klikkaa henkilön "Chuck Norris" poista-nappia</li>
+                    <li>Tarkistaa ettei sivulla ole tekstiä "Van Damme"</li>
+                    <li>Tarkistaa että sivulla on teksti "Chuck Norris"</li>
+                  </ol>
+		  
+		  
+                  <h1>Elokuvan lisääminen ja näyttelijän lisääminen elokuvaan</h1>
+		  
+                  <p>Luo testikansioon <code>wad.selenium</code> testiluokka <code>MovieTest</code>, johon asetat Selenium-testaamiseen tarvittavat komponentit.</p>
+		  
+                  <p>Toteuta seuraavat askeleet</p>
+		  
+                  <ol>
+                    <li>Mene elokuvasivulle</li>
+                    <li>Tarkista että sivulla ei ole tekstiä "Bloodsport"</li>
+                    <li>Tarkista että sivulla ei ole tekstiä "Van Damme"</li>
+                    <li>Etsi kenttä jonka id on "name" ja lisää siihen arvo "Bloodsport"</li>
+                    <li>Etsi kenttä jonka id on "lengthInMinutes" ja lisää siihen arvo "92"</li>
+                    <li>Lähetä kenttään liittyvä lomake</li>
+		    
+                    <li>Tarkista että sivulla on teksti "Bloodsport"</li>
+                    <li>Tarkista että sivulla ei ole tekstiä "Van Damme"</li>
+		    
+                    <li>Mene näyttelijäsivulle</li>
+                    <li>Tarkista ettei sivulla ole tekstiä "Van Damme"</li>
+                    <li>Etsi kenttä jonka id on "name", aseta kenttään teksti "Van Damme", ja lähetä lomake.</li>
+                    <li>Tarkistaa että sivulla on teksti "Van Damme"</li>
+                    <li>Etsi linkki, jossa on teksti "Van Damme" ja klikkaa siitä.</li>
+                    <li>Etsi nappi, jonka id on "add-to-movie", ja klikkaa sitä.</li>
+		    
+                    <li>Mene elokuvasivulle</li>
+		    
+                    <li>Tarkista että sivulla on teksti "Bloodsport"</li>
+                    <li>Tarkista että sivulla on teksti "Van Damme"</li>
+                  </ol>
+		  
+                  <p>Suorita taas testit klikkaamalla projektia oikealla hiirennäppäimellä ja valitsemalla <code>Test</code>.</p>
+                </div>
+              </div>
+            </div>
+	    
+	    
+	    <h2>Konfiguraatioprofiilit ja testaaminen</h2>
+
+	    <p>Testien ajamisessa voidaan käyttää myös konfiguraatioprofiileja. Kun sovellukselle on määritelty erilaisia profiileja, esimerkiksi kirjautumiseen liittyvät konfiguraatiot, voidaan tietty profiili aktivoida testeissä. Testin aktivointi tapahtuu annotaation <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/context/ActiveProfiles.html" target="_blank">ActiveProfiles</a> avulla.</p>
+
+	    <p>Alla olevassa esimerkissä testiluokan testit suoritetaan siten, että käytössä on profiiliin "test" liittyvä konfiguraatio, eli se konfiguraatio, joka on määritelty annotaatiolla <code>@Profile("test")</code> (tai <code>@Profile(values = {"test", "muita"})</code> jos halutaan että samaa konfiguraatiota käytetään useammassa profiilissa.</p>
+
+            <pre class="sh_java">
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@ActiveProfiles("dev")
+public class ApplicationTest {
+// ...
+            </pre>
+
+	    
+	    
+          </section>
+	  <!-- END OSA3 --->
+
+          <!-- BEGIN OSA4 --->
+          <section class="weeklimit" data-week-id="4">
+	    
+            <header>
+              <h1 id="osa4">Osa 4</h1>
+            </header>
+
+	    <p>https://crackstation.net/hashing-security.htm</p>
 	    
             <div class="tehtavat">
               <div class="tehtava" id="t-readinglist-ex">
@@ -3283,22 +4420,16 @@ public class GroceryItem extends AbstractPersistable&lt;Long&gt; {
                 <div id="t-readinglist" class="collapse">
 		  
 		  <p>Lukulistasovellus tarjoaa käyttäjälle mahdollisuuden lisätä uusia kirjoja lukulistalle, sekä päivittää jo listalla olevien kirjojen lukustatusta. Kukin kirja voi olla tilassa "unread" (lukematon), "reading" (lukemassa) tai "read" (luettu).</p>
-
+		  
 		  <p>Kirjan tilan vaihtaminen tapahtuu käyttöliittymässä olevaa nappia painamalla, ja uuden kirjan lisääminen onnistuu alalaidassa olevan lomakkeen avulla.</p>
-
+		  
 		  <img src="img/mooc/ex27-list.png" class="naytto"/>
-
+		  
 		  <p>Toteuta ohjelman toimintaan tarvittava tietokantatoiminnallisuus sekä oleelliset ReadingList-luokan vaatimat pyyntömäärittelyt. Kannattanee aloittaa tietokantaa käyttävän luokan (esim. BookDao) määrittelyllä -- tietokantaskeema on annettuna tiedostossa <code>database-schema.sql</code>, jonka lisäksi <code>Book</code>-oliosta lienee hyötyä. Käyttöliittymä on projektissa annettu valmiina.</p> 
 		  
                 </div>
               </div>
             </div>		
-	    
-
-
-
-	    
-	    
 	    
             <div class="tehtavat">
               <div class="tehtava" id="t-helloonetomany-ex">
@@ -3311,11 +4442,11 @@ public class GroceryItem extends AbstractPersistable&lt;Long&gt; {
                 </header>
 		
                 <div id="t-helloonetomany" class="collapse">
-		      
+		  
 		  <p>Lue <a href="http://tietokantojen-perusteet.github.io/#chapter6-1" target="_blank">tietokantojen perusteiden</a> kurssimateriaalin luku 6.1.</p>
-		      
+		  
 		  <p>Tässä tehtävässä käytössä on kaksi taulua sisältävä tietokanta. Tietokantataulujen määrittely on seuraava:</p>
-
+		  
 <pre class="sh_sql">
 CREATE TABLE Agency (
     id integer AUTO_INCREMENT PRIMARY KEY,
@@ -3331,7 +4462,7 @@ CREATE TABLE Agent (
 </pre>
 
 		  <p>Jokaisella agentilla on organisaatio (Agency), johon agentti kuuluu.</p>
-
+		  
 		  <p>Tällä hetkellä organisaatiolle löytyy AgencyDao-luokka, jonka avulla organisaatiot saa haettua näppärästi tietokannasta. AgentDao-luokan toiminnallisuudesta puuttuu kuitenkin täysin agenttien liittyminen organisaatioihin. Täydennä AgentDao-luokkaa seuraavasti:</p>
 
 		  <ul>
@@ -3346,7 +4477,7 @@ CREATE TABLE Agent (
               </div>
             </div>		
 	    
-
+	    
             <div class="tehtavat">
               <div class="tehtava" id="t-hellocategories-ex">
                 <header>
@@ -3354,13 +4485,13 @@ CREATE TABLE Agent (
                     <a data-toggle="collapse" class="collapsed" href="#t-hellocategories">
                       Hello Categories
                     </a>
-                      </h1>
+                  </h1>
                 </header>
 		
                 <div id="t-hellocategories" class="collapse">
 		  
 		  <p>Otetaan juuri harjoiteltu yhdestä-moneen -toiminnallisuus käyttöön web-sovelluksessa, missä tarkoituksena on kategorisoida esineitä. Käytössä oleva tietokantaskeema on seuraavanlainen:</p>
-
+		  
 <pre class="sh_sql">
 CREATE TABLE Category (
     id integer AUTO_INCREMENT PRIMARY KEY,
@@ -3376,15 +4507,15 @@ CREATE TABLE Item (
 </pre>
 
 		  <p>Tässä tehtävässä tavoitteenasi on toteuttaa esineiden kategorisointiin vaadittava toiminnallisuus -- sovelluksen ulkoasu on seuraavanlainen:</p>
-
+		  
 		  <img src="img/mooc/ex29-categories.png" class="naytto"/>
 		  
 		  <img src="img/mooc/ex29-items.png" class="naytto"/>
 		  
 
-
+		  
 		  <p>Ohjelman rajapinnat, eli tässä tapauksessa osoitteet, ovat seuraavat:</p>
-
+		  
 		  <ul>
 		    <li>GET-pyyntö osoitteeseen <code>/category</code> listaa kaikki tietokannassa olevat kategoriat.</li>
 		    <li>POST-pyyntö osoitteeseen <code>/category</code> luo tietokantaan uuden kategorian. Kategorian nimi tulee pyynnön parametrina nimeltä "name". Uudelleenohjaa pyynnön osoitteeseen <code>/category</code>.</li>
@@ -3394,7 +4525,7 @@ CREATE TABLE Item (
 		    <li>POST-pyyntö osoitteeseen <code>/category/:id/item</code> lisää <code>:id</code>-tunnuksella merkittyyn kategoriaan uuden esineen. Esineen nimi tulee pyynnön parametrina nimeltä "name". Uudelleenohjaa pyynnön osoitteeseen <code>/category/:id</code>, missä <code>:id</code> on kategorian tunnus.</li>
 		    <li>POST-pyyntö osoitteeseen <code>/category/:id/item/:itemId/delete</code> poistaa <code>:itemId</code>-tunnuksella merkityn esineen tietokannasta. Uudelleenohjaa pyynnön osoitteeseen <code>/category/:id</code>, missä <code>:id</code> on kategorian tunnus.</li>
 		  </ul>
-			
+		  
 		  
 		  <p>Tutki tehtävässä valmiiksi annettuja komponentteja ennen aloitusta, ja mieti mitkä palat ovat niitä, jotka tarvitset ensiksi. Voi olla hyvä aloittaa vain kategorioiden käsittelystä ja edetä vasta sitten esineiden käsittelyyn kun kategorioihin liittyvä toiminnallisuus on kunnossa.</p>
 		  
@@ -3403,26 +4534,14 @@ CREATE TABLE Item (
               </div>
             </div>		
 	    
-
-
-
-
-	    <p>Web-sovelluksissa käytetään tiedon tallentamiseen tyypillisesti relaatiotietokantoja (esim. <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a>). Relaatio
-
- joiden käyttämisen helpottamiseksi  on rakennettu työvälineitä 
-
-helpottamiseksi on rakennettu päälle on rakennettu työvälineitä  että   käytetään paljon relaatiotietokantoja, Nykyäänkin eniten käytetyt tieto
-
-
-
-
+	    
 	    <h2>Tyylitiedostot</h2>
 
-		<p>Olet ehkäpä huomannut, että tähän mennessä tekemämme web-sovellukset eivät ole kovin kaunista katsottavaa. Kurssilla pääpaino on palvelinpään toiminnallisuuden toteuttamisessa, joten emme jatkossakaan keskity sivustojen ulkoasuun. Sivujen ulkoasun muokkaaminen on kuitenkin melko suoraviivaista. Verkosta löytyy iso kasa oppaita sivun ulkoasun määrittelyyn -- <a href="http://www.w3schools.com/css/" target="_blank">tässä yksi</a>.</p>
+	    <p>Olet ehkäpä huomannut, että tähän mennessä tekemämme web-sovellukset eivät ole kovin kaunista katsottavaa. Kurssilla pääpaino on palvelinpään toiminnallisuuden toteuttamisessa, joten emme jatkossakaan keskity sivustojen ulkoasuun. Sivujen ulkoasun muokkaaminen on kuitenkin melko suoraviivaista. Verkosta löytyy iso kasa oppaita sivun ulkoasun määrittelyyn -- <a href="http://www.w3schools.com/css/" target="_blank">tässä yksi</a>.</p>
 
-		<p>Käytämme kurssilla muutamassa tehtävässä valmista <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> -kirjastoa ulkoasun määrittelyyn. Ulkoasun määrittely tapahtuu lisäämällä sivun <code>head</code>-osioon oleelliset kirjastot -- tässä kirjastot haetaan <a href="https://www.bootstrapcdn.com/" target="_blank">https://www.bootstrapcdn.com/</a>-palvelusta, joka tarjoaa kirjastojen ylläpito- ja latauspalvelun.</p>
-
-		<p>Alla on esimerkki HTML-sivusta, jossa Twitter Bootstrap on otettu käyttöön. Sivulla on lisäksi määritelty <code>body</code>-elementin luokaksi (class) "container", mikä tekee sivusta päätelaitteen leveyteen reagoivan. Elementillä <code>table</code> oleva luokka "table" lisää elementtiin tyylittelyn. Erilaisiin Twitter Bootstrapin tyyleihin voi tutustua tarkemmin <a href="http://getbootstrap.com/css/" target="_blank">täällä</a>.</p>
+	    <p>Käytämme kurssilla muutamassa tehtävässä valmista <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> -kirjastoa ulkoasun määrittelyyn. Ulkoasun määrittely tapahtuu lisäämällä sivun <code>head</code>-osioon oleelliset kirjastot -- tässä kirjastot haetaan <a href="https://www.bootstrapcdn.com/" target="_blank">https://www.bootstrapcdn.com/</a>-palvelusta, joka tarjoaa kirjastojen ylläpito- ja latauspalvelun.</p>
+	    
+	    <p>Alla on esimerkki HTML-sivusta, jossa Twitter Bootstrap on otettu käyttöön. Sivulla on lisäksi määritelty <code>body</code>-elementin luokaksi (class) "container", mikä tekee sivusta päätelaitteen leveyteen reagoivan. Elementillä <code>table</code> oleva luokka "table" lisää elementtiin tyylittelyn. Erilaisiin Twitter Bootstrapin tyyleihin voi tutustua tarkemmin <a href="http://getbootstrap.com/css/" target="_blank">täällä</a>.</p>
 
 <pre class="sh_xml">
 &lt;!DOCTYPE html&gt;
@@ -3468,104 +4587,38 @@ helpottamiseksi on rakennettu päälle on rakennettu työvälineitä  että   k�
 &lt;/html&gt;
 </pre>
 
-		<p></p>
+	    <p></p>
+	    
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellocss">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellocss">
+                      Hello CSS
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellocss" class="collapse">
+		  
+		  <p>Tässä tehtävässä tavoitteena on lähinnä kokeilla sovelluksessa olevaa sivua ilman tyylitiedostoja sekä tyylitiedostojen kanssa. Käynnistä palvelin ja katso miltä juuripolussa toimiva sovellus näyttää.</p>
+		  
+		  <p>Sammuta tämän jälkeen palvelin ja muokkaa sovellukseen liittyvää <code>index.html</code>-tiedostoa siten, että poistat kommenttimerkit <code>head</code>-elementissä olevien Twitter Bootstrap -kirjaston linkkien ympäriltä. Käynnistä tämän jälkeen palvelin uudestaan ja katso miltä sivu tämän jälkeen näyttää. Oleellista tässä on se, että sivun ulkoasun muuttamiseen tarvittiin käytännössä vain tyylitiedostojen lisääminen.</p>
 
-		<div class="tehtavat">
-		  <div class="tehtava" id="t-hellocss">
+		  <p>Tehtävässä ei ole testejä -- voit palauttaa sen kun olet kokeillut ylläolevaa muutosta.</p>
 
-		    <header>
-		      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-hellocss">
-                          Hello CSS
-                        </a>
-                      </h1>
-                    </header>
-
-                    <div id="t-hellocss" class="collapse">
-
-		      <p>Tässä tehtävässä tavoitteena on lähinnä kokeilla sovelluksessa olevaa sivua ilman tyylitiedostoja sekä tyylitiedostojen kanssa. Käynnistä palvelin ja katso miltä juuripolussa toimiva sovellus näyttää.</p>
-
-		      <p>Sammuta tämän jälkeen palvelin ja muokkaa sovellukseen liittyvää <code>index.html</code>-tiedostoa siten, että poistat kommenttimerkit <code>head</code>-elementissä olevien Twitter Bootstrap -kirjaston linkkien ympäriltä. Käynnistä tämän jälkeen palvelin uudestaan ja katso miltä sivu tämän jälkeen näyttää. Oleellista tässä on se, että sivun ulkoasun muuttamiseen tarvittiin käytännössä vain tyylitiedostojen lisääminen.</p>
-
-		      <p>Tehtävässä ei ole testejä -- voit palauttaa sen kun olet kokeillut ylläolevaa muutosta.</p>
-
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
 
-
-
-
-
-
-                <h1>HTTP-protokolla ja tilattomuus</h1>
-		
-                <p>HTTP on tilaton protokolla, eli se käsittelee jokaisen pyynnön itsenäisenä muista riippumattomana pyyntönä. HTTP-protokolla ei vaadi, että palvelin pitäisi kirjaa pyynnöistä ja kytkisi pyynnöt tiettyyn käyttäjään. Tämä tarkoittaa sitä, että HTTP ei osaa yhdistää samalta käyttäjältä tulevia pyyntöjä toisiinsa, jolloin jokainen pyyntö käsitellään erillisenä pyyntönä.</p>
-
-                <p>Vaikka HTTP on tilaton protokolla, on asiakkaan tunnistamiseen käytetty pitkään erilaisia kiertotapoja. Klassinen -- mutta erittäin huono -- tapa kiertää HTTP:n tilattomuus on ollut säilyttää GET-muotoisessa osoitteessa parametreja, joiden perusteella asiakas voidaan identifioida palvelinsovelluksessa. Parametrien käyttö osoitteissa ei ole kuitenkaan ongelmatonta: osoitteessa olevia parametreja voi helposti muokata käsin, jolloin palvelinsovelluksesta saattaa löytyä tietoturva-aukkoja tai ei-toivottua käyttäytymistä.</p>
-
-                <aside class="info">
-
-		  <br/>
-		  
-                  <h1>Case: GET-parametri tunnistautumiseen</h1>
-		  
-                  <p>Eräässä järjestelmässä verkkokaupan toiminnallisuus oli toteutettu siten, että GET-parametrina säilytettiin numeerista ostoskorin identifioivaa tunnusta. Käyttäjäkohtaisuus oli toteutettu palvelinpuolella siten, että tietyllä GET-parametrilla näytettiin aina tietyn käyttäjän ostoskori. Uusien tuotteiden lisääminen ostoskoriin onnistui helposti, sillä pyynnöissä oli aina mukana ostoskorin tunnistava GET-parametri. Ostoskorit oli valitettavasti identifioitu juoksevalla numerosarjalla. Henkilöllä 1 oli ostoskori 1, henkilöllä 2 ostoskori 2 jne.. Koska kuka tahansa pääsi katsomaan kenen tahansa ostoskoria vain osoitteessa olevaa numeroa vaihtamalla, olivat ostoskorien sisällöt välillä hyvin mielenkiintoisia.</p>
-		  
-                </aside>
-		
-                 <p>HTTP-protokollan tilattomuus ei pakota palvelinohjelmistoja tilattomuuteen. Palvelimella tilaa pidetään yllä jollain tietyllä tekniikalla, joka taas ei näy HTTP-protokollaan asti. Yleisin tekniikka tilattomuuden kiertämiseen on evästeiden käyttö.</p>
-
-
-                <h2>HTTP-protokollan tilattomuuden kiertäminen: evästeet</h2>
-
-                <p>HTTP on tilaton protokolla, eli käyttäjän toimintaa ja tilaa ei pysty pitämään yllä puhtaasti HTTP-yhteyden avulla. Käytännössä suurin osa verkkosovelluksista kuitenkin sisältää käyttäjäkohtaista toiminnallisuutta, jonka toteuttamiseen sovelluksella täytyy olla jonkinlainen tieto käyttäjästä ja käyttäjän tilasta. HTTP/1.1 tarjoaa mahdollisuuden tilallisten verkkosovellusten toteuttamiseen evästeiden (<em>cookies</em>) avulla.</p>
-
-                <p>Asettamalla käyttäjän tekemän pyynnön vastaukseen eväste, tulee käyttäjän jatkossa palauttaa kyseinen eväste aina pyynnön otsaketietoina. Tämä tapahtuu automaattisesti selaimen toimesta. Evästeitä käytetään istuntojen (<em>session</em>) ylläpitämiseen: istuntojen avulla on mahdollista pitää kirjaa käyttäjästä useampien pyyntöjen yli.</p>
-
-                <p>Evästeet toteutetaan otsakkeiden avulla. Kun käyttäjä tekee pyynnön palvelimelle ja palvelimella halutaan asettaa käyttäjälle eväste, palauttaa palvelu vastauksen mukana otsakkeen <code>Set-Cookie</code>, jossa määritellään käyttäjäkohtainen evästetunnus. Set-Cookie voi olla esimerkiksi seuraavan näköinen:</p>
-
-                <pre>
-Set-Cookie: SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg; Max-Age=3600; Domain=".helsinki.fi"
-                </pre>
-
-                <p>Ylläoleva palvelimelta lähetetty vastaus ilmoittaa pyytää selainta tallettamaan evästeen. Selaimen tulee jatkossa lisätä eväste <code>SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg</code> jokaiseen <code>helsinki.fi</code>-osoitteeseen. Eväste on voimassa tunnin, eli tunnin kuluttua sen voi poistaa. Tarkempi syntaksi evästeen asettamiselle on seuraava:</p>
-
-                <pre>
-Set-Cookie: nimi=arvo [; Comment=kommentti] [; Max-Age=elinaika sekunteina]
-                      [; Expires=parasta ennen paiva] [; Path=polku tai polunosa jossa eväste voimassa]
-                      [; Domain=palvelimen osoite (URL) tai osoitteen osa jossa eväste voimassa]
-                      [; Secure (jos määritelty, eväste lähetetään vain salatun yhteyden kanssa)]
-                      [; Version=evästeen versio]
-                </pre>
-
-                <p>Evästeet tallennetaan selaimen sisäiseen evästerekisteriin, josta niitä haetaan aina kun käyttäjä tekee kyselyn johonkin osoitteeseen. Evästeet lähetetään palvelimelle jokaisen viestin yhteydessä <code>Cookie</code>-otsakkeessa. </p>
-
-                <pre>
-Cookie: SESS57a5819a77579dfb1a1466ccceee22a0=0hr0aa2ogdfgkelogg
-                </pre>
-
-                <p>Evästeiden nimet ja arvot ovat yleensä monimutkaisia ja satunnaisesti luotuja niiden yksilöllisyyden takaamiseksi. Samaan osoitteeseen voi liittyä myös useampia evästeitä. Yleisesti ottaen evästeet ovat sekä hyödyllisiä että haitallisia: niiden avulla voidaan luoda yksiöityjä käyttökokemuksia tarjoavia sovelluksia, mutta niitä voidaan käyttää myös käyttäjien seurantaan ympäri verkkoa.</p>
-
-                <aside class="info">
-
-		  <br/>
-
-                  <h1>Kekseliästä</h1>
-
-                  <p>Painamalla F12 tai valitsemalla Tools -> Developer tools, pääset tutkimaan sivun lataamiseen ja sisältöön liittyvää statistiikkaa. Lisäneuvoja löytyy <a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank">Google Developers</a> -sivustolta.</p>
-
-                  <p>Avaa developer tools, ja mene osoitteeseen <a href="http://www.hs.fi" target="_blank">http://www.hs.fi</a>. Valitsemalla developer toolsien välilehden <code>Resources</code>, löydät valikon erilaisista sivuun liittyvistä resursseista. Avaa <code>Cookies</code> ja valitse vaihtoehto <code>www.hs.fi</code>. Kuinka moni palvelu pitää sinusta kirjaa kun menet Helsingin sanomien sivuille?</p>
-
-                </aside>
-
-		<p>Käyttämämme Spark-kirjasto piilottaa suurehkon osan istuntojen luomiseen liittyvästä työstä.</p>
-
-		<h3>Istunnot ja Spark</h3>
-
-		<p>Spark tarjoaa toiminnallisuuden <a href="http://sparkjava.com/documentation.html#sessions" target="_blank">istuntojen luomiseen ja hallintaan</a> <a href="http://sparkjava.com/documentation.html#request" target="_blank">Request</a>-olion tarjoaman <code>session</code>-metodin avulla. Uuden istunnon luominen sekä vanhan istunnon noutaminen tapahtuu antamalla Request-olion session-metodille parametrina arvo <code>true</code>.</p>
-
-		<p>Session-olio tarjoaa kaksi oleellista metodia. Metodi <code>attribute(String key)</code> palauttaa istuntoon <code>key</code>-tunnuksella tallennetun olion tai arvon, ja metodi <code>attribute(String key, Object value)</code> tallentaa istuntoon <code>key</code>-tunnuksella <code>value</code>-arvon. Alla oleva ohjelmakoodi lisää istuntoon tiedon ensimmäisen pyynnön ajanhetkestä, ja palauttaa sen aina pyynnön yhteydessä.</p>
+	    
+	    
+	    <h3>Istunnot ja Spark</h3>
+	    
+	    <p>Spark tarjoaa toiminnallisuuden <a href="http://sparkjava.com/documentation.html#sessions" target="_blank">istuntojen luomiseen ja hallintaan</a> <a href="http://sparkjava.com/documentation.html#request" target="_blank">Request</a>-olion tarjoaman <code>session</code>-metodin avulla. Uuden istunnon luominen sekä vanhan istunnon noutaminen tapahtuu antamalla Request-olion session-metodille parametrina arvo <code>true</code>.</p>
+	    
+	    <p>Session-olio tarjoaa kaksi oleellista metodia. Metodi <code>attribute(String key)</code> palauttaa istuntoon <code>key</code>-tunnuksella tallennetun olion tai arvon, ja metodi <code>attribute(String key, Object value)</code> tallentaa istuntoon <code>key</code>-tunnuksella <code>value</code>-arvon. Alla oleva ohjelmakoodi lisää istuntoon tiedon ensimmäisen pyynnön ajanhetkestä, ja palauttaa sen aina pyynnön yhteydessä.</p>
 
 <pre class="sh_java">
 // Session-olio haetaan pakkauksesta spark
@@ -3584,41 +4637,34 @@ get("/", (req, res) -> {
 });
 // ...</pre>
  
-		<p></p>
+	    <p></p>
 
-		<aside class="info">
-		  <br/>
-		  <h1>Istuntojen testaaminen selaimella</h1>
 
-		  <p>Istuntojen toiminnallisuuden testaaminen selaimella onnistuu näppärästi selainten tarjoaman anonyymitoiminnallisuuden avulla. Esimerkiksi Chromessa voi valita "New incognito window", mikä avaa käyttöön selainikkunan, missä aiemmin luotuja evästeitä ei lähetetä palvelimelle. Tällöin palvelin luulee, että pyyntö on uusi, ja asettaa vastaukseen uuden evästeen.</p>
+	    
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-hellosession-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellosession">
+                      Hello Session!
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellosession" class="collapse">
 		  
-		</aside>
-
-
-                <div class="tehtavat">
-
-                  <div class="tehtava" id="t-hellosession-ex">
-		    
-                    <header>
-                      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-hellosession">
-                          Hello Session!
-                        </a>
-                      </h1>
-                    </header>
-		    
-                    <div id="t-hellosession" class="collapse">
-		      
-		      <p>Toteuta sovellus, joka laskee henkilökohtaisia pyyntöjen määriä. Pyyntöjen määrät tulee tallentaa istuntoon.</p>
-
-		      <p>Kun käyttäjä tekee pyynnön palvelimelle, tulee vastauksen ensimmäiseen pyyntöön olla muotoa "counter: 1". Toiseen pyyntöön vastaus on "counter: 2", kolmanteen "counter: 3" jne. Kun toinen käyttäjä tekee pyynnön, tulee vastauksen olla muotoa "counter: 1". Toiseen pyyntöön vastaus on "counter: 2" jne.</p>
-                    </div>
-                  </div>
-		</div>
-
-		<h3>Pyyntöjen tarkastelu Sparkissa</h3>
-
-		<p>Spark tarjoaa näppärän toiminnallisuuden pyyntöjen tarkasteluun jo ennen kuin ne ohjataan <code>get</code> tai <code>post</code>-metodikutsuilla määriteltyihin metodeihin. Metodilla <code>before</code> voidaan määritellä toiminnallisuutta, joka suoritetaan ennen pyynnön ohjaamista eteenpäin. Esimerkiksi alla oleva ohjelmakoodi tulostaa jokaisen pyynnön yhteydessä osoitteen, johon pyyntö on tehty.</p>
+		  <p>Toteuta sovellus, joka laskee henkilökohtaisia pyyntöjen määriä. Pyyntöjen määrät tulee tallentaa istuntoon.</p>
+		  
+		  <p>Kun käyttäjä tekee pyynnön palvelimelle, tulee vastauksen ensimmäiseen pyyntöön olla muotoa "counter: 1". Toiseen pyyntöön vastaus on "counter: 2", kolmanteen "counter: 3" jne. Kun toinen käyttäjä tekee pyynnön, tulee vastauksen olla muotoa "counter: 1". Toiseen pyyntöön vastaus on "counter: 2" jne.</p>
+                </div>
+              </div>
+	    </div>
+	    
+	    <h3>Pyyntöjen tarkastelu Sparkissa</h3>
+	    
+	    <p>Spark tarjoaa näppärän toiminnallisuuden pyyntöjen tarkasteluun jo ennen kuin ne ohjataan <code>get</code> tai <code>post</code>-metodikutsuilla määriteltyihin metodeihin. Metodilla <code>before</code> voidaan määritellä toiminnallisuutta, joka suoritetaan ennen pyynnön ohjaamista eteenpäin. Esimerkiksi alla oleva ohjelmakoodi tulostaa jokaisen pyynnön yhteydessä osoitteen, johon pyyntö on tehty.</p>
 
 <pre class="sh_java">
 before("*", (req, res) -> {
@@ -3626,67 +4672,67 @@ before("*", (req, res) -> {
 });
 </pre>
 
-		<p>Suoritus jatkuu <code>before</code>ssa määritetyn koodin suorituksen jälkeen normaalisti, eli pyyntö ohjataan metodiin, joka käsittelee pyynnössä määriteltyä polkua. Pyynnön voi myös <a href="http://sparkjava.com/documentation.html#redirects" target="_blank">uudelleenohjata</a> tai pyynnön suorituksen voi <a href="http://sparkjava.com/documentation.html#halting" target="_blank">keskeyttää</a> tarvittaessa.</p>
+	    <p>Suoritus jatkuu <code>before</code>ssa määritetyn koodin suorituksen jälkeen normaalisti, eli pyyntö ohjataan metodiin, joka käsittelee pyynnössä määriteltyä polkua. Pyynnön voi myös <a href="http://sparkjava.com/documentation.html#redirects" target="_blank">uudelleenohjata</a> tai pyynnön suorituksen voi <a href="http://sparkjava.com/documentation.html#halting" target="_blank">keskeyttää</a> tarvittaessa.</p>
 
-                <div class="tehtavat">
-
-                  <div class="tehtava" id="t-helloauth-ex">
-
-                    <header>
-                      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-helloauth">
-                          Hello Auth!
-                        </a>
-                      </h1>
-                    </header>
-
-                    <div id="t-helloauth" class="collapse">
-
-		      <p>Tässä tehtävässä tehtävänäsi on toteuttaa yksinkertainen kirjautumistoiminnallisuus. Tehtäväpohjassa on tarjottuna lomake kirjautumiseen, sekä salainen sivu, joka tulee näyttää käyttäjälle jos kirjautuminen onnistuu.</p>
-
-		      <p>Oikea käyttäjätunnus on <strong><code>user</code></strong> ja oikea salasana on <strong><code>pw</code></strong>.</p>
-
-		      <p>Ohjelman toiminnallisuuden tulee olla seuraava:</p>
-
-		      <ul>
-			<li>Kun käyttäjä avaa sovelluksen selaimessa (esim. http://localhost:4567), tulee käyttäjälle näyttää sivu <code>index.html</code>.</li>
-			<li>Kun käyttäjä yrittää kirjautua lomakkeen avulla, tulee käyttäjätunnus ja salasana tarkistaa. Jos käyttäjätunnus ja salasana ovat oikein, käyttäjälle luodaan istunto, missä on tieto kirjautumisen onnistumisesta ja käyttäjä ohjataan osoitteeseen <code>/secret/</code>. Jos käyttäjätunnus tai salasana on väärin, tulee käyttäjälle näyttää sivu <code>index.html</code> siten, että käyttäjä näkee virheviestin <code>"Invalid credentials, try again."</code>.</li>
-			<li>Kun käyttäjä yrittää avata osoitteen <code>/secret/</code> tulee palvelimen tarkastaa onko käyttäjällä istuntoa, jossa olisi määritelty kirjautumisen onnistuminen. Jos istuntoa ei löydy, tulee käyttäjälle palauttaa statuskoodi <code>401</code> ja viesti <code>"Not allowed"</code>. Jos istunto löytyy, käyttäjälle näytetään sivun <code>secret.html</code> sisältö.</li>
-		      </ul>
-
-                    </div>
-                  </div>
-		</div>
-
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-helloauth-ex">
 		
-                <div class="tehtavat">
-                  <div class="tehtava" id="t-shoppingspree-ex">
-                    <header>
-                      <h1>
-                        <a data-toggle="collapse" class="collapsed" href="#t-shoppingspree">
-                          Shopping Spree!
-                        </a>
-                      </h1>
-                    </header>
-		    
-                    <div id="t-shoppingspree" class="collapse">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-helloauth">
+                      Hello Auth!
+                    </a>
+                  </h1>
+                </header>
 		
-		      <p>Istuntoon voidaan tallentaa myös olioita. Tyypillinen esimerkki tällaisesta on ostoskorin täyttäminen.</p>
+                <div id="t-helloauth" class="collapse">
+		  
+		  <p>Tässä tehtävässä tehtävänäsi on toteuttaa yksinkertainen kirjautumistoiminnallisuus. Tehtäväpohjassa on tarjottuna lomake kirjautumiseen, sekä salainen sivu, joka tulee näyttää käyttäjälle jos kirjautuminen onnistuu.</p>
 
-		      <p>Tehtäväpohjaan on toteutettu osa ostoskoritoiminnallisuuden vaatimista komponenteista. Tehtävänäsi on:</p>
+		  <p>Oikea käyttäjätunnus on <strong><code>user</code></strong> ja oikea salasana on <strong><code>pw</code></strong>.</p>
 
-		      <ul>
-			<li>ShoppingSpree-luokan toiminnallisuutta siten, että ostoskori tallennetaan käyttäjäkohtaiseen istuntoon.</li>
-			<li>Esineen ostoskoriin lisäämisen toteuttaminen palvelinpäässä -- selainpuolen toiminnallisuus on toteutettu.</li>
-			<li>Checkout-linkin tarvitseman toiminnallisuuden toteuttaminen -- käyttäjän tulee siis pystyä menemään checkout-sivulle, jossa näytetään ostoskorin tämän hetkinen sisältö.</li>
-		      </ul>
+		  <p>Ohjelman toiminnallisuuden tulee olla seuraava:</p>
 
-                    </div>
-                  </div>
+		  <ul>
+		    <li>Kun käyttäjä avaa sovelluksen selaimessa (esim. http://localhost:4567), tulee käyttäjälle näyttää sivu <code>index.html</code>.</li>
+		    <li>Kun käyttäjä yrittää kirjautua lomakkeen avulla, tulee käyttäjätunnus ja salasana tarkistaa. Jos käyttäjätunnus ja salasana ovat oikein, käyttäjälle luodaan istunto, missä on tieto kirjautumisen onnistumisesta ja käyttäjä ohjataan osoitteeseen <code>/secret/</code>. Jos käyttäjätunnus tai salasana on väärin, tulee käyttäjälle näyttää sivu <code>index.html</code> siten, että käyttäjä näkee virheviestin <code>"Invalid credentials, try again."</code>.</li>
+		    <li>Kun käyttäjä yrittää avata osoitteen <code>/secret/</code> tulee palvelimen tarkastaa onko käyttäjällä istuntoa, jossa olisi määritelty kirjautumisen onnistuminen. Jos istuntoa ei löydy, tulee käyttäjälle palauttaa statuskoodi <code>401</code> ja viesti <code>"Not allowed"</code>. Jos istunto löytyy, käyttäjälle näytetään sivun <code>secret.html</code> sisältö.</li>
+		  </ul>
+		  
                 </div>
+              </div>
+	    </div>
+	    
+	    
+            <div class="tehtavat">
+              <div class="tehtava" id="t-shoppingspree-ex">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-shoppingspree">
+                      Shopping Spree!
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-shoppingspree" class="collapse">
+		  
+		  <p>Istuntoon voidaan tallentaa myös olioita. Tyypillinen esimerkki tällaisesta on ostoskorin täyttäminen.</p>
+		  
+		  <p>Tehtäväpohjaan on toteutettu osa ostoskoritoiminnallisuuden vaatimista komponenteista. Tehtävänäsi on:</p>
 
+		  <ul>
+		    <li>ShoppingSpree-luokan toiminnallisuutta siten, että ostoskori tallennetaan käyttäjäkohtaiseen istuntoon.</li>
+		    <li>Esineen ostoskoriin lisäämisen toteuttaminen palvelinpäässä -- selainpuolen toiminnallisuus on toteutettu.</li>
+		    <li>Checkout-linkin tarvitseman toiminnallisuuden toteuttaminen -- käyttäjän tulee siis pystyä menemään checkout-sivulle, jossa näytetään ostoskorin tämän hetkinen sisältö.</li>
+		  </ul>
+		  
+                </div>
+              </div>
+            </div>
+	    
 
-
+	    
             <div class="tehtavat">
               <div class="tehtava">
                 <header>
@@ -3713,7 +4759,7 @@ before("*", (req, res) -> {
 
 
             <p>Käytännössä palvelin ja sovelluskehys ottaa vastuuta luokkien hallinnoinnista. Sovelluskehys syöttää riippuvuudet niitä tarvittaessa. Molemmat toiminnallisuudet ovat oleellisia kerrosarkkitehtuurin kerrosten toisistaan erottamisessa.</p>
-
+	    
 
             <div class="tehtavat">
               <div class="tehtava">
@@ -3774,12 +4820,12 @@ Mitsuku: Glad to hear it.</pre>
                 </div>
               </div>
             </div>		
-	    		
- 	    
-
-	  <!-- END OSA3 --->
-
-
+	    
+          </section>
+          <!-- END OSA4 --->
+	  
+	  
+	  
 	</article>
 
 
