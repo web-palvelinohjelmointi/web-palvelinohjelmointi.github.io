@@ -1,0 +1,835 @@
+<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->
+<!-- BEGIN HEADER -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web-palvelinohjelmointi</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="js/libs/syntaxhighlight/css/sh_style.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/chartist.min.css"/>
+        <link rel="stylesheet" href="css/wepa.css"/>
+
+        <link rel="stylesheet" href="css/wepa-mooc.css"/>
+
+    </head>
+    <body>
+
+        <!-- BEGIN NAV -->
+        <header role="navigation">
+            <h1>
+                <button type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="http://www.mooc.fi" class="hidden-in-hy">&#171; mooc.fi</a>
+
+            </h1>
+            <nav class="collapse bs-navbar-collapse" role="navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">Yleistä</a>
+                    </li>
+                    <li>
+                        <a href="osa1.html">Osa 1</a>
+                    </li>
+                    <li>
+                        <a href="osa2.html">Osa 2</a>
+                    </li>
+                    <li>
+                        <a href="osa3.html">Osa 3</a>
+                    </li>
+                    <li>
+                        <a href="osa4.html">Osa 4</a>
+                    </li>
+<!--
+                    <li>
+                        <a href="#viikko4">Viikko 4</a>
+                    </li>
+                    <li>
+                        <a href="#viikko5">Viikko 5</a>
+                    </li>
+                    <li>
+                        <a href="#viikko6">Viikko 6</a>
+                    </li>
+                    <li>
+                        <a href="#viikko7">Viikko 7</a>
+                    </li>
+-->
+                </ul>
+
+		<div style="direction: rtl;">
+		  <button id="logout" class="btn btn-warning">Kirjaudu ulos</button>
+		</div>
+            </nav>
+
+        </header>
+        <!-- // END NAV -->
+        <article>
+
+
+          <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form class="form-inline"  id="TmcLoginForm" role="form">
+		<div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
+                    <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
+                      <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua tai en tiedä TMC-tunnustani</button>
+                    <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
+                  </div>
+		</div><!-- /.modal-content -->
+              </form>
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+	  <!-- BEGIN CONTENT -->
+	  <section class="no-toc weeklimit" data-week-id="0">
+            <h1>Sisällysluettelo</h1>
+	    
+            <ul class="nav" id="material-toc"></ul>
+	    
+            <h1>Tehtävät</h1>
+	    
+            <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+	    
+	  </section>
+          <!-- BEGIN OSA4 --->
+          <section class="weeklimit" data-week-id="4">
+	    
+            <header>
+              <h1 id="osa4">Osa 4</h1>
+            </header>
+	    
+
+	    <p>Neljäs osio alkaa kertaustehtävällä, jossa täydennetään varauskalenterin toiminnallisuutta. Tämän jälkeen keskitymme web-ohjelmistoille tyypilliseen ohjelmistokehitysprosessiin sekä tähän liittyviin oleellisiin työvälineisiin. Lopulta tutustumme REST-arkkitehtuurimalliin.</p>
+	    
+	    
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa3-kertaus-ex" data-count="38">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa3-kertaus">
+                      Osa 3, kertaus: Reservations
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa3-kertaus" class="collapse">
+		  
+		  <p>Tässä tehtävässä tehtävänäsi on täydentää kesken jäänyttä varaussovellusta siten, että kaikki käyttäjät näkevät varaukset, mutta vain kirjautuneet käyttäjät pääsevät lisäämään varauksia.</p>
+
+		  <p>Kun käyttäjä tekee pyynnön sovelluksen juuripolkuun <code>/reservations</code>, tulee hänen nähdä varaussivu. Allaolevassa esimerkissä tietokannassa ei ole varauksia, mutta jos niitä on, tulee ne listata kohdan Current reservations alla.</p>
+
+
+		  <img src="img/2016-mooc/ex38-emptylist.png" class="browser-img"/>
+		  
+		  <p>Jos kirjautumaton käyttäjä yrittää tehdä varauksen, hänet ohjataan kirjautumissivulle.</p>
+
+		  <img src="img/2016-mooc/ex38-login.png" class="browser-img"/>
+		  
+		  <p>Kun kirjautuminen onnistuu, voi käyttäjä tehdä varauksia.</p>
+
+
+		  <img src="img/2016-mooc/ex38-reservations.png" class="browser-img"/>
+
+		  <p>Sovelluksen tulee kirjautumis- ja varaustoiminnallisuuden lisäksi myös varmistaa, että varaukset eivät mene päällekkäin.</p>
+
+		  <p>Luokassa <code>DefaultController</code> luodaan muutamia testikäyttäjiä, joita voi (esimerkiksi) käyttää sovelluksen testauksessa. Tarvitset ainakin:</p>
+
+		  <ul>
+		    <li>Palvelun käyttäjän tunnistautumiseen (esim. CustomUserDetailsService, kts. tehtävä 35), jolla täydennät luokkaa SecurityConfiguration</li>
+		    <li>Tavan aikaleimojen käsittelyyn (kts. esim. tehtävä 30)</li>
+		    <li>Kontrollerin varausten käsittelyyn ja tekemiseen</li>
+		  </ul>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+
+	    <h2>Käyttäjät ja oikeudet</h2>
+
+	    <p>Käyttäjillä on usein erilaisia oikeuksia sovelluksessa. Verkkokaupassa kaikki voivat listata tuotteita sekä lisätä tuotteita ostoskoriin, mutta vain tunnistautuneet käyttäjät voivat tehdä tilauksia. Tunnistautuneista käyttäjistä vain osa, esimerkiksi kaupan työntekijät, voivat tehdä muokkauksia tuotteisiin.</p>
+
+	    <p>Tällaisen toiminnan toteuttamiseen käytetään oikeuksia, joiden lisääminen vaatii muutamia muokkauksia aiempaan kirjautumistoiminnallisuuteemme. Aiemmin näkemässämme luokassa <code>CustomUserDetailsService</code> noudettiin käyttäjä seuraavasti:</p>
+
+<pre class="sh_java">
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByUsername(username);
+        if (account == null) {
+            throw new UsernameNotFoundException("No such user: " + username);
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                account.getUsername(),
+                account.getPassword(),
+                true,
+                true,
+                true,
+                true,
+                Arrays.asList(new SimpleGrantedAuthority("USER")));
+    }
+</pre> 
+
+	    <p>Palautettavan <code>User</code>-olion luomiseen liittyy lista oikeuksia. Yllä käyttäjälle on määritelty oikeus <code>USER</code>, mutta oikeuksia voisi olla myös useampi. Seuraava esimerkki palauttaa käyttäjän "USER" ja "ADMIN" -oikeuksilla.</p>
+
+<pre class="sh_java">
+        return new org.springframework.security.core.userdetails.User(
+                account.getUsername(),
+                account.getPassword(),
+                true,
+                true,
+                true,
+                true,
+                Arrays.asList(new SimpleGrantedAuthority("USER"), new SimpleGrantedAuthority("ADMIN")));
+</pre> 
+
+	    <p>Oikeuksia käytetään käytettävissä olevien polkujen rajaamisessa. Voimme rajata luokassa <code>SecurityConfiguration</code> osan poluista esimerkiksi vain käyttäjille, joilla on <code>ADMIN</code>-oikeus. Alla olevassa esimerkissä kaikki käyttäjät saavat tehdä GET-pyynnön sovelluksen juuripolkuun. Vain <code>ADMIN</code>-käyttäjät pääsevät polkuun <code>/clients</code>, jonka lisäksi muille sivuille tarvitaan kirjautuminen (mikä tahansa oikeus). Kuka tahansa pääsee kirjautumislomakkeeseen käsiksi.</p>
+
+
+<pre class="sh_java">
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers("/clients").hasAnyAuthority("ADMIN")
+                .anyRequest().authenticated();
+        http.formLogin()
+                .permitAll();
+    }
+</pre>
+
+	    <p>Oikeuksia varten määritellään tyypillisesti erillinen tietokantataulu, ja käyttäjällä voi olla useampia oikeuksia.</p>
+
+	    
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-onlyfortheselected">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-onlyfortheselected">
+                      Only for the Selected
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-onlyfortheselected" class="collapse">
+
+		  <p>Sovelluksessa on toteutettuna käyttäjienhallinta tällä hetkellä siten, että käyttäjillä ei ole erillisiä oikeuksia. Muokkaa sovellusta ja lisää sovellukseen käyttäjäkohtaiset oikeudet. Suojaa tämän jälkeen sovelluksen polut seuraavasti:</p>
+
+		  <ul>
+		    <li>Kuka tahansa saa nähdä polusta <code>/happypath</code> palautetun tiedon</li>
+		    <li>Vain USER tai ADMIN -käyttäjät saavat nähdä polusta <code>/secretpath</code> palautetun tiedon</li>		
+		    <li>Vain ADMIN-käyttäjät saavat nähdä polusta <code>/adminpath</code> palautetun tiedon</li>
+		  </ul>
+
+		  <p>Lisää sovellukseen myös seuraavat käyttäjät:</p>
+
+		  <table class="table">
+		    <tr>
+		      <th>Käyttäjätunnus</th>
+		      <th>Salasana</th>
+		      <th>Oikeudet</th>
+		    </tr>
+		    <tr>
+		      <td>larry</td>
+		      <td>larry</td>
+		      <td>USER</td>
+		    </tr>
+		    <tr>
+		      <td>moe</td>
+		      <td>moe</td>
+		      <td>USER ja ADMIN</td>
+		    </tr>
+		    <tr>
+		      <td>curly</td>
+		      <td>curly</td>
+		      <td>ADMIN</td>
+		    </tr>
+		  </table>
+
+                </div>
+              </div>
+	    </div>
+	    
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Käyttätunnus jäi määrittelemättä?</h1>
+
+	      <p>Jos Spring Security -komponentin ottaa käyttöön, mutta ei luo siihen liittyvää konfiguraatiota, ovat oletuksena kaikki polut salattu. Salasana löytyy sovelluksen käynnistyksen yhteydessä tulostuvista viesteistä.</p>
+	    
+	    </aside>
+	    
+            <h1 data-count="8">Tyypillinen ohjelmistokehitysprosessi</h1>
+	    
+	    <p>Ohjelmiston elinkaareen kuuluu vaatimusmäärittely, suunnittelu, toteutus, testaus, sekä ylläpito ja jatkokehitys. Vaatimusmäärittelyyn kuuluu ohjelmistoon liittyvien toiveiden ja vaatimusten kartoitus, jota seuraa suunnittelu, missä pohditaan miten vaatimukset toteutetaan. Toteutusvaihe sisältää ohjelmointia sekä sovelluksen elinympäristöön liittyvien komponenttien yhteensovittamista. Testaukseen kuuluu sovelluksen testaus niin automaattisesti kuin manuaalisesti. Kun ohjelmisto tai sen osa on toiminnassa, tulee elinkaaren osaksi myös käytössä olevasta ohjelmistosta löytyvien virheiden korjaaminen sekä uusien ominaisuuksien kehittäminen.</p>
+
+	    <p>Ohjelmointiin ja ohjelmistojen kehitykseen liittyy jatkuva etsiminen ja kokeileminen. Ongelmat pyritään ratkaisemaan kokeilemalla vaihtoehtoja kunnes ongelmaan löytyy sopiva ratkaisu. Jos ongelma on osittain tuttu, on tarkasteltavia vaihtoehtoja vähemmän, ja jos ongelma on tuttu, on siihen tyypillisesti ainakin yksi valmis ratkaisumalli. Tämän hetken suosituimmat ohjelmistokehitysmenetelmät (ketterät menetelmät kuten Scrum ja Kanban) ohjaavat työn läpinäkyvyyteen, oman työskentelyn kehittämiseen sekä siihen, että muiden osallistuminen ohjelmistokehitykseen on helppoa.</p>
+
+	    <h2>Ohjelmistoon liittyvät toiveet ja vaatimukset</h2>
+	    
+	    <p>Ohjelmistoon liittyvistä toiveista ja vaatimuksista keskustellaan asiakkaan ja käyttäjien kanssa, ja ne kirjataan muistiin. Vaatimukset kirjataan usein lyhyessä tarinamuodossa, joka kerrotaan uutta toiminnallisuutta toivovan henkilön näkökulmasta: "As a (käyttäjän tyyppi) I want (tavoite) so that (syy)." -- esimerkiksi "As a user I want to be able to view the messages so that I can see what others have written". Vaatimuksia kirjattaessa saadaan kuva ohjelmistolta toivotusta toiminnallisuudesta, jonka jälkeen toiminnallisuuksia voidaan järjestää tärkeysjärjestykseen. </p>
+	    
+	    <p>Toiminnallisuuksien tärkeysjärjestykseen asettaminen tapahtuu yhdessä asiakkaan ja käyttäjien kanssa. Kun toiminnallisuudet ovat kutakuinkin tärkeysjärjestyksessä, valitaan niistä muutama kerrallaan työstettäväksi. Samalla varmistetaan asiakkaan kanssa, että ohjelmistokehittäjät ja asiakas ymmärtävät toiveen samalla tavalla. Kun toiminnallisuus on valmis, toiminnallisuus näytetään asiakkaalle ja asiakas pääsee kertomaan uusia toiminnallisuustoiveita sekä mahdollisesti uudelleenjärjestelemään vaatimusten tärkeysjärjestystä.</p>
+
+            <p>Vaatimuksia ja toiveita, sekä niiden kulkemista projektin eri vaiheissa voidaan käsitellä esimerkiksi <a href="https://trello.com/" target="_blank">Trello</a>:n avulla. <a href="https://www.youtube.com/watch?v=7najSDZcn-U" target="_blank">Ohje Trellon käyttöön</a>.</p>
+
+
+	    <h2>Versionhallinta</h2>
+	    
+	    <p>Ohjelmiston lähdekoodin ja dokumentaatio tallennetaan keskitetysti versionhallintaan, mistä kuka tahansa voi hakea ohjelmistosta uusimman version sekä lähettää sinne uudemman päivitetyn version. Käytännössä jokaisella ohjelmistokehittäjällä on oma hiekkalaatikko, jossa ohjelmistoon voi tehdä muutoksia vaikuttamatta muiden tekemään työhön. Jokaisella ohjelmistokehittäjällä on yleensä samat tai samankaltaiset työkalut (ohjelmointiympäristö, ...), mikä helpottaa muiden kehittäjien auttamista.</p>
+
+	    <p>Kun ohjelmistokehittäjä valitsee vaatimuksen työstettäväksi, hän tyypillisesti hakee projektin versionhallinnasta projektin uusimman version, sekä lähtee toteuttamaan uutta vaatimusta. Kun vaatimukseen liittyvä osa tai komponentti on valmis sekä testattu paikallisesti (automaattiset testit on olemassa, toimii ohjelmistokehittäjän koneella), lähetetään uusi versio versionhallintapalvelimelle.</p>
+
+	    <p>Versionhallintapalvelin sisältää myös mahdollisesti useampia versioita projektista. Esimerkiksi git-mahdollistaa ns. branchien käyttämisen, jolloin uusia ominaisuuksia voidaan toteuttaa erillään "päähaarasta". Kun uusi ominaisuus on valmis, voidaan se lisätä päähaaraan. Versionhallinnassa olevia koodeja voidaan myös tägätä julkaisuversioiksi.</p>
+
+            <p>Yleisin versionhallintatyökalu on <a href="https://en.wikipedia.org/wiki/Git_(software)" target="_blank">Git</a>, joka on käytössä <a href="https://github.com/" target="_blank">Github</a>issa. <a href="https://guides.github.com/activities/hello-world/" target="_blank">Ensiaskeleet Githubin käyttöön</a>.</p>
+
+
+	    <h2>Jatkuva integraatio</h2>
+
+            <p>Versionhallintapalvelin on tyypillisesti kytketty integraatiopalvelimeen, jonka tehtävänä on suorittaa ohjelmistoon liittyvät testit jokaisen muutoksen yhteydessä sekä tuottaa niistä mahdollisesti erilaisia raportteja. Integraatiopalvelin kuuntelee käytännössä versionhallintajärjestelmässä tapahtuvia muutoksia, ja hakee uusimman lähdekoodiversion muutoksen yhteydessä.</p>
+	    
+            <p>Kun testit ajetaan sekä paikallisella kehityskoneella että erillisellä integraatiokoneella ohjelmistosta huomataan virheitä, jotka eivät tule esille muutoksen tehneen kehittäjän paikallisella koneella (esimerkiksi erilainen käyttöjärjestelmä, selain, ...). On myös mahdollista että ohjelmistosta ei noudeta kaikkia sen osia -- ohjelmisto voi koostua useista komponenteista --  jolloin kaikkien vaikutusten testaaminen paikallisesti on mahdotonta. Jos testit eivät mene läpi integraatiokoneella, korjataan muutokset mahdollisimman nopeasti.</p>
+	    
+            <p>Työkaluja automaattiseen kääntämiseen ja jatkuvaan integrointiin ovat esimerkiksi <a href="https://travis-ci.org" target="_blank">Travis</a> ja <a href="https://coveralls.io" target="_blank">Coveralls</a>. Travis varmistaa että viimeisin lähdekoodiversio kääntyy ja että testit menevät läpi, ja Coveralls tarjoaa välineitä testikattavuuden ja projektin historian tarkasteluun -- tässä hyödyksi on esimerkiksi <a href="https://github.com/cobertura/cobertura" target="_blank">Cobertura</a>. Kummatkin ovat ilmaisia käyttää kun projektin lähdekoodi on avointa -- kumpikin tarjoaa myös suoran Github-tuen.</p>
+	    
+            <p>Travisin käyttöönottoon vaaditaan käytännössä se, että projekti on esimerkiksi Githubissa ja että sen juurikansiossa on travisin konfiguraatiotiedosto <code>.travis.yml</code>. Yksinkertaisimmillaan konfiguraatiotiedosto sisältää vain käytetyn ohjelmointikielen -- travis osaa esimerkiksi päätellä projektin tyypin <code>pom.xml</code>-tiedoston pohjalta. <a href="https://docs.travis-ci.com/user/getting-started/" target="_blank">Ohje Traviksen käyttöönottoon</a>. </p>
+
+
+	    <h2>Nopeasti näytille</h2>
+
+	    <p>Kun uusi vaatimus tai sen osa on saatu valmiiksi, kannattaa viedä palvelimelle palautteen saamista varten. On tyypillistä, että ohjelmistolle on ainakin <em>Staging</em>- ja <em>Tuotanto</em>-palvelimet. Staging-palvelin on lähes identtinen ympäristö tuotantoympäristöön verrattuna. Staging (usein myös QA)-ympäristöön kopioidaan ajoittain tuotantoympäristön data, ja se toimii viimeisenä testaus- ja validointipaikkana (Quality assurance) ennen tuotantoon siirtoa. QA-ympäristöä käytetään myös demo- ja harjoitteluympäristönä. Kun QA-ympäristössä oleva sovellus on päätetty toimivaksi, siirretään sovellus tuotantoympäristöön.</p>
+
+	    <p>Tuotantoympäristö voi olla yksittäinen palvelin, tai se saattaa olla joukko palvelimia, joihin uusin muutos viedään hiljalleen. Tuotantoympäristö on tyypillisesti erillään muista ympäristöistä mahdollisten virheiden minimoimiseksi.</p>
+
+	    <p>Käytännössä versioiden päivitys tuotantoon tapahtuu usein automaattisesti. Esimerkiksi ohjelmistoon liittyvä Travis-konfiguraatio voidaan määritellä niin, että jos kaikki testit menevät läpi integraatiopalvelimella, siirretään ohjelmisto <a href="https://docs.travis-ci.com/user/deployment/heroku" target="_blank">automaattisesti tuotantoon</a>. Esimerkiksi Herokussa sijaitsevaan sovellukseen muutokset voidaan hakea automaattisesti Githubista (<a href="https://devcenter.heroku.com/articles/github-integration" target="_blank">ohje</a>).</p>
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Tietokantamigraatiot</h1>
+
+	      <p>Ohjelmistojen kehityksessä tulee vastaan tyypillisesti tilanne, missä tuotantokäytössä olevaa tietokantaskeemaa tulee muuntaa. Koska käytössä oleva tietokantaversio voi poiketa ohjelmistokehittäjän koneesta riippuen -- joku saattaa työstää uutta versiota, jollain toisella voi olla työn alla korjaukset vanhempaan versioon -- tarvitaa myös tietokantamuutosten automatisointiin välineitä. Tähän löytyy työvälineitä kuten <a href="http://www.liquibase.org/" target="_blank">Liquibase</a> ja <a href="https://flywaydb.org/" target="_blank">Flyway</a>, joista molemmista löytyy myös <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html" target="_blank">Spring Boot</a>-ohjeet.</p>
+
+	      <p>Käytännössä tietokantamigraatiot toteutetaan niin, että tietokannasta pidetään yllä tietokantataulujen muutos- ja muokkauskomennot sisältäviä versiokohtaisia tiedostoja. Käytössä olevaan tietokantaan on määritelty esimerkiksi taulu, jossa on tieto tämänhetkisestä versiosta. Jos käynnistettävässä sovelluksessa on uudempia muutoksia, ajetaan niihin liittyvät komennot tietokantaan ja tietokantaan merkitty versio päivittyy.</p>
+
+	      <p>Jos sovellus sijaitsee palvelussa kuten Heroku, jossa sovelluksen käynnistykseen on rajattu aina, kannattaa tietokantamigraatioihin liittyvistä versiotiedostoista ohjelmalliset. Esimerkiksi Flyway mahdollistaa muutosten tekemisen Java-koodissa.</p>
+
+	    </aside>
+
+	      
+
+
+	    <h1>REST-Arkkitehtuurimalli</h1>
+            
+
+	    <p>REST (<a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">representational state transfer</a>) on ohjelmointirajapintojen toteuttamiseen tarkoitettu arkkitehtuurimalli (tai "tyyli"), joka määrittelee sovellukset tietoa käsittelevien osien (komponentit), tietokohteiden (resurssit), sekä näitä yhdistävien yhteyksien kautta.</p>
+
+	    <p>Tietoa käsittelevät osat ovat selainohjelmisto, palvelinohjelmisto, ym. Resurssit ovat sovelluksen käsitteitä (henkilöt, kirjat, laskentaprosessit, laskentatulokset -- mikä tahansa voi käytännössä olla resurssi) sekä niitä yksilöiviä osoitteita. Resurssikokoelmat ovat löydettävissä ja navigoitavissa: resurssikokoelma voi löytyä esimerkiksi osoitteesta <code>/persons</code>, <code>/books</code>, <code>/processes</code> tai <code>/results</code>. Yksittäisille resursseille määritellään uniikit osoitteet (esimerkiksi <code>/persons/1</code>), ja niillä on myös määritelty esitysmuoto (esimerkiksi HTML, JSON tai XML); dataa voi lähettää ja vastaanottaa samassa muodossa. Resursseja ja tietoa käsittelevien osien yhteys perustuu tyypillisesti asiakas-palvelin -malliin, missä asiakas tekee pyynnön ja palvelin kuuntelee ja käsittelee vastaanottamiaan pyyntöjä sekä vastaa niihin.</p>
+	    
+            <aside class="info">
+	      <br/>
+	      
+              <h1>Tiedon alkulähteille</h1>
+	      
+              <p>Tutustu Roy T. Fieldingin ja Richard N. Taylorin artikkeliin <a href="resources/principled-design-of-the-modern-web-architecture.pdf" target="_blank">"Principled Design of the Modern Web Architecture"</a>, jossa REST määritellään sekä Fieldingin väitöskirjan <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm" target="_blank">viidenteen lukuun</a>. Vaikka emme tässä kappaleessa täytä kaikkia REST-rajapintoihin liittyviä vaatimuksia -- ainakaan aluksi -- on Roy Fielding sitä mieltä, että <a href="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven" target="_blank">oleellista on mahdollisuus resurssien välillä navigointiin</a>.</p>
+		
+              <p><em>"A truly RESTful API looks like hypertext. Every addressable unit of information carries an address, either explicitly (e.g., link and id attributes) or implicitly (e.g., derived from the media type definition and representation structure). Query results are represented by a list of links with summary information, not by arrays of object representations (query is not a substitute for identification of resources)."</em></p>
+		
+            </aside>
+
+	    
+            <h2>REST-rajapinnat ja Web-sovellukset</h2>
+            
+            <p>HTTP-protokollan yli käsiteltävillä REST-rajapinnoilla on tyypillisesti seuraavat ominaisuudet:</p>
+
+	    <ul>
+	      <li>Juuriosoite resurssien käsittelyyn (esimerkiksi <code>/books</code>)</li>
+	      <li>Resurssien esitysmuodon määrittelevä mediatyyppi (esimerkiksi <code>HTML</code>, <code>JSON</code>, ...), joka kertoo asiakkaalle miten resurssiin liittyvä data tulee käsitellä.</li>
+	      <li>Resursseja voidaan käsitellä HTTP-protokollan metodeilla (GET, POST, DELETE, ..)</li>
+	    </ul>
+	    
+	    <p>Kirjojen käsittelyyn ja muokkaamiseen määriteltävä rajapinta voisi olla esimerkiksi seuraavanlainen:</p>
+
+            <ul>
+              <li>GET-pyyntö osoitteeseen <code>/books</code> palauttaa kaikkien kirjojen tiedot.</li>
+              <li>GET osoitteeseen <code>/books/{id}</code>, missä <code>{id}</code> on yksittäisen kirjan yksilöivä tunniste, palauttaa kyseisen kirjan tiedot.</li>
+              <li>PUT osoitteeseen <code>/books/{id}</code>, missä <code>{id}</code> on yksittäisen kirjan yksilöivä tunniste, muokataan kyseisen kirjan tietoja. Kirjan uudet tiedot lähetetään osana pyyntöä.</li>
+              <li>DELETE osoitteeseen <code>/books/{id}</code> poistaa kirjan tietyllä tunnuksella.</li>
+              <li>POST osoitteeseen <code>/books</code> luo uuden kirjan pyynnön rungossa lähetettävän datan pohjalta. Palvelun vastuulla on päättää kirjalle tunnus.</li>
+            </ul>
+
+            <p>Osoitteissa käytetään tyypillisesti substantiivejä -- ei <code>books?id={id}</code> vaan <code>/books/{id}</code>. HTTP-pyynnön tyyppi määrittelee operaation. DELETE-tyyppisellä pyynnöllä poistetaan, POST-tyyppisellä pyynnöllä lisätään, PUT-tyyppisellä pyynnöllä päivitetään tietoja, ja GET-tyyppisellä pyynnöllä haetaan.</p>
+
+            <p>Datan muoto on toteuttajan päätettävissä. Tällä hetkellä eräs suosituista datamuodoista on <a href="http://en.wikipedia.org/wiki/JSON" target="_blank">JSON</a>, sillä sen käyttäminen osana selainohjelmistoja on suoraviivaista JavaScriptin kautta. Myös palvelinohjelmistot tukevat olioiden muuttamista JSON-muotoon.</p>
+
+            <p>Oletetaan että edelläkuvattu kirjojen käsittelyyn tarkoitettu rajapinta käsittelee JSON-muotoista dataa. Kirjaa kuvaava luokka on seuraavanlainen:</p>
+                
+<pre class="sh_java">
+package wad;
+
+public class Book {
+    private Long id;
+    private String name;
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String setName(String name) {
+        this.name = name;
+    }
+}</pre>
+                
+            <p>Kun luokasta on tehty olio, jonka <code>id</code>-muuttujan arvo on <code>2</code> ja nimi <code>"Harry Potter and the Chamber of Secrets"</code>, on sen JSON-esitys seuraavanlainen:</p>
+
+<pre>
+{
+  "id":2,
+  "name":"Harry Potter and the Chamber of Secrets"
+}</pre>
+            
+	    <p>JSON-notaatio määrittelee olion alkavalla aaltosululla <code>{</code>, jota seuraa oliomuuttujien nimet ja niiden arvot. Lopulta olio päätetään sulkevaan aaltosulkuun <code>}</code>. Oliomuuttujien nimet ovat hipsuissa <code>&quot;</code> sillä ne käsitellään merkkijonoina. Muuttujien arvot ovat arvon tyypistä riippuen hipsuissa. Tarkempi kuvaus JSON-notaatiosta löytyy sivulta <a href="http://json.org/" target="_blank">json.org</a>.</p>
+
+            <p>Pyynnön rungossa lähetettävän JSON-muotoisen datan muuttaminen olioksi tapahtuu annotaation <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestBody.html" target="_blank">@RequestBody</a> avulla. Annotaatio @RequestBody edeltää kontrollerimetodin parametrina olevaa oliota, johon sovelluskehittäjä pyytää Spring-sovelluskehystä asettamaan JSON-muotoisen datan arvot.</p>
+
+<pre class="sh_java">
+    @RequestMapping(method=RequestMethod.POST)
+    public String postBook(@RequestBody Book book) {
+        bookRepository.save(book);
+        return "redirect:/books";
+    }</pre>
+
+            <p>Vastauksen saa lähetettyä käyttäjälle JSON-muodossa lisäämällä pyyntöä käsittelevään metodiin annotaatio <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseBody.html" target="_blank">@ResponseBody</a>. Annotaatio @ResponseBody pyytää Spring-sovelluskehystä asettamaan palvelimen tuottaman datan selaimelle lähetettävän vastauksen runkoon. Jos vastaus on olio, muutetaan se (oletuksena) automaattisesti JSON-muotoiseksi vastaukseksi.</p>
+
+<pre class="sh_java">
+    @RequestMapping(method=RequestMethod.GET)
+    @ResponseBody
+    public Book getBook() {
+        Book book = new Book();
+        book.setName("Spring API");
+        return book;
+    }</pre>
+
+            <p>Edellä mainitut annotaatiot voi myös yhdistää. Oletetaan, että käytössä on <code>bookRepository</code>-niminen olio, jonka metodi <code>save</code> lisää kirjalle yksilöivän tunnuksen ja varastoi sen myöhempää käyttöä varten. Metodi myös palauttaa viitteen uuteen kirja-olioon. Uuden kirjan lisääminen tapahtuisi tällöin seuraavasti.</p> 
+
+<pre class="sh_java">
+    @RequestMapping(method=RequestMethod.POST)
+    @ResponseBody
+    public Book postBook(@RequestBody Book book) {
+        return bookRepository.save(book);
+    }</pre>
+                
+            <p>Nyt palvelulle voi lähettää JSON-muotoista dataa; vastaus on myös JSON-muotoinen, mutta luotavaan kirjaan on liitetty sen yksilöivä tunnus.</p>
+
+            <p>Voimme lisätä annotaatioon @RequestMapping lisätietoa metodin tuottamasta datasta. Attribuutti <code>consumes</code> kertoo minkälaista dataa metodin kuuntelema osoite hyväksyy. Metodi voidaan rajoittaa vastaanottamaan JSON-muotoista dataa merkkijonolla <code>"application/json"</code>. Vastaavasti metodille voidaan lisätä tietoa datasta, jota se tuottaa. Attribuutti <code>produces</code> kertoo tuotettavan datatyypin. Alla määritelty metodi sekä vastaanottaa että tuottaa JSON-muotoista dataa.</p>
+
+<pre class="sh_java">
+    @RequestMapping(method=RequestMethod.POST, 
+                      consumes="application/json", produces="application/json")
+    @ResponseBody
+    public Book postBook(@RequestBody Book book) {
+        return bookStorage.create(book);
+    }</pre>
+
+
+            <p>Jos on toteuttamassa omaa REST-rajapintaa, kannattanee joko käyttää Spring Data REST -komponenttia (palaamme tähän hieman myöhemmin) tai määritellä kontrolleriluokan annotaatioksi <code>@RestController</code>. Tämä asettaa jokaisen luokan metodiin annotaation <code>@ResponseBody</code> sekä sopivan datatyypin -- tässä tapauksessa "application/json".</p>
+
+            <p>Toteutetaan seuraavaksi kaikki tarvitut metodit kirjojen tallentamiseen. Kontrolleri hyödyntää erillistä luokkaa, joka tallentaa kirjaolioita tietokantaan ja tarjoaa tuen aiemmin määrittelemiemme books-osoitteiden ja pyyntöjen käsittelyyn -- PUT-metodi on jätetty omaa kokeilua varten.</p>
+
+
+            <pre class="sh_java">
+// importit
+
+@RestController
+@RequestMapping("books")
+public class BookController {
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @RequestMapping(method=RequestMethod.GET)
+    public List&lt;Book&gt; getBooks() {
+        return bookRepository.findAll();
+    }
+
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    public Book getBook(@PathVariable Integer id) {
+        return bookRepository.findOne(id);
+    }
+
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    public Book deleteBook(@PathVariable Integer id) {
+        return bookRepository.delete(id);
+    }    
+
+    @RequestMapping(method=RequestMethod.POST)
+    public Book postBook(@RequestBody Book book) {
+        return bookRepository.save(book);
+    }
+}</pre>
+
+	    
+            <aside class="info">
+	      <br/>
+              <h1>Apuvälineitä rajapinnan tarjoavan sovelluksen testaamiseen</h1>
+	      
+              <p>Palvelinohjelmistot, jotka tarjoavat vain avoimen rajapinnan kolmannen osapuolen ohjelmistoille, eivät tyypillisesti sisällä erillistä käyttöliittymää. Tällöin niiden testaaminen tapahtuu tyypillisesti sekä automaattisilla testeillä, että erilaisilla selainohjelmistoilla. Yksi hyvin hyödyllinen apuväline on <a href="https://www.getpostman.com/" target="_blank">Postman</a>, jonka saa lisättyä Google Chromeen Googlen web-storesta.</p>
+	      
+              <p>Postmanin hyödyntäminen on erittäin suositeltavaa -- kannattaa katsoa sen johdatusvideo, joka löytyy Postmanin sivulta. Katso myös <a href="https://www.youtube.com/watch?v=7YcW25PHnAA" target="_blank">RESTiä käsittelevä</a> Youtube-video, missä Postmania käytetään hieman.</p>
+            </aside>
+	    
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-tulospalvelu">
+                      Tulospalvelu
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-tulospalvelu" class="collapse">
+		  
+                  <p>Tässä tehtävässä toteutetaan pelitulospalvelu, joka tarjoaa REST-rajapinnan pelien ja tuloksien käsittelyyn. <strong>Huom! Kaikki syötteet ja vasteet ovat JSON-muotoisia olioita.</strong> Tehtäväpohjassa on toteutettu valmiiksi luokat <code>Game</code> ja <code>Score</code> sekä käytännölliset <code>Repository</code>-rajapinnat.</p>
+		  
+                  <h1>GameController</h1>
+		  
+                  <p>Pelejä käsitellään luokan <code>Game</code> avulla.</p>
+		  
+                  <p>Toteuta pakkaukseen <code>wad.controller</code> luokka <code>GameController</code>, joka tarjoaa REST-rajapinnan pelien käsittelyyn:</p>
+                  <ul>
+                    <li><code>POST /games</code> luo uuden pelin sille annetun pelin tiedoilla ja palauttaa luodun pelin tiedot. (Huom. vieläkin! Pyynnön <strong>rungossa</strong> oleva data on aina JSON-muotoista. Vastaukset tulee myös palauttaa JSON-muotoisina.)</li>
+                    <li><code>GET /games</code> listaa kaikki talletetut pelit.</li>
+                    <li><code>GET /games/{name}</code> palauttaa yksittäisen pelin tiedot <strong>pelin nimen perusteella</strong>.</li>
+                    <li><code>DELETE /games/{name}</code> poistaa nimen mukaisen pelin. Palauttaa poistetun pelin tiedot.</li>
+                  </ul>
+		  
+                  <h1>ScoreController</h1>
+		  
+                  <p>Jokaiselle pelille voidaan tallettaa pelikohtaisia tuloksia (luokka <code>Score</code>). Jokainen pistetulos kuuluu tietylle pelille, ja tulokseen liittyy aina pistetulos <code>points</code> numerona sekä pelaajan nimimerkki <code>nickname</code>.</p>
+		  
+                  <p>Toteuta luokka <code>wad.controller.ScoreController</code>, joka tarjoaa REST-rajapinnan tuloksien käsittelyyn:</p>
+		  
+                  <ul>
+                    <li><code>POST /games/{name}/scores</code> luo uuden tuloksen pelille <code>name</code> ja asettaa tulokseen pelin tiedot. Tuloksen tiedot lähetetään kyselyn rungossa.</li>
+                    <li><code>GET /games/{name}/scores</code> listaa pelin <code>name</code> tulokset.</li>
+                    <li><code>GET /games/{name}/scores/{id}</code> palauttaa tunnuksella <code>id</code> löytyvän tuloksen <code>name</code>-nimiselle pelille.</li>
+                    <li><code>DELETE /games/{name}/scores/{id}</code> poistaa avaimen <code>id</code> mukaisen tuloksen peliltä <code>name</code> (pelin tietoja ei tule pyynnön rungossa). Palauttaa poistetun tuloksen tiedot.</li>
+                  </ul>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+            <h2>Valmiin palvelun käyttäminen</h2>
+
+            <p>Toisen sovelluksen tarjoamaan REST-rajapintaan pääsee kätevästi käsiksi <a href="http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html" target="blank">RestTemplate</a>-luokan avulla. Voimme luoda oman komponentin kirjojen hakemiseen.</p>
+                
+<pre class="sh_java">
+// importit
+
+@Service
+public class BookService {
+
+    private RestTemplate restTemplate;
+    
+    public BookService() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    // tänne luokan tarjoamat palvelut
+}</pre>
+
+                
+
+            <ul>
+              <li>GET osoitteeseen <em>/books</em> palauttaa kaikkien kirjojen tiedot <em>tai</em> osajoukon kirjojen tiedoista -- riippuen toteutuksesta.</li>
+                    <pre class="sh_java">
+// kirjojen hakeminen
+List&lt;Book&gt; books = restTemplate.getForObject("<em>osoite</em>/books", List.class);</pre>
+              <li>GET osoitteeseen <em>/books/{id}</em>, missä {id} on yksittäisen kirjan yksilöivä tunniste, palauttaa kyseisen kirjan tiedot.</li>
+                    <pre class="sh_java">
+// tunnuksella 5 määritellyn kirjan hakeminen
+Book book = restTemplate.getForObject("<em>osoite</em>/books/{id}", Book.class, 5);</pre>
+              <li>PUT osoitteeseen <em>/books/{id}</em>, missä {id} on yksittäisen kirjan yksilöivä tunniste, muokkaa kyseisen kirjan tietoja tai lisää kirjan kyseiselle tunnukselle (toteutuksesta riippuen, lisäystä ei aina toteutettu). Kirjan tiedot lähetetään pyynnön rungossa.</li>
+
+                    <pre class="sh_java">
+// tunnuksella 5 määritellyn kirjan hakeminen
+Book book = restTemplate.getForObject("<em>osoite</em>/books/{id}", Book.class, 5);
+book.setName(book.getName() + " - DO NOT BUY!");
+
+// kirjan tietojen muokkaaminen
+restTemplate.put("<em>osoite</em>/books/{id}", book, 5);</pre>
+              <li>DELETE osoitteeseen <em>/books/{id}</em> poistaa kirjan tietyllä tunnuksella.</li>
+
+                    <pre class="sh_java">
+ // tunnuksella 32 määritellyn kirjan poistaminen
+restTemplate.delete("<em>osoite</em>/books/{id}", 32);</pre>
+              <li>POST osoitteeseen <em>/books</em> luo uuden kirjan pyynnön rungossa lähetettävän datan pohjalta. Palvelun vastuulla on päättää kirjalle tunnus.</li>
+
+                    <pre class="sh_java">
+Book book = new Book();
+book.setName("Harry Potter and the Goblet of Fire");
+
+// uuden kirjan lisääminen
+book = restTemplate.postForObject("<em>osoite</em>/books", book, Book.class);</pre>
+            </ul>
+
+            <p>Usein sovellukset hyödyntävät kolmannen osapuolen tarjoamaa palvelua omien toiminnallisuuksiensa toteuttamiseen. Harjoitellaan tätä seuraavaksi. </p>
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-gamerater">
+                      GameRater
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-gamerater" class="collapse">
+		  
+                  <p>Palvelu <em>GameRater</em> lisää aiempaan tulospalveluun mahdollisuuden arvostella yksittäisiä pelejä antamalla niille numeroarvosanan 0-5. Arvostelu tehdään kuitenkin erilliseen palveluun, emmekä siis laajenna edellistä palvelua suoraan.</p>
+		  
+                  <p><em>GameRater</em>-palvelun tulee käyttää <em>Tulospalvelu</em>-palvelun REST-rajapintaa, jonka avulla se tarjoaa samanlaisen rajapinnan pelien ja tulosten käsittelyyn. Ainoastaan pelien arvostelut käsitellään ja talletetaan tässä palvelussa! Arvosteluihin käytettävä entiteetti <code>Rating</code> ja siihen liittyvät palveluluokat on valmiina tehtäväpohjassa.</p>
+		  
+                  <p><strong>Huom!</strong> Joudut tutkimaan tehtäväpohjassa annettua koodia, jotta voit hyödyntää sitä. Joudut myös lukemaan tehtävän <em>Tulospalvelu</em> kuvausta tämän tehtävän toteutuksessa.</p>
+		  
+                  <p><strong>Huom!</strong> Valmis <em>Tulospalvelu</em>-palvelu löytyy osoitteesta <code>http://wepa-scoreservice-heroku.herokuapp.com/games</code>, joten voit tehdä tämän tehtävän täysin riippumatta tulospalvelu-tehtävästä.</p>
+		  
+		  
+                  <h1>GameRestClient ja GameController</h1>
+		  
+                  <p>Tee luokka <code>wad.service.GameRestClient</code>, joka toteuttaa rajapinnan <code>GameService</code>. Luokan tulee käyttää <em>Tulospalvelu</em>-palvelua kaikissa rajapinnan määrittelemissä toiminnoissa. REST-rajapinnan käyttö onnistuu Springin <code>RestTemplate</code>-luokan avulla.</p>
+		  
+                  <p><strong>Huom!</strong> <code>GameRestClient</code>-luokan <code>setUri</code>-metodi ottaa parametriksi yllä annetun URL-osoitteen valmiiseen <em>Tulospalvelu</em>-palveluun.</p>
+		  
+                  <p>Luo luokka <code>wad.controller.GameController</code>, joka tarjoaa <strong>täsmälleen samanlaisen</strong> JSON/REST-rajapinnan kuin <em>Tulospalvelu</em>-palvelun <code>GameController</code>, mutta siten, että jokainen toiminto käyttää valmista <em>Tulospalvelu</em>-palvelua rajapinnan <code>GameService</code> kautta.</p>
+		  
+                  <p><strong>Huom!</strong> Muista asettaa <code>GameService</code>-rajapinnan kautta URL-osoite valmiiseen <code>http://wepa-scoreservice-heroku.herokuapp.com/games</code>-osoitteeseen ohjelman käynnistyessä, esimerkiksi controller-luokan <code>@PostConstruct</code>-metodissa.</p>
+		  
+		  
+                  <h1>RatingController</h1>
+		  
+                  <p>Jokaiselle pelille voidaan tallettaa pelikohtaisia arvosteluja entiteetin <code>Rating</code> avulla. Arvosteluun liittyy numeroarvosana <code>rating</code> (0-5).</p>
+		  
+                  <p>Arvostelut liittyvät peleihin, jotka on talletettu eri palveluun, joten entiteetin <code>Rating</code> viittaus peliin täytyy tallettaa suoraan avaimena. Koska peleihin viitataan REST-rajapinnassa pelin nimellä, talletetaan jokaiseen <code>Rating</code>-entiteettiin pelin nimi attribuuttiin <code>gameName</code>. Tämän attribuutin avulla voidaan siis löytää arvosteluja pelin nimen perusteella.</p>
+		  
+                  <p>Toteuta luokka <code>wad.controller.RatingController</code>, joka tarjoaa REST-rajapinnan arvostelujen käsittelyyn:</p>
+		  
+                  <ul>
+                    <li><code>POST /games/{name}/ratings</code> luo uuden arvostelun pelille <code>name</code> - ainoa vastaanotettava attribuutti on <code>rating</code></li>
+                    <li><code>GET /games/{name}/ratings</code> listaa talletetut arvostelut pelille <code>name</code></li>
+                    <li><code>GET /games/{name}/ratings/{id}</code> palauttaa yksittäisen arvostelun tiedot pelin nimen <code>name</code> ja avaimen <code>id</code> perusteella</li>
+                    <li><code>DELETE /games/{name}/ratings/{id}</code> poistaa avaimen <code>id</code> mukaisen arvostelun</li>
+                  </ul>
+		  
+                </div>
+              </div>
+            </div>
+            
+                
+	    
+            <aside class="info">
+	      <br/>
+	      
+              <h1>Navigoitavuus</h1>
+	      
+              <p>Tähän asti toteuttamiemme palveluiden tarjoamat rajapinnat eivät ole sisältäneet linkkejä, joiden avulla resurssien välillä navigointi olisi ollut helppoa tai mahdollista. Tutustumme kohta menetelmään, jonka avulla näiden palveluiden tekeminen helpottuu huomattavasti; toinenkin tekniikka on olemassa -- osoitteessa <a href="http://spring.io/guides/gs/rest-hateoas/" target="_blank">http://spring.io/guides/gs/rest-hateoas/</a> kuvataan eräs menetelmä navigoitavan REST-rajapinnan toteuttamiseen.</p>
+              
+            </aside>
+	    
+	    
+            <h2>REST-palvelun kypsyystasot</h2>
+	    
+            <p>Martin Fowler käsittelee artikkelissaan <a href="http://martinfowler.com/articles/richardsonMaturityModel.html" target="_blank">Richardson Maturity Model</a> REST-rajapintojen kypsyyttä. Richardson Maturity Model (RMM) jaottelee REST-toteutuksen kolmeen tasoon, joista kukin tarkentaa toteutusta.</p>
+	    
+            <p>Aloituspiste on tason 0 palvelut, joita ei pidetä REST-palveluina. Näissä palveluissa HTTP-protokollaa käytetään lähinnä väylänä viestien lähettämiseen ja vastaanottamiseen, ja HTTP-protokollan käyttötapaan ei juurikaan oteta kantaa. Esimerkki tason 0 palvelusta on yksittäinen kontrollerimetodi, joka päättelee toteutettavan toiminnallisuuden pyynnössä olevan sisällön perusteella.</p>
+	    
+            <p>Tason 1 palvelut käsittelevät palveluita resursseina. Resurssit kuvataan palvelun osoitteena (esimerkiksi <code>/books</code>-resurssi sisältää kirjoja), ja resursseja voidaan hakea tunnisteiden perusteella (esim. <code>/books/nimi</code>). Edelliseen tasoon verrattuna käytössä on nyt konkreettisia resursseja; olio-ohjelmoijan kannalta näitä voidaan pitää myös olioina joilla on tila.</p>
+	    
+            <p>Tasolla 2 resurssien käsittelyyn käytetään kuvaavia HTTP-pyyntötyyppejä. Esimerkiksi resurssin pyyntö tapahtuu GET-metodilla, ja resurssin tilan muokkaaminen esimerkiksi PUT, POST, tai DELETE-metodilla. Näiden lisäksi palvelun vastaukset kuvaavat tapahtuneita toimintoja. Esimerkiksi jos palvelu luo resurssin, vastauksen tulee olla statuskoodi <code>201</code>, joka viestittää selaimelle resurssin luomisen onnistumisesta. Oleellista tällä tasolla on pyyntötyyppien erottaminen sen perusteella että muokkaavatko ne palvelimen dataa vai ei (GET vs. muut).</p>
+	    
+            <p>Kolmas taso sisältää tasot 1 ja 2, mutta lisää käyttäjälle mahdollisuuden ymmärtää palvelun tarjoama toiminnallisuus palvelimen vastausten perusteella. Webissä huomiota herättänyt termi <a href="https://weblogs.java.net/blog/mkarg/archive/2010/02/14/what-hateoas-actually-means" target="_blank">HATEOAS</a> käytännössä määrittelee miten web-resursseja tulisi löytää webistä.</p>
+	    
+	    
+            <p>RESTin isä, Roy Fielding, pitää vain tason 3 sovellusta oikeana REST-sovelluksena. Ohjelmistosuunnittelun näkökulmasta jokainen taso parantaa sovelluksen ylläpidettävyyttä -- <em>Level 1 tackles the question of handling complexity by using divide and conquer, breaking a large service endpoint down into multiple resources; Level 2 introduces a standard set of verbs so that we handle similar situations in the same way, removing unnecessary variation; Level 3 introduces discoverability, providing a way of making a protocol more self-documenting.</em> (<a href="http://martinfowler.com/articles/richardsonMaturityModel.html" target="_blank">lähde</a>)</p>
+	    
+	    
+            <p><em>Huom! Sovellusta suunniteltaessa ja toteuttaessa ei tule olettaa että RMM-tason 3 sovellus olisi parempi kuin RMM-tason 2 sovellus. Sovellus voi olla huono riippumatta toteutetusta REST-rajapinnan muodosta -- jossain tapauksissa rajapintaa ei oikeasti edes tarvita; asiakkaan tarpeet ja toiveet määräävät mitä sovelluskehittäjän kannattaa tehdä.</em></p>
+	    
+	    
+	    
+            <h2>Spring Data Rest</h2>
+	    
+            <p>Spring-sovelluskehys sisältää projektin <a href="http://projects.spring.io/spring-data-rest/" target="_blank">Spring Data REST</a>, minkä avulla REST-palveluiden tekeminen helpottuu hieman. Lisäämällä projektin <code>pom.xml</code>-konfiguraatioon riippuvuus <code>spring-boot-starter-data-rest</code> saamme Spring Boot-paketoidun version kyseisestä projektista käyttöömme.</p>
+	    
+            <pre class="sh_xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+            <p>Nyt Repository-luokkamme tarjoavat automaattisesti REST-rajapinnan, jonka kautta resursseihin pääsee käsiksi. REST-rajapinta luodaan oletuksena sovelluksen juureen, ja tehdään luomalla monikko domain-olioista. Esimerkiksi, jos käytössä on luokka <code>Book</code>, sekä sille määritelty <code>BookRepository</code>, joka perii Spring Data JPA:n rajapinnan, generoidaan rajapinnan <code>/books</code> alle toiminnallisuus kirja-olioiden muokkaamiseen.</p>
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-esinevarasto">
+                      RestItemRepository
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-esinevarasto" class="collapse">
+		  
+                  <p>Luo rajapinta <code>ItemRepository</code>, joka tarjoaa <code>Item</code>-olioiden tietokantatallennustoiminnallisuuden. Lisää tämän jälkeen Spring Data REST-riippuvuus pom.xml-tiedostoon, ja tarkista REST-rajapintasi toiminta esimerkiksi Postman REST Clientin avulla. Wat is this magic?</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+            <p>Usein käytännössä sovelluksemme kuitenkin toimivat jo palvelun juuripalvelussa, ja haluaisimme esimerkiksi tarjota rajapinnan erillisessä osoitteesssa. Spring Data REST-projektin konfiguraatiota voi muokata erillisen <code>RepositoryRestMvcConfiguration</code>-luokan kautta. Alla olevassa esimerkissä REST-rajapinta luodaan osoitteen <code>/api/v1</code>-alle. Annotaatio <code>@Component</code> kertoo Springille että luokka tulee ladata käyttöön käynnistysvaiheessa; rajapinta kertoo mistä luokasta on kyse.</p>
+	    
+            <pre class="sh_java">
+// pakkaus ja importit
+
+@Component
+public class CustomizedRestMvcConfiguration extends RepositoryRestConfigurerAdapter {
+
+    @Override
+    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+        config.setBasePath("/api/v1");
+    }
+}
+</pre>
+	       
+            <p>Nyt jos sovelluksessa on entiteetti <code>Book</code> sekä siihen sopiva <code>BookRepository</code>, on Spring Data REST-rajapinta osoitteessa <code>/api/v1/books</code>.</p>
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-viestiapi">
+                      MessageApi
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-viestiapi" class="collapse">
+		  
+                  <p>Tehtävässä on käytössä nyt jo tutuhko viestien kirjoitus- ja lukemispalvelu. Muokkaa sovellusta siten, että sovellus tarjoaa REST-rajapinnan viestien käsittelyyn. GET-pyynnön osoitteeseen <code>/api/messages</code> tulee palauttaa lista viesteistä, POST-pyyntö osoitteeseen <code>/api/messages</code> luo uuden viestin, jne.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+            <p>Käytännössä sovelluksen kehittäjä ei kuitenkaan tyypillisesti halua kaikkia HTTP-protokollan metodeja kaikkien käyttöön. Käytössä olevien metodien rajaaminen onnistuu käytettävää <code>Repository</code>-rajapintaa muokkaamalla. Alla olevassa esimerkissä <code>BookRepository</code>-rajapinnan olioita ei pysty poistamaan automaattisesti luodun REST-rajapinnan yli.</p>
+	    
+            <pre class="sh_java">
+// pakkaus
+import wad.domain.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+public interface BookRepository extends JpaRepository&lt;Message, Long&gt; {
+
+    @RestResource(exported = false)
+    @Override
+    public void delete(Long id);
+
+}</pre>
+
+            <h3>Spring Data REST ja RestTemplate</h3>
+
+            <p>Spring Data RESTin avulla luotavien rajapintojen hyödyntäminen onnistuu RestTemplaten avulla. Esimerkiksi yllä luotavasta rajapinnasta voidaan hakea <code>Resource</code>-olioita, jotka sisältävät kirjoja. RestTemplaten metodin <code><a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#exchange-java.lang.String-org.springframework.http.HttpMethod-org.springframework.http.HttpEntity-java.lang.Class-java.lang.Object...-" target="_blank">exchange</a></code> palauttaa vastausentiteetin, mikä sisältää hakemamme olion tiedot. Kyselyn mukana annettava <code>ParameterizedTypeReference</code> taas kertoo minkälaiseksi olioksi vastaus tulee muuntaa.</p>
+	      
+            <pre class="sh_java">
+RestTemplate restTemplate = new RestTemplate();
+ResponseEntity&lt;Resource&lt;Book&gt;&gt; response = 
+    restTemplate.exchange("<em>osoite</em>/books/1", // osoite
+                          HttpMethod.GET, // metodi
+                          null, // pyynnön runko; tässä tyhjä
+                          new ParameterizedTypeReference&lt;Resource&lt;Book&gt;&gt;() {}); // vastaustyyppi
+
+if (response.getStatusCode() == HttpStatus.OK) {
+    Resource&lt;Book&gt; resource = response.getBody();
+    Book book = resource.getContent();
+}
+            </pre>
+
+
+
+            <aside class="extra">
+              <h1>HAL</h1>
+	      
+              <p>HAL on spesifikaatio siitä, miten rajapinnat tulee toteuttaa jotta ne ovat helposti löydettävissä. Spring Data RESTin avulla luodut rajapinnat toteuttavat HAL-spesifikaation -- tutustu spesifikaatioon tarkemmin osoitteessa <a href="http://stateless.co/hal_specification.html" target="_blank">http://stateless.co/hal_specification.html</a>.</p>
+	      
+              </aside>
+	    
+
+
+
+
+	  </section>
+
+<!-- BEGIN FOOTER -->
+
+        <footer>
+            <p>
+                <a id="license" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; float:left; padding:15px" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+                <small>T&auml;m&auml; materiaali on lisensoitu Creative Commons BY-NC-SA-lisenssill&auml;, joten voit k&auml;ytt&auml;&auml; ja levitt&auml;&auml; sit&auml; vapaasti, kunhan alkuper&auml;isten tekij&ouml;iden nimi&auml; ei poisteta. Jos teet muutoksia materiaaliin ja haluat levitt&auml;&auml; muunneltua versiota, se t&auml;ytyy lisensoida samalla lisenssill&auml;. Materiaalien k&auml;ytt&ouml; kaupalliseen tarkoitukseen on ilman erillist&auml; lupaa kielletty. Tekij&auml;(t): <a href="http://www.cs.helsinki.fi/en/people/avihavai" target="_blank">Arto Hellas</a> sekä <a href="http://www.cs.helsinki.fi/en/rage" target="_blank">Agile Education Research</a> -tutkimusryhm&auml;.
+            </p>
+        </footer>
+
+        <div class="hidden">
+            <p>the end.</p>
+        </div>
+
+
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jqueryui/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
+
+        <script src="js/libs/chartist.min.js"></script>
+        <script src="js/libs/visibility.core.js"></script>
+        <script src="js/libs/visibility.timers.js"></script>
+        <script src="js/libs/visibility.fallback.js"></script>
+        <script src="js/js-logger.js"></script>
+        <script src="js/verticalfloat.js"></script>
+        <script src="js/pheromones.js"></script>
+        <script src="js/wepa.js"></script>
+
+
+    </body>
+</html>
