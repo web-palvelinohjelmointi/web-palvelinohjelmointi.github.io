@@ -333,7 +333,7 @@
 
 	      <p>Käytännössä tietokantamigraatiot toteutetaan niin, että tietokannasta pidetään yllä tietokantataulujen muutos- ja muokkauskomennot sisältäviä versiokohtaisia tiedostoja. Käytössä olevaan tietokantaan on määritelty esimerkiksi taulu, jossa on tieto tämänhetkisestä versiosta. Jos käynnistettävässä sovelluksessa on uudempia muutoksia, ajetaan niihin liittyvät komennot tietokantaan ja tietokantaan merkitty versio päivittyy.</p>
 
-	      <p>Jos sovellus sijaitsee palvelussa kuten Heroku, jossa sovelluksen käynnistykseen on rajattu aina, kannattaa tietokantamigraatioihin liittyvistä versiotiedostoista ohjelmalliset. Esimerkiksi Flyway mahdollistaa muutosten tekemisen Java-koodissa.</p>
+	      <p>Jos sovellus sijaitsee palvelussa kuten Heroku, jossa sovelluksen käynnistykseen on varattu vain rajattu aika, kannattaa tietokantamigraatioihin liittyvistä versiotiedostoista tehdä ohjelmalliset. Tällöin migraatio tapahtuu vasta kun sovellus on käynnistynyt, eikä käynnistystä keskeytetä ajan mahdollisen ylittymisen vuoksi. Esimerkiksi Flyway mahdollistaa muutosten tekemisen Java-koodissa.</p>
 
 	    </aside>
 
