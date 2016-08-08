@@ -46,13 +46,10 @@
                     <li>
                         <a href="osa4.html">Osa 4</a>
                     </li>
+                    <li>
+                        <a href="osa5.html">Osa 5</a>
+                    </li>
 <!--
-                    <li>
-                        <a href="#viikko4">Viikko 4</a>
-                    </li>
-                    <li>
-                        <a href="#viikko5">Viikko 5</a>
-                    </li>
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
@@ -761,7 +758,7 @@ porkkana=1
 
 	      <p>Nykyaikaiset web-sivustot ja palvelinohjelmistot sisältävät tyypillisesti useita erilaisia asioita: kuvia, tyylitiedostoja, musiikkia, videokuvaa ja niin edelleen. Jokainen sivuun liittyvä resurssi tulee hakea erikseen.</p>
 
-	      <p>HTTP-protokollasta julkaistiin toukokuussa 2015 versio <a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a> (<a href="https://tools.ietf.org/html/rfc7540" target="_blank">RFC 7540</a>). Eräs uudistus protokollassa on palvelimelle jätetty mahdollisuus lähettää pyyntöön vastauksena useampia resursseja saman. Tällöin yhteyden avaamiseen ja sulkemiseen käytetty aika vähenee ja web-sivustojen lataaminen mahdollisesti nopeutuu. HTTP/2 -protokolla sisältää muitakin parannuksia nykytilanteeseen -- suurin osa toiminnallisuudesta toteutetaan kuitenkin palvelinohjelmistoa pyörittävässä palvelimessa, eikä itse palvelinohjelmistossa.</p>
+	      <p>HTTP-protokollasta julkaistiin toukokuussa 2015 versio <a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a> (<a href="https://tools.ietf.org/html/rfc7540" target="_blank">RFC 7540</a>). Eräs uudistus protokollassa on palvelimelle jätetty mahdollisuus lähettää pyyntöön vastauksena useampia resursseja osana samaa vastausta. Tällöin yhteyden avaamiseen ja sulkemiseen käytetty aika vähenee ja web-sivustojen lataaminen mahdollisesti nopeutuu. HTTP/2 -protokolla sisältää muitakin parannuksia nykytilanteeseen -- suurin osa toiminnallisuudesta toteutetaan kuitenkin palvelinohjelmistoa pyörittävässä palvelimessa, eikä itse palvelinohjelmistossa.</p>
 	    </aside>
 
 	    
@@ -825,7 +822,7 @@ porkkana=1
               <div>MVC-mallissa käyttäjän pyyntö ohjautuu kontrollerille, joka sisältää sovelluslogiikkaa. Kontrolleri kutsuu pyynnöstä riippuen mallin toiminnallisuuksia ja hakee sieltä esimerkiksi tietoa. Tämän jälkeen pyyntö ohjataan näkymän luomisesta vastuulle olevalle komponentilla ja näkymä luodaan. Lopulta näkymä palautetaan vastauksena käyttäjän tekemälle pyynnölle.</div>
             </div>
 	    
-	    <p>MVC-mallista on useita hyötyjä. Käyttöliittymien (näkymien) suunnitelu ja toteutus voidaan eriyttää sovelluslogiikan toteuttamisesta, ja niitä voidaan työstää rinnakkain. Samalla ohjelmakoodi selkenee, sillä eri komponenttien vastuut ovat eriteltyjä -- näkymät eivät sisällä sovelluslogiikkaa, kontrollerin tehtävänä on käsitellä pyynnöt ja ohjata niitä eteenpäin, ja mallin vastuulla on tietoon liittyvät operaatiot. Tämän lisäksi sovellukseen voidaan luoda useampia käyttöliittymiä, joista jokainen käyttää samaa sovelluslogiikkaa, ja pyynnön kulku sovelluksessa selkiytyy.</p>
+	    <p>MVC-mallista on useita hyötyjä. Käyttöliittymien (näkymien) suunnittelu ja toteutus voidaan eriyttää sovelluslogiikan toteuttamisesta, ja niitä voidaan työstää rinnakkain. Samalla ohjelmakoodi selkenee, sillä eri komponenttien vastuut ovat eriteltyjä -- näkymät eivät sisällä sovelluslogiikkaa, kontrollerin tehtävänä on käsitellä pyynnöt ja ohjata niitä eteenpäin, ja mallin vastuulla on tietoon liittyvät operaatiot. Tämän lisäksi sovellukseen voidaan luoda useampia käyttöliittymiä, joista jokainen käyttää samaa sovelluslogiikkaa, ja pyynnön kulku sovelluksessa selkiytyy.</p>
 
 
 	    <h2>Kerrosarkkitehtuuri</h2>
@@ -863,7 +860,7 @@ porkkana=1
             <p>Palvelukerros tarjoaa kontrollerikerrokselle palveluita, joita kontrollerikerros voi käyttää. Palvelut voivat esimerkiksi abstrahoida kolmannen osapuolen tarjoamia komponentteja tai rajapintoja, tai sisältää toiminnallisuutta, jonka toteuttaminen kontrollerissa ei ole järkevää esimerkiksi sovelluksen ylläpidettävyyden kannalta.</p>
 
 	    
-            <p>Vaikka palvelukerroksella sijaitsevan toiminnallisuuden voisi sisällyttää kontrollerikerrokseen, kontrollerikerros ennen mittaa muuttuisi yhä epäselkeämmäksi.</p>
+            <p>Vaikka palvelukerroksella sijaitsevan toiminnallisuuden voisi sisällyttää kontrollerikerrokseen, kontrollerikerros ennen pitkää muuttuisi yhä epäselkeämmäksi.</p>
 
 	    <p>Palvelukerroksen luokat merkitään annotaatiolla <code>@Service</code> tai <code>@Component</code>. Tämä annotaatio tarkoittaa käytännössä sitä, että sovelluksen käynnistyessä luokka ladataan muistiin ja sen ilmentymä asetetaan olioihin, jotka on merkitty <code>@Autowired</code>-annotaatiolla.</p>
 
@@ -975,7 +972,7 @@ while (resultSet.next()) {
     String id = resultSet.getString("id");
     String name = resultSet.getString("name");
 
-    System.out.println(id + "t" + name);
+    System.out.println(id + "\t" + name);
 }
 
 // Close the resultset and the connection
@@ -1003,7 +1000,7 @@ connection.close();
 
 	    <p>Tietokannalla on tyypillisesti skeema, joka määrittelee tietokantataulujen rakenteen. Rakenteen lisäksi tietokantatauluissa on dataa. Kun tietokantasovellus käynnistetään ensimmäistä kertaa, nämä tyypillisesti ladataan myös käyttöön. H2-tietokantamoottori tarjoaa tätä varten työvälineitä <a href="http://www.h2database.com/javadoc/org/h2/tools/RunScript.html" target="_blank">RunScript</a>-luokassa. Alla olevassa esimerkissä tietokantayhteyden avaamisen jälkeen yritetään lukea tekstitiedostoista <code>database-schema.sql</code> ja <code>database-import.sql</code> niiden sisältö tietokantaan.</p>
 	    
-	    <p>Tiedosto <code>database-schema.sql</code> sisältää tietokantataulujen määrittelyt, ja tiedosto <code>database-import.sql</code> tietokantaan lisättävää tietoa. Järjestys on oleellinen -- jos tietokantataulujen määrittelyiden lukemisessa tulee virhe, ovat tietokantataulut olemassa, eikä tällöin tietoakaan enää kannata ladata uudestaan.</p>
+	    <p>Tiedosto <code>database-schema.sql</code> sisältää tietokantataulujen määrittelyt, ja tiedosto <code>database-import.sql</code> tietokantaan lisättävää tietoa. Järjestys on oleellinen -- jos tietokantataulujen määrittelyiden syöttämisessä tapahtuu virhe, ovat tietokantataulut olemassa. Tällöin tietoa ei myöskään ladata tietokantaan.</p>
 
 
 <pre class="sh_java">
@@ -1228,7 +1225,7 @@ public class Henkilo extends AbstractPersistable&lt;Long&gt; {
     private String nimi;
     // getterit ja setterit</pre>
 
-            <p>Jos tietokantataulun ja sarakkeiden eksplisiittisen poistaa, niiden nimet päätellään luokan ja muuttujien nimistä.</p>
+            <p>Jos tietokantataulun ja sarakkeiden annotaatioita ei eksplisiittisesti määritellä, niiden nimet päätellään luokan ja muuttujien nimistä.</p>
 
 <pre class="sh_java">
 // pakkaus ja importit

@@ -45,13 +45,10 @@
                     <li>
                         <a href="osa4.html">Osa 4</a>
                     </li>
+                    <li>
+                        <a href="osa5.html">Osa 5</a>
+                    </li>
 <!--
-                    <li>
-                        <a href="#viikko4">Viikko 4</a>
-                    </li>
-                    <li>
-                        <a href="#viikko5">Viikko 5</a>
-                    </li>
                     <li>
                         <a href="#viikko6">Viikko 6</a>
                     </li>
@@ -767,7 +764,7 @@ public class ThymeleafController {
 	      <br/>
 	      <h1>HTML</h1>
 
-	      <p>Jos mietit mistä ihmeestä tuossa HTML-lyhenteessä on kyse tai haluat verestää HTML-muistiasi, nyt on hyvä hetki käydä lukemassa osoitteessa <a href="http://www.w3schools.com/html/default.asp" target="_blank">http://www.w3schools.com/html/default.asp</a> oleva HTML-opas.</p>
+	      <p>Jos mietit mistä ihmeestä tuossa HTML-lyhenteessä on kyse tai haluat verestää HTML-osaamistasi, nyt on hyvä hetki käydä lukemassa osoitteessa <a href="http://www.w3schools.com/html/default.asp" target="_blank">http://www.w3schools.com/html/default.asp</a> oleva HTML-opas.</p>
 
 	    </aside>
 	    
@@ -2220,7 +2217,7 @@ porkkana=1
 
 	      <p>Nykyaikaiset web-sivustot ja palvelinohjelmistot sisältävät tyypillisesti useita erilaisia asioita: kuvia, tyylitiedostoja, musiikkia, videokuvaa ja niin edelleen. Jokainen sivuun liittyvä resurssi tulee hakea erikseen.</p>
 
-	      <p>HTTP-protokollasta julkaistiin toukokuussa 2015 versio <a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a> (<a href="https://tools.ietf.org/html/rfc7540" target="_blank">RFC 7540</a>). Eräs uudistus protokollassa on palvelimelle jätetty mahdollisuus lähettää pyyntöön vastauksena useampia resursseja saman. Tällöin yhteyden avaamiseen ja sulkemiseen käytetty aika vähenee ja web-sivustojen lataaminen mahdollisesti nopeutuu. HTTP/2 -protokolla sisältää muitakin parannuksia nykytilanteeseen -- suurin osa toiminnallisuudesta toteutetaan kuitenkin palvelinohjelmistoa pyörittävässä palvelimessa, eikä itse palvelinohjelmistossa.</p>
+	      <p>HTTP-protokollasta julkaistiin toukokuussa 2015 versio <a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank">HTTP/2</a> (<a href="https://tools.ietf.org/html/rfc7540" target="_blank">RFC 7540</a>). Eräs uudistus protokollassa on palvelimelle jätetty mahdollisuus lähettää pyyntöön vastauksena useampia resursseja osana samaa vastausta. Tällöin yhteyden avaamiseen ja sulkemiseen käytetty aika vähenee ja web-sivustojen lataaminen mahdollisesti nopeutuu. HTTP/2 -protokolla sisältää muitakin parannuksia nykytilanteeseen -- suurin osa toiminnallisuudesta toteutetaan kuitenkin palvelinohjelmistoa pyörittävässä palvelimessa, eikä itse palvelinohjelmistossa.</p>
 	    </aside>
 
 	    
@@ -2284,7 +2281,7 @@ porkkana=1
               <div>MVC-mallissa käyttäjän pyyntö ohjautuu kontrollerille, joka sisältää sovelluslogiikkaa. Kontrolleri kutsuu pyynnöstä riippuen mallin toiminnallisuuksia ja hakee sieltä esimerkiksi tietoa. Tämän jälkeen pyyntö ohjataan näkymän luomisesta vastuulle olevalle komponentilla ja näkymä luodaan. Lopulta näkymä palautetaan vastauksena käyttäjän tekemälle pyynnölle.</div>
             </div>
 	    
-	    <p>MVC-mallista on useita hyötyjä. Käyttöliittymien (näkymien) suunnitelu ja toteutus voidaan eriyttää sovelluslogiikan toteuttamisesta, ja niitä voidaan työstää rinnakkain. Samalla ohjelmakoodi selkenee, sillä eri komponenttien vastuut ovat eriteltyjä -- näkymät eivät sisällä sovelluslogiikkaa, kontrollerin tehtävänä on käsitellä pyynnöt ja ohjata niitä eteenpäin, ja mallin vastuulla on tietoon liittyvät operaatiot. Tämän lisäksi sovellukseen voidaan luoda useampia käyttöliittymiä, joista jokainen käyttää samaa sovelluslogiikkaa, ja pyynnön kulku sovelluksessa selkiytyy.</p>
+	    <p>MVC-mallista on useita hyötyjä. Käyttöliittymien (näkymien) suunnittelu ja toteutus voidaan eriyttää sovelluslogiikan toteuttamisesta, ja niitä voidaan työstää rinnakkain. Samalla ohjelmakoodi selkenee, sillä eri komponenttien vastuut ovat eriteltyjä -- näkymät eivät sisällä sovelluslogiikkaa, kontrollerin tehtävänä on käsitellä pyynnöt ja ohjata niitä eteenpäin, ja mallin vastuulla on tietoon liittyvät operaatiot. Tämän lisäksi sovellukseen voidaan luoda useampia käyttöliittymiä, joista jokainen käyttää samaa sovelluslogiikkaa, ja pyynnön kulku sovelluksessa selkiytyy.</p>
 
 
 	    <h2>Kerrosarkkitehtuuri</h2>
@@ -2322,7 +2319,7 @@ porkkana=1
             <p>Palvelukerros tarjoaa kontrollerikerrokselle palveluita, joita kontrollerikerros voi käyttää. Palvelut voivat esimerkiksi abstrahoida kolmannen osapuolen tarjoamia komponentteja tai rajapintoja, tai sisältää toiminnallisuutta, jonka toteuttaminen kontrollerissa ei ole järkevää esimerkiksi sovelluksen ylläpidettävyyden kannalta.</p>
 
 	    
-            <p>Vaikka palvelukerroksella sijaitsevan toiminnallisuuden voisi sisällyttää kontrollerikerrokseen, kontrollerikerros ennen mittaa muuttuisi yhä epäselkeämmäksi.</p>
+            <p>Vaikka palvelukerroksella sijaitsevan toiminnallisuuden voisi sisällyttää kontrollerikerrokseen, kontrollerikerros ennen pitkää muuttuisi yhä epäselkeämmäksi.</p>
 
 	    <p>Palvelukerroksen luokat merkitään annotaatiolla <code>@Service</code> tai <code>@Component</code>. Tämä annotaatio tarkoittaa käytännössä sitä, että sovelluksen käynnistyessä luokka ladataan muistiin ja sen ilmentymä asetetaan olioihin, jotka on merkitty <code>@Autowired</code>-annotaatiolla.</p>
 
@@ -2434,7 +2431,7 @@ while (resultSet.next()) {
     String id = resultSet.getString("id");
     String name = resultSet.getString("name");
 
-    System.out.println(id + "\t" + name);
+    System.out.println(id + "\\t" + name);
 }
 
 // Close the resultset and the connection
@@ -2462,7 +2459,7 @@ connection.close();
 
 	    <p>Tietokannalla on tyypillisesti skeema, joka määrittelee tietokantataulujen rakenteen. Rakenteen lisäksi tietokantatauluissa on dataa. Kun tietokantasovellus käynnistetään ensimmäistä kertaa, nämä tyypillisesti ladataan myös käyttöön. H2-tietokantamoottori tarjoaa tätä varten työvälineitä <a href="http://www.h2database.com/javadoc/org/h2/tools/RunScript.html" target="_blank">RunScript</a>-luokassa. Alla olevassa esimerkissä tietokantayhteyden avaamisen jälkeen yritetään lukea tekstitiedostoista <code>database-schema.sql</code> ja <code>database-import.sql</code> niiden sisältö tietokantaan.</p>
 	    
-	    <p>Tiedosto <code>database-schema.sql</code> sisältää tietokantataulujen määrittelyt, ja tiedosto <code>database-import.sql</code> tietokantaan lisättävää tietoa. Järjestys on oleellinen -- jos tietokantataulujen määrittelyiden lukemisessa tulee virhe, ovat tietokantataulut olemassa, eikä tällöin tietoakaan enää kannata ladata uudestaan.</p>
+	    <p>Tiedosto <code>database-schema.sql</code> sisältää tietokantataulujen määrittelyt, ja tiedosto <code>database-import.sql</code> tietokantaan lisättävää tietoa. Järjestys on oleellinen -- jos tietokantataulujen määrittelyiden syöttämisessä tapahtuu virhe, ovat tietokantataulut olemassa. Tällöin tietoa ei myöskään ladata tietokantaan.</p>
 
 
 <pre class="sh_java">
@@ -2687,7 +2684,7 @@ public class Henkilo extends AbstractPersistable&lt;Long&gt; {
     private String nimi;
     // getterit ja setterit</pre>
 
-            <p>Jos tietokantataulun ja sarakkeiden eksplisiittisen poistaa, niiden nimet päätellään luokan ja muuttujien nimistä.</p>
+            <p>Jos tietokantataulun ja sarakkeiden annotaatioita ei eksplisiittisesti määritellä, niiden nimet päätellään luokan ja muuttujien nimistä.</p>
 
 <pre class="sh_java">
 // pakkaus ja importit
@@ -4804,7 +4801,7 @@ public class BookController {
                 <header>
                   <h1>
                     <a data-toggle="collapse" class="collapsed" href="#t-tulospalvelu">
-                      Tulospalvelu
+                      ScoreService
                     </a>
                   </h1>
                 </header>
@@ -5101,6 +5098,1457 @@ if (response.getStatusCode() == HttpStatus.OK) {
             <header>
               <h1 id="osa5">Osa 5</h1>
             </header>
+
+
+
+	    <p>Viides osio alkaa kertaustehtävällä, jossa teemme viestien lisäämiseen ja hakemiseen tarkoitetun REST-rajapinnan. Tämän jälkeen tutustumme pikaisesti mediatyyppeihin sekä tiedostojen tallentamiseen ja lataamiseen, jota seuraa selaimessa tapahtuvaan toimintaan keskittyminen. Osio loppuu web-sovellusten tietoturvaan liittyvällä keskustelulla.</p>
+	    
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa4-kertaus-ex" data-count="44">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa4-kertaus">
+                      Osa 4, kertaus: MessageService
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa4-kertaus" class="collapse">
+
+                  <p>Toteuta REST-rajapinta valmiiksi annettujen Message-olioiden käsittelyyn. Rajapinnan tarjoamien metodien tulee palauttaa tietoa muodossa <code>application/hal+json;charset=UTF-8</code>, ja viestilista tulee löytyä polusta <code>/messages</code>. Pohdi sovellusta toteuttaessasi minkälaisia muita polkuja sovelluksessa tulee olla, sekä mieti myös niiden tarjoamia toiminnallisuuksia. </p>
+
+                </div>
+              </div>
+	    </div>
+
+
+
+	    <h2>Mediatyypit</h2>
+
+	    
+            <p>Pyyntöjä lähetettäessä ja vastaanottaessa palvelin vastaanottaa ja kertoo pyynnön tyypin otsakkeella <code>Content-Type</code>. Tätä tietoa lähetettävän tai vastaanotettavan datan muodosta kutsutaan <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">mediatyypiksi</a>, millä dataa käsittelevä ohjelmisto voi päättää mitä datalla tehdään. Mediatyyppi sisältää yleensä kaksi osaa; mediatyypin sekä tarkenteen (esim <code>application/json</code>). Kattava lista eri mediatyypeistä löytyy IANA-organisaation ylläpitämästä <a href="http://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">mediatyyppilistasta</a>.</p>
+
+            <p>Tyypillisiä mediatyyppejä ovat erilaiset kuvat <code>image/*</code>, videot <code>video/*</code>, äänet <code>audio/*</code> sekä erilaiset tekstimuodot kuten JSON <code>application/json</code>.</p>
+
+            <p>Web-palvelut voivat tarjota käytännössä mitä tahansa näistä tiedostotyypeistä käyttäjälle; käyttäjän sovellusohjelmisto päättelee vastauksessa tulevan mediatyypin mukaan osaako se käsitellä tiedoston.</p>
+
+	    <p>Yksinkertaisimmillaan mediatiedoston lähetys palvelimelta toimii Springillä seuraavasti. Oletetaan, että käytössämme on levypalvelin ja polussa <code>/media/data/</code> oleva PNG-kuvatiedosto <code>architecture.png</code>.</p>
+
+<pre class="sh_java">
+@RequestMapping(method = RequestMethod.GET, produces = "image/png")
+public void copyImage(OutputStream out) throws IOException {
+    Files.copy(Paths.get("/media/data/architecture.png"), out);
+}</pre>
+
+            <p>Yllä olevassa esimerkissä kerromme että metodi tuottaa <code>image/png</code>-tyyppistä sisältöä. Spring asettaa kontrollerin metodin parametriksi automaattisesti <code>OutputStream</code>-olion, johon pyynnön vastaus voidaan kirjoittaa. <code>Files</code>-luokan tarjoama <code>copy</code>-metodi kopioi kuvan suoraan tiedostosta pyynnön vastaukseksi.</p>
+
+            <p>Ylläolevan kontrollerimetodin palauttaman kuvan voi näyttää osana sivua <code>img</code>-elementin avulla. Jos metodi kuuntelee osoitetta <code>/media/image.png</code>, HTML-elementti <code>&lt;img src="/media/image.png" /&gt;</code> hakee kuvan automaattisesti osoitteesta sivun latautuessa.</p>
+
+            <p>Huom! Jos kuvat ovat staattisia eikä niitä esimerkiksi lisäillä tai poisteta, tulee niiden olla esimerkiksi projektin kansiossa <code>/src/main/resources/public/img</code> -- niille <strong>ei</strong> tule määritellä kontrollerimetodia. Kansion <code>public</code> alla olevat tiedostot kopioidaan web-sovelluksen käyttöön, ja niihin pääsee käsiksi web-selaimella ilman tarvetta kontrollerille.</p>
+
+
+            <h2>Tiedostojen tallentaminen ja lataaminen</h2>
+
+
+            <p>Web-sivuilta voi lähettää tiedostoja palvelimelle. Alla oleva lomake HTML-koodi luo lomakkeen, joka voi sisältää myös binääridataa (kts. <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2" target="_blank">multipart/form-data</a>).</p>
+
+<pre class="sh_xml">
+&lt;form method="POST" action="/files" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="file" /&gt;
+    &lt;input type="submit" value="Send!"/&gt;
+&lt;/form&gt;</pre>
+
+            <p>Lomake lähettää tiedot palvelimelle, jonka tulee käsitellä pyyntö. Pyynnön käsittely tapahtuu aivan kuten minkä tahansa muunkin pyynnön, mutta tässä tapauksessa pyynnön parametrin tyyppi on <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/multipart/MultipartFile.html" target="_blank">MultipartFile</a>, joka sisältää lähetettävän tiedoston tiedot.</p>
+
+            <p>Alla oleva kontrollerimetodi vastaanottaa pyynnön, ja tulostaa pyynnössä lähetetyn tiedoston koon ja tyypin. Se ei kuitenkaan tee vielä muuta.</p>
+
+<pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) {
+    System.out.println(file.getSize());
+    System.out.println(file.getContentType());
+
+    return "redirect:/files";
+}</pre>
+
+            <p>MultipartFile-olio sisältää myös tavutaulukon, missä pyynnössä lähetetty data sijaitsee.</p>
+
+            <p>Tavutaulukon -- eli tässä tapauksessa datan -- tallennus tietokantaan onnistuu seuraavasti. Entiteetti <code>FileObject</code> sisältää tavutaulukon siten, että sen voi tallentaa tietokantaan.</p>
+
+<pre class="sh_java">
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    @Lob
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>        
+
+            <p>Annotaatiolla <a href="http://docs.oracle.com/javaee/6/api/javax/persistence/Lob.html" target="_blank">@Lob</a> kerrotaan että annotoitu muuttuja tulee tallentaa tietokantaan isona dataobjektina. Tietokantamoottorit tallentavat nämä tyypillisesti erilliseen isommille tiedostoille tarkoitettuun sijaintiin, jolloin tehokkuus ei juurikaan kärsi erikokoisten kenttien takia.</p>
+
+            <p>Kun entiteetille tekee repository-olion, voi sen ottaa käyttöön myös kontrollerissa. Tietokantaan tallentaminen tapahtuu tällöin seuraavasti:</p>
+
+                <pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) throws IOException {
+    FileObject fo = new FileObject();
+    fo.setContent(file.getBytes());
+
+    fileObjectRepository.save(fo);
+
+    return "redirect:/files";
+}</pre>
+
+            <p>Tiedoston lähetys kontrollerista onnistuu vastaavasti. Tässä tapauksessa oletamme, että data on muotoa <code>image/png</code>; kontrolleri palauttaa tietokantaoliolta saatavan tavutaulukon pyynnön vastauksen rungossa.</p> 
+
+<pre class="sh_java">
+@RequestMapping(value="{id}", method = RequestMethod.GET, produces = "image/png")
+@ResponseBody
+public byte[] get(@PathVariable Long id) {
+    return fileObjectRepository.findOne(id).getContent();
+}</pre>        
+
+
+            <div class="tehtavat">
+	      <div class="tehtava">
+
+		<header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-gifbin">
+                      GifBin
+                    </a>
+                  </h1>
+                </header>
+
+                <div id="t-gifbin" class="collapse">
+                  <p>Tässä tehtävässä toteutetaan sovellus gif-kuvien varastointiin ja selaamiseen.</p>
+		  
+                  <p>Pääset toteuttamaan huomattavan osan sovelluksesta itse -- tarkista että suunnittelemasi domain-oliot sopivat yhteen annetun näkymän kanssa.</p>
+
+		  
+                  <p>Tehtäväpohjassa olevassa <code>gifs.html</code>-sivussa on toiminnallisuus, minkä avulla kuvia näytetään käyttäjälle.</p>
+		  
+                  <p>Toteuta toiminnallisuus, jonka avulla seuraavat toiminnot ovat käytössä.</p>
+		  
+                  <ul>
+                    <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs</code>, hänet ohjataan osoitteeseen <code>/gifs/1</code>.</li>
+                    <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs/{id}</code>, hänelle näytetään sivu <code>gifs</code>. Pyynnön modeliin tulee lisätä attribuutti <code>count</code>, joka sisältää tietokannassa olevien kuvien määrän. Tämän lisäksi, pyyntöön tulee lisätä attribuutti <code>next</code>, joka sisältää seuraavan kuvan tunnuksen -- jos sellainen on olemassa,  attribuutti <code>previous</code>, joka sisältää edeltävän kuvan tunnuksen -- jos sellainen on olemassa, ja <code>current</code>, joka sisältää nykyisen kuvan tunnuksen -- jos sellainen on olemassa.</li>
+                    <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/gifs/{id}/content</code>, tulee hänelle palauttaa tunnukslla <code>{id}</code> tietokannassa oleva kuva -- vastauksen mediatyypiksi tulee asettaa myös <code>image/gif</code>.</li>
+                  </ul>
+		  
+                  <p>HTML-sivulla on myös lomake, jonka avulla palvelimelle voi lähettää uusia kuvia. Toteuta palvelimelle toiminnallisuus, jonka avulla osoitteeseen <code>/gifs</code> tehdystä POST-pyynnöstä otetaan sisältö talteen ja tallennetaan se tietokantaa. Huom! Tallenna sisältö vain jos sen mediatyyppi on <code>image/gif</code>. Pyyntö uudelleenohjataan aina lopuksi osoitteeseen <code>/gifs</code>.</p>
+		  
+                </div>
+              </div>
+            </div>
+
+	    
+            <p>Kun isoja tiedostoja tallennetaan tietokantaan, kannattaa tietokanta suunnitella siten, että tiedostoja ei ladata tietokannasta sellaisten kutsujen yhteydessä, missä niitä ei tarvita. Voimme lisätä olioattribuuteille annotaatiolla <code>@Basic</code> lisämääreen <code>fetch</code>, minkä avulla hakeminen rajoitetaan eksplisiittisiin kutsuihin. Tarkasta tässä vaiheessa edellisen tehtävän mallivastaus -- huomaat että sielläkin -- vaikka annotaatio <code>@Basic</code> ei ollut käytössä -- konkreettinen kuva ladataan hyvin harvoin.</p>
+
+<pre class="sh_java">
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>
+
+            <p>Ylläoleva <code>@Basic(fetch = FetchType.LAZY)</code> annotaatio pyytää JPA-toteutusta (tapauksessamme Hibernate) luomaan annotoidun olioattribuutin get-metodiin ns. proxymetodin -- data haetaan tietokannasta vasta kun metodia <code>getContent()</code> kutsutaan.</p>
+
+
+            <h2>Yleiskäyttöinen tiedoston tallennus ja lataaminen</h2>
+
+            <p>Edellisessä esimerkissä määrittelimme kontrollerimetodin palauttaman mediatyypin osaksi <code>@RequestMapping</code> annotaatiota. Usein tiedostopalvelimet voivat kuitenkin palauttaa lähes minkätyyppisiä tiedostoja tahansa. Tutustutaan tässä yleisempään tiedoston tallentamiseen ja lataukseen.</p>
+
+            <p>Käytämme edellisessä esimerkissä käytettyä <code>FileObject</code>-entiteettiä toteutuksen pohjana.</p>
+
+            <p>Jotta voimme kertoa tiedoston mediatyypin, haluamme tallentaa sen tietokantaan. Tallennetaan tietokantaan mediatyypin lisäksi myös tiedoston alkuperäinen nimi sekä tiedoston pituus.</p>
+
+<pre class="sh_java">
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class FileObject extends AbstractPersistable&lt;Long&gt; {
+
+    private String name;
+    private String mediaType;
+    private Long size;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] content;
+
+    // getterit ja setterit
+}</pre>
+
+
+            <p>Pääsemme kaikkiin kenttiin käsiksi <code>MultipartFile</code>-olion kautta; muokataan aiemmin näkemäämme kontrolleria siten, että otamme kaikki yllämääritellyt kentät tietokantaan tallennettavaan olioon.</p>
+
+
+<pre class="sh_java">
+@RequestMapping(method = RequestMethod.POST)
+public String save(@RequestParam("file") MultipartFile file) throws IOException {
+    FileObject fo = new FileObject();
+
+    fo.setName(file.getOriginalName());
+    fo.setMediaType(file.getContentType());
+    fo.setSize(file.getSize());
+    fo.setContent(file.getBytes());
+
+    fileObjectRepository.save(fo);
+
+    return "redirect:/files";
+}</pre>
+
+
+            <p>Nyt tietokantaan tallennettu olio tietää myös siihen liittyvän mediatyypin. Haluamme seuraavaksi pystyä myös kertomaan kyseisen mediatyypin tiedostoa hakevalle käyttäjälle.</p>
+
+            <p><a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html" target="_blank">ResponseEntity</a>-oliota käytetään vastauksen paketointiin; voimme palauttaa kontrollerista ResponseEntity-olion, jonka pohjalta Spring luo vastauksen käyttäjälle. ResponseEntity-oliolle voidaan myös asettaa otsaketietoja, joihin saamme asetettua mediatyypin.</p>
+
+<pre class="sh_java">
+@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+public ResponseEntity&lt;byte[]&gt; viewFile(@PathVariable Long id) {
+    FileObject fo = fileObjectRepository.findOne(id);
+
+    final HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.parseMediaType(fo.getContentType()));
+    headers.setContentLength(fo.getSize());
+
+    return new ResponseEntity&lt;&gt;(fo.getContent(), headers, HttpStatus.CREATED);
+}</pre>                         
+
+            <p>Ylläolevassa esimerkissä vastaanotetaan pyyntö, minkä pohjalta tietokannasta haetaan FileObject-olio. Tämän jälkeen luodaan otsakeolio <code>HttpHeaders</code> ja asetetaan sille palautettavan datan mediatyyppi ja koko. Lopuksi palautetaan <code>ResponseEntity</code>-olio, mihin data, otsaketiedot ja pyyntöön liittyvä statusviesti (tässä tapauksessa CREATED) liitetään.</p>
+
+            <p>Edeltävä esimerkki ei ota kantaa tiedoston nimeen tai siihen, miten se ladataan. Voimme lisäksi vastaukseen <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html" target="_blank">Content-Disposition</a>-otsakkeen, minkä avulla voidaan ehdottaa tiedoston tallennusnimeä sekä kertoa että tiedosto on liitetiedosto, jolloin se tulee tallentaa.</p>
+
+<pre class="sh_java">
+@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+public ResponseEntity&lt;byte[]&gt; viewFile(@PathVariable Long id) {
+    FileObject fo = fileObjectRepository.findOne(id);
+
+    final HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.parseMediaType(fo.getContentType()));
+    headers.setContentLength(fo.getSize());
+    headers.add("Content-Disposition", "attachment; filename=" + fo.getName());
+
+    return new ResponseEntity&lt;&gt;(fo.getContent(), headers, HttpStatus.CREATED);
+}</pre>                         
+
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-filemanager">
+                      FileManager
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-filemanager" class="collapse">
+		  
+                  <p>Tässä tehtävässä toteutetaan yleisempi tiedostojen varastointiin ja näyttämiseen käytettävä sovellus.</p>
+		  
+                  <p>Kuten edellisessä tehtävässä, pääset toteuttamaan huomattavan osan sovelluksesta itse -- tarkista että suunnittelemasi domain-oliot sopivat yhteen annetun näkymän kanssa.</p>
+		  
+                  <p>Toteuta toiminnallisuus, jonka avulla seuraavat toiminnot ovat käytössä.</p>
+		  
+                  <ul>
+                    <li>Kun käyttäjä tekee GET-tyyppisen pyynnön osoitteeseen <code>/files</code>, pyyntöön lisätään tietokannasta löytyvät tiedostot ja käyttäjä ohjataan sivulle <code>files.html</code>.</li>
+                    <li>Kun käyttäjä lähettää lomakkeella tiedoston osoitteeseen <code>/files</code>, pyynnöstä otetaan talteen kaikki tiedot mitä näkymässä halutaan näyttää, ja tallennetaan ne tietokantaan. Pyyntö ohjataan lopuksi uudelleen osoitteeseen <code>/files</code>.</li>
+                    <li>Kun käyttäjä klikkaa yksittäiseen tiedostoon liittyvää delete-nappia, tulee tiedosto poistaa tietokannasta. Lopuksi pyyntö uudelleenohjataan osoitteeseen <code>/files</code>.</li>
+                    <li>Kun käyttäjä klikkaa yksittäiseen tiedostoon liittyvää nimeä sen lataamista varten, tulee tiedosto lähettää käyttäjälle. Aseta pyyntöön datan lisäksi myös tiedoston mediatyyppi että ja ehdotus tiedoston tallennusnimestä.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+	    
+            <h1 data-count="10">Javascript-pohjaiset selainohjelmistot</h1>
+
+	    <p>Tutustutaan seuraavaksi selainpuolen toiminnallisuuden peruspalasiin.</p>
+
+
+	    <h2>Web-sivujen rakenne</h2>
+
+	    <p>Web-sivut määritellään HTML-kielen avulla. Yksittäinen HTML-dokumentti koostuu sisäkkäin ja peräkkäin olevista elementeistä, jotka määrittelevät sivun rakenteen sekä sivun sisältävän tekstin. Rakenteen määrittelevät elementit erotellaan pienempi kuin (&lt;) ja suurempi kuin (&gt;) -merkeillä. Elementti avataan elementin nimen sisältävällä pienempi kuin -merkillä alkavalla ja suurempi kuin -merkkiin loppuvalla merkkijonolla, esim. <code>&lt;html&gt;</code>, ja suljetaan merkkijonolla jossa elementin pienempi kuin -merkin jälkeen on vinoviiva, esim <code>&lt;/html&gt;</code>. Yksittäisen elementin sisälle voi laittaa muita elementtejä.</p>
+
+	    <p>Tyypillisen HTML-dokumentin runko näyttää seuraavalta. Kun klikkaat allaolevassa <code>iframe</code>-elementissä <code>Result</code>-tekstiä, näet HTML-sivun, ja kun painat <code>HTML</code>-tekstiä, näet HTML-koodin. Klikkaamalla elementin oikeassa ylälaidassa olevasta <em>Edit in JSFiddle</em>-linkistä, pääset muokkaamaan elementtiä suoraan JSFiddlessä.</p>
+
+	    <iframe width="100%" height="250" src="http://jsfiddle.net/e3tuhyLz/embedded/html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+	    <p>Yllä olevassa HTML-dokumentissa on dokumentin tyypin kertova erikoiselementti <code>&lt;!DOCTYPE html&gt;</code>, joka kertoo dokumentin olevan HTML-sivu. Tätä seuraa elementti <code>&lt;html&gt;</code>, joka aloittaa HTML-dokumentin. Elementti <code>&lt;html&gt;</code> sisältää yleensä kaksi elementtiä, elementit <code>&lt;head&gt;</code> ja <code>&lt;body&gt;</code>. Elementti <code>&lt;head&gt;</code> sisältää sivun otsaketiedot, eli esimerkiksi sivun käyttämän merkistön <code>&lt;meta charset="utf-8" /&gt;</code> ja otsikon <code>&lt;title&gt;</code>. Elementti <code>&lt;body&gt;</code> sisältää selaimessa näytettävän sivun rungon. Ylläolevalla sivulla on ensimmäisen tason otsake-elementti <code>h1</code> (<em>header 1</em>) ja tekstielementti <code>p</code> (<em>paragraph</em>).</p>
+
+	    <p>Elementit voivat sisältää <em>tekstisolmun</em>. Esimerkiksi yllä olevat elementit <code>title</code>, <code>h1</code> ja <code>p</code> kukin sisältävät tekstisolmun eli tekstiä. Tekstisolmulle ei ole erillistä elementtiä tai määrettä, vaan se näkyy tekstinä käyttäjälle sivulla olevana tekstinä.</p>
+
+	    <p>Puhe tekstisolmuista antaa viitettä jonkinlaisesta puurakenteesta. HTML-dokumentit ovat rakenteellisia dokumentteja, joiden rakenne on usein helppo ymmärtää puumaisena kaaviona. Ylläolevan web-sivun voi esittää esimerkiksi seuraavanlaisena puuna.</p>
+
+<pre>
+                   html
+
+               /          \\
+
+             /              \\
+
+          head              body
+
+        /       \\         /      \\
+
+     meta       title     h1      p
+
+                 :        :       :
+
+              tekstiä  tekstiä tekstiä
+</pre>
+
+	    <p>Koska HTML-dokumentti on rakenteellinen dokumentti, on elementtien sulkemisjärjestyksellä väliä. Elementit tulee sulkea samassa järjestyksessä kuin ne on avattu. Esimerkiksi, järjestys <code>&lt;body&gt;&lt;p&gt;whoa, minttutee!&lt/body&gt;&lt;/p&gt;</code> on väärä, kun taas järjestys <code>&lt;body&gt;&lt;p&gt;whoa, minttutee!&lt;/p&gt;&lt/body&gt;</code> on oikea.</p>
+	    
+
+	    <p>Kaikki elementit eivät kuitenkaan sisällä tekstisolmua, eikä niitä suljeta erikseen. Yksi näistä poikkeuksista on <a href="http://www.w3schools.com/tags/tag_link.asp" target="_blank">link</a>-elementti.</p>
+
+
+	    <p>Kun selaimet lataavat HTML-dokumenttia ja muodostavat sen perusteella muistissa säilytettävää puuta, ne käyvät sen läpi ylhäältä alas, vasemmalta oikealle. Kun selain kohtaa elementin, se luo sille uuden solmun. Seuraavista elementeistä luodut solmut menevät aiemmin luodun solmun alle kunnes aiemmin kohdattu elementti suljetaan. Aina kun elementti suljetaan, puussa palataan ylöspäin edelliselle tasolle.</p>
+
+
+
+	    <h2>Elementit, attribuutit, nimet ja luokat</h2>
+
+
+	    <p>Elementit voivat sisältää attribuutteja, joilla voi olla yksi tai useampi arvo. Edellä nähdyssä HTML-dokumentissa elementille <code>meta</code> on määritelty erillinen attribuutti <code>charset</code>, joka kertoo dokumentissa käytettävän merkistön: "utf-8". Vastaavasti tiedon syöttämiseen käytettävien lomakkeiden <code>input</code> ym. kentissä käyttämämme attribuutti <code>name</code> määrittelee nimen, jota käytetään palvelimelle lähetettävän kentän sisällön tunnistamisessa.</p>
+
+	    <p>Muita yleisesti käytettäviä attribuuttityyppejä ovat <code>id</code>, joka määrittelee elementille uniikin tunnisteen sekä <code>class</code>, jonka avulla elementille voidaan määritellä tyyppiluokitus. Uudehkossa HTML5-määritelmässä elementit voivat sisältää myös <code>data</code>-attribuutteja, joiden toiminnallisuutta ei ole ennalta määritelty, ja joita käytetään tyypillisesti sovelluksen toiminnallisuuden takaamiseksi.</p>
+	    
+	    <p>Kun elementtejä haetaan id-attribuutin perusteella, vastaukseksi pitäisi tulla tyypillisesti vain yksi elementti, mutta class-attribuutin perusteella hakuvastauksia voi olla useampi.</p>
+
+	    <aside class="info">
+	    
+	      <br/>
+	      
+	      <h1>Lista attribuuteista</h1>
+
+	      <p>W3Schools-sivusto sisältää hyvän yhteenvedon käytössä olevista attribuuteista: <a href="http://www.w3schools.com/tags/ref_attributes.asp" target="_blank">http://www.w3schools.com/tags/ref_attributes.asp</a>. Lisätietoa data-attribuuteista löytyy osoitteesta <a href="http://www.w3schools.com/tags/att_global_data.asp" target="_blank">http://www.w3schools.com/tags/att_global_data.asp</a>.</p>
+	      
+	    </aside>
+	    
+
+	    <h2>Javascript-kieli</h2>
+
+
+	    <p>Siinä missä HTML on kuvauskieli web-sivujen rakenteen ja sisällön luomiseen, JavaScript on kieli dynaamisen toiminnan lisäämiselle. JavaScript on ohjelmakoodia, jota suoritetaan komento kerrallaan -- ylhäältä alas, vasemmalta oikealle. JavaScript-koodi suoritetaan käyttäjän omassa selaimessa.</p>
+
+	    <p>JavaScript-tiedoston pääte on yleensä <code>.js</code> ja siihen viitataan elementillä <code>script</code>. Elementillä <code>script</code> on attribuutti <code>src</code>, jolla kerrotaan lähdekooditiedoston sijainti. Kun lisäämme Javascript-koodia web-projektiimme, lisätään se tyypillisesti kansion <code>src/main/resources/public/javascript/</code> alle. Kansiossa <code>public</code> olevat tiedostot siirtyvät suoraan näkyville web-maailmaan, joten niitä ei tarvitse käsitellä erikseen esimerkiksi Thymeleaf-moottorin toimesta.</p>
+
+	    <p>Jos lähdekoodi on kansiossa <code>javascript</code> olevassa tiedostossa <code>code.js</code>, käytetään <code>script</code>-elementtiä seuraavasti: <code>&lt;script th:src="@{/javascript/code.js}"&gt;&lt;/script&gt;</code>.</p>
+
+	    <p>Yleinen käytänne JavaScript-lähdekoodien sivulle lisäämiseen on lisätä ne sivun loppuun juuri ennen <code>body</code>-elementin sulkemista. Tämä johtuu mm. siitä, että selain lähtee hakemaan JavaScript-tiedostoa kun se kohtaa sen määrittelyn HTML-dokumentissa, jolloin kaikki muut toiminnot odottavat latausta. Jos lähdekooditiedosto ladataan vasta sivun lopussa, käyttäjälle <em>näytetään</em> sivun sisältöä jo ennen Javascript-lähdekoodin latautumista, sillä selaimet usein näyttävät sivua käyttäjälle sitä mukaa kun se latautuu. Tällä luodaan tunne nopeammin reagoivista ja latautuvista sivuista.</p>
+
+	    <aside class="info">
+	      
+	      <br/>
+	      
+	      <h1>Lataamisen siirtäminen sivun loppuun: määre defer</h1>
+	      
+	      <p>Nykyään <code>script</code>-elementille voi lisätä määreen <code>defer</code>, jonka olemassaolo kertoo että elementin <code>src</code>-attribuutin määrittelemä tiedosto tulee suorittaa vasta kun html-sivu on käsitelty.</p>
+
+  <pre class="sh_html">
+...
+&lt;th:src="@{/javascript/code.js}" defer&gt;&lt;/script&gt;
+...</pre>
+
+	      <p>Defer-määre on kuitenkin uudehko lisä, eikä se toimi kaikissa selaimissa. <a href="http://www.w3schools.com/tags/att_script_defer.asp" target="_blank">Lisätietoa täältä...</a></p>
+
+	    </aside>
+
+
+	    <p>Luodaan kansioon <code>javascript</code> lähdekooditiedosto <code>code.js</code>. Tiedostossa <code>code.js</code> on funktio <code>sayHello</code>. Funktio luo ponnahdusikkunan, missä on teksti "hello there".</p>
+
+
+<pre class="sh_javascript_dom">
+function sayHello() {
+    alert("hello there");
+}
+</pre>
+
+	    <p>HTML-dokumentti, jossa lähdekooditiedosto ladataan, näyttää seuraavalta. Attribuutille <code>onclick</code> määritellään elementin klikkauksen yhteydessä suoritettava koodi.</p>
+
+<pre class="sh_html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" &gt;
+        &lt;title&gt;Sivun otsikko (näkyy selaimen palkissa)&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Sivulla näkyvä otsikko&lt;/h1&gt;
+        &lt;/header&gt;
+
+        &lt;article&gt;
+            &lt;p&gt;Sivuilla näytettävä normaali teksti on p-elementin sisällä. Alla on nappi,
+            jota painamalla kutsutaan funktiota "sayHello".&lt;/p&gt;
+            &lt;input type="button" value="Tervehdi" onclick="sayHello();" /&gt;
+        &lt;/article&gt;
+
+        &lt;!-- ladataan JavaScript-koodit tiedoston lopussa! --&gt;
+        &lt;script th:src="@{javascript/code.js}"&gt;&lt;/script&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+	    <p>Alla sama JSFiddlessä -- siellä kuitenkin <code>code.js</code> samassa kansiossa HTML-tiedoston kanssa:</p>
+	    
+	    <iframe width="100%" height="200" src="//jsfiddle.net/7ntuqtmL/5/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Javascript-oppaita</h1>
+	      
+	      <p>Jos Javascript ei ole ennalta tuttu kieli, kannattaa tutustua W3Schools-sivuston tarjoamaan <a href="http://www.w3schools.com/js/" target="_blank">Javascript-oppaaseen</a> sekä kurssin <a href="https://web-selainohjelmointi.github.io/" target="_blank">Web-selainohjelmointi</a> materiaaliin.</p>
+
+	    </aside>
+
+
+
+	    <h2>Web-sivujen rakenteen muokkaaminen Javascriptin avulla</h2>
+
+
+	    <p>JavaScriptiä käytetään ennenkaikkea dynaamisen toiminnallisuuden lisäämiseksi web-sivuille. Esimerkiksi web-sivuilla oleviin elementteihin tulee pystyä asettamaan arvoja, ja niitä tulee myös pystyä hakemaan. JavaScriptissä pääsee käsiksi dokumentissa oleviin elementteihin komennolla <code>document.getElementById("tunnus")</code>, joka palauttaa elementin, jonka <code>id</code>-attribuutti on "tunnus". Muita attribuutti- ja elementtityyppejä pääsee käsittelemään esimerkiksi <a href="http://www.w3schools.com/jsref/met_document_queryselector.asp" target="_blank">querySelector</a>-metodin avulla. </p>
+
+	    <p>Alla on tekstikenttä, jonka HTML-koodi on <code>&lt;input type="text" id="tekstikentta"/&gt;</code>. Kentän tunnus on siis <code>tekstikentta</code>. Jos haluamme päästä käsiksi elementtiin, jonka tunnus on "tekstikentta", käytämme komentoa <code>document.getElementById("tekstikentta")</code>. Tekstikenttäelementillä on attribuutti <code>value</code>, joka voidaan tulostaa.</p>
+
+	    <iframe width="100%" height="200" src="//jsfiddle.net/zL0beedq/10/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+	    <p>Tekstikentälle voidaan asettaa arvo kuten muillekin muuttujille. Alla olevassa esimerkissä haetaan edellisen esimerkin tekstikenttä, ja asetetaan sille arvo <code>5</code>.</p>
+
+	    <iframe width="100%" height="200" src="//jsfiddle.net/zL0beedq/11/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+	    <p>Tehdään vielä ohjelma, joka kysyy käyttäjältä syötettä, ja asettaa sen yllä olevan tekstikentän arvoksi.</p>
+
+	    <iframe width="100%" height="200" src="//jsfiddle.net/zL0beedq/12/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+	    <h3>Arvon asettaminen osaksi tekstiä</h3>
+
+	    
+	    <p>Yllä tekstikentälle asetettiin arvo sen <code>value</code>-attribuuttiin. Kaikilla elementeillä ei ole <code>value</code>-attribuuttia, vaan joillain näytetään niiden elementin <em>sisällä</em> oleva arvo. Elementin sisälle asetetaan arvo muuttujaan liittyvällä attribuutilla <code>innerHTML</code>.</p>
+
+	    <p>Alla olevassa esimerkissä sivulla on tekstielementti, jossa ei ole lainkaan sisältöä. Jos tekstielementtiin lisätään sisältöä, tulee se näkyville.</p>
+
+
+	    <iframe width="100%" height="200" src="//jsfiddle.net/zL0beedq/16/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+	    <p>Vastaavasti tekstin keskelle -- sisäelementtiin -- voi asettaa arvoja. Elementti <code>span</code> sopii tähän hyvin.</p>
+
+	    <iframe width="100%" height="200" src="//jsfiddle.net/zL0beedq/17/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+	    <h3>Case: Laskin</h3>
+	    
+	    
+	    <p>Luodaan laskin. Laskimella on kaksi toiminnallisuutta: pluslasku ja kertolasku. Luodaan ensin laskimelle javascriptkoodi, joka on tiedostossa <code>laskin.js</code>. Javascript-koodissa oletetaan, että on olemassa <code>input</code>-tyyppiset elementit tunnuksilla "eka" ja "toka" sekä <code>span</code>-tyyppinen elementti tunnuksella "tulos". Funktiossa <code>plus</code> haetaan elementtien "eka" ja "toka" arvot, ja asetetaan pluslaskun summa elementin "tulos" arvoksi. Kertolaskussa tehdään lähes sama, mutta tulokseen asetetaan kertolaskun tulos. Koodissa on myös apufunktio, jota käytetään sekä arvojen hakemiseen annetuilla tunnuksilla merkityistä kentistä että näiden haettujen arvojen muuttamiseen numeroiksi.</p>
+
+<pre class="sh_javascript_dom">
+function haeNumero(tunnus) {
+    return parseInt(document.getElementById(tunnus).value);
+}
+
+function asetaTulos(tulos) {
+    document.getElementById("tulos").innerHTML = tulos;
+}
+
+function plus() {
+    asetaTulos(haeNumero("eka") + haeNumero("toka"));
+}
+
+function kerto() {
+    asetaTulos(haeNumero("eka") * haeNumero("toka"));
+}
+</pre>
+
+	    <p>Laskimen käyttämä HTML-dokumentti näyttää seuraavalta:</p>
+
+<pre class="sh_html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" &gt;
+        &lt;title&gt;Laskin&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Plus- ja Kertolaskin&lt;/h1&gt;
+        &lt;/header&gt;
+
+        &lt;section&gt;
+            &lt;p&gt;
+                &lt;input type="text" id="eka" value="0" /&gt;
+                &lt;input type="text" id="toka" value="0" /&gt;
+            &lt;/p&gt;
+
+            &lt;p&gt;
+                &lt;input type="button" value="+" onclick="plus();" /&gt;
+                &lt;input type="button" value="*" onclick="kerto();" /&gt;
+            &lt;/p&gt;
+
+
+            &lt;p&gt;Laskimen antama vastaus: &lt;span id="tulos"&gt;&lt/span&gt;&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;script src="javascript/laskin.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+	    <p>Kokonaisuudessaan laskin näyttää seuraavalta:</p>
+
+
+	    <iframe width="100%" height="300" src="//jsfiddle.net/o8u0fk36/2/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+	    <p>&nbsp;</p>
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" href="#t-omalaskin">
+                      Calculator
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-omalaskin" class="collapse">
+		  
+
+		  <p>Toteuta edellisen esimerkin perusteella laskin, jossa on plus-, miinus-, kerto- ja jakolaskutoiminnallisuus. Keskity vain selainpuolen toiminnallisuuteen: älä muokkaa palvelinpuolen toiminnallisuutta. Varmista myös, että sivu on käytettävä ilman erillistä ohjetekstiä, eli että käyttämäsi napit ja tekstit kertovat käyttäjälle kaiken oleellisen.</p>
+
+                  <p>Tehtävään ei ole TMC:ssä testejä -- kun sovellus toimii oikein, lähetä se palvelimelle.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <h3>Elementtien valinta</h3>
+
+	    <p>Käytimme <code>getElementById</code>-kutsua tietyn elementin hakemiseen. Kaikki sivun elementit voi taas hakea esimerkiksi <code>getElementsByTagName("*")</code>-kutsulla. Molemmat ovat kuitenkin hieman kömpelöjä jos tiedämme mitä haluamme hakea.</p>
+
+	    <p>W3C DOM-määrittely sisältää myös paremman ohjelmointirajapinnan elementtien läpikäyntiin. <a href="http://www.w3.org/TR/selectors-api/" target="_blank">Selectors API</a> sisältää mm. <code>querySelector</code>-kutsun, jolla saadaan CSS-valitsinten kaltainen kyselytoiminnallisuus.</p>
+	    
+	    <p>Selector APIn tarjoamien <code>querySelector</code> (yksittäisen osuman haku) ja <code>querySelectorAll</code> (kaikkien osumien haku) -komentojen avulla kyselyn rajoittaminen vain <code>header</code>-elementissä oleviin <code>a</code>-elementteihin on helppoa.</p>
+	    
+<pre class="sh_javascript_dom">
+var linkit = document.querySelectorAll("nav a");
+// linkit-muuttuja sisältää nyt kaikki a-elementit, jotka ovat nav-elementin sisällä
+</pre>
+
+	    <p>Vastaavasti <code>header</code>-elementin sisällä olevat linkit voi hakea seuraavanlaisella kyselyllä.</p>
+
+<pre class="sh_javascript_dom">
+var linkit = document.querySelectorAll("header a");
+// linkit-muuttuja sisältää nyt kaikki a-elementit, jotka ovat header-elementin sisällä
+</pre>
+
+
+	    <h3>Elementtien lisääminen</h3>
+
+	    <p>HTML-dokumenttiin lisätään uusia elementtejä <code>document</code>-olion <code>createElement</code>-metodilla. Esimerkiksi alla luodaan <code>p</code>-elementti (tekstisolmu; <code>createTextNode</code>), joka asetetaan muuttujaan <code>tekstiElementti</code>. Tämän jälkeen luodaan tekstisolmu, joka sisältää tekstin "o-hai". Lopulta tekstisolmun lisätään tekstielementtiin.</p>
+
+<pre class="sh_javascript_dom">
+var tekstiElementti = document.createElement("p");
+var tekstiSolmu = document.createTextNode("o-hai");
+
+tekstiElementti.appendChild(tekstiSolmu);
+</pre>
+
+	    <p>Ylläoleva esimerkki ei luonnollisesti muuta HTML-dokumentin rakennetta sillä uutta elementtiä ei lisätä osaksi HTML-dokumenttia. Olemassaoleviin elementteihin voidaan lisätä sisältöä elementin <code>appendChild</code>-metodilla. Alla olevan tekstialue sisältää <code>article</code>-elementin, jonka tunnus on <code>dom-esim-3</code>. Voimme lisätä siihen elementtejä elementin <code>appendChild</code>-metodilla.</p>
+
+
+<pre class="sh_javascript_dom">
+var tekstiElementti = document.createElement("p");
+var tekstiSolmu = document.createTextNode("o-noes!");
+
+tekstiElementti.appendChild(tekstiSolmu);
+
+var alue = document.getElementById("dom-esim-3");
+alue.appendChild(tekstiElementti);
+</pre>
+
+	    <p>Artikkelielementin sekä sen sisältämien tekstielementtien lisääminen onnistuu vastaavasti. Alla olevassa esimerkissä käytössämme on seuraavanlainen <code>section</code>-elementti.</p>
+
+<pre class="sh_html">
+&lt;!-- .. dokumentin alkuosa .. --&gt;
+    &lt;section id="osio"&gt;&lt;/section&gt;
+&lt;!-- .. dokumentin loppuosa .. --&gt;
+</pre>
+
+	    <p>Uusien artikkelien lisääminen onnistuu helposti aiemmin näkemällämme <code>createElement</code>-metodilla.</p>
+
+
+<pre class="sh_javascript_dom">
+var artikkeli = document.createElement("article");
+
+var teksti1 = document.createElement("p");
+teksti1.appendChild(document.createTextNode("Lorem ipsum... 1"));
+artikkeli.appendChild(teksti1);
+
+var teksti2 = document.createElement("p");
+teksti2.appendChild(document.createTextNode("Lorem ipsum... 2"));
+artikkeli.appendChild(teksti2);
+
+document.getElementById("osio").appendChild(artikkeli);
+</pre>
+
+
+	    <p>Alla olevassa esimerkissä elementtejä lisätään yksitellen. Mukana on myös laskuri, joka pitää kirjaa elementtien lukumäärästä.</p>
+
+	    <iframe width="100%" height="300" src="//jsfiddle.net/tus22m5y/1/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+	    
+
+	    <h2>jQuery</h2>
+
+	    <p><a href="http://jquery.com/" target="_blank">jQuery</a> on JavaScript-kirjasto, jonka tavoitteena on helpottaa selainohjelmistojen toteutusta. Se tarjoaa apuvälineitä mm. DOM-puun muokkaamiseen, tapahtumien käsittelyyn sekä palvelimelle tehtävien kyselyiden toteuttamiseen, ja sen avulla toteutettu toiminnallisuus toimii myös useimmissa selaimissa.</p>
+
+	    <p>Uusimman jQuery-version saa ladattua <a href="http://jquery.com/download/" target="_blank">täältä</a>. Käytännössä jQuery on JavaScript-tiedosto, joka ladataan sivun latautuessa. Tiedoston voi asettaa esimerkiksi <code>head</code>-elementin sisään, tai ennen omia lähdekooditiedostoja.</p>
+
+<pre class="sh_html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;title&gt;Selaimen palkissa ja suosikeissa näkyvä otsikko&lt;/title&gt;
+     &lt;/head&gt;
+    &lt;body&gt;
+
+        &lt;!-- sivun sisältö --&gt;
+
+        &lt;script src="https://code.jquery.com/jquery-3.1.0.min.js"&gt;&lt;/script&gt;
+        &lt;script src="javascript/koodi.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+	    <h3>Valitsimet</h3>
+    
+	    <p>Käytimme edellisissä osioissa valmiita JavaScriptin DOM-toiminnallisuuksia. Elementtien etsimiseen on käytetty mm. <code>getElementById</code>-kutsua. JQuery käyttää <a href="http://sizzlejs.com/" target="_blank">Sizzle</a>-kirjastoa elementtien valinnan helpottamiseen. Esimerkiksi elementti, jonka attribuutin "id" arvo on "nimi", löytyy seuraavalla komennolla.</p>
+
+<pre class="sh_javascript_dom">
+var elementti = $("#nimi");
+</pre>
+
+
+	    <p>Kyselyt ovat muotoa<code>$("<em>kysely</em>")</code>. Jos elementtia haetaan <code>id</code>-attribuutin perusteella, lisätään kyselyn alkuun risuaita. Jos elementtiä haetaan luokan (<code>class</code>) perusteella, lisätään kyselyn alkuun piste. Jos taas elementtiä halutaan hakea esimerkiksi nimen perusteella, muodostetaan kysely sekä elementin että attribuutin kautta, esim. <code>$("input[name=nimi]")</code> palauttaa kaikki input-tyyppiset elementit, joissa <code>name</code>-attribuutin arvo on <code>nimi</code>.</p> 
+
+	    <aside class="extra">
+	      <p><strong>jQueryn valitsimet</strong></p>
+	      
+	      <p>Tarkempi kuvaus jQueryn valitsimista löytyy osoitteesta <a href="http://api.jquery.com/category/selectors/" target="_blank">http://api.jquery.com/category/selectors/</a>.</p>
+	    </aside>
+
+
+	    <h4>Elementtien lisääminen</h4>
+	    
+	    <p>JQuery tekee elementtien lisäämisestä hieman suoraviivaisempaa. Voimme kutsun <code>document.createElement</code> sijaan määritellä elementin tyypin sanomalla <code>$("&lt;article /&gt;");</code>. Myös tekstielementin luominen on hieman helpompaa: <code>$("<p/>").text("test");</code>. Aiempi koodimme:</p>
+
+<pre class="sh_javascript_dom">
+var artikkeli = document.createElement("article");
+
+var teksti1 = document.createElement("p");
+teksti1.appendChild(document.createTextNode("Lorem ipsum... 1"));
+artikkeli.appendChild(teksti1);
+
+var teksti2 = document.createElement("p");
+teksti2.appendChild(document.createTextNode("Lorem ipsum... 2"));
+artikkeli.appendChild(teksti2);
+
+document.getElementById("osio").appendChild(artikkeli);
+</pre>
+
+	    <p>Voidaan kirjoittaa myös hieman suoraviivaisemmin:</p>
+
+<pre class="sh_javascript_dom">
+var artikkeli = $("&lt;article/&gt;");
+
+var teksti1 = $("&lt;p/&gt;");
+teksti1.text("Lorem ipsum... 1");
+artikkeli.append(teksti1);
+
+var teksti2 = $("&lt;p/&gt;");
+teksti2.text("Lorem ipsum... 2");
+artikkeli.append(teksti2);
+
+$("#osio").append(artikkeli);
+</pre>
+
+
+	    <aside class="extra">
+	      <p><strong>DOM-puun muokkaus</strong></p>
+	      
+	      <p>Tarkempi kuvaus operaatioista DOM-puun muokkaamiseen löytyy osoitteesta <a href="http://api.jquery.com/category/Manipulation/" target="_blank">http://api.jquery.com/category/Manipulation/</a>.</p>
+	      <p>&nbsp;</p>
+	      
+	    </aside>
+	    
+
+
+	    <h3>Tapahtumien käsittely</h3>
+
+
+	    <p>JQuery rakentaa JavaScriptin valmiiden komponenttien päälle, joten sillä on toiminnallisuus myös tapahtumankäsittelijöiden rekisteröimiseen sivun komponenteille. Eräs hyvin hyödyllinen tapahtumankäsittelijä liittyy sivun latautumiseen: komennolla <code>$(document).ready(function() {});</code> voidaan määritellä funktion runko, joka suoritetaan kun sivun latautuminen on valmis.</p>
+
+	    <p>Kun sivun latautuminen on valmis, voimme olla varmoja siitä, että sivulla on kaikki siihen kuuluvat elementit. Tällöin on näppärää tehdä myös kyselyjä palvelimelle. Jos haluaisimme että id-attribuutin arvolla "osio" määriteltyyn elementtiin lisättäisiin kaksi tekstielementtiä sisältävä artikkelielementti kun sivu on latautunut, olisi tarvittava Javascript-koodi seuraavanlainen:</p>
+
+<pre class="sh_javascript_dom">
+$(document).ready(function() {
+  var artikkeli = $("&lt;article/&gt;");
+
+  var teksti1 = $("&lt;p/&gt;");
+  teksti1.text("Lorem ipsum... 1");
+  artikkeli.append(teksti1);
+
+  var teksti2 = $("&lt;p/&gt;");
+  teksti2.text("Lorem ipsum... 2");
+  artikkeli.append(teksti2);
+
+  $("#osio").append(artikkeli);
+});
+</pre>
+
+
+            <iframe width="100%" height="300" src="//jsfiddle.net/1epmnrd2/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>JSON</h1>
+	      
+	      <p>JSON, eli <code>JavaScript Object Notation</code>, on tiedon esitysmuoto. Olion määrittely alkaa aaltosululla <code>{</code>, jota seuraa muuttujan nimi ja sille annettava arvo. Arvon asetus oliomuuttujalle tapahtuu kaksoispisteellä, esimerkiksi <code>nimi: "Arvo"</code>. Useampia muuttujia voi määritellä pilkulla eroteltuna. Olion määrittely lopetetaan sulkevaan aaltosulkuun <code>}</code>.</p>
+
+<pre class="sh_javascript_dom">
+var olio = {nimi: "Arvo", tieto: 2000};
+</pre>
+
+	      <p>Olion muuttujiin pääsee käsiksi piste-notaatiolla. Esimerkiksi <code>olio</code>-olion muuttuja <code>nimi</code> löytyy komennolla <code>olio.nimi</code>.</p>
+
+<pre class="sh_javascript_dom">
+var olio = {nimi: "Arvo", tieto: 2000};
+alert(olio.nimi);
+</pre>
+
+	      <p>Myös uusien oliomuuttujien lisääminen on suoraviivaista. Uuden muuttujan lisääminen tapahtuu myös pistenotaatiolla -- harrastuksen lisääminen tapahtuu <code>olio</code>-oliolle sanomalla <code>olio.harrastus = "koodaus";</code>.</p>
+
+<pre class="sh_javascript_dom">
+var olio = {nimi: "Arvo", tieto: 2000};
+alert(olio.nimi);
+olio.harrastus = "koodaus";
+alert(olio.harrastus);
+</pre>
+
+
+	      <p>Olioiden rakennetta ei siis ole lyöty ennalta lukkoon.</p>
+
+	    </aside>
+
+	    
+	    <h2>Kyselyt palvelimelle</h2>
+
+	    <p>JQuery tarjoaa myös tuen kyselyjen tekemiseen erilliselle palvelinkomponentille.</p>
+
+	    <p>Kyselyt hoituvat kätevästi JQueryn <code><a href="http://api.jquery.com/jQuery.getJSON/" target="_blank">$.getJSON</a></code>-funktiolla. Alla olevassa esimerkissä haemme <a href="http://www.icndb.com/" target="_blank">ICNDb.com</a>ista oleellista dataa.</p>
+
+	    <p>Kyselyn palauttama data ohjataan <code>$.getJSON</code>-funktion toisena parametrina määriteltävään funktioon. Alla olevassa esimerkissä kutsumme vain <code>alert</code>-komentoa kaikelle palautettavalle datalle.</p>
+
+<pre class="sh_javascript_dom">
+$.getJSON("http://api.icndb.com/jokes/random/5",
+    function(data) {
+        alert(data);
+    }
+);
+</pre>
+
+	    <p>Ylläoleva esimerkki tulostaa vastaukset konsoliin -- huomaa, että jQuery muuntaa merkkijonomuotoiset vastaukset automaattisesti JSON-olioksi. Käytetään JQueryn <code>each</code>-komentoa listassa olevien elementtien iterointiin. Komennolle <code>each</code> voi antaa parametrina iteroitavan listan, sekä funktion, jota kutsutaan jokaisella listassa olevalla oliolla.</p>
+
+<pre class="sh_javascript_dom">
+$.getJSON("http://api.icndb.com/jokes/random/5",
+    function(data) {
+        $.each(data.value, function(i, item) {
+            alert(i);
+            alert(item);
+            alert("-----");
+        });
+    }
+);
+</pre>
+
+	    <p>Nyt ylläoleva komento tulostaa vastauksen value-kentässä olevat oliot yksitellen. Oletetaan, että käytössämme on elementti, jonka tunnus on "vitsit". JQuery tarjoaa myös mahdollisuuden nopeaan tekstielementtien luontiin komennolla <code>$("&lt;p/&gt")</code>. Elementteihin voi asettaa tekstin <code>text</code>-komennolla, ja elementin voi lisätä tietyllä tunnuksella määriteltyyn elementtiin komennolla <code>appendTo("#<em>tunnus</em>")</code>.</p>
+
+<pre class="sh_javascript_dom">
+$.getJSON("http://api.icndb.com/jokes/random/5",
+    function(data) {
+        $.each(data.value, function(i, item) {
+            $("&lt;p/&gt;").text(item.joke).appendTo("#vitsit");
+        });
+    }
+);
+</pre>
+
+            <h3>Tiedon lähettäminen palvelimelle</h3>
+
+
+	    <p>Jos tiedämme, että palvelu palauttaa JSON-dataa, voimme käyttää yllä käsiteltyä lähestymistapaa. Esimerkiksi viestien noutaminen Chat-chat -tehtävän viestipalvelimelta onnistuu seuraavalla komennolla. Tässä tapauksessa lisäämme jokaiseen viestiin liittyvän <code>message</code>-attribuutin "vitsit"-tunnuksella määriteltyyn elementtiin. Osoitteessa <a href="http://bad.herokuapp.com/app/messages" target="_blank">http://bad.herokuapp.com/app/messages</a> on valmiina viestejä tarjoava sovellus.</p>
+
+<pre class="sh_javascript_dom">
+$.getJSON("http://bad.herokuapp.com/app/messages", function(data) {
+    $.each(data, function(i, item) {
+        $("&lt;p/&gt;").text(item.message).appendTo("#vitsit");
+    });
+});
+</pre>
+
+	    <p>Yllä oleva komento on lyhenne alla määritellystä komennosta.</p>
+
+<pre class="sh_javascript_dom">
+$.ajax({
+    url: "http://bad.herokuapp.com/app/messages",
+    dataType: 'json',
+    success: parseMessages
+});
+
+function parseMessages(messages) {
+    $.each(messages, function(i, item) {
+        $("&lt;p/&gt;").text(item.message).appendTo("#vitsit");
+    });
+}
+</pre>
+
+	    <p>Komennolle <code><a href="http://api.jquery.com/jQuery.ajax/" target="_blank">$.ajax</a></code> voi lisätä myös dataa, mitä lähetetään palvelimelle. Esimerkiksi seuraavalla komennolla lähetetään osoitteeseen <code>http://bad.herokuapp.com/app/in</code> olio, jonka sisällä on attribuutit <code>name</code> ja <code>details</code>. Lähetettävän datan tyyppi asetetaan attribuutilla <code>contentType</code>, alla ilmoitamme että data on json-muotoista, ja että se käyttää utf-8 -merkistöä. </p>
+
+<pre class="sh_javascript_dom">
+var dataToSend = JSON.stringify({
+        name: "bob",
+        details: "i'm ted"
+    });
+
+$.ajax({
+    url: "http://bad.herokuapp.com/app/in",
+    dataType: 'json',
+    contentType:'application/json; charset=utf-8',
+    type: 'post',
+    data: dataToSend
+});
+</pre>
+
+	    <p>Pyynnössä voi sekä lähettää että vastaanottaa dataa. Attribuutin <code>success</code> asettaminen ylläolevaan pyyntöön aiheuttaa success-attribuutin arvona olevan funktion kutsun kun pyyntö on onnistunut.</p>
+
+
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" href="#t-tehtavalista">
+                      Tasks
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-tehtavalista" class="collapse">
+		  
+		  <p>Tehtävään on hahmoteltu tehtävien hallintaan tarkoitetun sovelluksen palvelinpuolen toiminnallisuutta. Lisää sovellukseen selainpuolen toiminnallisuus, joka mahdollistaa tehtävien lisäämisen sivulle Javascriptin avulla. Uusien tehtävien lisäämisen ei siis pidä aiheuttaa sivun uudelleenlatausta, vaan uusi tehtävä tulee lähettää palvelimelle Javascript-pyyntönä.</p>
+		  
+		  <p>Kun saat sovelluksen toimimaan, mieti myös sen käytettävyyttä. Sovellukselle ei ole automaattisia testejä.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+
+	    <h2>Rajoitettu pääsy resursseihin</h2>
+
+	    <p>Web-sivun julkisesti näkyvillä oleviin tietoihin kuten kuviin ja videoihin pääsee käsiksi lähes mistä tahansa palvelusta: esimerkiksi sivun lähdekoodissa oleva jQuery-kirjasto voi olla sovelluksesta erillisellä palvelimella. Tämä on hyödyllistä, sillä tällöin resursseja voidaan hajauttaa ympäri verkkoa ja yksittäisen palvelimen ei tarvitse lähettää kaikkea tietoa sivuston käyttäjälle.</p>
+
+	    <p>Javascript-lähdekoodissa tehdyt pyynnöt ovat kuitenkin oletuksena rajoitettuja. Jos palvelimelle ei määritellä erillistä <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html" target="_blank">CORS</a>-tukea, eivät selaimen sovelluksen osoitteen ulkopuolelta tekemät Javascript-pyynnöt sovellukseen onnistu.</p>
+
+	    <p>Yksinkertaisimmillaan CORS-tuen saa lisättyä kontrollerimetodille annotaation <code>@CrossOrigin</code>-avulla, jolle määritellään osoitteet, joissa sijaitsevista osoitteista pyyntöjä saa tehdä.</p>
+
+<pre class="sh_java">
+    @CrossOrigin(origins = "/**")
+    @RequestMapping(method=RequestMethod.GET)
+    @ResponseBody
+    public Book getBook() {
+        Book book = new Book();
+        book.setName("Spring API");
+        return book;
+    }</pre>
+
+
+	    <p>Koko sovelluksen tasolla vastaavan määrittelyn voi tehdä erillisen konfiguraatiotiedoston avulla.</p>
+
+<pre class="sh_java">
+@Configuration
+@EnableWebMvc
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**");
+	}
+}</pre>
+
+	    <p>Nyt sovellukseen voi tehdä Javascript-pyynnön missä tahansa sijaitsevasta sovelluksesta.</p>
+
+
+
+	    <h1>Web-sovellusten tietoturva</h1>
+
+	    <p>Selainpuoli liittyy käytettävyyteen, palvelinpuoli tietoturvaan.</p>
+
+	    <p>tietovuokaavioiden käyttö riskikohtien tunnistamiseen</p>
+
+
+            <h2>Suojattu yhteys</h2>
+
+
+            <p>Kommunikointi selaimen ja palvelimen välillä halutaan salata käytännössä aina. HTTPS on käytännössä HTTP-pyyntöjen tekemistä SSL (tai TLS)-salauksella höystettynä. HTTPS mahdollistaa sekä käytetyn palvelun verifioinnin sertifikaattien avulla että lähetetyn ja vastaanotetun tiedon salauksen.</p>
+
+            <p>HTTPS-pyynnöissä asiakas ja palvelin sopivat käytettävästä salausmekanismista ennen varsinaista kommunikaatiota. Käytännössä selain ottaa ensiksi yhteyden palvelimen HTTPS-pyyntöjä kuuntelevaan porttiin (yleensä 443), lähettäen palvelimelle listan selaimella käytössä olevista salausmekanismeista. Palvelin valitsee näistä parhaiten sille sopivan (käytännössä vahvimman) salausmekanismin, ja lähettää takaisin salaustunnisteen (palvelimen nimi, sertifikaatti, julkinen salausavain). Selain ottaa mahdollisesti yhteyttä sertifikaatin tarjoajaan -- joka on kolmas osapuoli -- ja tarkistaa onko sertifikaatti kunnossa.</p>
+
+            <p>Selain lähettää tämän jälkeen palvelimelle salauksessa käytettävän satunnaisluvun palvelimen lähettämällä salausavaimella salattuna. Palvelin purkaa viestin ja saa haltuunsa selaimen haluaman satunnaisluvun. Viesti voidaan nyt lähettää salattuna satunnaislukua ja julkista salausavainta käyttäen.</p>
+
+            <p>Käytännössä kaikki web-palvelimet tarjoavat HTTPS-toiminnallisuuden valmiina, joskin se täytyy ottaa palvelimilla käyttöön. Esimerkiksi Herokussa HTTPS on oletuksena käytössä sovelluksissa -- aiemmin mahdollisesti tekemääsi sovellukseen pääsee käsiksi siis myös osoitteen <code>https://sovelluksen-nimi.herokuapp.com</code> kautta. Tämä ei kuitenkaan estä käyttäjiä tekemästä pyyntöjä sovellukselle ilman HTTPS-yhteyttä -- jos haluat, että käyttäjien tulee tehdä kaikki pyynnöt HTTPS-yhteyden yli, lisää tuotantokonfiguraatioon seuraava rivi.</p>
+
+<pre>
+security.require_ssl=true
+</pre>
+
+
+            <h3>HSTS</h3>
+
+	    <p>HTTPS-yhteyden pakottaminen ei aina riitä. Jos ilkeämielinen henkilö pääsee käsiksi ensimmäiseen HTTP-pyyntöön, joka ohjaisi käyttäjän tekemään HTTPS-pyyntöjä palvelimelle, ovat HTTPS-pyynnötkin riskialttiita. HSTS-politiikka, missä sovellus kertoo käyttäjälle vaativansa aina HTTPS-protokollan käytön on eräs ratkaisu tähän. Tällöin selaimen muistiin jää tieto siitä, että selaimen tulee käyttää HTTPS-protokollaa sovelluksessa -- jos sovellus yrittää tarjota jotain muuta, tietää selain, että jotain on pielessä. Tästä lisää <a href="https://tools.ietf.org/html/rfc6797" target="_blank">https://tools.ietf.org/html/rfc6797</a>.</p>
+
+	    
+	    <aside class="info">
+	      <br/>
+	      <h1>Muutama sana turvallisesta verkkoyhteydestä</h1>
+
+	      <p>Jos yhteys selaimen ja sovelluksen välissä on kunnossa, on tilanne melko hyvä. Tässä välissä on hyvä kuitenkin mainita myös avointen verkkoyhteyksien käytöstä.</p>
+
+	      <p>Jos selaimen käyttäjä käyttää sovellusta avoimen (salasanattoman) langattoman verkkoyhteyden kautta, voi lähetettyjä viestejä kuunnella (ja muokata) käytännössä kuka tahansa. Avoimissa verkoissa käyttäjä kirjautuu siihen verkkoon, jonka signaali on vahvin. Jos ilkeämielinen henkilö rakentaa samannimisen verkon ja saa verkkoyhteyden signaalin vahvemmaksi kuin olemassaolevassa verkossa, ottaa käyttäjän käyttöjärjestelmä yhteyden ilkeämielisen henkilön verkkoon. Tällöin ilkeämielinen henkilö voi myös kuunnella verkkoliikennettä halutessaan.</p>
+
+	      <p>Tähän liittyvä hieman humoristinen esitys <a href="https://www.youtube.com/watch?v=rJ5jILY1vlw" target="_blank">DEF CON</a>-konferenssissa.</p>
+
+	    </aside>
+
+
+	    <h2>Syötteiden validointi</h2>
+
+		
+            <p>Lomakkeiden ja lähetettävän datan validointi, eli oikeellisuuden tarkistaminen, on tärkeää. Ensimmäinen askel -- jonka olemme jo ottaneet -- on tallennettavan datan esittäminen ohjelmaan liittyvien käsitteiden kautta. Olemme käyttäneet datan tallentamisessa olioita, joihin on määritelty sopivat kenttien tyypit. Tämä helpottaa työtämme jo hieman: esimerkiksi numerokenttiin ei saa asetettua merkkijonoja. Käyttämämme Spring Bootin mukana tulee <a href="http://hibernate.org/" target="_blank">Hibernate</a>-projektin komponentti, joka tarjoaa validointitoiminnallisuuden.</p>
+
+            <p>Validaatiosääntöjen määrittely tapahtuu annotaatioilla. Muokataan alla määriteltyä luokkaa <code>Person</code> siten, että henkilöllä tulee olla henkilötunnus, nimi ja sähköpostiosoite.</p>
+
+
+            <pre class="sh_java">
+// pakkaus jne
+public class Person {
+
+    private String socialSecurityNumber;
+    private String name;
+    private String email;
+
+    // getterit ja setterit
+}</pre>
+
+
+            <p>Sovitaan että henkilötunnus ei saa koskaan olla tyhjä ja sen tulee olla tasan 11 merkkiä pitkä. Nimen tulee olla vähintään 5 merkkiä pitkä, ja korkeintaan 30 merkkiä pitkä, ja sähköpostiosoitteen tulee olla validi sähköpostiosoite. Annotaatio <code>@NotBlank</code> varmistaa ettei annotoitu attribuutti ole tyhjä -- lisätään se kaikkiin kenttiin. Annotaatiolla <code>@Length</code> voidaan määritellä pituusrajoitteita muuttujalle, ja annotaatiolla <code>@Email</code> varmistetaan, että attribuutin arvo on varmasti sähköpostiosoite.</p>
+
+
+            <pre class="sh_java">
+// pakkaus
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+public class Person {
+
+    @NotBlank
+    @Length(min = 11, max = 11)
+    private String socialSecurityNumber;
+
+    @NotBlank
+    @Length(min = 5, max = 30)
+    private String name;
+
+    @NotBlank
+    @Email
+    private String email;
+
+    // getterit ja setterit</pre>
+
+
+            <h3>Olion validoinnin päälle kytkeminen tapahtuu kontrollerissa</h3>
+
+            <p>Kontrollerimetodit validoivat olion jos kontrollerimetodissa olevalle <code>@ModelAttribute</code>-annotaatiolla merkatulle oliolle on asetettu myös annotaatio <code>@Valid</code> (<code>javax.validation.Valid</code>).</p>
+
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute Person person) {
+        // .. esimerkiksi tallennus ja uudelleenohjaus
+    }</pre>
+
+            <p>Spring validoi olion pyynnön vastaanottamisen yhteydessä, mutta validointivirheet eivät ole kovin kaunista luettavaa. Yllä olevalla kontrollerimetodilla virheellisen nimen kohdalla saamme hieman kaoottisen ilmoituksen.</p>
+
+                <pre>
+Whitelabel Error Page
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+
+<em>aika</em>
+There was an unexpected error (type=Bad Request, status=400).
+Validation failed for object='person'. Error count: 1</pre>
+
+	    <p>Virheelle täytyy selvästi tehdä jotain..</p>
+
+
+            <h3>Validointivirheiden käsittely</h3>
+
+
+            <p>Validointivirheet aiheuttavat poikkeuksen, joka näkyy ylläolevana virheviestinä, jos niitä ei erikseen käsitellä. Validointivirheiden käsittely tapahtuu luokan <code>BindingResult</code> avulla, joka toimii validointivirheiden tallennuspaikkana. Luokan <code>BindingResult</code> kautta voimme käsitellä virheitä. <code>BindingResult</code>-olio kuvaa aina yksittäisen olion luomisen ja validoinnin onnistumista, ja se tulee asettaa heti validoitavan olion jälkeen. Seuraavassa esimerkki kontrollerista, jossa validoinnin tulos lisätään automaattisesti <code>BindingResult</code>-olioon.</p>
+
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            // validoinnissa virheitä: virheiden käsittely
+        }
+
+        // muu toteutus
+    }</pre>
+
+            <p>Ylläolevassa esimerkissä kaikki validointivirheet tallennetaan <code>BindingResult</code>-olioon. Oliolla on metodi <code>hasErrors</code>, jonka perusteella päätämme jatketaanko pyynnön prosessointia vai ei. Yleinen muoto lomakedataa tallentaville kontrollereille on seuraavanlainen:</p>
+
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "lomakesivu";
+        }
+
+        // .. esimerkiksi tallennus
+
+        return "redirect:/index";
+    }</pre>
+
+            <p>Yllä oletetaan että lomake lähetettiin näkymästä <em>"lomakesivu"</em>: käytännössä validoinnin epäonnistuminen johtaa nyt siihen, että pyyntö ohjataan takaisin lomakesivulle.</p>
+
+
+            <h3>Thymeleaf-lomakkeet ja BindingResult</h3>
+
+
+            <p>Lomakkeiden validointivirheet saadaan käyttäjän näkyville Thymeleafin avulla. Lomakkeet määritellään kuten normaalit HTML-lomakkeet, mutta niihin lisätään muutama apuväline. Lomakkeen attribuutti <code>th:object</code> kertoo olion, johon lomakkeen kentät tulee pyrkiä liittämään (huom! tämän tulee olla määriteltynä myös lomakkeen palauttavassa kontrollerimetodissa -- palaamme tähän kohta). Sitä käytetään yhdessä kontrolleriluokan <code>ModelAttribute</code>-annotaation kanssa. Lomakkeen kentät määritellään attribuutin <code>th:field</code> avulla, jossa oleva <code>*{arvo}</code> liitetään lomakkeeseen liittyvään olioon. Oleellisin virheviestin näkymisen kannalta on kuitenkin attribuuttiyhdistelmä <code>th:if="${#fields.hasErrors('arvo')}" th:errors="*{arvo}"</code>, joka näyttää virheviestin jos sellainen on olemassa.</p>
+
+            <p>Luodaan lomake aiemmin nähdyn <code>Person</code>-olion luomiseen.</p>
+
+
+            <pre class="sh_xml">
+&lt;form action="#" th:action="@{/persons}" th:object="${person}" method="POST"&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;td&gt;SSN: &lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" th:field="*{socialSecurityNumber}" /&gt;&lt;/td&gt;
+            &lt;td th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"&gt;SSN Virheviesti&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Name: &lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" th:field="*{name}" /&gt;&lt;/td&gt;
+            &lt;td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"&gt;Name Virheviesti&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Email: &lt;/td&gt;
+            &lt;td&gt;&lt;input type="text" th:field="*{email}" /&gt;&lt;/td&gt;
+            &lt;td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"&gt;Email Virheviesti&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;button type="submit"&gt;Submit&lt;/button&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/form&gt;</pre>
+
+            <p>Yllä oleva lomake lähettää lomakkeen tiedot osoitteessa <code>&lt;sovellus&gt;/persons</code> olevalle kontrollerimetodille. Lomakkeelle tullessa tarvitsemme erillisen tiedon käytössä olevasta oliosta. Alla on näytetty sekä kontrollerimetodi, joka ohjaa GET-pyynnöt lomakkeeseen, että kontrollerimetodi, joka käsittelee POST-tyyppiset pyynnöt. Huomaa erityisesti <code>@ModelAttribute</code>-annotaatio kummassakin metodissa. Metodissa <code>view</code> olion nimi on <code>person</code>, joka vastaa lomakkeessa olevaa <code>th:object</code>-attribuuttia. Tämän avulla lomake tietää, mitä oliota käsitellään.</p>
+
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.GET)
+    public String view(@ModelAttribute Person person) {
+        return "lomake";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "lomake";
+        }
+
+        // .. tallennus ja uudelleenohjaus
+    }</pre>
+
+            <p>Jos lomakkeella lähetetyissä kentissä on virheitä, virheet tallentuvat <code>BindingResult</code>-olioon. Tarkistamme kontrollerimetodissa <code>create</code> ensin virheiden olemassaolon -- jos virheitä on, palataan takaisin lomakkeeseen. Tällöin validointivirheet tuodaan lomakkeen käyttöön <code>BindingResult</code>-oliosta, jonka lomakkeen kentät täytetään <code>@ModelAttribute</code>-annotaatiolla merkitystä oliosta. Huomaa että virheet ovat pyyntökohtaisia, ja uudelleenohjauspyyntö kadottaa virheet.</p>
+
+            <p><strong>Huom!</strong> Springin lomakkeita käytettäessä lomakesivut haluavat käyttöönsä olion, johon data kytketään jo sivua ladattaessa. Yllä lisäsimme pyyntöön <code>Person</code>-olion seuraavasti:</p>
+
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.GET)
+    public String view(@ModelAttribute Person person) {
+        return "lomake";
+    }</pre>
+
+            <p>Toinen vaihtoehto on luoda kontrolleriluokkaan erillinen metodi, jonka sisältämä arvo lisätään automaattisesti pyyntöön. Tällöin lomakkeen näyttävä kontrollerimetodi ei tarvitse erikseen ModelAttribute-parametria. Tällöin toteutus olisi esimerkiksi seuraavanlainen:</p>
+
+            <pre class="sh_java">
+    @ModelAttribute
+    private Person getPerson() {
+        return new Person();
+    }
+        
+    @RequestMapping(method = RequestMethod.GET)
+    public String view() {
+        return "lomake";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "lomake";
+        }
+
+        // .. tallennus ja uudelleenohjaus
+    }</pre>
+
+
+            <p>Thymeleafin avulla tehdyistä lomakkeista ja niiden yhteistyöstä Springin kanssa löytyy lisää osoitteesta <a href="http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#creating-a-form" target="_blank">http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#creating-a-form</a>.</p>
+
+
+            <h3>Validointi ja entiteetit</h3>
+
+            <p>Vaikka edellisessä esimerkissä käyttämäämme <code>Person</code>-luokkaa ei oltu merkitty <code>@Entity</code>-annotaatiolla -- eli se ei ollut tallennettavissa JPAn avulla tietokantaan -- mikään ei estä meitä lisäämästä sille <code>@Entity</code>-annotaatiota. Toisaalta, lomakkeet voivat usein sisältää tietoa, joka liittyy useaan eri talletettavaan olioon. Tällöin voi luoda erillisen lomakkeen tietoihin liittyvän <em>lomakeolio</em>, jonka pohjalta luodaan tietokantaan tallennettavat oliot kunhan validointi onnistuu. Erilliseen lomakeobjektiin voi täyttää myös kannasta haettavia listoja ym. ennalta.</p>
+
+            <p>Kun validointisäännöt määritellään entiteetille, tapahtuu validointi kontrollerin lisäksi myös tietokantatallennusten yhteydessä.</p>
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" href="#t-ilmoittautuminen">
+                      Registration
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-ilmoittautuminen" class="collapse">
+		  
+                  <p>Tehtävän mukana tulee sovellus, jota käytetään ilmoittatumiseen. Tällä hetkellä käyttäjä voi ilmoittautua juhliin oikeastaan minkälaisilla tiedoilla tahansa. Tehtävänäsi on toteuttaa parametreille seuraavanlainen validointi:</p>
+		  
+                  <ol>
+                    <li>Nimen (<code>name</code>) tulee olla vähintään 4 merkkiä pitkä ja enintään 30 merkkiä pitkä.</li>
+                    <li>Osoitteen (<code>address</code>) tulee olla vähintään 4 merkkiä pitkä ja enintään 50 merkkiä pitkä.</li>
+                    <li>Sähköpostiosoitteen (<code>email</code>) tulee olla validi sähköpostiosoite.</li>
+                  </ol>
+		  
+		  
+                  <p>Tehtäväpohjan mukana tuleviin sivuihin on toteutettu valmiiksi lomake. Tehtävänäsi on toteuttaa validointitoiminnallisuus pakkauksessa <code>wad.domain</code> olevaan luokkaan <code>Registration</code>.</p>
+		  
+                  <p>Jos yksikin tarkastuksista epäonnistuu, tulee käyttäjälle näyttää rekisteröitymislomake uudelleen. Muista lisätä kontrolleriin validoitavalle parametrille annotaatio <code>@Valid</code>. Virheviestien ei tule näkyä vastauksessa jos lomakkeessa ei ole virhettä. Käyttöliittymä on tehtävässä valmiina.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    
+	    <h2>Käyttäjätunnukset ja pääsynvalvonta</h2>
+
+	    <p>Tutustuimme aiemmin käyttäjän tunnistamiseen eli autentikointiin. Autentikoinnin lisäksi sovelluksissa on tärkeää varmistaa, että käyttäjä saa tehdä asioita, joita hän yrittää tehdä: autorisointi. Jos käyttäjän tunnistaminen toimii mutta sovellus ei tarkista oikeuksia tarkemmin, on mahdollista päätyä esimerkiksi tilanteeseen, missä <a href="http://www.telegraph.co.uk/technology/facebook/10251869/Mark-Zuckerberg-Facebook-profile-page-hacked.html" target="_blank">käyttäjä pääsee tekemään epätoivottuja asioita</a>. </p>
+
+
+	    <h3>Muutama sana salasanoista</h3>
+
+	    <p>Salasanoja ei tule tallentaa selväkielisenä tietokantaan. Salasanoja ei tule -- myöskään -- tallentaa salattuna tietokantaan ilman, että niihin on lisätty erillinen "suola", eli satunnainen merkkijono, joka tekee salasanasta hieman vaikeammin tunnistettavan.</p>
+
+	    <p>Vuonna 2010 tehty tutkimus vihjasi, että noin 75&amp; ihmisistä käyttää samaa salasanaa sähköpostissa ja sosiaalisen median palveluissa. Jos käyttäjän sosiaalisen median salasana vuodetaan selkokielisenä, on siis mahdollista, että samalla myös hänen salasana esimerkiksi Facebookiin tai Google Driveen on päätynyt julkiseksi tiedoksi. Jos ilman "suolausta" salattu salasana vuodetaan, voi se mahdollisesti löytyä verkossa olevista valmiista salasanalistoista, mitkä sisältävät salasana-salaus -pareja. <a href="http://wpengine.com/unmasked/" target="_blank">Jostain syystä salasanat ovat myös usein ennustettavissa.</a></p>
+
+	    <p>Suolan lisääminen salasanaan ei auta tilanteissa, missä salasanat ovat ennustettavissa, koska salasanojen koneellinen läpikäynti on melko nopeaa. Salausmenetelmänä kannattaakin käyttää sekä salasanan suolausta, että algoritmia, joka on hidas laskea. Eräs tällainen on jo valmiiksi Springin kautta käyttämämme <a href="https://en.wikipedia.org/wiki/Bcrypt" target="_blank">BCrypt</a>-algoritmi.</p>
+
+
+	    <figure>
+
+	      <img src="http://imgs.xkcd.com/comics/password_strength.png">
+
+	      <figcaption>https://xkcd.com/936/ -- xkcd: Password strength. </figcaption>
+	      
+	    </figure>
+
+
+            <h3>Näkymätason autorisointi</h3>
+
+	    <p>Määrittelimme aiemmin oikeuksia sovelluksen polkuihin liittyen. Tämä ei kuitenkaan aina riitä, vaan käyttöliitymissä halutaan usein rajoittaa toiminta esimerkiksi käyttäjäroolien perusteella. Thymeleaf-projektiin löytyy liitännäinen, jonka avulla voimme lisätä tarkistuksia HTML-sivuille. Liitännäisen saa käyttöön lisäämällä seuraavan riippuvuuden <code>pom.xml</code>-tiedostoon.</p>
+
+            <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
+    &lt;artifactId&gt;thymeleaf-extras-springsecurity4&lt;/artifactId&gt;
+&lt;/dependency&gt;   
+            </pre>                            
+
+	    <p>Kun näkymiien <code>html</code>-elementtiin lisätään <code>sec:</code>-nimiavaruuden määrittely, voidaan sivulle määritellä elementtejä, joiden sisältö näytetään vain esimerkiksi tietyllä roolilla kirjautuneelle käyttäjälle. Seuraavassa esimerkissä teksti "salaisuus" näkyy vain käyttäjälle, jolla on rooli "ADMIN".</p>
+
+            <pre class="sh_xml">
+&lt;html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.springframework.org/security/tags"&gt;
+
+...
+&lt;div sec:authorize="hasAuthority('ADMIN')"&gt;
+    &lt;p&gt;salaisuus&lt;/p&gt;
+&lt;/div&gt;
+...
+            </pre>                            
+	    
+            <p>Attribuutilla <code>sec:authorize</code> määritellään säännöt, joita tarkistuksessa käytetään. Attribuutille käy mm. arvot <code>isAuthenticated()</code>, <code>hasAuthority('...')</code> ja <code>hasAnyAuthority('...')</code>. Lisää sääntöjä löytyy Spring Securityn <a href="http://docs.spring.io/spring-security/site/docs/current/reference/html/el-access.html" target="_blank">dokumentaatiosta</a>.</p>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Näkymän muutokset liittyvät käytettävyyteen</h1>
+
+	      <p>Edellä lisätty toiminnallisuus liittyy sovelluksen käytettävyyteen. Vaikka linkkiä ei näytettäisi osana sivua, kuka tahansa voi muokata sivun rakennetta selaimellaan. Tällöin pyynnön voi myös tehdä osoitteeseen, jota sivulla ei aluksi näy. </p>
+
+	      <p>Tämä pätee oikeastaan kaikkeen selainpuolen toiminnallisuuteen. Web-sivuilla Javascriptin avulla toteutettu dynaaminen toiminnallisuus on hyödyllistä käytettävyyden kannalta, mutta se ei millään tavalla takaa, että sovellus olisi turvallinen käyttää. Tietoturva toteutetaan suurelta osin palvelinpäässä.</p>
+
+	    </aside>
+
+
+            <h3>Metoditason autorisointi</h3>
+
+            <p>Pelkän näkymätason autorisoinnin ongelmana on se, että usein toimintaa halutaan rajoittaa tarkemmin -- esimerkiksi siten, että tietyt operaatiot (esim. poisto tai lisäys) mahdollistetaan vain tietyille käyttäjille tai käyttäjien oikeuksille. Käyttöliittymän näkymää rajoittamalla ei voida rajoittaa kutsuja polkuihin, ja aiemmin luotu polkuihin tehtävien kutsujen rajoitus ei auta esimerkiksi REST-tyyppisissä osoitteissa, varsinkin jos GET-pyyntöihin halutaan oikeus kaikille.</p>
+
+            <p>Saamme sovellukseemme käyttöön myös metoditason autorisoinnin. Lisäämällä tietoturvakonfiguraatiotiedostoon luokkatason annotaation <code>@EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)</code>, Spring Security etsii metodeja, joissa käytetään sopivia annotaatioita ja suojaa ne. Suojaus tapahtuu käytännössä siten, että metodeihin luodaan proxy-metodit; aina kun metodia kutsutaan, kutsutaan ensin tietoturvakomponenttia, joka tarkistaa onko käyttäjä kirjautunut.</p>
+
+            <p>Kun konfiguraatiotiedostoon on lisätty annotaatio, on käytössämme muunmuassa annotaatio <a href="http://docs.spring.io/spring-security/site/docs/current/reference/html/jc.html#jc-method" target="_blank">@Secured</a>. Alla olevassa esimerkissä <code>post</code>-metodin käyttöön vaaditaan "ADMIN"-oikeudet.</p>
+
+            <pre class="sh_java">
+    @Secured("hasAuthority('ADMIN')")
+    @RequestMapping(method = RequestMethod.POST)
+    public String post() {
+        // ..
+        return "redirect:/posts";
+    }
+            </pre>                            
+
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hiddenfields">
+                      Hidden fields
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-hiddenfields" class="collapse">
+		  
+                  <p>Tehtävässä on hahmoteltu viestien näyttämiseen tarkoitettua sovellusta.</p>
+		  
+                  <p>Luo sovellukseen tietoturvakonfiguraatio, missä määritellään kaksi käyttäjää. Ensimmäisellä käyttäjällä "user", jonka salasana on "password" on "USER"-oikeus. Toisella käyttäjällä "postman", jonka salasana on "pat", on "POSTER"-oikeus.</p>
+		  
+                  <p>Muokkaa näkymää <code>messages.html</code> siten, että vain käyttäjät, joilla on "POSTER"-oikeus näkee lomakkeen, jolla voi lisätä uusia viestejä.</p>
+		  
+                  <p>Muokkaa lisäksi konfiguraatiota siten, että käyttäjä voi kirjautua ulos osoitteesta <code>/logout</code>. Voit käyttää seuraavaa koodia (joutunet lisäämään konfiguraatioon muutakin..). </p>
+
+                  <pre class="sh_java">
+http.formLogin()
+    .permitAll()
+    .and()
+    .logout()
+    .logoutUrl("/logout")
+    .logoutSuccessUrl("/login");</pre>                                            
+
+
+                  <p>Lisää tämän jälkeen sovellukseen metoditason suojaus millä rajoitat POST-pyyntöjen tekemisen osoitteeseen <code>/message</code> vain käyttäjille, joilla on "POSTER"-oikeus. Vaikka testit päästäisivät sinut läpi jo ennen tämän toteutusta, tee se silti.</p>
+
+                </div>
+              </div>
+            </div>
+	    
+
+            <p>Käyttäjän identiteetin varmistaminen vaatii käyttäjälistan, joka taas yleensä ottaen tarkoittaa käyttäjän rekisteröintiä jonkinlaiseen palveluun. Käyttäjän rekisteröitymisen vaatiminen heti sovellusta käynnistettäessä voi rajoittaa käyttäjien määrää huomattavasti, joten rekisteröitymistä kannattaa pyytää vasta kun siihen on tarve.</p>
+
+            <p>Erillinen rekisteröityminen ja uuden salasanan keksiminen ei ole aina tarpeen. Web-sovelluksille on käytössä useita kolmannen osapuolen tarjoamia keskitettyjä identiteetinhallintapalveluita. Esimerkiksi <a href="http://oauth.net/2/" target="_blank">OAuth2</a>:n avulla sovelluskehittäjä voi antaa käyttäjilleen mahdollisuuden käyttää jo olemassaolevia tunnuksia. Myös erilaiset sosiaalisen median palveluihin perustuvat autentikointimekanismit ovat yleistyneet viime aikoina.</p>
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-extauth">
+                      External auth
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-extauth" class="collapse">
+		  
+                  <p>Osoitteessa <a href="http://authebin.herokuapp.com/authenticate">http://authebin.herokuapp.com/</a> on rajapinta tunnistautumista varten. Rajapinta olettaa, että sille lähetetään JSON-tyyppinen käyttäjätunnuksen ja salasanan sisältävä pyyntö. Olion muoto on seuraavanlainen:</p>
+
+<pre>
+{"username":"tunnus","password":"salasana"}
+</pre>
+
+		  
+                  <p>Tutustu tehtäväpohjassa olevaan luokkaan <code>CustomAuthenticationProvider</code> sekä sen käyttöön <code>SecurityConfiguration</code>-luokassa. Toteuta toiminnallisuus, minkä avulla käyttäjä voi kirjautua osoitteessa http://authebin.herokuapp.com olevan palvelun avulla. Tässä tehtävässä lienee hyötyä sekä RestTemplate-luokasta että HttpEntity-oliosta.</p>
+
+                  <p>Tehtävässä ei ole testejä. Palauttamalla tehtävän, olet testannut että se toimii toivotusti ja tunnistautuminen kolmannen osapuolen rajapinnan kautta onnistuu.</p>
+		  
+                </div>
+              </div>
+            </div>
+
+
+
+
+ 
+	    <h2>Tietokannan käyttö ja muut kolmannen osapuolen palvelut</h2>
+
+	    <p>Kolmannen osapuolen palveluissa kuten tietokannoissa ja muissa sovelluksissa tulee kiinnittää huomiota yhteyteen sekä tietokannan salasanaan ja konfiguraatioon. Yhteyden tietokantaan kannattaa olla salattu, ja tietokantaa käyttävien käyttäjien oikeudet rajattu niin, että heillä on oikeudet vain tarvitsemiinsa operaatioihin.</p>
+
+	    <p>Esimerkiksi tietokantaan voidaan määritellä yksi käyttäjä, jolla on vain lukuoikeudet tiettyihin tauluihin, ja toinen käyttäjä, joka voi myös kirjoittaa näihin tauluihin. Kaikkia oikeuksia ei kannata antaa kaikille käyttäjille, sillä sovellukseen voi eksyä SQL-injektiomahdollisuus. Tämä tarkoittaa tilannetta, missä sovelluksen käyttäjä pääsee syöttämään tietoa tietokantaan tehtäviin kyselyihin, mikä mahdollistaa esimerkiksi tietokannan tuhoamisen.</p>
+
+	    
+	    <figure>
+
+	      <img src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="School: Hi, this is your son's school. We're having some computer trouble.
+
+Mom: Oh, dear -- Did he break something?
+
+School: In a way. Did you really name your son Robert'); DROP TABLE Students;--?
+
+Mom: Oh. Yes. Little Bobby Tables we call him.
+
+School: Well, we've lost this year's student records. I hope you're happy.
+
+Mom: And I hope you've learned to sanitize your database inputs.">
+
+	      <figcaption>http://xkcd.com/327/ -- Exploits of a Mom. </figcaption>
+
+	    </figure>
+
+	    <p>&nbsp;</p>
+
+	    <p>Spring Data JPA:ta sekä parameterisoituja kyselyitä käytettäessä tämä on onneksi melko vaikeaa.</p>
+
+	    <p>Tietokannanhallintajärjestelmän sisältävään koneeseen tulee muutenkin kiinnittää huomiota. Hyvin toteutettu sovellus, oikein konfiguroitu tietokanta sekä turvallinen yhteys ei auta, jos tietokannanhallintajärjestelmän sisältävässä koneessa on esimerkiksi vanhentunut käyttöjärjestelmä tai toinen sovellus, joiden kautta koneelle pystyy murtautumaan.</p>
+
+	    <h2>Tyypillisimpiä tietoturvauhkia</h2>
+
+            <p>OWASP (<em>Open Web Application Security Project</em>) on verkkosovellusten tietoturvaan keskittynyt kansainvälinen järjestö, jonka tavoitteena on tiedottaa tietoturvariskeistä ja sitä kautta edesauttaa turvallisten web-sovellusten kehitystä. OWASP-yhteisö pitää myös yllä listaa merkittävimmistä web-tietoturvariskeistä. Vuoden 2013 lista on seuraava:</p>
+
+            <ol>
+              <li>Injection -- sovellukseen jääneet aukot, jotka mahdollistavat esimerkiksi SQL-injektioiden tekemisen.</li><br/>
+              <li>Broken Authentication and Session Management -- autentikaatio esimerkiksi siten, että evästeisiin on helppo päästä käsiksi tai siten, että tieto autentikaatiosta kulkee osoitteessa.</li><br/>
+              <li>Cross-Site Scripting (XSS) -- Mahdollisuus syöttää sivulle Javascript-koodia esimerkiksi tekstikentän kautta. Tämä mahdollistaa mm. toisella koneella  olevan Javascript-koodin suorittamisen, tai lomaketietojen lähettämisen kolmannen osapuolen palveluun. </li><br/>
+              <li>Insecure Direct Object References -- mahdollisuus päästä käsiksi esimerkiksi palvelimella sijaitseviin tiedostoihin muokkaamalla polkua tai lähettämällä palvelimelle sopivaa dataa. Yksinkertaisin kokeilu lienee <code>../</code>-merkkijonon kokeilemista sovelluksen polussa.</li><br/>
+              <li>Security Misconfiguration -- huonosti tehdyt tietoturvakonfiguraatiot.</li><br/>
+              <li>Sensitive Data Exposure -- yhteyksien tulee olla suojattu.</li><br/>
+              <li>Missing Function Level Access Control -- autorisaatiota ei tapahdu metoditasolla.</li><br/>
+              <li>Cross-Site Request Forgery (CSRF) -- sovelluksessa XSS-aukko, joka mahdollistaa epätoivotun pyynnön lähettämisen toiselle palvelimelle. Lomakkeisiin voidaan myös määritellä <a href="http://docs.spring.io/spring-security/site/docs/current/reference/html/csrf.html" target="_blank">erillinen otsaketieto</a>, joka on uniikki ja luodaan sivun latauksen yhteydessä.</li><br/>
+              <li>Using Components with Known Vulnerabilities -- sovelluksessa käytetään osia, joissa on tunnettuja tietoturvariskejä. </li><br/>
+              <li>Unvalidated Redirects and Forwards -- älä käytä parametreja uudelleenohjauksissa. Riskinä on väärien parametrien syöttäminen ja sitä kautta epätoivottuun tietoon pääseminen.</li><br/>
+            </ol>
+	    
+            <p>Tutustu listaan tarkemmin osoitteessa <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project</a>. He tarjoavat dokumentaatiossaan kuvaukset riskeistä, sekä esimerkkejä hyökkäyksistä; <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet" target="_blank">Tässä</a> esimerkki XSS-filtterien kiertämisestä.</p>
+	    
+
+
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Palvelinten fyysinen tietoturva</h1>
+
+	      <p>Tietoturvaan keskityttäessä on hyvä muistaa myös fyysinen tietoturva. Jos palvelinsaliin pääsee helposti, voi kuka tahansa kävellä sinne ja ottaa palvelimen kainaloonsa. Tällöin sovellukseen toteutetun tietoturvan hyöty on melko pieni.</p>
+
+	    </aside>
+
+
+
+	  </section>
+
+	  <!-- END OSA5 -->
+
+
+          <!-- BEGIN OSAX --->
+          <section class="weeklimit" data-week-id="X">
+	    
+            <header>
+              <h1 id="osaX">Osa X</h1>
+            </header>
+
+
+	    <h2>Uhkamallinnus</h2>
+
+	    <p>https://www.owasp.org/index.php/Application_Threat_Modeling</p>
+
+
+
+	    <aside class="info">
+
+	      <br/>
+	      <h1>Palvelunestohyökkäykset</h1>
+
+	      <p>
+http://www.networkworld.com/article/2170051/tech-primers/tech-primers-four-ways-to-defend-against-ddos-attacks.html</p>
+
+	      <p>https://www.heroku.com/policy/security</p>
+
+	      <p>pilvipalveluiden käyttö, skaalautuminen</p>
+
+	    </aside>
+	    
+	    
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-twiitberg">
+                      Twiitberg
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-twiitberg" class="collapse">
+		  
+                  <p>Tehtäväpohjaan on hahmoteltu palvelua, minne käyttäjä voi lisätä lyhyitä viestejä ja kuvia. Kuten huomaat, sovellus on jäänyt kesken, eikä edes autentikointi toimi. Tehtävänäsi tässä on (1) tutustua palveluun, (2) korjata autentikaatio, ja (3) keksiä toiminnallisuus tai kaksi, mitä palvelussa ei vielä ole, ja mitä siellä pitäisi olla. Toteuta keksimäsi toiminnallisuudet, ja palauta tehtävä.</p>
+		  
+                  <p>Kirjoita tehtävän palautuksen yhteyteen toteuttamasi ominaisuudet -- tehtävä on kolmen kurssipisteen arvoinen.</p>
+		  
+                </div>
+              </div>
+            </div>
 
 
             <p>Jos palvelua haluaa käyttää selainohjelmistosta, onnistuu se esimerkiksi <a href="http://jquery.com/" target="_blank">jQuery</a>-projektin avulla. Yksittäisen kirjan tietojen hakeminen ja nimen näyttäminen käyttäjälle onnistuu yksinkertaisimmillaan seuraavasti:</p>
@@ -5530,7 +6978,7 @@ Mitsuku: Glad to hear it.</pre>
             </div>		
 	    
           </section>
-          <!-- END OSA5 --->
+          <!-- END OSAX --->
 	  
 	  
 	  
