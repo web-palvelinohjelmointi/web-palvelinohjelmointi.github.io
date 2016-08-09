@@ -5768,7 +5768,7 @@ var elementti = $("#nimi");
 
 	    <h4>Elementtien lisääminen</h4>
 	    
-	    <p>JQuery tekee elementtien lisäämisestä hieman suoraviivaisempaa. Voimme kutsun <code>document.createElement</code> sijaan määritellä elementin tyypin sanomalla <code>$("&lt;article /&gt;");</code>. Myös tekstielementin luominen on hieman helpompaa: <code>$("<p/>").text("test");</code>. Aiempi koodimme:</p>
+	    <p>JQuery tekee elementtien lisäämisestä hieman suoraviivaisempaa. Voimme kutsun <code>document.createElement</code> sijaan määritellä elementin tyypin sanomalla <code>$("&lt;article /&gt;");</code>. Myös tekstielementin luominen on hieman helpompaa: <code>$("&lt;p/&gt;").text("test");</code>. Aiempi koodimme:</p>
 
 <pre class="sh_javascript_dom">
 var artikkeli = document.createElement("article");
@@ -6021,9 +6021,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	    <h1>Web-sovellusten tietoturva</h1>
 
+<!--
 	    <p>Selainpuoli liittyy käytettävyyteen, palvelinpuoli tietoturvaan.</p>
 
+
 	    <p>tietovuokaavioiden käyttö riskikohtien tunnistamiseen</p>
+-->
+
+	    <p>Tutustutaan tässä web-sovellusten tietoturvaan liittyviin teemoihin. Aloita katsomalla Juhani Erosen ARTTech-seminaari aiheesta <a href="https://www.youtube.com/watch?v=-51nIz8pz08" target="_blank">Your privacy is protected by .. what exactly?</a>.</p>
 
 
             <h2>Suojattu yhteys</h2>
@@ -6293,7 +6298,7 @@ Validation failed for object='person'. Error count: 1</pre>
 
 	    <p>Salasanoja ei tule tallentaa selväkielisenä tietokantaan. Salasanoja ei tule -- myöskään -- tallentaa salattuna tietokantaan ilman, että niihin on lisätty erillinen "suola", eli satunnainen merkkijono, joka tekee salasanasta hieman vaikeammin tunnistettavan.</p>
 
-	    <p>Vuonna 2010 tehty tutkimus vihjasi, että noin 75&amp; ihmisistä käyttää samaa salasanaa sähköpostissa ja sosiaalisen median palveluissa. Jos käyttäjän sosiaalisen median salasana vuodetaan selkokielisenä, on siis mahdollista, että samalla myös hänen salasana esimerkiksi Facebookiin tai Google Driveen on päätynyt julkiseksi tiedoksi. Jos ilman "suolausta" salattu salasana vuodetaan, voi se mahdollisesti löytyä verkossa olevista valmiista salasanalistoista, mitkä sisältävät salasana-salaus -pareja. <a href="http://wpengine.com/unmasked/" target="_blank">Jostain syystä salasanat ovat myös usein ennustettavissa.</a></p>
+	    <p>Vuonna 2010 tehty tutkimus vihjasi, että noin 75&#37; ihmisistä käyttää samaa salasanaa sähköpostissa ja sosiaalisen median palveluissa. Jos käyttäjän sosiaalisen median salasana vuodetaan selkokielisenä, on siis mahdollista, että samalla myös hänen salasana esimerkiksi Facebookiin tai Google Driveen on päätynyt julkiseksi tiedoksi. Jos ilman "suolausta" salattu salasana vuodetaan, voi se mahdollisesti löytyä verkossa olevista valmiista salasanalistoista, mitkä sisältävät salasana-salaus -pareja. <a href="http://wpengine.com/unmasked/" target="_blank">Jostain syystä salasanat ovat myös usein ennustettavissa.</a></p>
 
 	    <p>Suolan lisääminen salasanaan ei auta tilanteissa, missä salasanat ovat ennustettavissa, koska salasanojen koneellinen läpikäynti on melko nopeaa. Salausmenetelmänä kannattaakin käyttää sekä salasanan suolausta, että algoritmia, joka on hidas laskea. Eräs tällainen on jo valmiiksi Springin kautta käyttämämme <a href="https://en.wikipedia.org/wiki/Bcrypt" target="_blank">BCrypt</a>-algoritmi.</p>
 
