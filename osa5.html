@@ -49,6 +49,9 @@
                     <li>
                         <a href="osa5.html">Osa 5</a>
                     </li>
+                    <li>
+                        <a href="osa6.html">Osa 6</a>
+                    </li>
 <!--
                     <li>
                         <a href="#viikko6">Viikko 6</a>
@@ -771,7 +774,7 @@ var elementti = $("#nimi");
 
 	    <p>Kyselyt ovat muotoa<code>$("<em>kysely</em>")</code>. Jos elementtia haetaan <code>id</code>-attribuutin perusteella, lisätään kyselyn alkuun risuaita. Jos elementtiä haetaan luokan (<code>class</code>) perusteella, lisätään kyselyn alkuun piste. Jos taas elementtiä halutaan hakea esimerkiksi nimen perusteella, muodostetaan kysely sekä elementin että attribuutin kautta, esim. <code>$("input[name=nimi]")</code> palauttaa kaikki input-tyyppiset elementit, joissa <code>name</code>-attribuutin arvo on <code>nimi</code>.</p> 
 
-	    <aside class="extra">
+	    <aside class="info">
 	      <p><strong>jQueryn valitsimet</strong></p>
 	      
 	      <p>Tarkempi kuvaus jQueryn valitsimista löytyy osoitteesta <a href="http://api.jquery.com/category/selectors/" target="_blank">http://api.jquery.com/category/selectors/</a>.</p>
@@ -813,7 +816,7 @@ $("#osio").append(artikkeli);
 </pre>
 
 
-	    <aside class="extra">
+	    <aside class="info">
 	      <p><strong>DOM-puun muokkaus</strong></p>
 	      
 	      <p>Tarkempi kuvaus operaatioista DOM-puun muokkaamiseen löytyy osoitteesta <a href="http://api.jquery.com/category/Manipulation/" target="_blank">http://api.jquery.com/category/Manipulation/</a>.</p>
@@ -1371,7 +1374,7 @@ Validation failed for object='person'. Error count: 1</pre>
             <p>Kun konfiguraatiotiedostoon on lisätty annotaatio, on käytössämme muunmuassa annotaatio <a href="http://docs.spring.io/spring-security/site/docs/current/reference/html/jc.html#jc-method" target="_blank">@Secured</a>. Alla olevassa esimerkissä <code>post</code>-metodin käyttöön vaaditaan "ADMIN"-oikeudet.</p>
 
             <pre class="sh_java">
-    @Secured("hasAuthority('ADMIN')")
+    @Secured("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public String post() {
         // ..

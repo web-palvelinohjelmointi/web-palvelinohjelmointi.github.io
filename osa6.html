@@ -1,0 +1,769 @@
+<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->
+<!-- BEGIN HEADER -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web-palvelinohjelmointi</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="js/libs/syntaxhighlight/css/sh_style.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/chartist.min.css"/>
+        <link rel="stylesheet" href="css/wepa.css"/>
+
+        <link rel="stylesheet" href="css/wepa-mooc.css"/>
+
+    </head>
+    <body>
+
+        <!-- BEGIN NAV -->
+        <header role="navigation">
+            <h1>
+                <button type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="http://www.mooc.fi" class="hidden-in-hy">&#171; mooc.fi</a>
+
+            </h1>
+            <nav class="collapse bs-navbar-collapse" role="navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">Yleistä</a>
+                    </li>
+                    <li>
+                        <a href="osa1.html">Osa 1</a>
+                    </li>
+                    <li>
+                        <a href="osa2.html">Osa 2</a>
+                    </li>
+                    <li>
+                        <a href="osa3.html">Osa 3</a>
+                    </li>
+                    <li>
+                        <a href="osa4.html">Osa 4</a>
+                    </li>
+                    <li>
+                        <a href="osa5.html">Osa 5</a>
+                    </li>
+                    <li>
+                        <a href="osa6.html">Osa 6</a>
+                    </li>
+<!--
+                    <li>
+                        <a href="#viikko6">Viikko 6</a>
+                    </li>
+                    <li>
+                        <a href="#viikko7">Viikko 7</a>
+                    </li>
+-->
+                </ul>
+
+		<div style="direction: rtl;">
+		  <button id="logout" class="btn btn-warning">Kirjaudu ulos</button>
+		</div>
+            </nav>
+
+        </header>
+        <!-- // END NAV -->
+        <article>
+
+
+          <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form class="form-inline"  id="TmcLoginForm" role="form">
+		<div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
+                    <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
+                      <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua tai en tiedä TMC-tunnustani</button>
+                    <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
+                  </div>
+		</div><!-- /.modal-content -->
+              </form>
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+	  <!-- BEGIN CONTENT -->
+	  <section class="no-toc weeklimit" data-week-id="0">
+            <h1>Sisällysluettelo</h1>
+	    
+            <ul class="nav" id="material-toc"></ul>
+	    
+            <h1>Tehtävät</h1>
+	    
+            <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+	    
+	  </section>
+          <!-- BEGIN OSA6 --->
+          <section class="weeklimit" data-week-id="6">
+	    
+            <header>
+              <h1 id="osa6">Osa 6</h1>
+            </header>
+
+	    <p>Kurssin kuudes osio alkaa edellisen osion sisältöä kertaavalla tehtävällä, missä korjataan erään verkkokauppasovelluksen tietoturvaongelmia. Tämän jälkeen tutustumme skaalautuvien sovellusten rakentamiseen sekä palveluperustaisiin arkkitehtuureihin.</p>
+
+
+
+
+
+	    <h2>Uhkamallinnus</h2>
+
+	    <p>Uhkamallinnus on lähestymistapa sovelluksen tietoturvan analysointiin. Uhkamallinnuksen voi jakaa kolmeen korkean tason askeleeseen: (1) Sovelluksen komponenttien ja niiden välisen kommunikaation analysointi, (2) Tietoturvariskien tunnistaminen ja niiden priorisointi, sekä (3) Suojamenetelmien tunnistaminen.</p>
+
+	    <p>Sovelluksen komponenttien tunnistamisella sekä niiden välisen kommunikaation analysoinnilla selvitetään sovellukseen liittyvät kirjastot, palvelut sekä kommunikaatiomenetelmät. Tässä tarkastellaan olemassaolevia käyttötapauksia, sekä luodaan myös uusia käyttötapauksia, joiden perusteella päätellään miten järjestelmää käytetään. Samalla tunnistetaan kohdat, joiden kautta hyökkääjä voi päästä järjestelmään käsiksi ja tunnistetaan resurssit, joista hyökkääjä voisi olla kiinnostunut. Askeleen tuloksena on lista sovellukseen liittyvistä kirjastoista, palveluista, kommunikaatiomenetelmistä sekä resursseista, jonka lisäksi jokaisesta järjestelmään pääsyn mahdollistavasta kohdasta sekä järjestelmän resurssista kirjataan mahdolliset käyttäjätasot ja niiden mahdollistamat oikeudet.</p>
+
+	    <p>Tietoturvariskien tunnistamisessa ja priorisoinnissa määritellään mahdollisia uhkia. Näitä lähestytään potentiaalisen hyökkääjän näkökulmasta, ja työhön liittyy valmiita kategorisointeja, joita voidaan käyttää muistilistana. Eräs kategorisaatio uhkille on <a href="https://msdn.microsoft.com/en-us/library/ee823878(v=cs.20).aspx" target="_blank">STRIDE</a>. STRIDE tulee sanoista Spoofing (hyökkääjä haluaa uskotella olevansa joku toinen), Tampering (hyökkääjä haluaa muokata dataa, tuloksia tai verkkoliikennettä, tai yleisesti häiritä järjestelmän toimintaa), Repudiation (hyökkääjä haluaa suorittaa järjestelmässä toimintoja, joista hän ei jää kiinni, ja joihin hänellä ei ole oikeuksia), Information Disclosure (hyökkääjä haluaa päästä käsiksi salaiseen tietoon, esim. tiedosto tai verkkoliikenne), Denial of Service (hyökkääjä haluaa estää muita käyttäjiä pääsemästä järjestelmään käsiksi), Elevation of Privilege (hyökkääjä haluaa järjestelmään tai järjestelmän resursseihin paremmat oikeudet, joiden avulla hänestä tulee luotettu käyttäjä, ja hän pääsee tekemään epätoivottuja toimintoja). Vaiheen tuloksena on lista uhkista: uhkiin liittyy myös sovelluskehittäjän kannalta vaikeat tapaukset kuten tilanne, missä sovelluksen käyttäjä käyttää järjestelmää esimerkiksi kirjastosta ja unohtaa kirjautua järjestelmästä ulos. Jokaiseen uhkaan liitetään myös riski, joka sisältää tiedon uhkaan toteutumiseen liittyvästä vaikutuksesta, todennäköisyydestä ja sen vähentämisestä sekä uhkan helppoudesta (mm. löydettävyys). Priorisointi perustuu näiden tekijöiden yhteisvaikutukseen: eräs priorisointimenetelmä on <a href="https://en.wikipedia.org/wiki/DREAD_(risk_assessment_model)" target="_blank">DREAD</a>.</p>
+
+	    <p>Kolmanteen vaiheeseen liittyy tietoturvariskeiltä suojautumiseen liittyvien menetelmien tunnistaminen. Tutustu teemaan tarkemmin osoitteessa <a href="https://www.owasp.org/index.php/Application_Threat_Modeling" target="_blank">https://www.owasp.org/index.php/Application_Threat_Modeling</a>.</p>
+
+	    <p>Huomaa, että uhkamallinnuksessa ei aina tarkastella sovelluksen sisäistä rakennetta. Tämä on kuitenkin tärkeää, sillä sovelluksen sisäinen logiikka sisältää usein virheitä, jotka saattavat myös johtaa ongelmiin. Alla olevassa tehtävässä tutustutaan tähän ja edellisen viikon teemoihin tarkemmin.</p>
+
+	    
+
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa5-kertaus-ex" data-count="52">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa5-kertaus">
+                      Osa 5, kertaus: OnlineShop
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa5-kertaus" class="collapse">
+
+		  <p>Tehtävässä on mukana verkkokauppasovellus, jonka kautta käyttäjät voivat tilata itselleen verkkokaupan tuotteita. Sovellukseen liittyy kuitenkin muutama tietoturvariski. Tässä kertaustehtävässä tehtävänäsi on tunnistaa nämä tietoturvariskit sekä korjata ne, joiden korjaaminen on mahdollista sovelluksesta.</p>
+
+		  <p>Keskity tehtävässä käyttäjien oikeuksiin (autentikaatio), oikeuksien varmistamiseen (autorisaatio) sekä verkkokaupan sovelluslogiikan toimivuuteen verkkokaupan jatkuvuuden kannalta. Tehtävässä ei toistaiseksi ole automaattisia testejä.</p>
+		  
+                </div>
+              </div>
+	    </div>
+
+	    
+	    <aside class="info">
+	      
+	      <br/>
+	      <h1>Palvelunestohyökkäykset</h1>
+
+	      <p>Eräs STRIDE-kategorian riskeistä on palvelunestohyökkäys (Denial of Service), jonka tavoitteena on estää muiden käyttäjien pääsy sovellukseen. Tätä voidaan käyttää esimerkiksi siten, että hyökkääjä ajaa palvelun alas ja vaatii lunnaita hyökkäyksen lopettamisesta. Palvelunestohyökkäykset toteutetaan tyypillisesti siten, että hyökkääjällä on merkittävä määrä tietokoneita ja verkkoliikennekaistaa, ja hyökkääjä tekee jatkuvasti pyyntöjä palveluun. Uhka realisoitui myös kesän 2016 olympialaisissa Yle Areenan käyttämässä palvelussa, jonka takia Ylen Rio Areena -palvelua ei juurikaan päästy käyttämään olympialaisten alussa.</p>
+
+	      <p>Palvelunestohyökkäyksiltä suojautuminen on mahdollista. Tutustu osoitteessa <a href="http://www.networkworld.com/article/2170051/tech-primers/tech-primers-four-ways-to-defend-against-ddos-attacks.html" target="_blank">http://www.networkworld.com/article/2170051/tech-primers/tech-primers-four-ways-to-defend-against-ddos-attacks.html</a> olevaan artikkeliin.</p>
+
+	    </aside>
+	    
+	    
+
+	    
+            
+	    <h1 data-count="12">Sovellusten skaalautuminen</h1>
+	    
+
+            <p>Kun sovellukseen liittyvä liikenne ja tiedon määrä kasvaa niin isoksi, että sovelluksen käyttö takkuilee, tulee asialle tehdä jotain.</p>
+	    	    
+            <aside class="info">
+	      <br/>
+              <h1>Hitausongelmat</h1>
+	      
+              <p>Vaikka tässä kappaleessa puhummekin skaalautuvuudesta, sovelluksen hitausongelmat liittyvät usein myös konfiguraatio-ongelmiin. Tyypillisiä ongelmia ovat esimerkiksi toistuvat tietokantakyselyt tauluihin, joiden kenttiin ei ole määritelty hakuoperaatioita tehostavia indeksejä. Esimerkiksi yksittäisen käyttäjän etsiminen tietokantataulusta nimen perusteella vaatii pahimmassa tapauksessa kaikkien rivien läpikäynnin ilman indeksien käyttöä; indeksillä hakuja on vain muutama.</p>
+
+	      <p>Sovelluksen ongelmakohdat löytyvät usein sovelluksen toimintaa profiloimalla. Spring-sovellusten profilointi onnistuu esimerkiksi <a href="https://www.appdynamics.com/java/spring/" target="_blank">AppDynamicsin</a> ja <a href="https://www.yourkit.com/" target="_blank">YourKit</a>in avulla. Spring Boot-projekteihin voi lisätää myös <a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-actuator" target="_blank">Actuator</a>-komponentin, jonka avulla <a href="http://kielczewski.eu/2015/01/application-metrics-with-spring-boot-actuator/" target="_blank">sovellukseen voi lisätä tilastojen keruutoiminnallisuutta</a>.</p>
+            </aside>
+	    
+            <p>Olettaen, että sovelluksen konfiguraatio on kunnossa, sovelluksen skaalautumiseen on useampia lähtökohtia: (1) olemassaolevien resurssien käytön tehostaminen esimerkiksi välimuistitoteutusten ja palvelintehon kasvattamisen avulla, (2) resurssien määrän kasvattaminen esimerkiksi uusia palvelimia hankkimalla, (3) toiminnallisuuden jakaminen pienempiin vastuualueisiin ja palveluihin sekä näiden määrän kasvattaminen.</p>
+	    
+            <p>Sovellukset eivät tyypillisesti skaalaannu lineaarisesti, ja skaalautumiseen liittyy paljon muutakin kuin resurssien lisääminen. Jos yksi palvelin pystyy käsittelemään tuhat pyyntöä sekunnissa, emme voi olettaa, että kahdeksan palvelinta pystyy käsittelemään kahdeksantuhatta pyyntöä sekunnissa, sillä tehoon vaikuttavat myös muut käytetyt komponentit sekä verkkokapasiteetti. Skaalautumiseen ei ole olemassa yhtä oikeaa lähestymistapaa. Joskus tehokkaamman palvelimen hankkiminen on nopeampaa ja kustannustehokkaampaa kuin sovelluksen muokkaaminen -- esimerkiksi hitaasti toimiva tietokanta tehostuu tyypillisesti huomattavasti lisäämällä käytössä olevaa muistia, joskus taas käytetyn tietokantakomponentin vaihtaminen tehostaa sovellusta merkittävästi. Oleellista sovelluskehityksen kannalta on kuitenkin lähestyä ongelmaa pragmaattisesti ja optimoida käytettyjä henkilöresursseja; jos sovellus ei tule olemaan laajassa käytössä, ei sen skaalautumista kannata pitää tärkeimpänä sovelluksen ominaisuutena.</p>
+
+
+
+            <h2>Palvelinpuolen välimuistit</h2>
+	    
+
+            <p>Tyypillisissä web-palvelinohjelmistoissa huomattava osa kyselyistä on GET-tyyppisiä pyyntöjä. GET-tyyppiset pyynnöt eivät muokkaa palvelimella olevaa dataa, vaan pyytävät tietoa. Esimerkiksi tietokannasta dataa hakevat GET-tyyppiset pyynnöt luovat yhteyden tietokantasovellukseen, josta data haetaan. Jos näitä pyyntöjä on useita, eikä tietokannassa oleva data juurikaan muutu, kannattaa turhat tietokantakyselyt karsia.</p>
+	    
+            <p>Spring Bootia käytettäessä palvelimessa käytettävän <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html" target="_blank">välimuistin konfigurointi</a> tapahtuu lisäämällä konfiguraatiotiedostoon annotaatio <code>@EnableCaching</code>. Oman välimuistitoteutuksen toteuttaminen tapahtuu luomalla <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/cache/CacheManager.html" target="_blank">CacheManager</a>-rajapinnan toteuttava luokka sovellukseen. Jos taas omaa välimuistitoteutusta ei tee, etsii sovellus käynnistyessään välimuistitoteutusten (<a href="http://www.ehcache.org/" target="_blank">Ehcache</a>, <a href="https://hazelcast.com/" target="_blank">Hazelcast</a>, <a href="http://www.couchbase.com/" target="_blank">Couchbase</a>...) konfiguraatiotiedostoja. Jos näitä ei löydy, välimuistina käytetään yksinkertaista hajautustaulua.</p>
+	    
+            <p>Kun välimuisti on konfiguroitu, voimme lisätä välimuistitoiminnallisuuden palvelumetodeille <code>@Cacheable</code>-annotaation avulla. Alla olevassa esimerkissä metodin <code>read</code> palauttama tulos asetetaan välimuistiin.</p>
+
+                <pre class="sh_java">
+@Service
+public class MyService {
+
+    @Autowired
+    private MyRepository myRepository;
+
+    @Cacheable("my-cache-key")
+    public My read(Long id) {
+        return myRepository.findOne(id);
+    }
+
+    // ...</pre>
+
+            <p>Käytännössä annotaatio <code>@Cacheable</code> luo metodille <code>read</code> proxy-metodin, joka ensin tarkistaa onko haettavaa tulosta välimuistissa -- proxy-metodit ovat käytössä vain jos metodia kutsutaan luokan ulkopuolelta. Jos tulos on välimuistissa, palautetaan se sieltä, muuten tulos haetaan tietokannasta ja se tallennetaan välimuistiin. Metodin parametrina annettavia arvoja hyödynnetään cacheavaimen toteuttamisessa, eli jokaista haettavaa oliota kohden voidaan luoda oma tietue välimuistiin. Tutustu seuraavaksi Springin <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html" target="_blank">cache</a>-dokumentaatioon.</p>
+
+            <p>Välimuistitoteutuksen vastuulla ei ole pitää kirjaa tietokantaan tehtävistä muutoksista, jolloin välimuistin tyhjentäminen muutoksen yhteydessä on sovelluskehittäjän vastuulla. Dataa muuttavat metodit tulee annotoida sopivasti annotaatiolla <code>@CacheEvict</code>, jotta välimuistista poistetaan muuttuneet tiedot.</p>
+
+
+            <div class="tehtavat">
+              <div class="tehtava" id="t-weatherservice">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-weatherservice">
+                      Weather Service
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-weatherservice" class="collapse">
+		  
+                  <p>Kumpulan kampuksella majaileva ilmatieteen laitos kaipailee pientä viritystä omaan sääpalveluunsa. Tällä hetkellä palvelussa on toiminnallisuus sijaintien hakemiseen ja lisäämiseen. Ilmatieteen laitos on lisäksi toteuttanut säähavaintojen lisäämisen suoraan tuotantotietokantaan, mihin ei tässä palvelussa päästä käsiksi. Palvelussa halutaan kuitenkin muutama lisätoiminnallisuus:</p>
+		  
+                  <p>Lisää sovellukseen välimuistitoiminnallisuus. Osoitteisiin <code>/locations</code> ja <code>/locations/{id}</code> tehtyjen hakujen tulee toimia siten, että jos haettava sijainti ei ole välimuistissa, se haetaan tietokannasta ja tallennetaan välimuistiin. Jos sijainti taas on välimuistissa, tulee se palauttaa sieltä ilman tietokantahakua.</p>
+		  
+                  <p>Lisää tämän jälkeen sovellukseen toiminnallisuus, missä käytössä oleva välimuisti tyhjennetään kun käyttäjä lisää uuden sijainnin tai tekee GET-tyyppisen pyynnön osoitteeseen <code>/flushcaches</code>. Erityisesti jälkimmäinen on tärkeä asiakkaalle, sillä se lisää tietokantaan tietoa myös palvelinohjelmiston ulkopuolelta.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Välimuistit selainpuolella</h1>
+
+
+              <p>Tiedostoja jaettaessa dataa ei kannata siirtää uudestaan jos se on jo käyttäjällä. Voimme määritellä HTTP-pyynnön vastauksen otsaketietoihin tietoa datan vanhentumisesta, jonka perusteella selain osaa päätellä milloin näytettävä tieto on vanhentunutta ja se pitäisi hakea uudestaan. Hieman uudempi tapa on <a href="http://en.wikipedia.org/wiki/HTTP_ETag" target="_blank">entiteettitagin</a> käyttö pyynnön vastauksessa. Kun resurssiin liittyvään vastaukseen lisätään ETag-otsake, lähettää selain tiedostoa seuraavalla kerralla haettaessa aiemmin annetun arvon osana <code>"If-None-Match"</code>-otsaketta. Käytännössä palvelimella voidaan tällöin tarkistaa onko tiedosto muuttunut -- jos ei, vastaukseksi riittää pelkkä statuskoodi 304 -- NOT MODIFIED.</p>
+	    </aside>
+
+            <h2>Palvelinmäärän kasvattaminen</h2>
+	    
+            <p>Skaalautumisesta puhuttaessa puhutaan käytännössä lähes aina horisontaalisesta skaalautumisesta, jossa käyttöön hankitaan esimerkiksi lisää palvelimia. Vertikaalinen skaalautumisen harkinta on mahdollista tietyissä tapauksissa, esimerkiksi tietokantapalvelimen ja -kyselyiden toimintaa suunniteltaessa, mutta yleisesti ottaen horisontaalinen skaalautuminen on kustannustehokkaampaa. Käytännöllisesti ajatellen kahden viikon ohjelmointityö kymmenen prosentin tehonparannukseen on tyypillisesti kalliimpaa kuin muutaman päivän konfiguraatiotyö ja uuden palvelimen hankkiminen. Käyttäjien määrän kasvaessa uusien palvelinten hankkiminen on joka tapauksessa vastassa.</p>
+	    
+            <p>Pyyntöjen määrän kasvaessa yksinkertainen ratkaisu on palvelinmäärän eli käytössä olevan raudan kasvattaminen. Tällöin pyyntöjen jakaminen palvelinten kesken hoidetaan erillisellä kuormantasaajalla (<em><a href="http://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank">load balancer</a></em>), joka ohjaa pyyntöjä palvelimille.</p>
+	    
+            <p>Jos sovellukseen ei liity tilaa (esimerkiksi käyttäjän tunnistaminen tai ostoskori), kuormantasaaja voi ohjata pyyntöjä käytössä oleville palvelimille round-robin -tekniikalla. Jos sovellukseen liittyy tila, tulee tietyn asiakkaan tekemät pyynnöt ohjata aina samalle palvelimelle, sillä evästeet tallennetaan oletuksena palvelinkohtaisesti. Tämän voi toteuttaa esimerkiksi siten, että kuormantasaaja lisää pyyntöön evästeen, jonka avulla käyttäjä identifioidaan ja ohjataan oikealle palvelimelle. Tätä lähestymistapaa kutsutaan termillä (<em>sticky session</em>).</p>
+	    
+            <p>Pelkkä palvelinmäärän kasvattaminen ja kuormantasaus ei kuitenkaan aina riitä. Kuormantasaus helpottaa verkon kuormaa, mutta ei ota kantaa palvelinten kuormaan. Jos yksittäinen palvelin käsittelee pitkään kestävää laskentaintensiivistä kyselyä, voi kuormantasaaja ohjata tälle palvelimelle lisää kyselyjä "koska eihän se ole vähään aikaan saanut mitään töitä".  Käytännössä tällöin entisestään paljon laskentaa tekevä palvelimen saa lisää kuormaa. On kuitenkin mahdollista käyttää kuormantasaajaa, joka lisäksi pitää kirjaa palvelinten tilasta, mutta käytännössä kuorma vaihtuu usein hyvin nopeasti, ja reagointi ei aina ole nopeaa.</p>
+	    
+            <p>Parempi ratkaisu palvelinmäärän kasvattamiselle on palvelinmäärän kasvattaminen <em>ja</em> sovelluksen suunnittelu siten, että laskentaintensiiviset operaatiot käsitellään erillisillä palvelimilla. Tällöin käytetään käytännössä erillistä laskentaklusteria aikaa vievien laskentaoperaatioiden käsittelyyn, jolloin käyttäjän pyyntöjä kuuntelevan palvelimen kuorma pysyy alhaisena.</p>
+	    
+            <p>Riippuen pyyntöjen määrästä, palvelinkonfiguraatio voidaan toteuttaa jopa siten, että staattiset tiedostot (esim. kuvat) löytyvät erillisiltä palvelimilta, GET-pyynnöt käsitellään erillisillä pyyntöjä vastaanottavilla palvelimilla, ja datan muokkaamista tai prosessointia vaativat kyselyt (esim POST) ohjataan asiakkaan pyyntöjä vastaanottavien palvelinten toimesta laskentaklusterille.</p>
+	    
+            <aside class="info">
+	      <br/>
+              <h1>Rajoitettu määrä samanaikaisia pyyntöjä osoitetta kohden</h1>
+	      
+              <p>Staattisten resurssien kuten kuvien ja tyylitiedostojen hajauttaminen eri palvelimille on oikeastaan fiksua. <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html" target="_blank">HTTP 1.1-spesifikaation</a> yhteyksiin liittyvässä osissa suositellaan tiettyyn osoitteeseen tehtävien samanaikaisten pyyntöjen määrän rajoittamista kahteen.</p>
+	      
+              <p><em>Clients that use persistent connections SHOULD limit the number of simultaneous connections that they maintain to a given server. A single-user client SHOULD NOT maintain more than 2 connections with any server or proxy. A proxy SHOULD use up to 2*N connections to another server or proxy, where N is the number of simultaneously active users. These guidelines are intended to improve HTTP response times and avoid congestion.</em></p>
+	      
+              <p>Käytännössä suurin osa selaimista tekee enemmän kuin 2 kyselyä kerrallaan samaan osoitteeseen. Jos web-sivusto sisältää paljon erilaisia staattisita resursseja, ja ne sijaitsevat kaikki samalla palvelimella, saadaan resursseja korkeintaan selaimeen rajoitettu määrä kerrallaan. Toisaalta, jos resurssit jaetaan useamman sijainnin kesken, ei tätä rajoitetta ole.</p>
+	      
+              <p>Resurssien jakaminen useampaan sijantiin mahdollistaa myös maantieteellisen hajauttamisen, missä käyttäjä saa sivun sisällön lähellä olevilta palvelimilta, mikä nopeuttaa vasteaikaa. Sama resurssi voi olla myös useammalla palvelimella.</p>
+	      
+              <p>Tutustu aiheeseen tarkemmin lukemalla Wikipedian artikkeli <a href="http://en.wikipedia.org/wiki/Content_delivery_network" target="_blank">Content delivery network</a>.</p>
+	      
+            </aside>
+
+
+	    <p>Palvelinmäärän kasvattaminen onnistuu myös tietokantapuolella. Tällöin käyttöön tulevat tyypillisesti hajautetut tietokantapalvelut kuten <a href="http://cassandra.apache.org/" target="_blank">Apache Cassandra</a> ja <a href="http://geode.apache.org/" target="_blank">Apache Geode</a>. Riippumatta käyttöön valitusta teknologiasta, aiemmin käyttämämme Spring Data JPA:n ohjelmointimalli sopii myös näihin tietokantoihin: esimerkiksi Cassandran käyttöönottoon löytyy ohjeistusta osoitteesta <a href="http://projects.spring.io/spring-data-cassandra/" target="_blank">http://projects.spring.io/spring-data-cassandra/</a>. </p>
+
+	    
+            <aside class="info">
+	      <br/>
+
+              <h1>Teknologiahype</h1>
+	      
+              <p>Tietokantamoottoreiden ympärillä on viime vuosikymmenen lopusta lähtien ollut NoSQL-tietokantoihin liittyvää hypeen verrattavaa keskustelua. Nyt kun tuosta on mennyt hetki, on hyvä tarkastella keskustelua ja siihen liittyviä jälkiviisauksia.</p>
+
+	      <p>Eräs merkittävistä NoSQL-buumin aloittajista oli Twitterin noin 2010 tekemä <a href="http://www.computerworld.com/article/2520084/database-administration/twitter-growth-prompts-switch-from-mysql-to--nosql--database.html" target="_blank">päätös siirtyä MySQL-relaatiotietokannan käytöstä NoSQL-tietokantaan</a>; taustasyynä muutokselle oli "relaatiotietokantojen hitaus". Keskustelua seurasi <a href="http://www.mysql.com/" target="_blank">MySQL</a>:n ja <a href="https://mariadb.org/" target="_blank">MariaDB</a>:n kehittäjän Monty Wideniuksen <a href="http://blog.jelastic.com/2013/01/21/are-nosql-and-big-data-just-hype/" target="_blank">pohdintaa</a> teemaan liittyen: <em>The main reason Twitter had problems with MySQL back then, was that they were using it incorrectly. The strange thing was that the solution they suggested for solving their problems could be done just as easily in MySQL as in Cassandra.</em></p>
+
+	      <p>Käytännössä Widenius vihjasi, että Twitter vain käytti MySQL:ää huonosti. Nykyään Twitterkin on tosin rakentanut itselleen sopivampaa tietokannanhallintajärjestelmää, tästä lisää osoitteessa <a href="https://gigaom.com/2014/05/12/3-lessons-in-database-design-from-the-team-behind-twitters-manhattan/" target="_blank">https://gigaom.com/2014/05/12/3-lessons-in-database-design-from-the-team-behind-twitters-manhattan/</a>.</p>
+
+	    </aside>
+
+
+	    
+            <h2>Tiedostojen jakaminen ja tietokannat</h2>
+	
+            <p>Kun sovelluksen kasvu saavuttaa pisteen, missä yksittäisestä tietokantapalvelimesta siirrytään useamman palvelimen käyttöön, on hyvä hetki miettiä sovelluksen tietokantarakennetta. Tietokantojen määrän kasvaessa numeeristen tunnusten (esim <code>Long</code>) käyttäminen tunnisteena on ongelmallista. Jos tietokantataulussa on numeerinen tunnus ja useampi sovellus luo uusia tietokantarivejä, tarvitaan erillinen palvelu tunnusten antamiselle -- tämän palvelun kaatuessa koko sovellus voi kaatua. Toisaalta, jos palvelua ei ole toteutettu hyvin, on tunnusten törmäykset mahdollisia, mikä johtaa helposti tiedon katoamiseen. Numeeristen avainten käyttö erityisesti osoitteiden yhteydessä tekee niistä myös helposti arvattavia, mikä voi myös luoda tietoturvariskejä yhdessä huonosti toteutetun pääsynvalvonnan kanssa.  Yhtenä vaihtoehtona numeerisille tunnuksille on ehdotettu <a href="http://docs.oracle.com/javase/7/docs/api/java/util/UUID.html" target="_blank">UUID</a>-pohjaisia merkkijonotunnuksia, jotka voidaan luoda ennen olion tallentamista tietokantaan.</p>
+	    
+            <p>Spring Data JPAn tapauksessa tämä tarkoittaa sitä, että <code>AbstractPersistable</code>-luokan periminen ei onnistu kuten ennen. Voimme kuitenkin toteuttaa oman UUIDPersistable-luokan, joka luo tunnuksen automaattisesti. </p>
+	    
+            <pre class="sh_java">
+@MappedSuperclass
+public abstract class UUIDPersistable implements Persistable&lt;String&gt; {
+
+    @Id
+    private String id;
+
+    public UUIDPersistable() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isNew() {
+        return false;
+    }
+
+    // muuta mahdollista
+}</pre>
+
+            <p>Ylläoleva toteutus luo uuden id-avaimen olion luontivaiheessa, jolloin se on käytössä jo ennen olion tallentamista tietokantaan. Rajapinta <a href="http://docs.spring.io/spring-data/data-commons/docs/current/api/org/springframework/data/domain/Persistable.html" target="_blank">Persistable</a> on rajapinta, jota Spring Data -projektit käyttävät olioiden tallennuksessa erilaisiin tietokantoihin.</p>
+
+            <p>Nyt voimme luoda merkkijonotunnusta käyttävän entiteetin seuraavasti:</p>
+
+            <pre class="sh_java">
+@Entity
+public class Person extends UUIDPersistable {
+
+    private String name;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}</pre>
+
+
+            
+	    
+            <div class="tehtavat">
+              <div class="tehtava" id="t-imageservice">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-imageservice">
+                      Image Service
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-imageservice" class="collapse">
+		  
+                  <p>Tehtäväpohjassa on kuvapalvelu, joka tarjoaa toiminnallisuutta kuvien listaukseen ja pienennykseen.</p>
+		  
+                  <p>Tällä hetkellä kuvan lisääminen ohjaa käyttäjän suoraan <code>/images</code>-osoitteeseen, eli palvelun juureen. Muuta sovellusta siten, että käyttäjä ohjataan uuteen osoitteeseen <code>/images/{id}</code>, missä <code>id</code> on juuri luodun kuvan merkkijonoavain. Toteuta myös sopiva kontrolleri, joka toimii yhteistyössä <code>index.html</code>-näkymässä olevan koodin kanssa.</p>
+		  
+                  <p>Kun käyttäjä hakee kuvaa, tällä hetkellä kuva haetaan aina tietokannasta. Muokkaa kuvien lähettämistä siten, että käyttäjälle palautetaan kuvan mukana myös ETag-otsake, jonka arvoksi on asetettu kyseisen kuvan <code>id</code>-kentän arvo (huom! alkuperäisillä kuvilla ja thumbnaileilla on eri arvot.). Seuraavan kerran kun käyttäjä pyytää samaa kuvaa, hän lähettää pyynnön mukana myös <code>If-None-Match</code>-otsakkeen, joka sisältää aiemmin lähetetyn ETag-otsakkeen arvon. Tässä lienee apua annotaatiosta <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestHeader.html" target="_blank">@RequestHeader</a>.</p>
+		  
+                  <p>Riippumatta otsakkeen <code>If-None-Match</code> arvosta, palauta vastauksena vain statuskoodi <code>304</code>, eli ei muokattu. Huom! Älä lähetä kuvaa tällöin vastauksessa -- käytä vain statuskoodia.</p>
+		  
+                </div>
+              </div>
+            </div>
+
+
+	    <h3>Evästeet ja useampi palvelin</h3>
+	    
+		
+
+            <p>Kun käyttäjä kirjautuu palvelinohjelmistoon, tieto käyttäjästä pidetään tyypillisesti yllä sessiossa. Sessiot toimivat evästeiden avulla, jotka palvelin asettaa pyynnön vastaukseen, ja selain lähettää aina palvelimelle. Sessiotiedot ovat oletuksena yksittäisellä palvelimella, mikä aiheuttaa ongelmia palvelinmäärän kasvaessa. Edellä erääksi ratkaisuksi mainittiin kuormantasaajien (load balancer) käyttö siten, että käyttäjät ohjataan aina samalle koneelle. Tämä ei kuitenkaan ole aina mahdollista -- kuormantasaajat eivät aina tue sticky session -tekniikkaa -- eikä kannattavaa -- kun palvelinmäärää säädellään dynaamisesti, uusi palvelin käynnistetään tyypillisesti vasta silloin, kun havaitaan ruuhkaa -- olemassaolevat käyttäjät ohjataan ruuhkaantuneelle palvelimelle uudesta palvelimesta riippumatta.</p>
+
+            <p>Yksi vaihtoehto on tunnistautumisongelman siirtäminen tietokantaan -- skaalautumista helpottaa tietokannan hajauttaminen esimerkiksi käyttäjätunnusten perusteella. Sen sijaan, että käytetään palvelimen hallinnoimia sessioita, pidetään käyttäjätunnus ja kirjautumistieto salattuna evästeessä. Eväste lähetetään kaikissa tiettyyn osoitteeseen tehtävissä kutsuissa; palvelin voi tarvittaessa purkaa evästeessä olevan viestin ja hakea käyttäjään liittyvät tiedot tietokannasta.</p>
+
+            <div class="tehtavat">
+              <div class="tehtava" id="t-cookieauth">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-cookieauth">
+                      Cookie-based authentication
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-cookieauth" class="collapse">
+		  
+                  <p>Tässä tehtävässä hiotaan Springin <a href="http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/web/authentication/rememberme/PersistentTokenBasedRememberMeServices.html" target="_blank">PersistentTokenBasedRememberMeServices</a>-komponenttia luomalla siihen JPA:ta käyttävä tietokantatoiminnallisuus. PersistentTokenBasedRememberMeServices-komponentti tarjoaa evästeisiin perustuvan autentikaation, joka perustuu seuraaviin askeleisiin:</p>
+		  
+                  <ol>
+                    <li>Kun käyttäjä kirjautuu siten, että hän valitsee <code>Remember Me</code>-vaihtoehdon, käyttäjälle annetaan eväste.</li>
+                    <li>Eväste sisältää käyttäjän käyttäjätunnuksen, evästeen sarjanumeron, sekä viestin. Sarjanumero ja viesti ovat satunnaisesti generoituja ja ne tallennetaan tietokantaan.</li>
+                    <li>Kun käyttäjä vierailee sivulla, hän lähettää pyynnössä evästeen. Tällöin käyttäjätunnus, sarjanumero ja viesti haetaan tietokannasta.</li>
+                    <li>Jos kaikki edellämainitut löytyvät tietokannasta, oletetaan että käyttäjä on kirjautunut sivulle. Samalla käytetty viesti poistetaan tietokannasta, ja tietokantaan luodaan uusi satunnainen viesti aiemmin käytettyjen sarjanumeron ja käyttäjätunnuksen pariksi. Käyttäjälle palautetaan uusi eväste, missä on uudet tiedot.</li>
+                    <li>Jos käyttäjätunnus ja sarjanumero on oikein, mutta viesti on väärin, oletetaan että joku on yrittänyt ryövätä käyttäjän tunnuksen ja pyydetään käyttäjää kirjautumaan. Samalla kaikki käyttäjään liittyvät aiemmat evästetiedot / kirjautumisdatat poistetaan tietokannasta.</li>
+                    <li>Jos käyttäjätunnusta ja sarjanumeroa ei ole olemassa, pyydetään käyttäjää kirjautumaan.</li>
+                  </ol>
+		  
+                  <p>Ylläolevan toteutuksen etuna on se, että se skaalautuu melko hyvin. Palvelinten määrää voi kasvattaa niin pitkään kuin tietokantatason toiminta toimii hyväksyttävällä tasolla.</p>
+		  
+                  <p>Projektiin on toteutettu valmiiksi entiteettiluokka <code>CustomPersistentToken</code> sekä <code>PersistentTokenBasedRememberMeServices</code>-palvelun tarvitseman <a href="http://docs.spring.io/autorepo/docs/spring-security/current/apidocs/org/springframework/security/web/authentication/rememberme/PersistentTokenRepository.html" target="_blank">PersistentTokenRepository</a>-rajapinnan toteuttavan luokan runko, joka löytyy sijainnista <code>wad.auth.CustomPersistentTokenService</code>.</p>
+		  
+                  <p><strong>Toteuta tarvittava toiminnallisuus JPA-tuen aikaansaamiseksi.</strong> Tarvitset ainakin palvelun CustomPersistentToken-entiteetin tallentamiseen, jonka lisäksi tarvitset sopivaa logiikkaa <code>CustomPersistentTokenService</code>-luokkaan; voit ottaa mallia esimerkiksi Springin vastaavasta JDBC-rajapintaa käyttävästä <a href="https://github.com/spring-projects/spring-security/blob/master/web/src/main/java/org/springframework/security/web/authentication/rememberme/JdbcTokenRepositoryImpl.java" target="_blank">JdbcTokenRepositoryImpl</a>-luokasta, missä vastaava toteutus on tehty ilman JPA:ta -- voit käytännössä hyödyntää samaa toimintaideaa omassa koodissasi. Lue siis JdbcTokenRepositoryImpl-luokan toteutus, ja kopioi sen logiikka omaan JPA-pohjaiseen toteutukseesi. </p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+            <h2>Asynkroniset metodikutsut ja rinnakkaisuus</h2>
+	    
+            <p>Jokaiselle palvelimelle tulevalle pyynnölle määrätään säie, joka on varattuna pyynnön käsittelyn loppuun asti. Jokaisen pyynnön käsittelyyn kuuluu ainakin seuraavat askeleet: (1) pyyntö lähetetään palvelimelle, (2) palvelin vastaanottaa pyynnön ja ohjaa pyynnön oikealle kontrollerille, (3) kontrolleri vastaanottaa pyynnön ja ohjaa pyynnön oikealle palvelulle tai palveluille, (4) palvelu vastaanottaa pyynnön, suorittaa pyyntöön liittyvät operaatiot muiden palveluiden kanssa, ja palauttaa lopulta vastauksen metodin suorituksen lopussa, (5) kontrolleri ohjaa pyynnön sopivalle näkymälle, ja (6) vastaus palautetaan käyttäjälle. Pyyntöä varten on palvelimella varattuna säie kohdissa 2-6. Jos jonkun kohdan suoritus kestää pitkään -- esimerkiksi palvelu tekee pyynnön toiselle palvelimelle, joka on hidas -- on säie odotustilassa.</p>
+
+	    <p>Palvelukutsun suorituksen odottaminen ei kuitenkaan aina ole tarpeen. Jos sovelluksemme suorittaa esimerkiksi raskaampaa laskentaa, tai tekee pitkiä tietokantaoperaatioita joiden tuloksia käyttäjän ei tarvitse nähdä heti, kannattaa pyyntö suorittaa asynkronisesti. Asynkronisella metodikutsulla tarkoitetaan sitä, että asynkronista metodia kutsuva metodi ei jää odottamaan metodin tuloksen valmistumista. Jos edellisissä askeleissa kohta 4 suoritetaan asynkronisesti, ei sen suoritusta tarvitse odottaa loppuun.</p>
+	    	    
+            <p>Ohjelmistokehykset toteuttavat asynkroniset metodikutsut luomalla palvelukutsusta erillisen säikeen, jossa pyyntö käsitellään. Spring Bootin tapauksessa asynkroniset metodikutsut saa käyttöön lisäämällä sovelluksen konfiguraatioon (tapauksessamme usein <code>Application</code>-luokassa) rivi <code>@EnableAsync</code>. Kun konfiguraatio on paikallaan, voimme suorittaa metodeja asynkronisesti. Jotta metodisuoritus olisi asynkroninen, tulee metodin olla <code>void</code>-tyyppinen, sekä sillä tulee olla annotaatio <code>@Async</code>.</p>
+	    
+            <p>Tutkitaan tapausta, jossa tallennetaan <code>Item</code>-tyyppisiä olioita. Item-olion sisäinen muoto ei ole niin tärkeä.</p>
+	    
+            <pre class="sh_java">
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@ModelAttribute Item item) {
+        itemService.create(item);
+        return "redirect:/items";
+    }</pre>
+
+            <p>Oletetaan että <code>ItemService</code>-olion metodi <code>create</code> on void-tyyppinen, ja näyttää seuraavalta:</p>
+
+            <pre class="sh_java">
+    public void create(Item item) {
+        // koodia.. 
+    }</pre>
+		
+            <p>Metodin muuttaminen asynkroniseksi vaatii <code>@Async</code>-annotaation ItemService-luokkaan.</p>
+	    
+            <pre class="sh_java">
+    @Async
+    public void create(Item item) {
+        // koodia.. 
+    }</pre>
+
+            <p>Käytännössä asynkroniset metodikutsut toteutetaan asettamalla metodikutsu suoritusjonoon, josta se suoritetaan kun sovelluksella on siihen mahdollisuus.</p>
+
+
+            <div class="tehtavat">
+              <div class="tehtava" id="t-calculations">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-calculations">
+                      Calculations
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-calculations" class="collapse">
+		  
+                  <p>Tehtäväpohjassa on sovellus, joka tekee raskasta laskentaa (nukkuu kuin tutkijat). Tällä hetkellä käyttäjä joutuu odottamaan laskentapyynnön suoritusta pitkään, mutta olisi hienoa jos käyttäjälle kerrottaisiin laskennan tilasta jo laskentavaiheessa.</p>
+		  
+                  <p>Muokkaa sovellusta siten, että laskenta tallennetaan kertaalleen jo ennen laskentaa -- näin siihen saadaan viite; aseta oliolle myös status "PROCESSING". Muokkaa tämän jälkeen luokkaa <code>CalculationService</code> siten, että laskenta tapahtuu asynkronisesti.</p>
+		  
+                  <p>Huom! Älä poista <code>CalculationService</code>-luokasta koodia</p>
+		  
+                  <pre class="sh_java">
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CalculationService.class.getName()).log(Level.SEVERE, null, ex);
+        }</pre>                            
+
+		  
+                  <p>Kun sovelluksesi toimii oikein, laskennan lisäyksen pitäisi olla nopeaa ja käyttäjä näkee lisäyksen jälkeen laskentakohtaisen sivun, missä on laskentaan liittyvää tietoa. Kun sivu ladataan uudestaan noin 2 sekunnin kuluttua, on laskenta valmistunut.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+            <h3>Rinnakkain suoritettavat metodikutsut</h3>
+
+            <p>Koostepalvelut, eli palvelut jotka keräävät tietoa useammasta palvelusta ja yhdistävät tietoja käyttäjälle, tyypillisesti haluavat näyttää käyttäjälle vastauksen.</p>
+	    
+            <p>Näissä tilanne on usein se, että palveluita on useita, ja niiden peräkkäinen suorittaminen on tyypillisesti hidasta. Suoritusta voi nopeuttaa ottamalla käyttöön rinnakkaisen suorituksen, joka onnistuu esimerkiksi Javan <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html" target="_blank">ExecutorService</a>-luokan avulla. Voimme käytännössä lisätä tehtäviä niitä suorittavalle palvelulle, jolta saamme viitteen tulevaa vastausta varten.</p>
+
+            <p>Spring tarjoaa myös tähän apuvälineitä. Kun lisäämme sovellukselle <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html">AsyncTaskExecutor</a>-rajapinnan toteuttaman olion (esimerkiksi <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html" target="_blank">ThreadPoolTaskExecutor</a>), voimme injektoida sen sovelluksemme käyttöön tarvittaessa. Tietynlaisen olion sovellukseen tapahtuu luomalla <code>@Bean</code>-annotaatiolla merkitty olio konfiguraatiotiedostossa. Alla esimerkiksi luodaan edellämainitut oliot.</p>
+
+	    
+            <pre class="sh_java">
+// konfiguraatiotiedosto
+    @Bean
+    public AsyncTaskExecutor asyncTaskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(8);
+        return executor;
+    }</pre>
+
+            <p>Nyt voimme ottaa käyttöön sovelluksessa <code>AsyncTaskExecutor</code>-rajapinnan toteuttavan olion.</p>
+
+            <pre class="sh_java">
+    @Autowired
+    private AsyncTaskExecutor taskExecutor;</pre>
+
+            <p>Käytännössä tehtävien lisääminen rinnakkaissuorittajalle tapahtuu esimerkiksi seuraavasti. Alla luodaan kolme <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html" target="_blank">Callable</a>-rajapinnan toteuttavaa oliota, annetaan ne <code>taskExecutor</code>-ilmentymälle, ja otetaan jokaisen kohdalla talteen <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html" target="_blank">Future</a>-viite, mihin suorituksen tulos asetetaan kun suoritus on loppunut. Future-oliosta saa tuloksen <code>get</code>-metodilla.</p>
+
+            <pre class="sh_java">
+    // käytössä myös ylläoleva taskExecutor
+    List&lt;Future&lt;TuloksenTyyppi&gt;&gt; results = new ArrayList&lt;&gt;();
+
+    results.add(taskExecutor.submit(new Callable&lt;TuloksenTyyppi&gt;() {
+        @Override
+        public TuloksenTyyppi call() {
+            // laskentaa.. -- tulos voi olla käytännössä mitä tahansa
+            return new TuloksenTyyppi();
+        }
+    }));
+    
+    for (Future&lt;TuloksenTyyppi&gt; result: results) {
+        TuloksenTyyppi t = result.get();
+
+        // tee jotain tällä..
+    }</pre>
+
+
+            <div class="tehtavat">
+              <div class="tehtava" id="t-lowestprice">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-lowestprice">
+                      Lowest Prices
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-lowestprice" class="collapse">
+		  
+                  <p>Tehtäväpohjaan on lähdetty toteuttamaan sovellusta, joka etsii eri palveluiden rajapinnoista halutun esineen hintaa ja palauttaa halvimman. Palvelusta on toteutettu ensimmäinen versio, mutta se on liian hidas.</p>
+		  
+                  <p>Ennenkuin sovelluskehittäjät juoksevat hakemaan uutta rautaa, muokkaa palvelun <code>QuoteService</code>-toiminnallisuutta siten, että se suorittaa hintakyselyt rinnakkain nykyisen peräkkäissuorituksen sijaan.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+            <aside class="info">
+	      <br/>
+              <h1>Java 8 ja kokoelmien rinnakkainen läpikäynti</h1>
+	      
+              <p>Java 8 tarjoaa kehittyneemmän välineistön kokoelmien läpikäyntiin. Tutustu näihin osoitteessa <a href="http://docs.oracle.com/javase/tutorial/collections/streams/parallelism.html" target="_blank">http://docs.oracle.com/javase/tutorial/collections/streams/parallelism.html</a>.</p>
+	      
+            </aside>
+	    
+	    
+            <h3>Viestijonot</h3>
+	    
+            <p>Kun palvelinohjelmistoja skaalataan siten, että osa laskennasta siirretään erillisille palvelimille, on oleellista että palveluiden välillä kulkevat viestit (pyynnöt ja vastaukset) eivät katoa, ja että käyttäjän pyyntöjä vastaanottavan palvelimen ei tarvitse huolehtia toisille palvelimille lähetettyjen pyyntöjen perille menemisestä tai lähetettyjen viestien vastausten käsittelystä. Eniten käytetty lähestymistapa viestien säilymisen varmentamiseen on viestijonot (<em>messaging</em>, <em>message queues</em>), joiden tehtävänä on toimia viestien väliaikaisena säilytyspisteenä. Käytännössä viestijonot ovat erillisiä palveluita, joihin viestien tuottajat (<em>producer</em>) voivat lisätä viestejä, joita viestejä käyttävät palvelut kuluttavat (<em>consumer</em>).</p>
+	    
+            <p>Viestijonoja käyttävät sovellukset kommunikoivat viestijonon välityksellä. Tuottaja lisää viestejä viestijonoon, josta käyttäjä niitä hakee. Kun viestin sisältämän datan käsittely on valmis, prosessoija lähettää viestin takaisin. Viestijonoissa on yleensä varmistustoiminnallisuus: jos viestille ei ole vastaanottajaa, jää viesti viestijonoon ja se tallennetaan esimerkiksi viestijonopalvelimen levykkeelle. Viestijonojen konkreettinen toiminnallisuus riippuu viestijonon toteuttajasta.</p>
+	    
+            <p>Viestijonosovelluksia on useita, esimerkiksi <a href="http://activemq.apache.org/" target="_blank">ActiveMQ</a> ja <a href="http://www.rabbitmq.com/" target="_blank">RabbitMQ</a>. Viestijonoille on myös useita standardeja, joilla pyritään varmistamaan sovellusten yhteensopivuus. Esimerkiksi Javan melko pitkään käytössä ollut <a href="http://en.wikipedia.org/wiki/Java_Message_Service" target="_blank">JMS</a>-standardi määrittelee viestijonoille rajapinnan, jonka viestijonosovelluksen tarjoajat voivat toteuttaa. Nykyään myös <a href="http://www.amqp.org/" target="_blank">AMQP</a>-protokolla on kasvattanut suosiotaan. Myös Spring tarjoaa komponentteja viestijonojen käsittelyyn, tutustu lisää aiheeseen <a href="http://spring.io/guides/gs/messaging-jms/" target="_blank">täällä</a>.</p>
+	    
+	    
+	    
+            <h2>Palvelukeskeiset arkkitehtuurit</h2>
+	    
+	    
+            <p>Monoliittisten "minä sisällän kaiken mahdollisen"-sovellusten ylläpitokustannukset kasvavat niitä kehitettäessä, sillä uuden toiminnallisuuden lisääminen vaatii olemassaolevan sovelluksen muokkaamista sekä testaamista. Olemassaoleva sovellus voi olla kirjoitettu hyvin vähäisesssä käytössä olevalla kielellä (vrt. pankkijärjestelmät ja COBOL) ja esimerkiksi kehitystä tukevat automaattiset testit voivat puuttua siitä täysin. Samalla myös uusien työntekijöiden tuominen ohjelmistokehitystiimiin on vaikeaa, sillä sovellus voi hoitaa montaa vastuualuetta samaan aikaan. </p>
+
+            <p>Yrityksen toiminta-alueiden laajentuessa sekä uusien sovellustarpeiden ilmentyessä aiemmin toteutettuihin toiminnallisuuksiin olisi hyvä päästä käsiksi, mutta siten, että toiminnallisuuden käyttäminen ei vaadi juurikaan olemassaolevan muokkausta. Koostamalla sovellus erillisistä palveluista saadaan luotua tilanne, missä palvelut ovat tarvittaessa myös uusien sovellusten käytössä. Palvelut tarjoavat rajapinnan (esim. REST) minkä kautta niitä voi käyttää. Samalla rajapinta kapseloi palvelun toiminnan, jolloin muiden palvelua käyttävien sovellusten ei tarvitse tietää sen toteutukseen liittyvistä yksityiskohdista. Oleellista on, että yksikään palvelu ei yritä tehdä kaikkea. Tämä johtaa myös siihen, että yksittäisen palvelun toteutuskieli tai muut teknologiset valinnat ei vaikuta muiden komponenttien toimintaan -- oleellista on vain se, että palvelu tarjoaa rajapinnan jota voi käyttää ja joka löydetään.</p>
+
+            <p>Yrityksen kasvaessa sen sisäiset toiminnat ja rakennettavat ohjelmistot sisältävät helposti päällekkäisyyksiä. Tällöin tilanne on käytännössä se, että aikaa käytetään samankaltaisten toimintojen ylläpitoon useammassa sovelluksessa -- pyörä keksitään yhä uudestaan ja uudestaan uudestaan uusia sovelluksia kehitettäessä.</p>
+
+
+            <p>SOA (<em><a href="http://en.wikipedia.org/wiki/Service-oriented_architecture" target="_blank">Service Oriented Architecture</a></em>), eli palvelukeskeinen arkkitehtuuri, on suunnittelutapa, jossa eri sovelluksen komponentit on suunniteltu toimimaan itsenäisinä avoimen rajapinnan tarjoavina palveluina. Pilkkomalla sovellukset erillisiin palveluihin luodaan tilanne, missä palveluita voidaan käyttää myös tulevaisuudessa kehitettävien sovellusten toimesta. Palveluita käyttävät esimerkiksi toiset palvelut tai selainohjelmistot. Selainohjelmistot voivat hakea palvelusta JSON-muotoista dataa Javascriptin avulla ilman tarvetta omalle palvelinkomponentille. SOA-arkkitehtuurin avulla voidaan helpottaa myös ikääntyvien sovellusten jatkokäyttöä: ikääntyvät sovellukset voidaan kapseloida rajapinnan taakse, jonka kautta sovelluksen käyttö onnistuu myös jatkossa.</p>
+
+            <aside class="info">
+	      <br/>
+              <h1>Case: Amazon</h1>
+	      
+              <p>Amazon on hyvä esimerkki yrityksestä, joka on menestynyt osittain sen takia, että se on toteuttanut tarjoamansa toiminnallisuudet palveluina. Siirtymä ei kuitenkaan ollut yksinkertainen, allaoleva viesti on katkelma Amazonin toimitusjohtajan, Jeff Bezosin, noin vuonna 2002 kirjoittamasta viestistä yritykselle (<a href="https://plus.google.com/+RipRowan/posts/eVeouesvaVX" target="_blank">lähde</a>).</p>
+
+              <pre>
+1) All teams will henceforth expose their data and functionality 
+   through service interfaces.
+
+2) Teams must communicate with each other through these interfaces.
+
+3) There will be no other form of interprocess communication allowed: 
+   no direct linking, no direct reads of another team's data store, 
+   no shared-memory model, no back-doors whatsoever. The only communication 
+   allowed is via service interface calls over the network.
+
+4) It doesn't matter what technology they use. HTTP, Corba, Pubsub, 
+   custom protocols — doesn't matter.
+
+5) All service interfaces, without exception, must be designed from the 
+   ground up to be externalizable. That is to say, the team must plan 
+   and design to be able to expose the interface to developers in the 
+   outside world. No exceptions.
+
+6) Anyone who doesn't do this will be fired.</pre>
+
+              <p>Oikeastaan, hyvin suuri syy sille, että Amazon tarjoaa nykyään erilaisia pilvipalveluita (kts. <a href="http://aws.amazon.com/" target="_blank">Amazon Web Services</a>) liittyy siihen kokemukseen, mitä yrityksen työntekijät sekä yritys on kerännyt kun yrityksen sisäistä toimintaa kehitettiin kohti palveluja tarjoavia ohjelmistotiimejä.</p>
+
+            </aside>
+
+	    <p>Rakennetaan seuraavaksi muutama palvelu, joiden toiminnallisuus yhdistetään lopulta.</p>
+
+
+            <div class="tehtavat">
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-huoneistot">
+                      Apartments
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-huoneistot" class="collapse">
+		  
+                  <p>Toteuta Spring Data RESTin avulla REST-rajapinta huoneistojen hallintaan.</p>
+		  
+                  <p>Jokaisella huoneistolla tulee olla uniikki nimi (<code>name</code>), joka ei saa olla tyhjä. Huoneistojen lisäys tapahtuu tekemällä JSON-muotoinen POST-pyyntö osoitteeseen <code>/api/apartments</code> (esim. <code>{"name":"The Cupboard Under the Stairs"}</code>). Vastaavasti <code>GET</code>-pyyntö osoitteeseen <code>/api/apartments</code> palauttaa <code>HAL</code>-spesifikaatiota seuraavan JSON-vastauksen, missä huoneet on listattu.</p>
+		  
+                  <p>yksittäisen huoneiston haku ja poisto tapahtuu osoitteessa <code>/api/apartments/{id}</code>, missä <code>id</code> on huoneiston uniikki tunnus.</p>
+		  
+                  <p>Käytä huoneiston tunnuksena (<code>id</code>) <code>Long</code>-tyyppistä muuttujaa.</p>
+		  
+                </div>
+              </div>
+	      
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-henkilot">
+                      Authentication
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-henkilot" class="collapse">
+		  
+                  <p>Toteutetaan sovellus henkilöiden luomiseen.</p>
+		  
+                  <p>Toteuta Spring Data RESTin avulla REST-rajapinta henkilöiden hallintaan.</p>
+		  
+                  <p>Jokaisella henkilöllä tulee olla uniikki nimi (<code>name</code>), uniikki käyttäjätunnus (<code>username</code>) sekä salasana (<code>password</code>), joista yksikään ei saa olla tyhjä.</p>
+		  
+                  <p>Henkilöiden lisäys tapahtuu tekemällä JSON-muotoinen POST-pyyntö osoitteeseen <code>/api/persons</code> (esim. <code>{"name":"Harry Potter", "username":"hedwig", "password":"nimbus2000"}</code>).</p>
+		  
+                  <p>Vastaavasti <code>GET</code>-pyyntö osoitteeseen <code>/api/persons</code> palauttaa <code>HAL</code>-spesifikaatiota seuraavan JSON-vastauksen, missä henkilöt on listattu.</p>
+		  
+                  <p>Yksittäinen henkilö voidaan hakea tunnuksen perusteella osoitteesta <code>/api/persons/{id}</code>, missä <code>id</code> on henkilön uniikki tunnus. Poistamisen ei kuitenkaan tule onnistua.</p>
+		  
+                  <p>Käytä henkilön tunnuksena (<code>id</code>) <code>Long</code>-tyyppistä muuttujaa.</p>
+		  
+                  <p><strong>Huom!</strong> Toteuta toiminnallisuus siten, että GET-pyynnön yhteydessä henkilön salasanaa ei palauteta. Vastauksen tulee siis sisältää aina vain nimi ja käyttäjätunnus. Etsi apua Googlesta, avainsanoja ovat ainakin <code>@JsonProperty</code>, <code>@JsonIgnore</code> sekä esimerkiksi haku "json ignore property on deserialization but allow on serialization".</p> 
+		  
+		  
+                  <p>Lisää tämän jälkeen sovellukseen rajapinta <code>/authenticate</code>, jonka avulla voidaan tarkistaa löytyykö käyttäjärekisteristä sopiva käyttäjätunnus-salasana -pari. Rajapinnalle voidaan tehdä <code>POST</code>-tyyppinen pyyntö JSON-muodossa. JSON-data sisältää käyttäjätunnus-salasana -parin (<code>{"username":"tunnus","password":"jackbauer"}</code>). Jos tietokannasta löytyy käyttäjä annetulla käyttäjätunnuksella ja salasanalla, metodin tulee palauttaa statuskoodi <code>200</code> eli "OK", sekä käyttäjän nimi vastauksen rungossa. Jos käyttäjää ei löydy, palautettavan arvon tulee olla <code>401</code> eli "Unauthorized".</p>
+		  
+                  <p>Toteuta vastaus siten että autentikointiin käytettävä kontrollerimetodi palauttaa <code><a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html" target="_blank">ResponseEntity</a></code>-olion. ResponseEntitylle voi määritellä vastauksen statuskoodin sekä rungon. Alla oleva ResponseEntity-olion runko sisältää merkkijonon <code>"jack bauer"</code> ja palauttaa statuskoodin <code>200</code> eli "OK".</p>
+		  
+                  <pre class="sh_java">
+		    ResponseEntity&lt;String&gt; vastaus = new ResponseEntity&lt;&gt;("jack bauer", HttpStatus.OK);</pre>
+                </div>
+              </div>
+	      
+              <div class="tehtava">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-varauspalvelu">
+                      Reservations
+                    </a>
+                  </h1>
+                </header>
+                <div id="t-varauspalvelu" class="collapse">
+		  
+                  <p>Jatkokehitetään sovellusta huoneistojen varaamiseen ja varaustilanteen tarkasteluun. Käytössäsi on huoneistojen käsittelyyn tarvittava rajapinta, jonka palveluntarjoaja on toteuttanut sinua varten. Rajapintaa käytetään <code>ApartmentService</code>-luokan avulla, joka löytyy pakkauksesta <code>wad.ext.apartments</code>.</p>
+		  
+                  <p>Voit käyttää Huoneistot tehtävän vastausta osana tätä tehtävää:</p>
+		  
+                  <ol>
+                    <li>Paketoi tehtävä Huoneistot komennolla <code>mvn clean package</code></li>
+                    <li>Käynnistä huoneistot-sovellus komennolla <code>java -Dserver.port=12345 -jar target/Huoneistot-1.0-SNAPSHOT.jar</code></li>
+                    <li>Tämä käynnistää Huoneistot sovelluksen paikallisen koneesi porttiin 12345 -- sovellus siis osoitteessa <code>http://localhost:12345</code> ja sen tarjoamaa rajapintaa voi hyödyntää osoitteesta <code>http://localhost:12345/api</code>.</li>
+                  </ol>
+		  
+		  
+                  <p>Tällä hetkellä sovelluksen tarjoama polussa <code>/api/reservations</code> oleva rajapinta mahdollistaa uusien varausten tekemisen sekä varausten poistamisen. Muokkaa rajapintaa siten, että sen kautta voi vain hakea tämänhetkisen varaustilanteen, mutta ei voi tehdä muutoksia siihen.</p>
+		  
+                  <p>Lisää tämän jälkeen sovellukseen kontrolleri, joka kuuntelee osoitteeseen <code>/reservations</code>-tehtäviä pyyntöjä. Kun osoitteeseen tehdään GET-tyyppinen pyyntö, tulee pyynnön modeliin lisätä sekä kaikki olemassaolevat varaukset että kaikki asunnot.</p>
+		  
+                  <p>Lisää asunnot modeliin parametrin nimellä "apartments" -- huoneistoihin pääset käsiksi <code>ApartmentService</code>-toteutuksen avulla. Varausten tulee olla modelissa parametrilla "reservations". Näytä käyttäjälle polussa <code>/src/main/resources/templates/reservations.html</code> olevasta näkymästä luotu sivu.</p>
+		  
+                  <p>Tämän lisäksi, kun osoitteeseen <code>/reservations</code> tehdään POST-pyyntö, missä on varauksen tiedot, varaus tulee tallentaa tietokantaan. POST-pyynnön mukana tulee muuttujat <code>reservationStart</code>, <code>reservationEnd</code> sekä <code>apartmentId</code> -- voit todennäköisesti hyödyntää luokkaa <code>Reservation</code> tässä. Kun otat pyynnön vastaan, lisää varaukseen varattavan huoneiston nimi -- voit hakea yksittäisen huoneiston tiedot huoneiston tunnuksen perusteella <code>ApartmentService</code>-palvelusta. Muistathan että POST-pyynnön jälkeen pyyntö tulee aina uudelleenohjata.</p>
+		  
+                  <p>Huom! Lisää kontrollerille lisäksi <code>@PostConstruct</code>-annotaatiolla merkitty metodi, joka suoritetaan kun kontrolleri on ladattu. Aseta siinä <code>ApartmentService</code>-palvelulle osoite -- käytä aiempaa huoneistotehtävän vastausta testaukseen.</p>
+		  
+                  <hr/>
+
+                  <p>Muokkaa tämän jälkeen varaustoiminnallisuutta siten, että päällekkäisten varausten tekeminen ei onnistu. Samaa huoneistoa ei siis tule voida varata kahdesti samalle aikajaksolle tai osittain päällekkäiselle aikajaksolle.</p>
+
+		  <p>Kun varausten rajaus toimii, muokkaa vielä varauksen maksuun liittyvää toiminnallisuutta. Jokaiseen varaukseen liittyy muuttuja <code>paymentStatus</code>, joka asetetaan varauksen luonnin yhteydessä <code>"UNPAID"</code>-tilaan, eli maksamattomaksi. Lisää sovellukseen toiminto, joka muuttaa varauksen maksutilaksi <code>"PAID"</code>. Tilan tulee muuttua jos osoitteeseen <code>/reservations/{id}/payment</code> tehdään POST-tyyppinen pyyntö -- tässä <code>id</code> on varauksen uniikki tunnus (<code>id</code>).</p>
+		  
+                  <p>Nyt varausten maksu voitaisiin periaatteessa hoitaa erillisessä palvelussa, joka päivittäisi varauksen tilan maksun yhteydessä.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+
+            <aside class="info">
+	      <br/>
+	      
+              <h1>Lisää aiheesta</h1>
+	      
+              <p>Tutustu Microsoftin <a href="http://msdn.microsoft.com/en-us/library/bb833022.aspx" target="_blank">SOA-johdatukseen</a> ja katso Youtube-video <a href="https://www.youtube.com/watch?v=OY7QGDg93Ic" target="_blank">Decomposing Applications for Deployability and Scalability</a>.</p>
+	      
+            </aside>
+	    
+
+	    
+          </section>
+<!-- BEGIN FOOTER -->
+
+        <footer>
+            <p>
+                <a id="license" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; float:left; padding:15px" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+                <small>T&auml;m&auml; materiaali on lisensoitu Creative Commons BY-NC-SA-lisenssill&auml;, joten voit k&auml;ytt&auml;&auml; ja levitt&auml;&auml; sit&auml; vapaasti, kunhan alkuper&auml;isten tekij&ouml;iden nimi&auml; ei poisteta. Jos teet muutoksia materiaaliin ja haluat levitt&auml;&auml; muunneltua versiota, se t&auml;ytyy lisensoida samalla lisenssill&auml;. Materiaalien k&auml;ytt&ouml; kaupalliseen tarkoitukseen on ilman erillist&auml; lupaa kielletty. Tekij&auml;(t): <a href="http://www.cs.helsinki.fi/en/people/avihavai" target="_blank">Arto Hellas</a> sekä <a href="http://www.cs.helsinki.fi/en/rage" target="_blank">Agile Education Research</a> -tutkimusryhm&auml;.
+            </p>
+        </footer>
+
+        <div class="hidden">
+            <p>the end.</p>
+        </div>
+
+
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jqueryui/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
+
+        <script src="js/libs/chartist.min.js"></script>
+        <script src="js/libs/visibility.core.js"></script>
+        <script src="js/libs/visibility.timers.js"></script>
+        <script src="js/libs/visibility.fallback.js"></script>
+        <script src="js/js-logger.js"></script>
+        <script src="js/verticalfloat.js"></script>
+        <script src="js/pheromones.js"></script>
+        <script src="js/wepa.js"></script>
+
+
+    </body>
+</html>
