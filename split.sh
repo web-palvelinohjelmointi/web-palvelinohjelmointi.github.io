@@ -7,6 +7,7 @@ then
     rm osa4.html
     rm osa5.html
     rm osa6.html
+    rm osa7.html
 fi
 
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > index.html
@@ -16,6 +17,7 @@ echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGE
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa4.html
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa5.html
 echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa6.html
+echo "<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->" > osa7.html
 
 INDEX=0
 HEADER=0
@@ -93,6 +95,12 @@ while read line; do
         *END*OSA6*)
             OSA=-1
             ;;
+        *BEGIN*OSA7*)
+            OSA=7
+            ;;
+        *END*OSA7*)
+            OSA=-1
+            ;;
     esac
 
     if [ $HEADER -eq 1 ] || [ $FOOTER -eq 1 ] || [ $INDEX -eq 1 ]; then
@@ -106,6 +114,7 @@ while read line; do
         echo $line >> osa4.html
         echo $line >> osa5.html
         echo $line >> osa6.html
+        echo $line >> osa7.html
     fi
 
     if [ $OSA -eq 1 ]; then
@@ -130,5 +139,9 @@ while read line; do
 
     if [ $OSA -eq 6 ]; then
         echo $line >> osa6.html
+    fi
+
+    if [ $OSA -eq 7 ]; then
+        echo $line >> osa7.html
     fi
 done < 2016-mooc.html
