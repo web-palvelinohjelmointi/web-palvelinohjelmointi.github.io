@@ -1,0 +1,923 @@
+<!-- AUTOMATICALLY GENERATED FILE, PLEASE DO NOT EDIT DIRECTLY: FOR CHANGES, MODIFY 2016-mooc.html -->
+<!-- BEGIN HEADER -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web-palvelinohjelmointi</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="js/libs/syntaxhighlight/css/sh_style.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/chartist.min.css"/>
+        <link rel="stylesheet" href="css/wepa.css"/>
+
+        <link rel="stylesheet" href="css/wepa-mooc.css"/>
+
+    </head>
+    <body>
+
+        <!-- BEGIN NAV -->
+        <header role="navigation">
+            <h1>
+                <button type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="http://www.mooc.fi" class="hidden-in-hy">&#171; mooc.fi</a>
+
+            </h1>
+            <nav class="collapse bs-navbar-collapse" role="navigation">
+                <ul>
+                    <li>
+                        <a href="index.html">Yleistä</a>
+                    </li>
+                    <li>
+                        <a href="osa1.html">Osa 1</a>
+                    </li>
+                    <li>
+                        <a href="osa2.html">Osa 2</a>
+                    </li>
+                    <li>
+                        <a href="osa3.html">Osa 3</a>
+                    </li>
+                    <li>
+                        <a href="osa4.html">Osa 4</a>
+                    </li>
+                    <li>
+                        <a href="osa5.html">Osa 5</a>
+                    </li>
+                    <li>
+                        <a href="osa6.html">Osa 6</a>
+                    </li>
+                    <li>
+                        <a href="osa7.html">Osa 7</a>
+                    </li>
+                </ul>
+
+		<div style="direction: rtl;">
+		  <button id="logout" class="btn btn-warning">Kirjaudu ulos</button>
+		</div>
+            </nav>
+
+        </header>
+        <!-- // END NAV -->
+        <article>
+
+
+          <div class="modal fade" id="tmcAuthModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="tmcAuthModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form class="form-inline"  id="TmcLoginForm" role="form">
+		<div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="tmcAuthModalLabel">Kirjoita TMC-tunnuksesi</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Pyydämme sinua kirjautumaan TMC-tunnuksillasi materiaaliin. Kirjautumistietoja käytetään oppimateriaalin käytön tutkimukseen.</p>
+                    <div id="tmc-account-wrong-alert" class="hidden alert alert-danger">Tarkista TMC-tunnuksesi</div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputPassword2">TMC-tunnus</label>
+                      <input type="text" name="tmcAccountName" class="form-control" id="inputTmcAccount" placeholder="TMC-tunnus">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="tmcAccountNOACCOUNT" class="btn btn-default" data-dismiss="modal">En halua tai en tiedä TMC-tunnustani</button>
+                    <button type="submit" name="tmcLoginButton" id="tmcAccountOK" class="btn btn-primary">OK</button>
+                  </div>
+		</div><!-- /.modal-content -->
+              </form>
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+	  <!-- BEGIN CONTENT -->
+	  <section class="no-toc weeklimit" data-week-id="0">
+            <h1>Sisällysluettelo</h1>
+	    
+            <ul class="nav" id="material-toc"></ul>
+	    
+            <h1>Tehtävät</h1>
+	    
+            <ul class="nav nav-pills nav-pills-fixed-width" id="tehtavat-toc"></ul>
+	    
+	  </section>
+          <!-- BEGIN OSA7 --->
+          <section class="weeklimit" data-week-id="7">
+	    	    
+            <header>
+              <h1 id="osa7">Osa 7</h1>
+            </header>
+	    
+	    <p>Kurssin seitsemäs osio alkaa laajemmalla kertaavalla tehtävällä, missä rakennetaan kolmannen osapuolen vitsejä tarjoavaan palveluun arviointitoiminnallisuus. Tämän jälkeen tutustutaan reaktiiviseen ohjelmointiin sekä web socket-teknologiaan. Viimeisen osion tehtävät ovat kaikki testittömiä: osassa toivotaan, että päätät itse lisättävän toiminnallisuuden, osassa taas toivottu toiminnallisuus on kuvattu.</p>
+
+            <div class="tehtavat">
+	      
+              <div class="tehtava" id="t-osa6-kertaus-ex" data-count="61">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-osa6-kertaus">
+                      Osa 6, kertaus: JokeVotes
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-osa6-kertaus" class="collapse">
+		  
+		  <p>Kertaustehtävässä on toteutettuna kolmannen osapuolen palvelusta vitsejä noutava sovellus. Vitseille on lisätty arviointimahdollisuus (tykkää / en tykkää). Muokkaa sovellusta siten, että käyttäjälle tarjotaan linkki eniten tykättyyn vitsiin -- linkkiä klikkaamalla kyseisen vitsin pääsee näkemään ja arvioimaan. Hyödynnä arvioita eniten tykätyn vitsin päättelyyn: jos arviot omat samat, voit päättää miten toimit.</p>
+		  
+                </div>
+              </div>
+	    </div>
+	    
+	    
+            <aside class="info">
+	      <br/>
+	      
+              <h1>Palveluiden löytäminen</h1>
+	      
+              <p>Palveluorientoituneiden arkkitehtuurien yleistyessä markkinoille on myös ilmestynyt ESB (<a href="http://en.wikipedia.org/wiki/Enterprise_service_bus" target="_blank">enterprise service bus</a>)-sovelluksia, joiden tehtävä on toimia viestinvälittäjänä palveluiden välillä. Viestinvälityspalveluiden käyttäminen johtaa siihen, että palvelut ovat paremmin eriytettynä toisistaan -- palvelua A käyttävä palvelu B tietää vain viestinvälittäjän sekä palvelun A tunnisteen. Palvelun A tunniste ja kuvaus voidaan saada viestinvälittäjältä, ja palvelu voi kuvata itsensä esimerkiksi RAML (<a href="http://raml.org/" target="_blank">RESTful API Modeling Language</a>)-kuvauksen tai <a href="https://helloreverb.com/developers/swagger" target="_blank">Swagger</a>in avulla.</p>
+	      
+              <p>Kantamme tällä kurssilla ESB-sovelluksiin on kuitenkin melko sama kuin Martin Fowlerilla ja Jim Webberillä; liika ylimääräinen toiminnallisuus voi vaikeuttaa palveluiden käyttöä ja kankeuttaa organisaatiota. Katso esitys <a href="http://www.infoq.com/presentations/soa-without-esb" target="_blank">Does My Bus Look Big in This?</a>.</p>
+	      
+            </aside>
+	    
+	    
+	    <h2>Tyylitiedostot</h2>
+
+	    <p>Olet ehkäpä huomannut, että tähän mennessä tekemämme web-sovellukset eivät ole kovin kaunista katsottavaa. Kurssilla pääpaino on palvelinpään toiminnallisuuden toteuttamisessa, joten emme jatkossakaan keskity sivustojen ulkoasuun. Sivujen ulkoasun muokkaaminen on kuitenkin melko suoraviivaista. Verkosta löytyy iso kasa oppaita sivun ulkoasun määrittelyyn -- <a href="http://www.w3schools.com/css/" target="_blank">tässä yksi</a>.</p>
+
+	    <p>Ulkoasun määrittelyssä käytetään usein apuna valmista <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> -kirjastoa. Ulkoasun määrittely tapahtuu lisäämällä sivun <code>head</code>-osioon oleelliset kirjastot -- tässä kirjastot haetaan <a href="https://www.bootstrapcdn.com/" target="_blank">https://www.bootstrapcdn.com/</a>-palvelusta, joka tarjoaa kirjastojen ylläpito- ja latauspalvelun, jonka lisäksi elementteihin voi lisätä luokkamäärittelyjä, jotka kertovat niiden tyyleistä.</p>
+	    
+	    <p>Alla on esimerkki HTML-sivusta, jossa Twitter Bootstrap on otettu käyttöön. Sivulla on lisäksi määritelty <code>body</code>-elementin luokaksi (class) "container", mikä tekee sivusta päätelaitteen leveyteen reagoivan. Elementillä <code>table</code> oleva luokka "table" lisää elementtiin tyylittelyn. Erilaisiin Twitter Bootstrapin tyyleihin voi tutustua tarkemmin <a href="http://getbootstrap.com/css/" target="_blank">täällä</a>.</p>
+
+<pre class="sh_xml">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Blank&lt;/title&gt;
+        &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/&gt;
+        &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/&gt;
+        &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+
+    &lt;body class="container"&gt;
+
+        &lt;table class="table"&gt;
+            &lt;tr&gt;
+                &lt;th&gt;An&lt;/th&gt;
+                &lt;th&gt;important&lt;/th&gt;
+                &lt;th&gt;header&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;More&lt;/td&gt;
+                &lt;td&gt;important&lt;/td&gt;
+                &lt;td&gt;text&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;More&lt;/td&gt;
+                &lt;td&gt;important&lt;/td&gt;
+                &lt;td&gt;text&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;More&lt;/td&gt;
+                &lt;td&gt;important&lt;/td&gt;
+                &lt;td&gt;text&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;More&lt;/td&gt;
+                &lt;td&gt;important&lt;/td&gt;
+                &lt;td&gt;text&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+	    <p></p>
+	    
+	    <div class="tehtavat">
+	      <div class="tehtava" id="t-hellocss">
+		
+		<header>
+		  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-hellocss">
+                      Hello CSS
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-hellocss" class="collapse">
+		  
+		  <p>Tässä tehtävässä tavoitteena on lähinnä kokeilla sovelluksessa olevaa sivua ilman tyylitiedostoja sekä tyylitiedostojen kanssa. Käynnistä palvelin ja katso miltä juuripolussa toimiva sovellus näyttää.</p>
+		  
+		  <p>Sammuta tämän jälkeen palvelin ja muokkaa sovellukseen liittyvää <code>index.html</code>-tiedostoa siten, että poistat kommenttimerkit <code>head</code>-elementissä olevien Twitter Bootstrap -kirjaston linkkien ympäriltä. Käynnistä tämän jälkeen palvelin uudestaan ja katso miltä sivu tämän jälkeen näyttää. Oleellista tässä on se, että sivun ulkoasun muuttamiseen tarvittiin käytännössä vain tyylitiedostojen lisääminen.</p>
+		  
+		  <p>Tehtävässä ei ole testejä -- voit palauttaa sen kun olet kokeillut ylläolevaa muutosta.</p>
+		  
+                </div>
+              </div>
+            </div>
+	    
+
+	    <h1 data-count="13">Reaktiivisen sovelluksen ohjelmointi</h1>
+
+	    <p>Tarkastellaan seuraavaksi lyhyesti reaktiivisten sovellusten ohjelmointia. Tutustumme ensin pikaisesti funktionaaliseen ohjelmointiin sekä reaktiiviseen ohjelmointiin, jonka jälkeen nämä yhdistetään. Lopuksi katsotaan erästä tapaa lisätä palvelimen ja selaimen välistä vuorovaikutusta.</p>
+
+	    <h2>Funktionaalinen ohjelmointi</h2>
+
+
+	    <p>Funktionaalisen ohjelmoinnin ydinajatuksena on ohjelmakoodin suorituksesta johtuvien sivuvaikutusten minimointi. Sivuvaikutuksilla tarkoitetaan ohjelman tai ympäristön tilaan vaikuttavia epätoivottuja muutoksia. Sivuvaikutuksia ovat esimerkiksi muuttujan arvon muuttuminen, tiedon tallentaminen tietokantaan tai esimerkiksi käyttöliittymän näkymän muuttaminen.</p>
+
+	    <p>Keskiössä ovat puhtaat ja epäpuhtaat funktiot. Puhtaat funktiot noudattavat seuraavia periaatteita: (1) funktio ei muuta ohjelman sisäistä tilaa ja sen ainoa tuotos on funktion palauttama arvo, (2) funktion palauttama arvo määräytyy funktiolle parametrina annettavien arvojen perusteella, eikä samat parametrien arvot voi johtaa eri palautettaviin arvoihin, ja (3) funktiolle parametrina annettavat arvot on määritelty ennen funktion arvon palauttamista.</p>
+
+	    <p>Epäpuhtaat funktiot taas voivat palauttaa arvoja, joihin vaikuttavat myös muutkin asiat kuin funktiolle annettavat parametrit, jonka lisäksi epäpuhtaat funktiot voivat muuttaa ohjelman tilaa. Tällaisia ovat esimerkiksi tietokantaa käyttävät funktiot, joiden toiminta vaikuttaa myös tietokannan sisältöön tai jotka hakevat tietokannasta tietoa.</p>
+
+
+	    <p>Funktionaaliset ohjelmointikielet tarjoavat välineitä ja käytänteitä jotka "pakottavat" ohjelmistokehittäjää ohjelmoimaan funktionaalisen ohjelmoinnin periaatteita noudattaen. Tällaisia kieliä ovat esimerkiksi <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)" target="_blank">Haskell</a>, joka on puhdas funktionaalinen ohjelmointikieli eli siinä ei ole mahdollista toteuttaa epäpuhtaita funktioita. Toinen esimerkki on <a href="https://en.wikipedia.org/wiki/Clojure" target="_blank">Clojure</a>, jossa on mahdollista toteuttaa myös epäpuhtaita funktiota -- Clojureen löytyy myös erillinen Helsingin yliopiston tarjoama MOOC (<a href="http://mooc.fi/courses/2014/clojure/" target="_blank">Functional programming with Clojure</a>).</p>
+
+	    <p>Funktionaalisen ohjelmoinnin hyötyihin liittyy muunmuassa testattavuus. Alla on annettuna esimerkki metodista, joka palauttaa nykyisenä ajanhetkenä tietyllä kanavalla näkyvän ohjelman.</p>
+
+	    <pre class="sh_java">
+public TvOhjelma annaTvOhjelma(Opas opas, Kanava kanava) {
+    Aikataulu aikataulu = opas.annaAikataulu(kanava);
+    return aikataulu.annaTvOhjelma(new Date());
+}
+</pre>
+
+	    <p>Ylläolevan metodin palauttamaan arvoon vaikuttaa aika, eli sen arvo ei määräydy vain annettujen parametrien perusteella. Metodin testaaminen on vaikeaa, sillä aika muuttuu jatkuvasti. Jos määrittelemme myös ajna metodin parametriksi, paranee testattavuus huomattavasti.</p>
+
+	    <pre class="sh_java">
+public TvOhjelma annaTvOhjelma(Opas opas, Kanava kanava, Date aika) {
+    Aikataulu aikataulu = opas.annaAikataulu(kanava);
+    return aikataulu.annaTvOhjelma(aika);
+}
+</pre>
+
+	    <p>Funktionaalisessa ohjelmoinnissa käytetään alkioiden käsittelyyn työvälineitä kuten <code>map</code> ja <code>filter</code>, joista ensimmäistä käytetään arvon muuntamiseen ja jälkimmäistä arvojen rajaamiseen. Alla olevassa esimerkissä käydään läpi henkilölista ja valitaan sieltä vain Maija-nimiset henkilöt. Lopulta heiltä valitaan iät ja ne tulostetaan.</p>
+
+<pre class="sh_java">
+List&lt;Henkilo&gt; henkilot = // .. henkilo-lista saatu muualta
+
+henkilot.stream()
+        .filter(h -&gt; h.getNimi().equals("Maija"))
+        .map(h -> h.getIka())
+        .forEach(System.out::println);
+</pre>
+
+	    <p>Ylläolevassa esimerkissä henkilot-listan sisältö ei muutu ohjelmakoodin suorituksen aikana. Periaatteessa -- jos useampi sovellus haluaisi listaan liittyvät tiedot -- kutsun <code>System.out::println</code> voisi vaihtaa esimerkiksi tiedon lähettämiseen liittyvällä kutsulla.</p>
+
+
+	    <h2>Reaktiivinen ohjelmointi</h2>
+
+	    <p>Reaktiivisella ohjelmoinnilla tarkoitetaan ohjelmointiparadigmaa, missä ohjelman tila voidaan nähdä verkkona, missä muutokset muuttujiin vaikuttavat myös kaikkiin niistä riippuviin muuttujiin. Perinteisessä imperatiivisessa ohjelmoinnissa alla olevan ohjelman tulostus on 5.</p>
+
+	    <pre class="sh_java">
+int a = 3;
+int b = 2;
+int c = a + b;
+a = 7;
+
+System.out.println(c);
+</pre>
+
+	    <p>Reaktiivisessa ohjelmoinnissa asia ei kuitenkaan ole näin, vaan ohjelman tulostus olisi 9. Lauseke <code>int c = a + b;</code> määrittelee muuttujan <code>c</code> arvon riippuvaiseksi muuttujista a ja b, jolloin kaikki muutokset muuttujiin a tai b vaikuttavat myös muuttujan c arvoon.</p>
+
+	    <p>Reaktiivista ohjelmointia hyödynnetään esimerkiksi taulukkolaskentaohjelmistoissa, missä muutokset yhteen soluun voivat vaikuttaa myös muiden solujen sisältöihin, mitkä taas mahdollisesti päivittävät muita soluja jne. Yleisemmin ajatellen reaktiivinen ohjelmointiparadigma on kätevä tapahtumaohjatussa ohjelmoinnissa; käyttöliittymässä tehtyjen toimintojen aiheuttamat muutokset johtavat myös käyttöliittymässä näkyvän tiedon päivittymisen. </p> 
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Aiheesta tarkemmin</h1>
+
+	      <p>Tutustu osoitteessa <a href="http://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf" target="_blank">http://soft.vub.ac.be/Publications/2012/vub-soft-tr-12-13.pdf</a> olevaan Survey-artikkeliin, joka käsittelee reaktiivisen ohjelmoinnin kehitystä. Myös Andre Staltzin kirjoittama osoitteessa <a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754" target="_blank">https://gist.github.com/staltz/868e7e9bc2a7b8c1f754</a> löytyvä johdanto kannattaa lukea.</p> 
+	    </aside>
+
+
+	    <p>Termi reaktiivinen ohjelmointi (reactive programming) on kuormittunut, ja sillä on myös toinen yleisesti käytössä oleva merkitys. Reaktiivisella ohjelmoinnilla tarkoitetaan myös reaktiivisten sovellusten kehittämistä. </p>
+
+	    <aside class="info">
+	      <br/>
+	      <h1>Reactive Manifesto</h1>
+	      
+	      <p>Tutustu <a href="http://www.reactivemanifesto.org/" target="_blank">Reaktiivisen sovelluskehityksen manifestiin</a>, joka ohjeistaa ohjelmistokehittäjiä luomaan sovelluksia, jotka vastaavat pyyntöön nopeasti (responsive), kestävät virhetilanteita (resilient), mukautuvat erilaisiin kuormiin (elastic) ja välittävät viestejä eri järjestelmän osa-alueiden välillä (message driven): </p>
+	      
+	      <p><em>Responsive: The system responds in a timely manner if at all possible. Responsiveness is the cornerstone of usability and utility, but more than that, responsiveness means that problems may be detected quickly and dealt with effectively. Responsive systems focus on providing rapid and consistent response times, establishing reliable upper bounds so they deliver a consistent quality of service. This consistent behaviour in turn simplifies error handling, builds end user confidence, and encourages further interaction.</em></p>
+
+
+	      <p><em>Resilient: The system stays responsive in the face of failure. This applies not only to highly-available, mission critical systems — any system that is not resilient will be unresponsive after a failure. Resilience is achieved by replication, containment, isolation and delegation. Failures are contained within each component, isolating components from each other and thereby ensuring that parts of the system can fail and recover without compromising the system as a whole. Recovery of each component is delegated to another (external) component and high-availability is ensured by replication where necessary. The client of a component is not burdened with handling its failures.</em></p>
+
+
+	      <p><em>Elastic: The system stays responsive under varying workload. Reactive Systems can react to changes in the input rate by increasing or decreasing the resources allocated to service these inputs. This implies designs that have no contention points or central bottlenecks, resulting in the ability to shard or replicate components and distribute inputs among them. Reactive Systems support predictive, as well as Reactive, scaling algorithms by providing relevant live performance measures. They achieve elasticity in a cost-effective way on commodity hardware and software platforms.</em></p>
+
+	      <p><em>Message Driven: Reactive Systems rely on asynchronous message-passing to establish a boundary between components that ensures loose coupling, isolation and location transparency. This boundary also provides the means to delegate failures as messages. Employing explicit message-passing enables load management, elasticity, and flow control by shaping and monitoring the message queues in the system and applying back-pressure when necessary. Location transparent messaging as a means of communication makes it possible for the management of failure to work with the same constructs and semantics across a cluster or within a single host. Non-blocking communication allows recipients to only consume resources while active, leading to less system overhead.</em></p>
+
+	      <p>Lainattu: <a href="http://www.reactivemanifesto.org/" target="_blank">http://www.reactivemanifesto.org/</a></p>
+
+	    </aside>
+
+
+	    <h2>Funktionaalinen reaktiivinen ohjelmointi</h2>
+
+
+	    <p>Funktionaalinen reaktiivinen ohjelmointi on funktionaalista ohjelmointia ja reaktiivista ohjelmointia yhdistävä ohjelmointiparadigma. Järjestelmiä on karkeasti jakaen kahta tyyppiä, joista toinen perustuu viestien lähettämiseen (viestejä välitetään verkon läpi kunnes tulos saavutettu) ja toinen viestien odottamiseen (odotetaan kunnes tulokselle on tarvetta, ja tuotetaan tulos).</p>
+
+	    <p>Materiaalin edellisessä osassa olleessa verkkokauppojen hintavertailuohjelmassa (tehtävä LowestPrices) käytettiin esimerkiksi seuraavaa lähdekoodia kaikkien verkkokauppojen läpikäyntiin:</p>
+
+<pre class="sh_java">
+// services on lista hintatietoja tarjoavia palveluita
+// ja taskExecutor on Javan AsyncTaskExecutor-luokan ilmentymä
+BaseService bestService = services.stream().parallel()
+                .map(s -&gt; taskExecutor.submit(() -&gt; {
+                            s.getLowestPrice(item);
+                            return s;
+                        })
+                ).map(f -&gt; {
+                    try {
+                        return f.get();
+                    } catch (Throwable t) {
+                        // käsittele virhe
+                        return null;
+                    }
+                })
+                .min((s1, s2) -&gt; Double.compare(s1.getLowestPrice(item), s2.getLowestPrice(item)))
+                .get();
+</pre>
+
+
+	    <p>Esimerkissä etsitään edullisin vaihtoehto kaikista vaihtoehdoista, jolle tehdään lopuksi jotain. Esimerkissä on kuitenkin ongelma: metodin <code>get</code>-kutsuminen <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html" target="_blank">Future</a>-rajapinnan toteuttavalle oliolle jää odottamaan tuloksen valmistumista. Samalla myös pyyntöä käsittelevä säie on odotustilassa.</p>
+
+	    <p>Ohjelman voisi rakentaa fiksummin. Entä jos sovellus lähettäisikin vastauksen selaimelle kun laskenta on valmis, mutta ei pakottaisi säiettä odottamaan vastausta? Eräs mahdollisuus on <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank">CompletableFuture</a>-luokan käyttö, jonka avulla työn alla oleville tehtäville voidaan kertoa <em>mitä pitää tehdä sitten kun laskenta on valmis</em>. Tutustu aiheeseen tarkemmin osoitteessa <a href="http://www.deadcoderising.com/java8-writing-asynchronous-code-with-completablefuture/" target="_blank">http://www.deadcoderising.com/java8-writing-asynchronous-code-with-completablefuture/</a>. Springin <a href="http://docs.spring.io/spring-integration/reference/html/messaging-endpoints-chapter.html#gw-completable-future" target="_blank">dokumentaatiossa</a> löytyy myös aiheeseen liittyvää sisältöä.</p>
+
+
+	    <h2>Web Socketit</h2>
+
+            <p><a href="http://en.wikipedia.org/wiki/WebSocket" target="_blank">WebSocketit</a> ovat tapa toteuttaa palvelimen ja selaimen välinen kommunikointi siten, että selain rekisteröityy palveluun, jonka jälkeen palvelin voi lähettää selaimelle dataa ilman uutta pyyntöä selaimelta. Rekisteröityminen tapahtuu sivulla olevan Javascriptin avulla, jonka jälkeen Javascriptiä käytetään myös palvelimelta tulevan tiedon käsittelyyn.</p>
+
+            <p>Spring tarjoaa komponentit Websockettien käyttöön. Määritellään ensin riippuvuudet projekteihin <code>spring-boot-starter-websocket</code> ja <code>spring-messaging</code>, jonka jälkeen luodaan tarvittavat konfiguraatiotiedostot.</p>
+
+                <pre class="sh_xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-messaging&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+
+                <pre class="sh_java">
+import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+
+@Configuration
+@EnableWebSocketMessageBroker
+public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfigurer {
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        // osoite, johon selain ottaa yhteyttä rekisteröityäkseen
+        registry.addEndpoint("/register").withSockJS();
+    }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // osoite, jonka alla websocket-kommunikaatio tapahtuu
+        registry.setApplicationDestinationPrefixes("/ws");
+        // osoite, jonka kautta viestit kuljetetaan
+        registry.enableSimpleBroker("/channel");
+    }
+}</pre>
+
+            <p>Ylläolevan konfiguraation oleellisimmat osat ovat annotaatio <code>@EnableWebSocketMessageBroker</code>, joka mahdollistaa websocketien käytön sekä luo viestinvälittäjän. Konfiguraation osa <code>registry.enableSimpleBroker("/channel");</code> luo polun, jota pitkin vastaukset lähetetään käyttäjälle ja <code>registry.setApplicationDestinationPrefixes("/ws");</code> kertoo että sovelluksen polkuun <code>/ws</code> päätyvät viestit ohjataan viestinvälittäjälle. Näiden lisäksi rivi <code>registry.addEndpoint("/register").withSockJS();</code> määrittelee <a href="http://en.wikipedia.org/wiki/Streaming_Text_Oriented_Messaging_Protocol" target="_blank">STOMP</a>-protokollalle osoitteen, mitä kautta palveluun voi rekisteröityä. Tässä lisäksi määritellään <a href="https://github.com/sockjs" target="_blank">SockJS</a> fallback-tuki, jota käytetään jos käyttäjän selain ei tue Websocketteja.</p>
+
+            <p>Selainpuolella käyttäjä tarvitsee sekä SockJS- että StompJS-kirjastot. Hyödynnämme <a href="http://en.wikipedia.org/wiki/Content_delivery_network" target="_blank">CDN</a>-verkostoja, jotka tarjoavat staattista sisältöä sivuille ilman tarvetta niiden omalla palvelimella säilyttämiselle. Esimerkiksi <a href="http://cdnjs.com/" target="_blank">CDNJS</a>-palvelu ehdottaa edellämainituille kirjastoille olemassaolevia osoitteita -- kirjastot voi luononllisesti pitää myös osana omaa sovellusta.</p>
+
+            <p>Kokonaisuudessaan selainpuolen toiminnallisuus on esimerkiksi seuraava -- alla body-elementin sisältö:</p>
+	    
+            <pre class="sh_xml">
+&lt;p&gt;&lt;input type="button" onclick="send();" value="Say Wut!"/&gt;&lt;/p&gt;
+
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"&gt;&lt;/script&gt;
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+// luodaan asiakasohjelmisto, joka rekisteröityy osoitteeseen "/register"
+var client = Stomp.over(new SockJS('/register'));
+
+// kun käyttäjä painaa sivulla olevaa nappia, lähetetään osoitteeseen
+// "/ws/messages" viesti "hello world!"
+function send() {
+    client.send("/ws/messages", {}, JSON.stringify({'message': 'hello world!'}));
+}
+
+// otetaan yhteys sovellukseen ja kuunnellaan "channel"-nimistä kanavaa
+// -- jos kanavalta tulee viesti, näytetään JavaScript-alert ikkuna
+client.connect({}, function (frame) {    
+    client.subscribe('channel', function (response) {
+        alert(response);
+    });
+});
+
+// kun sivu suljetaan, yritetään sulkea yhteys palvelimelle
+window.onbeforeunload = function () {
+    client.disconnect();
+}
+&lt;/script&gt;</pre>
+
+            <p>Palvelinpuolella ohjelmistomme toimii esimerkiksi seuraavasti. Kuunnellaan osoitteeseen <code>/ws/messages</code>-tulevia pyyntöjä -- allaoleva esimerkki yrittää muuntaa automaattisesti pyynnössä tulevan JSON-datan <code>Message</code>-olioksi. Toisin kuin aiemmin, käytämme nyt <code>@MessageMapping</code>-annotaatiota, joka on viestinvälityksen vastine <code>@RequestMapping</code>-annotaatiolle.</p>
+
+            <pre class="sh_java">
+@Controller
+public class MessageController {
+    
+    // koska konfiguraatiossa määritelty "/ws"-juuripoluksi, vastaanottaa
+    // tämä kontrollerimetodi osoitteeseen /ws/messages tulevat viestit
+    @MessageMapping("/messages")
+    public void handleMessage(Message message) throws Exception {
+        // tee jotain
+    }
+}</pre>
+
+            <p>Voimme lisäksi toteuttaa esimerkiksi palvelun, joka lähettää viestejä <em>kaikille</em> tiettyyn polkuun rekisteröityneille käyttäjille. Allaoleva palvelu lähettää viestin kerran kymmenessä sekunnissa.</p>
+
+            <pre class="sh_java">
+@Service
+public class MessageService {
+
+    @Autowired
+    private SimpMessagingTemplate template;
+
+    @Scheduled(fixedDelay = 10000)
+    public void addMessage() {
+        Message message = new Message();
+        // aseta viestin sisältö
+        this.template.convertAndSend("/vastauskanava", message);
+    }
+}
+            </pre>          
+
+            <p>Yllä käytetty <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/messaging/simp/SimpMessagingTemplate.html" target="_blank">SimpMessagingTemplate</a> on hieman kuin aiemmin käyttämämme RestTemplate, mutta eri käyttötarkoitukseen.</p>
+
+
+
+            <div class="tehtavat">
+              <div class="tehtava" id="t-chat2010">
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-chat2010">
+                      Chat 2010
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-chat2010" class="collapse">
+		  
+                  <p>Tutustu osoitteessa <a href="http://spring.io/guides/gs/messaging-stomp-websocket/" target="_blank">http://spring.io/guides/gs/messaging-stomp-websocket/</a> olevaan oppaaseen.</p>
+		  
+                  <p>Tehtävässä on hahmoteltu chat-palvelua, jossa käyttäjä voi kirjautuessaan valita kanavan, mihin hän kirjoittaa viestejä. Tehtävään on hahmoteltu yksinkertainen kirjautuminen sekä käyttöliittymä, missä on toiminnallisuus yhteyden ottamiseen palvelimelle. Oletuskanavalla on myös jo yksi käyttäjä, joka lähettelee kanavalle viestejä.</p>
+
+		  <p>Tutustu sovelluksen toimintaan, ja toteuta sovellukseen yksi uusi haluamasi toiminnallisuus. Se voi olla vaikkapa uusi viestejä lähettävä palvelu (helpohko), tai chatissa olevien henkilöiden listaaminen (haastava). Kerro tehtävän palautuksen yhteydessä kuvaus toteuttamastasi toiminnallisuudesta.</p>
+		  		  
+                </div>
+              </div>
+            </div>
+	    
+	    
+	    <h1>Kertausta</h1>
+	    
+
+            <p>Kertauksen teemana on hieman isomman sovelluksen toteuttaminen alusta lähtien. Sovelluksen teemana on miniyhteisöpalvelu, missä käyttäjät näkevät kaveriensa viestejä; kavereiden viesteistä voidaan myös tykätä. Käytämme ulkoasupohjana netistä valmiiksi löytyvää ulkoasua. Tässä tapauksessa ulkoasumme on <a href="http://w3layouts.com/" target="_blank">w3layouts</a>-palvelun tarjoama <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported</a>-lisenssillä varustettu <a href="http://w3layouts.com/cyan-flat-ui-kit-responsive-mobile-web-template/" target="_blank">Cyan Flat UI KIT Responsive mobile web template</a>. Käytännössä pohja tarjoaa nipun komponentteja, joita voimme hyödyntää osana sivumme rakentamista. Pohja käyttää myös valmiita Javascript- ja CSS-komponentteja, kuten <a href="http://jquery.com/" target="_blank">jQuery</a> ja <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Termi "responsive" tarkoittaa sitä, että käyttöliittymä mukautuu sitä käyttävän laitteen näytön kokoon.</p>
+
+            <p>Ensimmäinen askel käyttöliittymän käyttöönotossa on valmiin paketin purkaminen siten, että sivun katsominen onnistuu kun palvelin käynnistetään. Ensimmäisessä tehtäväpohjassa tämä on tehty valmiiksi -- sivuun liittyvät erilaiset resurssit kuten Javascript-tiedostot ja kuvat on siirretty kansion <code>static</code>-alle, näkymän linkit on korjattu osoittamaan oikeisiin sijainteihin, ja näkymästä on luotu erillinen tiedosto <code>template.html</code>. Tämän lisäksi palvelinohjelmiston oletuskontrolleri ohjaa käyttäjän näkymään, missä tiedoston <code>template.html</code> sisältö näytetään.</p>
+
+            <p>Seuraavat tehtäväpohjat sisältävät aina edellisen tehtävän ratkaisun, jolloin voit hypätä joidenkin kohtien yli tarvittaessa. Tehtävissä ei ole testejä; palauta tehtävä aina kun saat sen onnistuneesti valmiiksi.</p>
+	    
+            <div class="tehtavat">
+              <div class="tehtava" id="t-henkilot-ja-viestit-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-henkilot-ja-viestit">
+                      Users and Messages
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-henkilot-ja-viestit" class="collapse">
+		  
+                  <p>Lisätään tässä sivulle toiminnallisuus viestien listaamiseen ja lähettämiseen. Henkilöiden luomista tai kirjautumista ei vielä toteuteta. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
+		  
+                  <img src="img/exercises/w7e01-uml.png" alt="[Person|name (String)]1-*[Post|date (Date);title (String);content (String)]"/>
+		  
+                  <p>Luo tehtävään ylläolevassa UML-kaaviossa kuvatut entiteetit <code>Person</code> ja <code>Post</code>, sekä niille sopivat <code>Repository</code>-rajapinnat. Lisää tämän jälkeen profiiliin <code>DevProfile</code> koodi, jolla saat sovellukseen sovelluksen käynnistyessä muutaman käyttäjän sekä heille viestejä (<code>@PostConstruct</code>-annotaatiosta on tässä hyötyä!).</p>
+		  
+                  <p>Kun testidata on käytössä, luo <code>template.html</code>-tiedostosta kopio nimeltä <code>index.html</code>. Muokkaa luokkaa <code>DefaultController</code> siten, että pyyntö mihin tahansa osoitteeseen näyttää sivun <code>index.html</code>; lisää modeliin myös 10 uusinta viestiä, uusin ensimmäisenä.</p>
+		  
+                  <p>Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että viestit näkyvät siinä. Löytänet oikean alueen hakemalla tekstiä <em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus dui id libero auctor cursus."</em>. Kun saat toteutuksen toimimaan, sinun pitäisi nähdä templaten sijaan lisäämäsi tekstit; viestialue voi näyttää esimerkiksi seuraavalta:</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-post-anonymous-sorted.png" alt="Kolme viestiä listattuna. Ensimmäisessä Anonymous -henkilö sanoo 'asdsada', toisessa Anonymous -henkilö ei sano mitään, ja kolmannessa Jack Reacher sanoo 'I'm not a vagrant. I'm a hobo. Big difference'. Viesteissä näkyy myös kellonajat."/>
+                  <p>&nbsp;</p>
+		  
+                  <p>Lisää tämän jälkeen erillinen kontrolleri, joka kuuntelee osoitteeseen <code>/posts</code> tulevia POST-tyyppisiä pyyntöjä. Kun kontrolleri vastaanottaa pyynnön, se tallentaa viestin ja ohjaa käyttäjän oletusnäkymään (missä haetaan kymmenen uusinta viestiä). Voit hakea esimerkiksi tietokannasta satunnaisen henkilön viestin lähettäjäksi.</p>
+		  
+                  <p>Kun POST-pyyntöjä osoitteeseen <code>/posts</code> kuunteleva kontrolleri toimii, muokkaa <code>index.html</code>-tiedostossa olevaa viestikenttää seuraavanlaisesta</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-post-message-pre.png" alt="Lomake, missä otsikkona 'GET IN TOUCH', ja kenttinä nimi (Name), sähköposti (Email), puhelinnumero (Phone) ja viesti (Message). Lomakkeen lähetysnapissa teksti 'Send Message'."/>
+                  <p>&nbsp;</p>
+		  
+                  <p>seuraavanlaiseksi</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-post-message-post.png" alt="Lomake, missä otsikkona 'WHAT'S GOING ON?', jonka lisäksi näkyy iso tekstialue, johon voi kirjoittaa viestin. Lomakkeen lähetysnapissa teksti 'Let 'Em Know!'."/>
+                  <p>&nbsp;</p>
+		  
+                  <p>Kun laatikkoon kirjoitetaan viesti ja "Let 'Em Know!"-nappia painetaan, tulee viesti lähettää POST-tyyppisellä pyynnöllä osoitteeseen <code>/posts</code>. Huomaa että tarvitset lomakkeen tietojen lähettämiseen -- jos palvelin valittaa jotain CORS-teemaista, varmista, että osa lomakkeesta tehdään Thymeleafin avulla (esim <code>th:action="@{/posts}"</code>).</p>
+		  
+                </div>
+              </div>
+	      
+              <div class="tehtava" id="t-profiilit-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-profiilit">
+                      Profiilit
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-profiilit" class="collapse">
+		  
+                  <p>Lisätään tässä sivulle toiminnallisuus henkilöiden listaamiseen. Palauttaessasi tehtävän vakuutat että toteutuksesi toimii tehtävänannon mukaisesti.</p>
+		  
+                  <img src="img/exercises/w7e02-uml.png" alt="[Person|name (String);slogan (String); lastUpdated (Date)]1-*[Post|date (Date);title (String);content (String)]"/>
+		  
+                  <p>Lisää luokalle <code>Person</code> kentät <code>lastUpdated</code> ja <code>slogan</code>. Lastupdated pitää kirjaa viimeisimmästä muutoksesta; slogan taas on -- noh -- henkilön slogan.</p>
+		  
+                  <p>Muokkaa tämän jälkeen oletuskontrolleria siten, että se lisää 10 viimeksi tietojaan päivittänyttä käyttäjää modeliin. Muokkaa sivua <code>index.html</code> siten, että sivulla oletuksena ollut henkilö "Zach Dunes" vaihtuu käyttäjälistaan.</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-profiilit-pre.png" alt="Kuva, missä näkyy yksittäinen Henkilö 'Zach Dunes', teksti 'Lorem ipsum dolor sit amet, (jne)' ja nappi 'Profile'" />
+                  <p>&nbsp;</p>
+		  
+                  <p>Kun tehtävä on valmis, sivulla näkyy viimeisimmät käyttäjät ja heidän sloganit.</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-profiilit-post.png" alt="Kuva, missä kaksi henkilöä listattuna. Ensimmäisenä 'Jack Reacher', sloganina 'I know I'm smarter than an armadillo'. Toisena 'Jack Bauer', sloganina 'I'm federal agent Jack Bauer. This is the longest day of my life' Kummallekin on myös nappi, jossa lukee 'Profile'."/>
+                  <p>&nbsp;</p>
+		  
+		  
+                </div>
+              </div>
+	      
+              <div class="tehtava" id="t-uusia-henkiloita-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-uusia-henkiloita">
+                      Uusia henkilöitä
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-uusia-henkiloita" class="collapse">
+		  
+                  <p>Tässä tehtävässä toteutetaan ensimmäinen versio uusien henkilöiden lisäämisestä. </p>
+		  
+                  <p>Muokkaa tiedostoa <code>index.html</code> siten, että kopioit nykyisen kirjautumislomakkeen ja luot siitä erillisen "Sign up"-lomakkeen, minkä avulla voi luoda uuden käyttäjän. Lomake voi näyttää esimerkiksi seuraavanlaiselta</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-sign-up.png" alt="Kirjautumislomake. Otsikkona 'Not a member? Sign Up Now', jota seuraa kaksi tekstikenttää -- yksi nimelle ja yksi sloganille. Näitä seuraa nappi 'Sign up'."/>
+                  <p>&nbsp;</p>
+		  
+		  
+                  <p>Lisää tämän jälkeen sovellukseen erillinen kontrolleri, joka kuuntelee <code>POST</code>-tyyppisiä pyyntöjä osoitteeseen <code>/persons</code>; pyynnön pohjalta luodaan uusi käyttäjä. Muokkaa kontrolleria ja juuri luomaasi lomaketta siten, että niiden avulla voidaan luoda uusia käyttäjiä. Uuden käyttäjän lisäämisen tulee onnistua kirjoittamalla käyttäjän nimi ja slogan; käyttäjien lisäämiseen erikoistunut kontrolleri tallentaa käyttäjän ja ohjaa pyynnön oletuskontrollerille.</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-signing-up.png" alt="Kirjautumislomake. Otsikkona 'Not a member? Sign Up Now', jota seuraa kaksi tekstikenttää -- yksi nimelle ja yksi sloganille. Näitä seuraa nappi 'Sign up'. Tällä kertaa nimi-kenttään on täytetty esimerkin vuoksi nimi 'Horst von der Goltz' ja slogan 'Oldies but goodies!'"/>
+                  <p>&nbsp;</p>
+		  
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7-signed-up.png" alt="Tässä kuvalla vinkataan, että Horst olisi luotu järjestelmään. Edellisestä tehtävästä tuttu listaus henkilöitä, mutta tässä yksi henkilöistä 'Horst von der Goltz'."/>
+                  <p>&nbsp;</p>
+		  
+                </div>
+              </div>
+	      
+	      
+              <div class="tehtava" id="t-kirjautuminen-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-kirjautuminen">
+                      Kirjautuminen
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-kirjautuminen" class="collapse">
+		  
+                  <p>Tässä tehtävässä sovellukseen lisätään autorisointi- ja autentikointitoiminnallisuus. Tämän lisäksi kirjautumissivu ja uuden käyttäjän luomiseen tarkoitettu sivu muokataan erillisiksi sivuiksi, sekä asetetaan viestien lähetys niin, että niillä on oikeat kirjoittajat. </p>
+		  
+                  <img src="img/exercises/w7e04-uml.png" alt="[Person| name (String); slogan (String); lastUpdated (Date); username (String); password (String); salt (String)]1-*[Post|date (Date);title (String);content (String)]"/>
+		  
+                  <p>Ennen alkua, lisää <code>Person</code>-entiteetille kentät username, password ja salt. Käyttäjätunnuksen tulee olla uniikki.</p>
+		  
+                  <h1>Sivujen eriyttäminen</h1>
+		  
+                  <p>Kopioi <code>index.html</code>-tiedostosta kaksi uutta versiota, toisen nimeksi tulee <code>login.html</code> ja toisen nimeksi <code>signup.html</code>. Luo tämän jälkeen oletuskontrolleriin kaksi kontrollerimetodia. Pyyntö osoitteeseen <code>/login</code> näyttää sivun <code>login.html</code>. Pyyntö osoitteeseen <code>/signup</code> näyttää sivun <code>signup.html</code>.</p>
+		  
+                  <p>Muokkaa sivuja siten, että <code>login.html</code> näyttää seuraavalta:</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7e04-signin.png" alt="Kirjautumislomake. Otsikkona 'Sign in', jonka lisäksi lomakkeessa kaksi kenttää: 'username' ja 'password'. Näiden lisäksi lomakkeeseen liittyvä nappi 'Sign in'. Lomakkeen alapuolella on teksti 'Sign Up Now -&gt;', joka on linkki."/>
+                  <p>&nbsp;</p>
+		  
+                  <p>Kun sivulla klikkaa linkkiä "Sign up now", pääsee osoitetta <code>/signup</code> kuuntelevan kontrollerin kautta sivulle <code>signup.html</code>, joka näyttää seuraavalta:</p>
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7e04-signup.png" alt="Rekisteröitymislomake. Otsikkona 'Sign Up Form', jonka lisäksi lomakkeessa neljä kenttää: 'name', 'slogan', 'username' ja 'password'. Näiden lisäksi lomakkeeseen liittyvä nappi 'Sign up'."/>
+                  <p>&nbsp;</p>
+		  
+                  <p>Kirjautumissivun tulee vieläkin lähettää lomakkeelle syötettävät tiedot palvelimelle.</p>
+		  
+                  <h1>Tietoturvakonffit</h1>
+		  
+                  <p>Lue tässä välissä seuraavat sivut <a href="http://www.javacodegeeks.com/2012/08/bcrypt-salt-its-bare-minimum.html" target="_blank">http://www.javacodegeeks.com/2012/08/bcrypt-salt-its-bare-minimum.html</a> ja <a href="http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCrypt.html" target="_blank">http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/bcrypt/BCrypt.html</a>.</p>
+		  
+                  <p>Muokkaa Person-luokan <code>setPassword</code>-metodi seuraavanlaiseksi:</p>
+                  <pre class="sh_java">
+    public void setPassword(String password) {
+        this.salt = BCrypt.gensalt();
+        this.password = BCrypt.hashpw(password, this.salt);
+    }</pre>
+
+                  <p>Jos et muista mitään <code>salt</code>-termistä tai miksi ylläoleva tehdään, lue esimerksi Wikipedian artikkeli <a href="http://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">Salt (cryptography)</a>.</p>
+		  
+                  <p>Lisää tämän jälkeen projektiin Spring Security-riippuvuus, ja konfiguroi siihen liittyvä <code>SecurityConfiguration</code>-komponentti seuraavasti:</p>
+		  
+                  <ul>
+
+                    <li>Kuka tahansa saa tehdä pyynnön osoitteisiin <code>/login</code>, <code>/signup</code> ja <code>/static</code> (sekä kaikkiin sen alla oleviin resursseihin). Kuka tahansa saa myös lähettää POST-tyyppisen pyynnön osoitteeseen <code>/persons</code>.</li>
+
+                    <li>Sovelluksessa on kirjautumislomake, joka on osoitteessa <code>/login</code> -- kun kirjautuminen onnistuu, käyttäjä ohjataan oletuskontrollerin kuuntelemaan osoitteeseen.</li>
+
+                    <li>Sovelluksessa on logout-toiminnallisuus, joka on osoitteessa <code>/logout</code> -- kun kirjautuminen onnistuu, käyttäjä ohjataan <code>/login</code>-osoitteeseen.</li>
+
+		    <li>Kirjautumiseen käytetään alla annettua <code>JpaAuthenticationProvider</code>-luokkaa.</li>
+		  </ul>
+
+<pre class="sh_java">
+@Component
+public class JpaAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Override
+    public Authentication authenticate(Authentication a) throws AuthenticationException {
+        String username = a.getPrincipal().toString();
+        String password = a.getCredentials().toString();
+
+        Person person = personRepository.findByUsername(username);
+
+        if (person == null) {
+            throw new AuthenticationException("Unable to authenticate user " + username) {
+            };
+        }
+
+        if (!BCrypt.hashpw(password, person.getSalt()).equals(person.getPassword())) {
+            throw new AuthenticationException("Unable to authenticate user " + username) {
+            };
+        }
+
+        List&lt;GrantedAuthority&gt; grantedAuths = new ArrayList&lt;&gt;();
+        grantedAuths.add(new SimpleGrantedAuthority("USER"));
+
+        return new UsernamePasswordAuthenticationToken(person.getUsername(), password, grantedAuths);
+    }
+
+    @Override
+    public boolean supports(Class&lt;?&gt; type) {
+        return true;
+    }
+}</pre>                            
+
+		  <p>Nyt sekä kirjautuminen käyttäjänä että käyttäjän luomisen pitäisi toimia.</p>
+
+		  <h1>Uloskirjautuminen</h1>
+
+		  <p>Spring Security olettaa, että uloskirjautumispyynnön mukana annetaan edellisen pyynnön vastaukseen generoitu satunnainen tunnus. Pelkkä GET-pyyntö osoitteeseen <code>/logout</code> ei toimi, sillä haluamme estää mahdollisia <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" target="_blank">CSRF</a>-hyökkäyksiä.</p>
+
+                  <p>Haluamme kuitenkin että logout-nappi on linkki, joten teemme erillisen piilossa olevan lomakkeen, joka lähetetään linkkiä painamalla.</p>
+
+                  <p>Muokkaa sivun oikeassa ylälaidassa olevaa logout-nappia siten, että se lähettää piilossa generoidun lomakkeen palvelimelle. Allaolevasta koodista lienee sinulle hyötyä.</p>
+		  
+                  <pre class="sh_java">
+&lt;ul class="logout list-unstyled"&gt;
+    &lt;li&gt;&lt;a href="#" onclick="document.getElementById('logout-form').submit();"&gt;&lt;span&gt; &lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;form style="visibility: hidden" id ="logout-form" method="post" action="#" th:action="@{/logout}"&gt;&lt;input type="submit" value="Logout"/&gt;&lt;/form&gt;</pre>
+
+                  <p>Nyt myös uloskirjautumisen pitäisi toimia.</p>
+		  
+		  
+                  <h1>Viestien lähetys oikealla nimellä</h1>
+		  
+                  <p>Kun käyttäjä on sivulla, hän on kirjautunut. Käyttäjätunnukseen pääsee käsiksi <a href="http://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/context/SecurityContextHolder.html" target="_blank">SecurityContextHolder</a>-luokan kautta, joka pitää kirjaa kirjautuneesta käyttäjästä. Luokkaa käytetään seuraavasti:</p>
+
+                  <pre class="sh_java">
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+System.out.println(authentication.getName()); // tulostaa käyttäjätunnuksen</pre>                            
+
+                  <p>Toteuta palvelu, jonka voi injektoida <code>@Autowired</code>-annotaation avulla mihin tahansa sovellukseen, ja jolta saa tällä hetkellä kirjautuneen käyttäjän tiedot <em>Person</em>-oliona.</p>
+		  
+                  <p>Lisää tämän jälkeen osoitteeseen <code>/posts</code>-tehtäviä pyyntöjä kuuntelevaan kontrolleriin toiminnallisuus, missä uutta viestiä lisättäessä sille lisätään myös oikea kirjoittaja.</p>
+		  
+                  <p>Nyt kun kirjaudut sovellukseen, voit kirjoittaa viestin siten, että viestin kirjoittajana näkyy käyttäjäsi nimi.</p>
+                </div>
+              </div>
+	      
+
+
+              <div class="tehtava" id="t-tykkaaminen-ex">
+
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-tykkaaminen">
+                      Tykkääminen
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-tykkaaminen" class="collapse">
+                  
+		  <p>Tässä tehtävässä lisätään tykkäystoiminnallisuus viesteihin. </p>
+		  
+                  <img src="img/exercises/w7e05-uml.png" alt="[Person]-*[Post]
+[Person]-*[Like]
+[Like]*-[Post]"/>
+
+                  <p>Muokkaa ensin <code>Post</code>-entiteettiä siten, että sille luodaan satunnaisesti generoitu merkkijonotunnus. Luo tämän jälkeen entiteetti <code>Like</code> (kannattanee nimetä se jotenkin ettei tietokanta hermostu :)), joka kuvaa resurssiin liittyvää tykkäystä. Pidä resurssina merkkijonoa, joka viittaa esimerkiksi postin tunnukseen; jokainen tykkäys liittyy myös käyttäjään.</p>
+
+                  <p>Tee tämän jälkeen kontrolleri, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/likes</code>. Pyynnön mukana tulee parametri <code>resourceId</code>, joka viittaa tykättävään resurssiin -- lisää myös jokaiseen tykkäykseen <em>nykyinen</em> käyttäjä, jonka saat edellisessä tehtävässä toteutetusta palvelusta. Uudelleenohjaa käyttäjä oletuskontrollerille tykkäyksen lisäämisen jälkeen.</p>
+
+                  <p>Muokkaa tämän jälkeen oletuskontrolleria siten, että tietokannasta haetaan sivulla näytettäviin viesteihin liittyvät tykkäykset. Lisää tykkäykset modelin attribuutiksi nimeltä <code>likes</code> -- tykkäysten tulee olla <code>Map</code>, missä avain on resurssin tunnus ja arvo tykkäysten lukumäärä.</p>
+
+                  <p>Toteuta tämän jälkeen käyttöliittymään <em>viestikohtainen</em> tykkäyslinkki -- alla olevasta koodista lienee hyötyä.</p>
+
+                  <pre class="sh_xml">
+&lt;form style="visibility: hidden" th:id="@{like-{id}(id=${post.id})}" method="post" action="#" th:action="@{/likes}"&gt;
+    &lt;input type="text" name="resourceId" th:value="${post.id}"&gt;&lt;/input&gt;
+    &lt;input type="submit" value="Like"/&gt;
+&lt;/form&gt;
+&lt;p&gt;
+    &lt;a href="#" th:onclick="@{document.getElementById('like-{id}').submit();(id=${post.id})}"&gt;+1 like&lt;/a&gt; 
+    &lt;span th:if="${likes[post.id] != null}"&gt;
+        &lt;span th:text="${likes[post.id]}"&gt;num&lt;/span&gt; like&lt;span th:if="${likes[post.id] &gt; 1}"&gt;s&lt;/span&gt;
+    &lt;/span&gt;
+&lt;/p&gt;</pre>
+
+                  <p>Kun tehtävä toimii, sivuilla näkyy tykkäysnapit sekä tehtyjen tykkäysten määrät.</p>
+		  
+                  <p>&nbsp;</p>
+                  
+		  <img src="img/exercises/w7e05-likes.png" alt="Kuva, missä kaksi viestiä listattuna. Kummankin viestin yhteydessä on nyt linkki '+1 like', jota klikkaamalla viestistä voi tykätä. Tämän lisäksi viestissä, jota on tykätty, lukee tykkäysten lukumäärä (tykkäyslinkin vieressä)."/>
+		  
+		  <p>&nbsp;</p>
+		  
+                  <p>Huom! Jos teet tulevaisuudessa tykkäystoiminnallisuutta, joskus puhdas selainpuolen toteutus on tarpeeksi -- tutustu esimerkiksi <a href="http://socialitejs.com/" target="_blank">SocialiteJS</a>-kirjastoon.</p>
+		  
+                </div>
+              </div>
+	      
+	      
+              <div class="tehtava" id="t-kaverit-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-kaverit">
+                      Kaverit
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-kaverit" class="collapse">
+                  
+		  <p>Tässä tehtävässä lisätään mahdollisuus kaverien lisäämiseen. Palauta se taas kokonaisuutena.</p>
+
+                  <img src="img/exercises/w7e06-uml.png" alt="[Person]-*[Post]
+[Person]-*[Like]
+[Like]*-[Post]
+[FriendshipRequest|status (Status)]-2[Person]
+--pyyntöön kuuluu sekä pyynnön lähettäjä (source) ja pyynnön vastaanottaja (target)"/>
+                  <h1>Entiteetti ja kaveripyynnön lisäys</h1>
+		  
+                  <p>Luo entiteetti <code>FriendshipRequest</code>, jossa on <code>Person</code>-olio sekä lähteenä että kohteena (source & target). Tämän lisäksi entiteetillä on status, joka voi saada arvot <code>Requested</code>, <code>Accepted</code>, <code>Rejected</code>.</p>
+		  
+                  <p>Kun entiteetti on olemassa, luo uusi kontrolleri, joka kuuntelee POST-tyyppisiä pyyntöjä osoitteeseen <code>/friends</code>. POST-tyyppinen pyyntö saa parametrina kentän muuttujan <code>personId</code>, joka on sen käyttäjän tunnus, kenelle kaveripyyntö tehdään. Tallenna pyyntö tietokantaan jos tietokannassa ei ole jo samaa pyyntöä tai vastaavaa pyyntöä, siten, että lähde ja kohde ovat vaihtuneet päittäin.</p>
+		  
+                  <p>Muokkaa vielä käyttöliittymää siten, että käyttäjäprofiili näyttää seuraavalta -- listassa tulee näkyä vain ne käyttäjät, jotka eivät ole nykyisen käyttäjän kavereita.</p>
+		  
+		  
+                  <p>&nbsp;</p>
+		  
+                  <img src="img/exercises/w7e06-friendem.png" alt="Käyttäjän listaus, sama kuin profiileissa. Nyt käyttäjän 'Profile' -napin sijaan näkyy teksti 'Friend 'Em!', mitä klikkaamalla kirjautunut käyttäjä lähettää kohteelle kaveripyynnön."/>
+		  
+                  <p>&nbsp;</p>
+		  
+                  <p>Allaolevasta koodista lienee hyötyä.</p>
+		  
+                  <pre class="sh_xml">
+&lt;form method="POST" th:action="@{/friends}"&gt;
+    &lt;input type="hidden" name="personId" th:value="${user.id}"/&gt;
+    &lt;input type="submit" class="p-btn" value="Friend 'em!"/&gt;
+&lt;/form&gt;</pre>
+
+
+                  <h1>Kaveripyyntöjen näyttäminen</h1>
+		  
+                  <p>Muokkaa oletuskontrolleria siten, että vastaukseen lisätään niiden kaveripyyntöjen lukumäärä, joiden status on <code>Requested</code> ja kohde nykyinen käyttäjä. Muokkaa tämän jälkeen sivua <code>index.html</code> siten, että sivun oikeassa ylälaidassa näytetään notifikaatio, vain jos käyttäjälle on kaveripyyntöjä.</p> 
+		  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7e06-notif.png" alt="Tässä näkyy (1) kuva pienellä -- nyt joku valmis kuva, ei siis tartte toteuttaa kuvatoiminnallisuutta, (2) notifikaatiokuva 'kello', ja (3) logout-nappi. Enpä oikein osaa selittää tätä paremmin.." />
+                  <p>&nbsp;</p>
+                  
+                  <p>Muokkaa notifikaatiota siten, että kun notifikaatiota klikataan, niin käyttäjä tekee GET-pyynnön osoitteeseen <code>/friends</code>.</p>
+		  
+                  
+                  <h1>Kaveripyyntöjen hyväksyminen</h1>
+		  
+                  <p>Muokkaa <code>/friends</code>-osoitetta kuuntelevaa kontrolleria siten, että se palauttaa käyttäjälle tehdyt kaveripyynnöt ja näyttää sivun <code>friends.html</code></p>
+		  
+                  <p>Tee tämän jälkeen sivusta <code>index.html</code> kopio <code>friends.html</code> ja muokkaa sitä siten, että se näyttää vain listan käyttäjiä. Muokkaa käyttäjälistaa siten, että jokaiselle käyttäjälle on nappi "Ok! I Like 'im!".</p>
+                  
+                  <p>&nbsp;</p>
+                  <img src="img/exercises/w7e06-notif.png" alt="Täsmälleen sama kuva kuin aiemmin."/>
+                  <p>&nbsp;</p>
+                  
+                  <p>Kun nappia painetaan, käyttäjän pitäisi olla toisen käyttäjän kaveri.</p>
+                  
+                </div>
+              </div>
+              
+              
+              <div class="tehtava" id="t-omafeature-ex">
+		
+                <header>
+                  <h1>
+                    <a data-toggle="collapse" class="collapsed" href="#t-omafeature">
+                      Oma feature
+                    </a>
+                  </h1>
+                </header>
+		
+                <div id="t-omafeature" class="collapse">
+                  <p>Lisää tässä tehtävässä oma feature sovellukseen -- esimerkiksi mahdollisuus profiilikuvien tai muiden kuvien lisääminen.</p>
+                </div>
+              </div>
+            </div>
+	    
+            <p>Kuten huomaat, yhteisöpalvelumme on vielä kaukana valmiista -- ensiaskeleet on kuitenkin tehty. Ennenpitkää sovellus pilkottaisiin pienempiin palasiin, ja sovelluksen toiminta rakennettaisiin niin, että sivulle toteutettava JavaScript-komponentti hakisi sivun sisällön useammasta eri palvelusta. Palaamme tähän <em>myöhemmin..</em>.</p>
+	    
+	    
+          </section>
+<!-- BEGIN FOOTER -->
+
+        <footer>
+            <p>
+                <a id="license" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; float:left; padding:15px" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+                <small>T&auml;m&auml; materiaali on lisensoitu Creative Commons BY-NC-SA-lisenssill&auml;, joten voit k&auml;ytt&auml;&auml; ja levitt&auml;&auml; sit&auml; vapaasti, kunhan alkuper&auml;isten tekij&ouml;iden nimi&auml; ei poisteta. Jos teet muutoksia materiaaliin ja haluat levitt&auml;&auml; muunneltua versiota, se t&auml;ytyy lisensoida samalla lisenssill&auml;. Materiaalien k&auml;ytt&ouml; kaupalliseen tarkoitukseen on ilman erillist&auml; lupaa kielletty. Tekij&auml;(t): <a href="http://www.cs.helsinki.fi/en/people/avihavai" target="_blank">Arto Hellas</a> sekä <a href="http://www.cs.helsinki.fi/en/rage" target="_blank">Agile Education Research</a> -tutkimusryhm&auml;.
+            </p>
+        </footer>
+
+        <div class="hidden">
+            <p>the end.</p>
+        </div>
+
+
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jqueryui/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/libs/syntaxhighlight/sh_main.min.js"></script>
+
+        <script src="js/libs/chartist.min.js"></script>
+        <script src="js/libs/visibility.core.js"></script>
+        <script src="js/libs/visibility.timers.js"></script>
+        <script src="js/libs/visibility.fallback.js"></script>
+        <script src="js/js-logger.js"></script>
+        <script src="js/verticalfloat.js"></script>
+        <script src="js/pheromones.js"></script>
+        <script src="js/wepa.js"></script>
+
+
+    </body>
+</html>
