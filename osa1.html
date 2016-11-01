@@ -145,7 +145,7 @@
 &lt;parent&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;1.4.0.RC1&lt;/version&gt;
+    &lt;version&gt;1.4.1.RELEASE&lt;/version&gt;
 &lt;/parent&gt;
 &lt;dependencies&gt;
     &lt;dependency&gt;
@@ -154,32 +154,6 @@
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
-
-            <aside class="info">
-
-	      <br/>
-	      
-	      <h1>Release Candidate</h1>
-
-	      <p>Käytämme toistaiseksi Spring Boot -projektin version 1.4. esiversiota. Tehtäväpohjiin on valmiiksi määritelty sijainti, mistä esiversio löytyy. Omia kokeiluja varten tulee projektin <code>pom.xml</code>-tiedostoon lisätä määrittely esiversion löytämiseksi:</p>
-
-<pre class="sh_xml">
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;spring-milestones&lt;/id&gt;
-        &lt;name&gt;spring-milestones&lt;/name&gt;
-        &lt;url&gt;http://repo.spring.io/milestone/&lt;/url&gt;
-        &lt;releases&gt;
-            &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;/releases&gt;
-        &lt;snapshots&gt;
-            &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;/snapshots&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
-</pre>
-
-	    </aside>
 
 	    <p>Kun riippuvuudet on lisätty projektiin ja projektista pääsee käsiksi Spring-sovelluskehyksen metodeihin ja luokkiin, voimme luoda ensimmäisen palvelinohjelmistomme.</p>
 

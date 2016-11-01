@@ -157,8 +157,12 @@
 	    
 	    
 	    <p>Kurssin tehtävien tekemisessä hyödynnetään Helsingin yliopiston tietojenkäsittelytieteen laitoksellä kehitettyä <a href="http://testmycode.github.io/" target="_blank">Test My Code</a>-palvelua, joka mm. tarjoaa ohjelmointiympäristöön liitettävän TMC-liitännäisen. Kurssitehtävät noudetaan paikalliselle koneelle TMC-liitännäisen avulla. TMC mahdollistaa myös tehtävien suoraviivaisen palauttamisen tehtäväpalvelimelle. Osa kurssin tehtävistä tarkastetaan automaattisesti TMC-palvelun avulla -- muiden tehtävien toiminta tulee taas tarkastaa itse erilaisten tukimateriaalien kuten kuvien avulla.</p>
-	    
-	    <p>Kurssilla käytettävä TMC-palvelin löytyy osoitteessa <a href="http://tmc.mooc.fi/mooc" target="_blank">http://tmc.mooc.fi/mooc</a>, kurssin nimenä on <code>2016-wepa</code>. Alkutoimet kurssilla käytettävien työvälineiden asentamiseen löytyy osoitteesta <a href="http://mooc.fi/courses/general/ohjelmointi/" target="_blank">http://mooc.fi/courses/general/ohjelmointi/</a>.</p>
+
+
+	    <p>Helsingin yliopiston kurssilla käytettävä TMC-palvelin löytyy osoitteessa <a href="http://tmc.mooc.fi/org/hy" target="_blank">http://tmc.mooc.fi/org/hy</a>, kurssin nimenä on <code>s2016-wepa</code>. Alkutoimet kurssilla käytettävien työvälineiden asentamiseen löytyy osoitteesta <a href="http://mooc.fi/courses/general/ohjelmointi/" target="_blank">http://mooc.fi/courses/general/ohjelmointi/</a>.</p>
+	    	    
+
+	    <p>Avoimen kurssilla käytettävä TMC-palvelin löytyy osoitteessa <a href="http://tmc.mooc.fi/mooc" target="_blank">http://tmc.mooc.fi/mooc</a>, kurssin nimenä on <code>2016-wepa</code>. Alkutoimet kurssilla käytettävien työvälineiden asentamiseen löytyy osoitteesta <a href="http://mooc.fi/courses/general/ohjelmointi/" target="_blank">http://mooc.fi/courses/general/ohjelmointi/</a>.</p>
 	    
 	    
             <h2>Kurssin tukimuodot</h2>
@@ -169,9 +173,9 @@
 	    
 	    
             <h1 id="teemat">Teemat ja oppimistavoitteet</h1>
-
+<!--
 	    <p>Kurssin teemat ja oppimistavoitteet täydentyvät kurssin edetessä. Alustava julkaisuaikataulu: 11.7.2016 (osa1), 18.7.2016 (osa2), 25.7.2016 (osa3), 1.8.2016 (osa4), 8.8.2016 (osa5), 15.8.2016 (osa6), 22.8.2016 (osa7).</p>
-
+-->
 	    <p>
 	    
 	    <table class="table">
@@ -295,7 +299,7 @@
 &lt;parent&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;1.4.0.RC1&lt;/version&gt;
+    &lt;version&gt;1.4.1.RELEASE&lt;/version&gt;
 &lt;/parent&gt;
 &lt;dependencies&gt;
     &lt;dependency&gt;
@@ -304,32 +308,6 @@
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
-
-            <aside class="info">
-
-	      <br/>
-	      
-	      <h1>Release Candidate</h1>
-
-	      <p>Käytämme toistaiseksi Spring Boot -projektin version 1.4. esiversiota. Tehtäväpohjiin on valmiiksi määritelty sijainti, mistä esiversio löytyy. Omia kokeiluja varten tulee projektin <code>pom.xml</code>-tiedostoon lisätä määrittely esiversion löytämiseksi:</p>
-
-<pre class="sh_xml">
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;spring-milestones&lt;/id&gt;
-        &lt;name&gt;spring-milestones&lt;/name&gt;
-        &lt;url&gt;http://repo.spring.io/milestone/&lt;/url&gt;
-        &lt;releases&gt;
-            &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;/releases&gt;
-        &lt;snapshots&gt;
-            &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;/snapshots&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
-</pre>
-
-	    </aside>
 
 	    <p>Kun riippuvuudet on lisätty projektiin ja projektista pääsee käsiksi Spring-sovelluskehyksen metodeihin ja luokkiin, voimme luoda ensimmäisen palvelinohjelmistomme.</p>
 
