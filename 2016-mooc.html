@@ -936,7 +936,7 @@ public class ThymeleafJaDataController {
 	    <h2>Listojen käsittely</h2>
 
 
-	    <p>Thymeleafille annettavalle Model-oliolle voi asettaa tekstin lisäksi myös arvokokoelmia. Alla luomme "pääohjelmassa" listan, joka asetetaan Thymeleafin käsiteltäväksi menevään Model-olioon jokaisen juuripolkuun tehtävän pyynnön yhteydessä. Jos juuripolkuun lähetetään parametri nimeltä <code>"content"</code>, lisätään se myös listaan -- alla parametri on määritelty ei-pakolliseksi annotaation <code>@RequestMapping</code> attribuutilla <code>required = false</code>.</p>
+	    <p>Thymeleafille annettavalle Model-oliolle voi asettaa tekstin lisäksi myös arvokokoelmia. Alla luomme "pääohjelmassa" listan, joka asetetaan Thymeleafin käsiteltäväksi menevään Model-olioon jokaisen juuripolkuun tehtävän pyynnön yhteydessä. Jos juuripolkuun lähetetään parametri nimeltä <code>"content"</code>, lisätään se myös listaan -- alla parametri on määritelty ei-pakolliseksi annotaation <code>@RequestParam</code> attribuutilla <code>required = false</code>.</p>
 
 <pre class="sh_java">
 package thymeleafdata;
