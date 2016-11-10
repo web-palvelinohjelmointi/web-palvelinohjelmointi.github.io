@@ -316,6 +316,8 @@
 	      <p>Käytämme tällä kurssilla <a href="https://maven.apache.org/" target="_blank">Maven</a>ia valmiiden kirjastojen noutamiseen sekä projektien hallintaan. Tämän takia projektimme on luotu Maven-projekteina -- uuden Maven-projektin luominen onnistuu NetBeansissa valitsemalla File -&gt; New Project -&gt; Maven -&gt; Java Application.</p>
 	      
 	      <p>Maven-projektin riippuvuudet määritellään projektiin liittyvässä (Project Files) <code>pom.xml</code>-tiedostossa olevassa <code>dependencies</code>-osiossa.</p>
+
+	      <p>Spring-projektin käynnistäminen kannattaa tehdä komentoriviltä komennolla <code>mvn spring-boot:run</code>. Tällöin sovellus käynnistyy muutosten yhteydessä automaattisesti uudestaan (kun käytämme <code>spring-boot-devtools</code> liitännäistä sekä Spring-sovelluskehyksen maven-tukea) -- tämä nopeuttaa hieman ohjelmistokehitysprosessia. Lisää <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html" target="_blank">Spring Devtools</a>-projektista löytyy täältä.</p>
 	      
 	    </aside>
 	    
@@ -325,7 +327,7 @@
 &lt;parent&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;1.4.1.RELEASE&lt;/version&gt;
+    &lt;version&gt;1.4.2.RELEASE&lt;/version&gt;
 &lt;/parent&gt;
 &lt;dependencies&gt;
     &lt;dependency&gt;
