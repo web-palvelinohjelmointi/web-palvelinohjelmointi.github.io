@@ -10,7 +10,7 @@ String.prototype.hashCode = function() {
 };
 
 var VERTICALFLOAT = {
-    DATA_URI: "https://tmc.mooc.fi/mooc/courses/34/points.json?api_version=7&t=" + new Date().getTime(),
+    DATA_URI: "https://tmc.mooc.fi/org/hy/courses/174/points.json?api_version=7&t=" + new Date().getTime(),
     minOpacity: 0.4,
     maxOpacity: 1,
     analyticsChart: null,
@@ -21,8 +21,7 @@ var VERTICALFLOAT = {
     init: function(username) {
         VERTICALFLOAT.username = username;
 
-	var courseId = 41;
-
+/*
         if(window.location.href.indexOf("s2015-wepa-mooc") > -1) {
 	    courseId = 34;
 	} else if (window.location.href.indexOf("s2015-wepa") > -1) {
@@ -30,6 +29,7 @@ var VERTICALFLOAT = {
 	}
 
 	VERTICALFLOAT.DATA_URI = "https://tmc.mooc.fi/mooc/courses/" + courseId + "/points.json?api_version=7&t=" + new Date().getTime();
+*/
 	
 	if(!VERTICALFLOAT.username) {
 	    console.log("Analytics: not initiating.");
