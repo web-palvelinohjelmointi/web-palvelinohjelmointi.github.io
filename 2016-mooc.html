@@ -6040,7 +6040,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             <p>Käytännössä kaikki web-palvelimet tarjoavat HTTPS-toiminnallisuuden valmiina, joskin se täytyy ottaa palvelimilla käyttöön. Esimerkiksi Herokussa HTTPS on oletuksena käytössä sovelluksissa -- aiemmin mahdollisesti tekemääsi sovellukseen pääsee käsiksi siis myös osoitteen <code>https://sovelluksen-nimi.herokuapp.com</code> kautta. Tämä ei kuitenkaan estä käyttäjiä tekemästä pyyntöjä sovellukselle ilman HTTPS-yhteyttä -- jos haluat, että käyttäjien tulee tehdä kaikki pyynnöt HTTPS-yhteyden yli, lisää tuotantokonfiguraatioon seuraava rivi.</p>
 
 <pre>
-security.require_ssl=true
+security.require-ssl=true
 </pre>
 
 
