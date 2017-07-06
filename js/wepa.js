@@ -234,11 +234,11 @@ $(function() {
 	
 	var storedUsername = localStorage.getItem("tmc.account.name");
 	logger.setUser(storedUsername);
-	logger.setApiUrl("http://data.pheromones.io/")
+	logger.setApiUrl("https://data.pheromones.io/")
 	logger.init();
 	
 	pheromones.init({
-            apiUrl: "http://data.pheromones.io/",
+            apiUrl: "https://data.pheromones.io/",
             username: storedUsername,
             submitAfter: 20
 	});
